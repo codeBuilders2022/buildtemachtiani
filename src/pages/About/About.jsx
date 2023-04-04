@@ -10,12 +10,12 @@ const About = () => {
       {/* <Header category="Inicio" title="Inicio" /> */}
       <div className=" flex justify-center">
         <div className="w-800">
-          <img
+          {/* <img
             className="rounded-full border-solid border-2 dark:border-white border-black"
             src={avatar5}
             alt="perfil"
             width={250}
-          />
+          /> */}
           <div className="mt-7 pl-5">
             <h1 className="text-3xl font-extrabold tracking-tight dark:text-white text-black mb-5">
               Lorem ipsum dolor sit amet
