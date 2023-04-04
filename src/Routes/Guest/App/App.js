@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
-import { Navbar, Footer, Sidebar, ThemeSettings } from "./components";
+import { Navbar, Footer, Sidebar, ThemeSettings } from "../../../components";
 
 import {
   Investigaciones,
@@ -11,13 +11,12 @@ import {
   Actual,
   Pdf,
   PageActual,
-} from "./pages";
+} from "../../../pages";
 
-import { useStateContext } from "./contexts/ContextProvider";
+import { useStateContext } from "../../../contexts/ContextProvider";
 import "./App.css";
 
 const App = () => {
-
   const {
     activeMenu,
     themeSettings,
@@ -28,9 +27,7 @@ const App = () => {
     setCurrentMode,
   } = useStateContext();
 
-
   useEffect(() => {
-
     const currentThemeColor = localStorage.getItem("colorMode");
     const currentThemeMode = localStorage.getItem("themeMode");
 
@@ -40,7 +37,7 @@ const App = () => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ ]);
+  }, []);
 
   return (
     <div className={currentMode === "Dark" ? "dark" : ""}>
@@ -77,16 +74,63 @@ const App = () => {
 
             <div>
               {themeSettings && <ThemeSettings />}
-
               <Routes>
-                {/* Mis paginas */}
-                <Route path="/" element={<Actual />} />
-                <Route path="/investigaciones" element={<Investigaciones />} />
-                <Route path="/Instrucciones" element={<Instrucciones />} />
-                <Route path="/About" element={<About />} />
-                <Route path="/Mision" element={<Mision />} />
-                <Route path="/ricedut/:id" element={<Pdf />} />
-                <Route path="/NumeroActual" element={<PageActual />} />
+                <Route
+                  path="/"
+                  element={
+                    <Suspense fallback={<></>}>
+                      <Actual />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/investigaciones"
+                  element={
+                    <Suspense fallback={<></>}>
+                      <Investigaciones />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/Instrucciones"
+                  element={
+                    <Suspense fallback={<></>}>
+                      <Instrucciones />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/About"
+                  element={
+                    <Suspense fallback={<></>}>
+                      <About />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/Mision"
+                  element={
+                    <Suspense fallback={<></>}>
+                      <Mision />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/ricedut/:id"
+                  element={
+                    <Suspense fallback={<></>}>
+                      <Pdf />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="NumeroActual"
+                  element={
+                    <Suspense fallback={<></>}>
+                      <PageActual />
+                    </Suspense>
+                  }
+                />
               </Routes>
             </div>
             <Footer />

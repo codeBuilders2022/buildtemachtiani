@@ -4,7 +4,7 @@ import { Header } from "../../components";
 import svg from "../../data/Titulo-2.svg";
 import svgWhite from "../../data/Sidebar.svg";
 import { ultimoNumero, DescriptionUltimoNumero } from "../../data/dummy";
-import Button from "../../components/Button/Button";
+import Button from "../../components/atoms/Button/Button";
 import { useStateContext } from "../../contexts/ContextProvider";
 
 const Actual = () => {
