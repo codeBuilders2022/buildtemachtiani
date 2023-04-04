@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.b47e3b3c.css",
-    "main.js": "/static/js/main.e66d5878.js",
+    "main.css": "/static/css/main.f24ef935.css",
+    "main.js": "/static/js/main.5d3e4968.js",
     "static/media/Revista01.png": "/static/media/Revista01.836acd7447e75e74b925.png",
     "static/media/JUNIO-2019.png": "/static/media/JUNIO-2019.250cb0fdc2efef323f68.png",
     "static/media/JUNIO-2021.png": "/static/media/JUNIO-2021.329c533e334229700737.png",
@@ -13,11 +13,11 @@
     "static/media/Titulo-2.svg": "/static/media/Titulo-2.188866b7350d57ac78b9a245e75a808a.svg",
     "static/media/Sidebar.svg": "/static/media/Sidebar.d7c52ea285e7cce90987137cf44af661.svg",
     "index.html": "/index.html",
-    "main.b47e3b3c.css.map": "/static/css/main.b47e3b3c.css.map",
-    "main.e66d5878.js.map": "/static/js/main.e66d5878.js.map"
+    "main.f24ef935.css.map": "/static/css/main.f24ef935.css.map",
+    "main.5d3e4968.js.map": "/static/js/main.5d3e4968.js.map"
   },
   "entrypoints": [
-    "static/css/main.b47e3b3c.css",
-    "static/js/main.e66d5878.js"
+    "static/css/main.f24ef935.css",
+    "static/js/main.5d3e4968.js"
   ]
 }
