@@ -7,7 +7,7 @@ const Footer = () => {
 
   const activeLinks = ({isActive}) => {
     return{
-      color: isActive ? "rgb(20 184 166)" : null
+      color: isActive ? currentColor : null
     }
   }
   return (
@@ -20,11 +20,11 @@ const Footer = () => {
         <div className="md:flex md:justify-around">
           <div className="md:w-400 mb-5 mr-3">
             <h1 className="dark:text-white text-black">
-              <strong>ricet</strong>
+              <strong>RICET</strong>
             </h1>
             <p className="dark:text-gray-200 text-gray-700">
               Enseñar a los chicos como alimentarse a si mismo y cómo vivir en
-              comunidad en forma responsablees el centro de la educación
+              comunidad en forma responsable el centro de la educación.
             </p>
             <div className="hidden md:flex text-sm font-medium text-zinc-800 dark:text-zinc-200 text-center mt-5">
               <NavLink
@@ -39,7 +39,7 @@ const Footer = () => {
                 className="relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400"
                 style={activeLinks}
               >
-                <span>Quiénes Somos</span>
+                <span>Acerca de</span>
               </NavLink>
               <NavLink
                 to="/mision"
@@ -74,7 +74,7 @@ const Footer = () => {
             </span>
             <h1>San Lorenzo 381 Guadalajara - México</h1>
           </div>
-          <div className="mt-6 flex gap-6 ">
+          <div className="mt-6 flex gap-6 pointer-events-none opacity-40">
             <a
               className="group -m-1 p-1"
               aria-label="Follow on Twitter"

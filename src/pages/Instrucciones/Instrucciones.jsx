@@ -13,14 +13,14 @@ import {
 
 const Instrucciones = () => {
   return (
-    <div className="dark:bg-gray-600 dark:text-white m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl md:bg-fondo-b md:bg-cover md:bg-center">
+    <div className="dark:bg-gray-600 dark:text-white m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
       <div className="flex items-center">
         <Header
           category="Revista internacional de Ciencias de la Educación Temachtiani"
           title="LO QUE DEBES SABER"
         />
       </div>
-      <div className="p-5 bg-slate-100 dark:bg-gray-500 rounded-2xl opacity-90 mb-10">
+      <div className="p-5 bg-slate-100 dark:bg-gray-500 rounded-2xl mb-10">
         <Convocatoria />
         <div className="flex justify-center items-center pb-10">
           <div className="md:w-4/5 text-black">

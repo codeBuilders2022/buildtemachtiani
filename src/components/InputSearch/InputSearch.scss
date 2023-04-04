@@ -1,0 +1,40 @@
+.InputSearch {
+    position: relative;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // border-radius: 10px;
+    background: #fff;
+
+    input {
+        height: 100%;
+        width: 100%;
+        padding: 0 40px;
+        font-family: "Roboto", sans-serif;
+        // color: #777;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        // border: 1px solid red;
+        transition: border-color 0.2s;
+
+        &::placeholder {
+            font-family: "Roboto", sans-serif;
+            font-size: 11px;
+            color: #777;
+            text-decoration: none solid rgb(0, 0, 0);
+        }
+    }
+
+    .search {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        right: 0;
+        top: calc(111px - 86.75px);
+    }
+
+
+}

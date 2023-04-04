@@ -1,9 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap");
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Open Sans", sans-serif;
+@font-face{
+  font-family: 'Metropolis';
+  /* src: local('Metropolis'), url(./assets/fonts/montserrat/Montserrat-Regular.ttf) format('truetype'); */
+  src: local('Metropolis'), url(./assets/fonts/metropolis/Metropolis-Regular.otf);
+}
+body{
+  font-family: "Metropolis", sans-serif;
 }
 
 @tailwind base;
