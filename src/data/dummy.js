@@ -2,7 +2,7 @@ import React from "react";
 import portada01 from "./JUNIO-2019.png";
 import portada02 from "./NOVIEMBRE-2020.png";
 import portada03 from "./ENERO-2021.png";
-import portada04 from './JUNIO-2021.png'
+import portada04 from "./JUNIO-2021.png";
 import numeroActual from "./Revista01.png";
 
 //Mi paginas de trabajo
@@ -60,11 +60,9 @@ export const field = [
   {
     volumen: "Vol.3",
     Meses: "Meses",
-    Fecha: "Fecha Limite de Manuscrito"
+    Fecha: "Fecha Limite de Manuscrito",
   },
-
-]
-
+];
 
 export const Modalidades = () => (
   <div>
@@ -116,16 +114,16 @@ export const InstruccionesAutores = () => (
         </h1>
         <p className="text-justify text-lg">
           La Revista Internacional de Ciencias de la Educacion Temachtiani
-          (RICET) es una publicación con periodicidad trimestral, que
-          pretende la difusión del conocimiento y las ideas relacionadas con la
+          (RICET) es una publicación con periodicidad trimestral, que pretende
+          la difusión del conocimiento y las ideas relacionadas con la
           investigación y la formación educativa, esto incluye la gestión del
           conocimiento. Por tener un carácter plural, se aceptan para su
           publicación, trabajos académicos basados en diversas teorías y
           disciplinas científicas aplicadas al proceso de enseñanza aprendizaje,
           siempre y cuando, mantengan el rigor científico que aporte riqueza al
           conocimiento en Educación. Lo anterior lo podemos resumir en una
-          revista de carácter transdisciplinario y transteórico. La RICET es
-          una revista arbitrada, la revisión se realiza por pares a doble ciego.
+          revista de carácter transdisciplinario y transteórico. La RICET es una
+          revista arbitrada, la revisión se realiza por pares a doble ciego.
           Consideramos que la investigación científica, cuando se traduce a un
           idioma distinto al lenguaje materno del autor, puede perder parte de
           su esencia, es por eso que esta revista recibirá por el momento,
@@ -205,33 +203,35 @@ export const InstruccionesAutores = () => (
           Normas para el envío de artículos
         </h1>
         <p className="text-justify text-lg">
-          El envío será vía correo electrónico al email: educiencia@revistatemachtiani.net.
-          Todo manuscrito que se envíe a la Revista Internacional de
-          Investigación y Formación Educativa para ser evaluado debe adherirse
-          estrictamente al Manual de Estilo de Publicaciones APA tercera edición
-          en español y a los lineamientos que el comité editorial considera
-          indispensables y que a continuación describimos. Debe presentarse en
-          un único documento escrito a doble espacio con letra Times New Roman,
-          Arial o Courier a 12 puntos, márgenes de 2.5 en todos los lados y no
-          debe exceder de 20 páginas, incluyendo tablas y figuras. La primera
-          página debe incluir el título, nombre(s) completo(s) del(os) autor(es)
-          (primero el nombre seguido por los apellidos unidos por un guion),
-          afiliación institucional, encabezado sugerido y datos de localización
-          del autor principal, así como dirección postal, dirección electrónica
-          y teléfonos de todos los autores. La segunda y/o tercera páginas
-          incluyen el título, un resumen de máximo 250 palabras y las palabras
-          clave en español (máximo 3 separadas por una coma), y el título, el
-          resumen y las palabras clave en inglés. De no señalarse autor para
-          recibir correspondencia, se entenderá que es el primer autor quien
-          tendrá esta función. Las tablas y figuras deberán insertarse en el
-          manuscrito, estas no deberán aparecer en formato de imagen debido a
-          que pierden la nitidez al ajustarse en el documento. Deben editarse en
-          tonos de grises. De tener abreviaciones, deberá anotarse a pie de
-          figura, el significado de cada abreviación. Si existen dudas respecto
-          a las instrucciones para enviar manuscritos, diríjase al correo
-          electrónico de la revista:{" "}
+          El envío será vía correo electrónico al email:
+          educiencia@revistatemachtiani.net. Todo manuscrito que se envíe a la
+          Revista Internacional de Investigación y Formación Educativa para ser
+          evaluado debe adherirse estrictamente al Manual de Estilo de
+          Publicaciones APA tercera edición en español y a los lineamientos que
+          el comité editorial considera indispensables y que a continuación
+          describimos. Debe presentarse en un único documento escrito a doble
+          espacio con letra Times New Roman, Arial o Courier a 12 puntos,
+          márgenes de 2.5 en todos los lados y no debe exceder de 20 páginas,
+          incluyendo tablas y figuras. La primera página debe incluir el título,
+          nombre(s) completo(s) del(os) autor(es) (primero el nombre seguido por
+          los apellidos unidos por un guion), afiliación institucional,
+          encabezado sugerido y datos de localización del autor principal, así
+          como dirección postal, dirección electrónica y teléfonos de todos los
+          autores. La segunda y/o tercera páginas incluyen el título, un resumen
+          de máximo 250 palabras y las palabras clave en español (máximo 3
+          separadas por una coma), y el título, el resumen y las palabras clave
+          en inglés. De no señalarse autor para recibir correspondencia, se
+          entenderá que es el primer autor quien tendrá esta función. Las tablas
+          y figuras deberán insertarse en el manuscrito, estas no deberán
+          aparecer en formato de imagen debido a que pierden la nitidez al
+          ajustarse en el documento. Deben editarse en tonos de grises. De tener
+          abreviaciones, deberá anotarse a pie de figura, el significado de cada
+          abreviación. Si existen dudas respecto a las instrucciones para enviar
+          manuscritos, diríjase al correo electrónico de la revista:{" "}
           <span className="dark:text-sky-200 text-sky-900">
-            <a href="mailto:ricedut@gmail.com">educiencia@revistatemachtiani.net</a>
+            <a href="mailto:ricedut@gmail.com">
+              educiencia@revistatemachtiani.net
+            </a>
           </span>
         </p>
       </div>
@@ -240,7 +240,7 @@ export const InstruccionesAutores = () => (
 );
 export const MisionVision = () => (
   <div className="mt-10">
-    <div className="p-10 rounded-xl bg-slate-100 dark:bg-gray-500 mb-5    ">
+    <div className="p-10 rounded-xl bg-slate-100 dark:bg-gray-500 mb-5">
       <p className="text-3xl font-extrabold tracking-tight dark:text-white text-black">
         Misión
       </p>
@@ -329,7 +329,6 @@ export const links = [
   },
 ];
 
-
 ///AQUI ES DONDE DE AGREGA LOS NOMBRES DE LAS REVISTAS A LAS LISTA
 export const nRevistas = [
   {
@@ -349,13 +348,11 @@ export const nRevistas = [
       },
       {
         id: 4,
-        nombre: "RICEDUT-JUNIO-2021"
-      }
+        nombre: "RICEDUT-JUNIO-2021",
+      },
     ],
   },
 ];
-
-
 
 //// AQUI ES DONDE SE AGREGAN LAS IMAGENES PARA MOSTRAR LAS PORTADAS
 export const cartData = [
@@ -381,8 +378,8 @@ export const cartData = [
     id: 4,
     image: portada04,
     alt: "portada04",
-    title: "RICEDUT-JUNIO-21"
-  }
+    title: "RICEDUT-JUNIO-21",
+  },
 ];
 
 /* Este apartado es donde se modificara cada vez que quieras subir un archivo a la web */
@@ -413,9 +410,29 @@ export const DescriptionUltimoNumero = () => (
   </p>
 );
 
-// export const About_description = () => (
-
-// )
-
-
-
+//Acerca de
+export const About_description = () => (
+  <div className="w-auto flex flex-col gap-7 p-10 rounded-xl bg-slate-100 dark:bg-gray-500 mb-5">
+    <p className="text-justify">
+      Es una publicación trimestral, tiene por objetivo la difusión del
+      conocimiento y las ideas relacionadas con las Ciencias de la Educación,
+      incluyendo la investigación y la formación educativa. De la misma forma
+      consideramos muy importante la divulgación general del conocimiento por lo
+      que apostamos a ser un instrumento de divulgación de las ideas.
+    </p>
+    <p className="text-justify">
+      Pretendemos ser un espacio de difusión del conocimiento, un espacio donde
+      podamos compartir ideas y un espacio de convergencia para diferentes
+      expresiones de teorías, conceptos y lo relacionado con las ciencias de la
+      educación.
+    </p>
+    <p className="text-justify">
+      Por tener un carácter plural, consideramos importante generar una sección
+      especializada en la difusión de artículos creados por estudiantes de nivel
+      superior que estén acompañados de un académico o un investigador adscrito
+      a una Institución de Educación Superior, así como una sección dedicada a
+      la publicación de artículos en lenguas originarias, por lo que pretendemos
+      que la revista sea de carácter transdiciplinario y transteórico.
+    </p>
+  </div>
+);
