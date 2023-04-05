@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Skeleton } from "primereact/skeleton";
 
 // assets
-import Lupa from "../../assets/images/magnifier.png";
+import Lupa from "../../../assets/images/magnifier.png";
 
 const InputSearch = ({
   placeholder,

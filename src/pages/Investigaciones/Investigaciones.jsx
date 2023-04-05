@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Header } from "../../components";
 import { cartData } from "../../data/dummy";
-import InputSearch from "../../components/InputSearch/InputSearch";
+import InputSearch from "../../components/atoms/InputSearch/InputSearch";
 
 const Investigaciones = () => {
 

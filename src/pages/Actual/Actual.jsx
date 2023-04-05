@@ -25,7 +25,7 @@ const Actual = () => {
         <div className="p-5 bg-slate-100 dark:bg-gray-500 rounded-2xl opacity-90">
           {ultimoNumero.map((item) => (
             <div key={item.clave}>
-              <h3 className="text-justify">{item.title}</h3>
+              <h1 className="text-justify">{item.title}</h1>
               <div className="md:flex ms:gap-5 mt-5">
                 <div className="flex justify-center">
                   <div className="">

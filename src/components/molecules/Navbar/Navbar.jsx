@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { useStateContext } from "../../../contexts/ContextProvider";
 
@@ -44,16 +44,30 @@ const activeLinks = ({isActive}) => {
 
   const handleActiveMenu = () => setActiveMenu(!activeMenu);
   const handleActiveNavbar = () => setOpenNavbar(!openNavbar);
+  const [navbarState, setNavbarState] = useState(false)
+
+  const changeBg = () => {
+    if (window.scrollY >= 80) {
+      setNavbarState(true)
+    }
+    else {
+      setNavbarState(false)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("scroll", changeBg)
+  }, [])
 
   return (
+    <div className={`fixed md:static bg-slate-100 dark:bg-gray-800 navbar w-full ${navbarState && ""}`}>
     <div className="flex justify-between p-2 md:ml-6 md:mr-6 relative">
       <NavButton
         text="Ediciones"
         customFunc={handleActiveMenu}
         icon={<AiOutlineMenu />}
       />
-      <div className="flex">
-        <div className="flex flex-1 justify-end items-center gap-x-5 md:gap-x-8">
+        <div className="flex justify-end items-center gap-x-5 md:gap-x-8">
           <div className="flex flex-1 justify-end md:justify-center">
             <div className="pointer-events-auto md:hidden">
               <button
@@ -192,7 +206,8 @@ const activeLinks = ({isActive}) => {
             </nav>
           </div>
         </div>
-      </div>
+      
+    </div>
     </div>
   );
 };

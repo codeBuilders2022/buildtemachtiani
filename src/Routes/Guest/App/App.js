@@ -68,10 +68,7 @@ const App = () => {
               activeMenu ? "md:ml-72" : "flex-2"
             }`}
           >
-            <div className="fixed md:static bg-slate-100 dark:bg-gray-800 navbar w-full ">
-              <Navbar />
-            </div>
-
+            <Navbar />
             <div>
               {themeSettings && <ThemeSettings />}
               <Routes>
