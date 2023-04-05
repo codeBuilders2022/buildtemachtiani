@@ -73,8 +73,8 @@ const ContainerPDF = ({ mostrar }) => {
 
   return (
     <>
-      {/* <main className="m-auto md:w-1000 h-screen mt-14 md:mt-1"> */}
-      <main className="m-auto md:w-1000 mt-14 md:mt-1">
+      <main className="m-auto md:w-1000 h-screen mt-14 md:mt-1">
+      {/* <main className="m-auto md:w-1000 mt-14 md:mt-1"> */}
         <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.0.279/build/pdf.worker.min.js">
           <Viewer plugins={[defaultLayoutPluginInstance]} fileUrl={PDF} />
         </Worker>

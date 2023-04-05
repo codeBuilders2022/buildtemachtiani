@@ -1,5 +1,5 @@
 import React, { useEffect, Suspense } from "react";
-import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import { Navbar, Footer, Sidebar, ThemeSettings } from "../../../components";
 
@@ -74,7 +74,7 @@ const App = () => {
 
             <div>
               {themeSettings && <ThemeSettings />}
-              <HashRouter>
+              <Routes>
                 <Route
                   path="/"
                   element={
@@ -131,7 +131,7 @@ const App = () => {
                     </Suspense>
                   }
                 />
-              </HashRouter>
+              </Routes>
             </div>
             <Footer />
           </div>
