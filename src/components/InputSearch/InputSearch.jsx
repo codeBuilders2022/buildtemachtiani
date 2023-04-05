@@ -15,16 +15,13 @@ const InputSearch = ({
   disabled,
   width,
   skeleton,
-  style,
   onBlur,
   onChange,
   onKeyDown,
-  sizeLup,
-  classInput,
 }) => {
   return !skeleton ? (
     <>
-      <div className={"relative h-9 w-80 shadow-md dark:shadow-inner flex justify-center items-center bg-white rounded-xl"}>
+      <div className={`relative h-9 w-80 shadow-md dark:shadow-inner flex justify-center items-center bg-white rounded-xl ${className}`}>
         <input
           className={
             "h-full w-full shadow-inner text-black pl-4 pr-10 border-none outline-none rounded-xl placeholder-gray-600 placeholder:text-xs "
