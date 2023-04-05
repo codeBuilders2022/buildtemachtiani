@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.a35bb595.css",
-    "main.js": "/static/js/main.712d1f1f.js",
+    "main.js": "/static/js/main.aac80b8b.js",
     "static/media/Revista01.png": "/static/media/Revista01.836acd7447e75e74b925.png",
     "static/media/JUNIO-2019.png": "/static/media/JUNIO-2019.250cb0fdc2efef323f68.png",
     "static/media/JUNIO-2021.png": "/static/media/JUNIO-2021.329c533e334229700737.png",
@@ -14,10 +14,10 @@
     "static/media/Metropolis-Regular.otf": "/static/media/Metropolis-Regular.67a1988d7b65b0aaa16d.otf",
     "index.html": "/index.html",
     "main.a35bb595.css.map": "/static/css/main.a35bb595.css.map",
-    "main.712d1f1f.js.map": "/static/js/main.712d1f1f.js.map"
+    "main.aac80b8b.js.map": "/static/js/main.aac80b8b.js.map"
   },
   "entrypoints": [
     "static/css/main.a35bb595.css",
-    "static/js/main.712d1f1f.js"
+    "static/js/main.aac80b8b.js"
   ]
 }
