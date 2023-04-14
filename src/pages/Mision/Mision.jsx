@@ -1,5 +1,5 @@
 import React from "react";
-import Banner from "../../data/banner.png";
+import Banner from "../../assets/images/banner.png";
 import { MisionVision } from "../../data/dummy";
 
 const Mision = () => {

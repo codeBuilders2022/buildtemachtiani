@@ -2,6 +2,7 @@ import React from "react";
 //import React, { useEffect, useState } from "react";
 import { Worker, Viewer } from "@react-pdf-viewer/core";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
+import Pdfs from '../../../assets/PDF/RICEDUT-ENERO-2021.pdf'
 
 // Import styles
 import "@react-pdf-viewer/core/lib/styles/index.css";
@@ -76,7 +77,9 @@ const ContainerPDF = ({ mostrar }) => {
       <main className="m-auto md:w-1000 h-screen mt-14 md:mt-1">
       {/* <main className="m-auto md:w-1000 mt-14 md:mt-1"> */}
         <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.0.279/build/pdf.worker.min.js">
-          <Viewer plugins={[defaultLayoutPluginInstance]} fileUrl={PDF} />
+
+          {/* //Aqui en Viewer no acepta caracteres especiales, por ejemplo [".", ","] */}
+          <Viewer plugins={[defaultLayoutPluginInstance]} fileUrl={Pdfs} />
         </Worker>
       </main>
     </>
