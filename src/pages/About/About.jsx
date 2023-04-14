@@ -1,6 +1,7 @@
 import React from "react";
 import { useStateContext } from "../../contexts/ContextProvider";
-import avatar5 from "../../data/avatar5.jpg";
+// import avatar5 from "../../data/avatar5.jpg";
+// import avatar5 from "../../assets/images/avatar5.jpg";
 import { About_description } from "../../data/dummy";
 import Header from "../../components/molecules/Header/Header";
 

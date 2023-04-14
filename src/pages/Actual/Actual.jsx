@@ -1,8 +1,9 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Header } from "../../components";
-import svg from "../../data/Titulo-2.svg";
-import svgWhite from "../../data/Sidebar.svg";
+// import svg from "../../data/Titulo-2.svg";
+import svg from "../../assets/images/Titulo-2.svg";
+import svgWhite from "../../assets/images/Sidebar.svg";
 import { ultimoNumero, DescriptionUltimoNumero } from "../../data/dummy";
 import Button from "../../components/atoms/Button/Button";
 import { useStateContext } from "../../contexts/ContextProvider";

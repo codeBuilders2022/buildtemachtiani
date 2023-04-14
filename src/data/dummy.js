@@ -1,9 +1,9 @@
 import React from "react";
-import portada01 from "./JUNIO-2019.png";
-import portada02 from "./NOVIEMBRE-2020.png";
-import portada03 from "./ENERO-2021.png";
-import portada04 from "./JUNIO-2021.png";
-import numeroActual from "./Revista01.png";
+import portada01 from "../assets/images/JUNIO-2019.png";
+import portada02 from "../assets/images/NOVIEMBRE-2020.png";
+import portada03 from "../assets/images/ENERO-2021.png";
+import portada04 from "../assets/images/JUNIO-2021.png";
+import numeroActual from "../assets/images/Revista01.png";
 
 //Mi paginas de trabajo
 export const themeColors = [
@@ -238,6 +238,7 @@ export const InstruccionesAutores = () => (
     </div>
   </div>
 );
+
 export const MisionVision = () => (
   <div className="mt-10">
     <div className="p-10 rounded-xl bg-slate-100 dark:bg-gray-500 mb-5">
@@ -338,18 +339,18 @@ export const nRevistas = [
         id: 1,
         nombre: "RICEDUT-JUNIO-2019",
       },
-      {
-        id: 2,
-        nombre: "RICEDUT-NOVIEMBRE-2020",
-      },
-      {
-        id: 3,
-        nombre: "RICEDUT-ENERO-2021",
-      },
-      {
-        id: 4,
-        nombre: "RICEDUT-JUNIO-2021",
-      },
+      // {
+      //   id: 2,
+      //   nombre: "RICEDUT-NOVIEMBRE-2020",
+      // },
+      // {
+      //   id: 3,
+      //   nombre: "RICEDUT-ENERO-2021",
+      // },
+      // {
+      //   id: 4,
+      //   nombre: "RICEDUT-JUNIO-2021",
+      // },
     ],
   },
 ];
@@ -362,24 +363,24 @@ export const cartData = [
     alt: "portada1",
     title: "RICEDUT-JUNIO-2019",
   },
-  {
-    id: 2,
-    image: portada02,
-    alt: "portada2",
-    title: "RICEDUT-NOVIEMBRE-2020",
-  },
-  {
-    id: 3,
-    image: portada03,
-    alt: "portada3",
-    title: "RICEDUT-ENERO-2021",
-  },
-  {
-    id: 4,
-    image: portada04,
-    alt: "portada04",
-    title: "RICEDUT-JUNIO-21",
-  },
+  // {
+  //   id: 2,
+  //   image: portada02,
+  //   alt: "portada2",
+  //   title: "RICEDUT-NOVIEMBRE-2020",
+  // },
+  // {
+  //   id: 3,
+  //   image: portada03,
+  //   alt: "portada3",
+  //   title: "RICEDUT-ENERO-2021",
+  // },
+  // {
+  //   id: 4,
+  //   image: portada04,
+  //   alt: "portada04",
+  //   title: "RICEDUT-JUNIO-21",
+  // },
 ];
 
 /* Este apartado es donde se modificara cada vez que quieras subir un archivo a la web */

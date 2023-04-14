@@ -114,8 +114,7 @@ const Sidebar = () => {
 
                   {/* //////////////////////////////////////////////////////////////////////////// */}
                   {activeMenuRevistas ? (
-                    <>
-                      {revista.nombreRevista.map((i) => (
+                      revista.nombreRevista.map((i) => (
                         <NavLink
                           key={i.id}
                           to={`/ricedut/${i.id}/?${i.nombre}`}
@@ -131,8 +130,7 @@ const Sidebar = () => {
                             {i.nombre}
                           </span>
                         </NavLink>
-                      ))}
-                    </>
+                      ))
                   ) : (
                     <></>
                   )}
