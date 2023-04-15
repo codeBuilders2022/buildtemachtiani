@@ -105,7 +105,7 @@ const Home = () => {
                 <div className='metrics'>
                     <div className='left'>
                         <p className='title'>Indexada en:</p>
-                        <div>
+                        <div className="in">
                             {data.index.map((element, index) => {
                                 return (
                                     <div className='index' key={index}>
