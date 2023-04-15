@@ -4,6 +4,7 @@ import { FiSettings } from "react-icons/fi";
 import { Navbar, Footer, Sidebar, ThemeSettings } from "../../../components";
 import { useStateContext } from "../../../contexts/ContextProvider";
 import "./App.scss"
+import Home from "../../../pages/Home/Home";
 
 //Lazy
 const Actual = lazy(() => import("../../../pages/Actual/Actual"));
@@ -77,7 +78,7 @@ const App = () => {
                   path="/"
                   element={
                     <Suspense fallback={<></>}>
-                      <Actual />
+                      <Home/>
                     </Suspense>
                   }
                 />
