@@ -9,6 +9,7 @@ import {
   Instrucciones,
   Mision,
   Actual,
+  Home,
   Pdf,
   PageActual,
 } from "../../../pages";
@@ -76,7 +77,7 @@ const App = () => {
                   path="/"
                   element={
                     <Suspense fallback={<></>}>
-                      <Actual />
+                      <Home/>
                     </Suspense>
                   }
                 />

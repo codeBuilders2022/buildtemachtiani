@@ -31,6 +31,10 @@ export const themeColors = [
     color: "#FB9678",
     name: "Salmon",
   },
+  {
+    color: "#87000C",
+    name: "Wine",
+  },
 ];
 
 export const tableConvocatoria = [
