@@ -1,21 +1,22 @@
-import React, { useEffect, Suspense } from "react";
+import React, { useEffect, Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import { Navbar, Footer, Sidebar, ThemeSettings } from "../../../components";
-
-import {
-  Investigaciones,
-  About,
-  Instrucciones,
-  Mision,
-  Actual,
-  Home,
-  Pdf,
-  PageActual,
-} from "../../../pages";
-
 import { useStateContext } from "../../../contexts/ContextProvider";
-import "./App.css";
+import "./App.scss"
+import Home from "../../../pages/Home/Home";
+
+//Lazy
+const Actual = lazy(() => import("../../../pages/Actual/Actual"));
+const Investigaciones = lazy(() => import("../../../pages/Investigaciones/Investigaciones"));
+const Instrucciones = lazy(() => import("../../../pages/Instrucciones/Instrucciones"));
+const About = lazy(() => import("../../../pages/About/About"));
+const Mision = lazy(() => import("../../../pages/Mision/Mision"));
+const Pdf = lazy(() => import("../../../pages/Pdf/Pdf"));
+const PageActual = lazy(() => import("../../../pages/PageActual/PageActual"));
+const MagazinePolicies = lazy(() => import("../../../pages/MagazinePolicies/MagazinePolicies"));
+
+
 
 const App = () => {
   const {
@@ -126,6 +127,14 @@ const App = () => {
                   element={
                     <Suspense fallback={<></>}>
                       <PageActual />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="magazine-policies"
+                  element={
+                    <Suspense fallback={<></>}>
+                      <MagazinePolicies />
                     </Suspense>
                   }
                 />
