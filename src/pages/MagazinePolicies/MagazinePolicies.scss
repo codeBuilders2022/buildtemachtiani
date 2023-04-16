@@ -6,40 +6,72 @@
   margin: 40px;
   border-radius: 24px;
 
+  p {
+    text-align: justify;
+  }
+
   @media (max-width: 768px) {
-    padding: 8px;
-    margin: 8px;
+    padding: 8px 8px 8px 8px;
+    // padding: 8px;
+    margin: 80px 8px 8px 8px;
   }
 
   .inside_magazine {
     width: 100%;
     border-radius: 16px;
-    padding: 30px;
+    padding: 41px;
 
     display: flex;
     flex-direction: column;
     gap: 45px;
 
-    .options {
-      width: 432px;
-      margin-bottom: 5px;
-      font-size: 15px;
-      cursor: pointer;
-      position: relative;
+    @media (max-width: 768px) {
+      padding: 15px;
+    }
 
-      &::before {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 0;
-        height: 3px;
-        background: #559bd4;
-        transition: width 0.3s ease;
+    .sesion_opt {
+      @media (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
       }
 
-      &:hover::before {
-        width: 60px;
+      .options {
+        width: 432px;
+        margin-bottom: 5px;
+        font-size: 15px;
+        cursor: pointer;
+        position: relative;
+
+        &::before {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 3px;
+          background: #559bd4;
+          transition: width 0.3s ease;
+        }
+
+        &:hover::before {
+          width: 60px;
+        }
+
+        @media (max-width: 768px) {
+          font-size: 18px;
+          width: unset;
+
+          &::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: #559bd4;
+          }
+        }
       }
     }
 
@@ -113,6 +145,11 @@
             display: flex;
             gap: 50px;
 
+            @media (max-width: 768px) {
+              flex-wrap: wrap;
+              gap: 15px;
+            }
+
             .inside_block {
               display: flex;
               align-items: center;
@@ -146,5 +183,255 @@
         }
       }
     }
+
+    .secct3_ {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      p {
+        font-size: 16px;
+      }
+
+      .title_s {
+        font-size: 25px;
+        opacity: 0.8;
+        position: relative;
+        width: 409px;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: #559bd4;
+        }
+
+        @media (max-width: 768px) {
+          width: auto;
+        }
+      }
+
+      .title_h3 {
+        font-size: 18px;
+      }
+
+      .block_ul {
+        padding-left: 25px;
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+
+        li {
+          font-size: 13px;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .secct4_ {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .title_secct4 {
+        font-size: 25px;
+        opacity: 0.8;
+        position: relative;
+        width: 320px;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: #559bd4;
+        }
+
+        @media (max-width: 768px) {
+          width: auto;
+        }
+      }
+    }
+
+    .secct5_ {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .title_secct5 {
+        font-size: 25px;
+        opacity: 0.8;
+        position: relative;
+        width: 320px;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: #559bd4;
+        }
+
+        @media (max-width: 768px) {
+          width: auto;
+        }
+      }
+      p {
+        font-size: 16px;
+      }
+    }
+
+    .secct6_ {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      p {
+        font-size: 16px;
+      }
+      .title_secct6 {
+        font-size: 25px;
+        opacity: 0.8;
+        position: relative;
+        width: 200px;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: #559bd4;
+        }
+      }
+
+      .block_code {
+        padding-left: 25px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .code_h3 {
+          font-size: 14px;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .secct7_{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+
+      .title_secct7{
+        font-size: 25px;
+        opacity: 0.8;
+        position: relative;
+        width: 250px;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: #559bd4;
+        }
+
+        @media (max-width: 768px) {
+          width: auto;
+        }
+      }
+
+      p{
+        font-size: 16px;
+      }
+    }
+
+    .secct8_{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+       
+      .title_secct8{
+        font-size: 25px;
+        opacity: 0.8;
+        position: relative;
+        width: 660px;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: #559bd4;
+        }
+
+        @media (max-width: 768px) {
+          width: auto;
+        }
+      }
+
+      p{
+        font-size: 16px;
+      }
+
+      .note_{
+        font-size: 14px;
+        font-weight: bold;
+        padding-left: 15px;
+      }
+    }
+
+    .secct9_{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .title_secct9{
+        font-size: 25px;
+        opacity: 0.8;
+        position: relative;
+        width: 420px;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: #559bd4;
+        }
+
+        @media (max-width: 768px) {
+          width: auto;
+        }
+      }
+      p{
+        font-size: 16px;
+      }
+    }
+
+
   }
 }
