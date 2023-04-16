@@ -6,6 +6,9 @@ import books from "../../../assets/images/books.png"
 import img1 from "../../../assets/images/udg.jpg"
 import { Link } from "react-router-dom"
 import { useState } from "react"
+import director from "../../../assets/images/director.jpg"
+import revisor from "../../../assets/images/revisor.jpg"
+import editor from "../../../assets/images/editora.jpg"
 
 const Sidebar = () => {
     const options = [
@@ -19,6 +22,12 @@ const Sidebar = () => {
         { title: "Congreso Internacional de Educación para la Salud", date: "2023.06.03", urlSign: "https://registro-ciam.hcg.gob.mx/" },
         { title: "Congreso Internacional de Estudiantes de Ciencias de la Salud", date: "2023.08.14", urlSign: "https://registro-ciam.hcg.gob.mx/" },
         { title: "XXV Congreso Internacional Avances en Medicina", date: "2024.03.17", urlSign: "https://registro-ciam.hcg.gob.mx/" },
+    ])
+
+    const [comite, setComite] = useState([
+        { occupation: "Director", name: "Elena Cardona Álvarez", grade: "Dra.", email: "joel@gmail.com", img: director },
+        { occupation: "Revisor en jefe", name: "Carlos Millán Blanco", grade: "Dr.", email: "joelarian@gmail.com", img: revisor },
+        { occupation: "Editor en jefe", name: "Julia Rocha Corona", grade: "Dra.", email: "joeltrincado@gmail.com", img: editor },
     ])
 
     return (
@@ -68,7 +77,26 @@ const Sidebar = () => {
                         </svg>
                     </div>
                 </div>
-                <button className="comite">Comité Editorial</button>
+                <div className="editorial">
+                    <button className="comite">Comité Editorial</button>
+                    <div className="team">
+                        {comite.map((position, index) => {
+                            return (
+                                <div className="cardTeam" key={index}>
+                                    <img src={position.img} />
+                                    <div className="info">
+                                        <p>{position.grade} {position.name}</p>
+                                        <p style={{ fontStyle: 'italic' }}>{position.occupation}</p>
+                                        <p style={{ fontStyle: 'italic' }}>{position.email}</p>
+                                    </div>
+                                </div>
+                            )
+                        })}
+                        <div className="seeComite">
+                            <button>Ver más...</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </aside>
     )
