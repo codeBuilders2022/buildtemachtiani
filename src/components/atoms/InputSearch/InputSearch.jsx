@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-// import "./InputSearch.scss";
+import "./InputSearch.scss";
 
 import { Skeleton } from "primereact/skeleton";
 
@@ -19,13 +19,11 @@ const InputSearch = ({
   onChange,
   onKeyDown,
 }) => {
-  return !skeleton ? (
+  return !skeleton ? (             
     <>
-      <div className={`relative h-9 w-80 shadow-md dark:shadow-inner flex justify-center items-center bg-white rounded-xl ${className}`}>
+      <div className={`InputSearch ${className}`}>
         <input
-          className={
-            "h-full w-full shadow-inner text-black pl-4 pr-10 border-none outline-none rounded-xl placeholder-gray-600 placeholder:text-xs "
-          }
+          className={"bg-input-color-lig dark:bg-input-color-dark"}
           id={id}
           value={value}
           disabled={disabled}

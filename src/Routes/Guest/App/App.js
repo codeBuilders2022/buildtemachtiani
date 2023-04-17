@@ -60,7 +60,7 @@ const App = () => {
               <FiSettings />
             </button>
           </div>
-          {activeMenu ? (
+          {/* {activeMenu ? (
             <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-sky-900 ease-in-out duration-75">
               <Sidebar />
             </div>
@@ -68,7 +68,7 @@ const App = () => {
             <div className="w-0 dark:bg-secondary-dark-bg">
               <Sidebar />
             </div>
-          )}
+          )} */}
           <div
             // De esta clase cambias el color del fondo
             className={`dark:bg-gray-800 bg-slate-100 min-h-screen w-full ${
@@ -96,7 +96,7 @@ const App = () => {
                   }
                 />
                 <Route
-                  path="/Instrucciones"
+                  path="/guide-authors"
                   element={
                     <Suspense fallback={<></>}>
                       <Instrucciones />
@@ -104,7 +104,7 @@ const App = () => {
                   }
                 />
                 <Route
-                  path="/About"
+                  path="/about"
                   element={
                     <Suspense fallback={<></>}>
                       <About />
@@ -112,7 +112,7 @@ const App = () => {
                   }
                 />
                 <Route
-                  path="/Mision"
+                  path="/mision-vision"
                   element={
                     <Suspense fallback={<></>}>
                       <Mision />
@@ -127,14 +127,14 @@ const App = () => {
                     </Suspense>
                   }
                 />
-                <Route
+                {/* <Route
                   path="NumeroActual"
                   element={
                     <Suspense fallback={<></>}>
                       <PageActual />
                     </Suspense>
                   }
-                />
+                /> */}
                 <Route
                   path="/metrics"
                   element={
@@ -144,7 +144,7 @@ const App = () => {
                   }
                 />
                 <Route
-                  path="magazine-policies"
+                  path="/magazine-policies"
                   element={
                     <Suspense fallback={<></>}>
                       <MagazinePolicies />
