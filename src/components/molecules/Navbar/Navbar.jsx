@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { useStateContext } from "../../../contexts/ContextProvider";
+import InputSearch from "../../atoms/InputSearch/InputSearch";
 
 const NavButton = ({ customFunc, icon, color, dotColor, text }) => (
   <button
@@ -26,50 +27,42 @@ const NavButton = ({ customFunc, icon, color, dotColor, text }) => (
 );
 
 const Navbar = () => {
-  const {
-    activeMenu,
-    setActiveMenu,
-    openNavbar,
-    setOpenNavbar,
-    currentColor
-  } = useStateContext();
+  const { activeMenu, setActiveMenu, openNavbar, setOpenNavbar, currentColor } =
+    useStateContext();
 
-const activeLinks = ({isActive}) => {
-  return{
-    color: isActive ? currentColor : null
-  }
-}
-
-
+  const activeLinks = ({ isActive }) => {
+    return {
+      color: isActive ? currentColor : null,
+    };
+  };
 
   const handleActiveMenu = () => setActiveMenu(!activeMenu);
   const handleActiveNavbar = () => setOpenNavbar(!openNavbar);
-  const [navbarState, setNavbarState] = useState(false)
+  const [navbarState, setNavbarState] = useState(false);
 
   const changeBg = () => {
     if (window.scrollY >= 80) {
-      setNavbarState(true)
+      setNavbarState(true);
+    } else {
+      setNavbarState(false);
     }
-    else {
-      setNavbarState(false)
-    }
-  }
+  };
 
   useEffect(() => {
-    window.addEventListener("scroll", changeBg)
-  }, [])
+    window.addEventListener("scroll", changeBg);
+  }, []);
 
   return (
-    <div className={`fixed md:static bg-slate-100 dark:bg-gray-800 navbar w-full ${navbarState && ""}`}>
-    <div className="flex justify-between p-2 md:ml-6 md:mr-6 relative">
-      <NavButton
+    <div
+      className={`fixed bg-slate-100 dark:bg-gray-800 navbar w-full h-16 ${navbarState}`}
+    >
+      {/* <NavButton
         text="Ediciones"
         customFunc={handleActiveMenu}
         icon={<AiOutlineMenu />}
-      />
-        <div className="flex justify-end items-center gap-x-5 md:gap-x-8">
-          <div className="flex flex-1 justify-end md:justify-center">
-            <div className="pointer-events-auto md:hidden">
+      /> */}
+
+      <div className="pointer-events-auto md:hidden h-full flex items-center justify-end pr-6">
               <button
                 className="group flex items-center rounded-full bg-white/90 
                       px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg 
@@ -125,7 +118,7 @@ const activeLinks = ({isActive}) => {
                             className="relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400"
                             onClick={() => setOpenNavbar(false)}
                           >
-                            <span>Actual</span>
+                            <span>Inicio</span>
                           </NavLink>
                         </li>
                         <li>
@@ -139,20 +132,29 @@ const activeLinks = ({isActive}) => {
                         </li>
                         <li>
                           <NavLink
-                            to="/mision"
-                            className="relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400"
+                            to="/guide-authors"
+                            className="relative block px-3 py-2 transition hover:text-teal-500  dark:hover:text-teal-400"
                             onClick={() => setOpenNavbar(false)}
                           >
-                            <span>Misión</span>
+                            <span>Guia para autores</span>
                           </NavLink>
                         </li>
                         <li>
                           <NavLink
-                            to="/instrucciones"
-                            className="relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400"
+                            to="/mision-vision"
+                            className="relative block px-3 py-2 transition hover:text-teal-500  dark:hover:text-teal-400"
                             onClick={() => setOpenNavbar(false)}
                           >
-                            <span>Instrucciones para Autores</span>
+                            <span>Misión y Visión</span>
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink
+                            to="/magazine-policies"
+                            className="relative block px-3 py-2 transition hover:text-teal-500  dark:hover:text-teal-400"
+                            onClick={() => setOpenNavbar(false)}
+                          >
+                            <span>Políticas de la revista</span>
                           </NavLink>
                         </li>
                       </ul>
@@ -164,50 +166,26 @@ const activeLinks = ({isActive}) => {
               )}
             </div>
 
-            <nav className="pointer-events-auto hidden md:block">
-              <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
-                <li>
-                  <NavLink
-                    to="/"
-                    className="relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400"
-                    style={activeLinks}
-                  > 
-                    <span>Actual</span>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/about"
-                    className="relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400"
-                    style={activeLinks}
-                  >
-                    <span>Acerca de</span>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/mision"
-                    className="relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400"
-                    style={activeLinks}
-                  >
-                    <span>Misión</span>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/instrucciones"
-                    className="relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400"
-                    style={activeLinks}
-                  >
-                    <span>Instrucciones para Autores</span>
-                  </NavLink>
-                </li>
-              </ul>
-            </nav>
-          </div>
+      <nav className="pointer-events-auto hidden md:bg-white/90 md:ring-1 md:ring-zinc-900/5 md:dark:ring-white/10 md:backdrop-blur md:dark:bg-zinc-800/90 md:z-50 h-full md:flex md:items-center md:w-full md:justify-end">
+        <div className="">
+          <ul className="flex items-center pr-12 gap-9">
+          {/* flex text-sm font-medium md:items-center
+                              text-zinc-800  h-full md:w-full md:justify-end
+                              ring-zinc-900/5  
+                              dark:text-zinc-200  md:pr-8 gap-9 */}
+            <li>
+              <NavLink
+                to="/"
+                className="relative dark:text-white  block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400 text-lg font-bold"
+                style={activeLinks}
+              >
+                <span>Inicio</span>
+              </NavLink>
+            </li>
+            <InputSearch />
+          </ul>
         </div>
-      
-    </div>
+      </nav>
     </div>
   );
 };

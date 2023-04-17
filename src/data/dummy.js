@@ -110,9 +110,9 @@ export const Evaluacion = () => (
 );
 
 export const InstruccionesAutores = () => (
-  <div className="p-4">
+  <>
     <div className="mb-10">
-      <div className="md:w-4/5 p-5 bg-slate-100 dark:bg-gray-500 rounded-2xl opacity-90">
+      <div className="md:w-full p-5 bg-slate-100 dark:bg-gray-500 rounded-2xl opacity-90">
         <h1 className="text-xl uppercase mb-2 mt-2 dark:text-gray-300">
           Políticas de la revista
         </h1>
@@ -139,7 +139,7 @@ export const InstruccionesAutores = () => (
     </div>
 
     <div className="flex justify-end mb-10">
-      <div className="md:w-4/5 bg-slate-100 dark:bg-gray-500 rounded-2xl p-5 opacity-90">
+      <div className="md:w-full bg-slate-100 dark:bg-gray-500 rounded-2xl p-5 opacity-90">
         <h1 className="text-xl uppercase mb-2 mt-2 dark:text-gray-300">
           Tipos de trabajos para publicarse
         </h1>
@@ -163,7 +163,7 @@ export const InstruccionesAutores = () => (
     </div>
 
     <div className="mb-10">
-      <div className="md:w-4/5 bg-slate-100 dark:bg-gray-500 rounded-2xl p-5 opacity-90">
+      <div className="md:w-full bg-slate-100 dark:bg-gray-500 rounded-2xl p-5 opacity-90">
         <h1 className="text-xl uppercase mb-2 mt-2 dark:text-gray-300">
           Transmisión de derechos de autor
         </h1>
@@ -202,7 +202,7 @@ export const InstruccionesAutores = () => (
     </div> */}
 
     <div className="mb-10 flex justify-end">
-      <div className="md:w-4/5 bg-slate-100 dark:bg-gray-500 rounded-2xl p-5 opacity-90">
+      <div className="md:w-full bg-slate-100 dark:bg-gray-500 rounded-2xl p-5 opacity-90">
         <h1 className="text-xl uppercase mb-2 mt-2 dark:text-gray-300">
           Normas para el envío de artículos
         </h1>
@@ -240,16 +240,17 @@ export const InstruccionesAutores = () => (
         </p>
       </div>
     </div>
-  </div>
+  </>
+  
 );
 
 export const MisionVision = () => (
-  <div className="mt-10">
+  <div className="mt-10 font-normal">
     <div className="p-10 rounded-xl bg-slate-100 dark:bg-gray-500 mb-5">
       <p className="text-3xl font-extrabold tracking-tight dark:text-white text-black">
         Misión
       </p>
-      <p className="text-lg dark:text-white text-justify">
+      <p className="text-lg dark:text-white text-justify ">
         Ser un medio independiente que parte de la necesidad de difundir la
         investigación científica en educación, con un enfoque
         transdisciplinario, que busca la publicación electrónica de nuevos
