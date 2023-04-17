@@ -1,0 +1,22 @@
+.CategoryMetric
+{
+    width: 100%;
+    max-width: 200px;
+    height: 100%;
+    min-height: 75px;
+    background: #dae3eb;
+    border-radius: 5px;
+    cursor: pointer;
+    .title-category
+    {
+        // text-align: center;
+        padding: 10px 10px 0 ;
+        font-size: 14px;
+    }
+    .number-metric
+    {
+        font-size: 14px;
+        padding-left: 10px;
+
+    }
+}

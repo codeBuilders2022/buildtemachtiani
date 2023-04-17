@@ -3,20 +3,25 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import { Navbar, Footer, Sidebar, ThemeSettings } from "../../../components";
 import { useStateContext } from "../../../contexts/ContextProvider";
-import "./App.scss"
+import "./App.scss";
 import Home from "../../../pages/Home/Home";
+import Metrics from "../../../pages/Metrics/Metrics";
 
 //Lazy
 const Actual = lazy(() => import("../../../pages/Actual/Actual"));
-const Investigaciones = lazy(() => import("../../../pages/Investigaciones/Investigaciones"));
-const Instrucciones = lazy(() => import("../../../pages/Instrucciones/Instrucciones"));
+const Investigaciones = lazy(() =>
+  import("../../../pages/Investigaciones/Investigaciones")
+);
+const Instrucciones = lazy(() =>
+  import("../../../pages/Instrucciones/Instrucciones")
+);
 const About = lazy(() => import("../../../pages/About/About"));
 const Mision = lazy(() => import("../../../pages/Mision/Mision"));
 const Pdf = lazy(() => import("../../../pages/Pdf/Pdf"));
 const PageActual = lazy(() => import("../../../pages/PageActual/PageActual"));
-const MagazinePolicies = lazy(() => import("../../../pages/MagazinePolicies/MagazinePolicies"));
-
-
+const MagazinePolicies = lazy(() =>
+  import("../../../pages/MagazinePolicies/MagazinePolicies")
+);
 
 const App = () => {
   const {
@@ -78,7 +83,7 @@ const App = () => {
                   path="/"
                   element={
                     <Suspense fallback={<></>}>
-                      <Home/>
+                      <Home />
                     </Suspense>
                   }
                 />
@@ -130,6 +135,14 @@ const App = () => {
                     </Suspense>
                   }
                 /> */}
+                <Route
+                  path="/metrics"
+                  element={
+                    <Suspense fallback={<></>}>
+                      <Metrics />
+                    </Suspense>
+                  }
+                />
                 <Route
                   path="/magazine-policies"
                   element={
