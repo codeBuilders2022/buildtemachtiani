@@ -5,6 +5,7 @@ import { Navbar, Footer, Sidebar, ThemeSettings } from "../../../components";
 import { useStateContext } from "../../../contexts/ContextProvider";
 import "./App.scss";
 import Home from "../../../pages/Home/Home";
+import Metrics from "../../../pages/Metrics/Metrics";
 
 //Lazy
 const Actual = lazy(() => import("../../../pages/Actual/Actual"));
