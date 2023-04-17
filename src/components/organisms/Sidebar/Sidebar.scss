@@ -1,0 +1,194 @@
+.Sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+
+    .posted {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .title {
+            display: flex;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgb(140, 132, 160);
+            gap: 10px;
+            margin-top: 30px;
+
+            img {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            li {
+                font-style: italic;
+
+                &:hover {
+                    color: rgb(140, 132, 160);
+                    letter-spacing: 1px;
+                    transition: letter-spacing .3s linear;
+                }
+            }
+        }
+
+        .imgBank {
+            display: flex;
+            position: relative;
+
+            .eye {
+                position: absolute;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                display: grid;
+                place-items: center;
+                cursor: pointer;
+                background-color: #73639a85;
+                border-radius: 5px;
+
+                &:hover {
+                    background-color: #73639aa2;
+
+                    svg {
+                        width: 80px;
+                        height: 80px;
+                        transition: width .2s linear;
+                        transition: height .2s linear;
+                    }
+                }
+            }
+        }
+
+        .editorial {
+            width: 100%;
+            border: 10px solid rgba(140, 132, 160, 0.235);
+            margin-top: 30px;
+
+
+            .comite {
+                width: 100%;
+                height: 40px;
+                background: linear-gradient(to left, #8c84a0, #73639a);
+                color: white;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                font-size: 14px;
+                font-weight: 600;
+                cursor: pointer;
+
+                &:hover {
+                    letter-spacing: 5px;
+                    transition: letter-spacing .3s linear;
+                }
+            }
+
+            .team {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                padding: 10px;
+
+                display: flex;
+                gap: 20px;
+
+                img {
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 5px;
+                    object-fit: cover;
+                }
+
+                .cardTeam {
+                    display: flex;
+                    gap: 10px;
+                }
+
+                .info {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+                    font-size: 12px;
+                    color: #73639a;
+                    font-weight: 700;
+
+                    span {
+                        opacity: 0.7;
+                        font-weight: 400;
+                    }
+                }
+            }
+
+            .seeComite {
+                display: flex;
+                width: 100%;
+                justify-content: right;
+
+                button {
+                    color: #73639a;
+                    font-style: italic;
+                    font-size: 13px;
+
+                    &:hover {
+                        color: #87000C;
+                        letter-spacing: 2px;
+                        transition: letter-spacing .3s linear;
+                    }
+                }
+            }
+        }
+    }
+
+    .events_container {
+        display: flex;
+        flex-direction: column;
+        border: 10px solid rgba(140, 132, 160, 0.235);
+        margin-top: 30px;
+
+        .headerEvent {
+            width: 100%;
+            height: 25px;
+            background: linear-gradient(to left, #8c84a0, #73639a);
+            text-align: center;
+            display: grid;
+            place-items: center;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .events {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            gap: 20px;
+
+            .event {
+                .date {
+                    font-size: 12px;
+                    color: #73639a;
+                    font-weight: 700;
+                }
+
+                .titleEvent {
+                    font-size: 14px;
+                    font-style: italic;
+                    color: #8c84a0;
+
+                    &:hover {
+                        color: #87000C;
+                    }
+                }
+            }
+        }
+    }
+}

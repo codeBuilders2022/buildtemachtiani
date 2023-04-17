@@ -1,0 +1,437 @@
+.MagazinePolicies {
+  // width: 100%;
+  height: 100%;
+  background: #fff;
+  padding: 40px;
+  margin: 40px;
+  border-radius: 24px;
+
+  p {
+    text-align: justify;
+  }
+
+  @media (max-width: 768px) {
+    padding: 8px 8px 8px 8px;
+    // padding: 8px;
+    margin: 80px 8px 8px 8px;
+  }
+
+  .inside_magazine {
+    width: 100%;
+    border-radius: 16px;
+    padding: 41px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+
+    @media (max-width: 768px) {
+      padding: 15px;
+    }
+
+    .sesion_opt {
+      @media (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .options {
+        width: 432px;
+        margin-bottom: 5px;
+        font-size: 15px;
+        cursor: pointer;
+        position: relative;
+
+        &::before {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 3px;
+          background: #559bd4;
+          transition: width 0.3s ease;
+        }
+
+        &:hover::before {
+          width: 60px;
+        }
+
+        @media (max-width: 768px) {
+          font-size: 18px;
+          width: unset;
+
+          &::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: #559bd4;
+          }
+        }
+      }
+    }
+
+    .secct1_ {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .title_secct1 {
+        font-size: 25px;
+        opacity: 0.8;
+        position: relative;
+        width: 225px;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: #559bd4;
+        }
+      }
+
+      p {
+        text-align: justify;
+      }
+    }
+
+    .secct2_ {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .title_secct2 {
+        width: 240px;
+        font-size: 25px;
+        opacity: 0.8;
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: #559bd4;
+        }
+      }
+
+      .secct_2inside {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        .inside_secct_2 {
+          width: 100%;
+          //    display: flex;
+          //    flex-direction: column;
+          //    gap: 30px;
+
+          ._title {
+            font-size: 20px;
+          }
+
+          .block_checks {
+            display: flex;
+            gap: 50px;
+
+            @media (max-width: 768px) {
+              flex-wrap: wrap;
+              gap: 15px;
+            }
+
+            .inside_block {
+              display: flex;
+              align-items: center;
+              gap: 10px;
+
+              //   .check_box_ {
+              //     background-color: #fff;
+              //     width: 15px;
+              //     height: 15px;
+              //     -webkit-appearance: none;
+              //     -moz-appearance: none;
+              //     appearance: none;
+              //     border: 1px solid #888;
+              //     border-radius: 50%;
+
+              //     &:checked {
+              //       background: linear-gradient(
+              //         120deg,
+              //         #3a8dde 3%,
+              //         #8331a7 47%,
+              //         #df1683 100%
+              //       );
+              //     }
+              //   }
+
+              .incisos {
+                font-size: 15px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .secct3_ {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      p {
+        font-size: 16px;
+      }
+
+      .title_s {
+        font-size: 25px;
+        opacity: 0.8;
+        position: relative;
+        width: 409px;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: #559bd4;
+        }
+
+        @media (max-width: 768px) {
+          width: auto;
+        }
+      }
+
+      .title_h3 {
+        font-size: 18px;
+      }
+
+      .block_ul {
+        padding-left: 25px;
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+
+        li {
+          font-size: 13px;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .secct4_ {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .title_secct4 {
+        font-size: 25px;
+        opacity: 0.8;
+        position: relative;
+        width: 320px;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: #559bd4;
+        }
+
+        @media (max-width: 768px) {
+          width: auto;
+        }
+      }
+    }
+
+    .secct5_ {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .title_secct5 {
+        font-size: 25px;
+        opacity: 0.8;
+        position: relative;
+        width: 320px;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: #559bd4;
+        }
+
+        @media (max-width: 768px) {
+          width: auto;
+        }
+      }
+      p {
+        font-size: 16px;
+      }
+    }
+
+    .secct6_ {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      p {
+        font-size: 16px;
+      }
+      .title_secct6 {
+        font-size: 25px;
+        opacity: 0.8;
+        position: relative;
+        width: 200px;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: #559bd4;
+        }
+      }
+
+      .block_code {
+        padding-left: 25px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .code_h3 {
+          font-size: 14px;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .secct7_{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+
+      .title_secct7{
+        font-size: 25px;
+        opacity: 0.8;
+        position: relative;
+        width: 250px;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: #559bd4;
+        }
+
+        @media (max-width: 768px) {
+          width: auto;
+        }
+      }
+
+      p{
+        font-size: 16px;
+      }
+    }
+
+    .secct8_{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+       
+      .title_secct8{
+        font-size: 25px;
+        opacity: 0.8;
+        position: relative;
+        width: 660px;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: #559bd4;
+        }
+
+        @media (max-width: 768px) {
+          width: auto;
+        }
+      }
+
+      p{
+        font-size: 16px;
+      }
+
+      .note_{
+        font-size: 14px;
+        font-weight: bold;
+        padding-left: 15px;
+      }
+    }
+
+    .secct9_{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .title_secct9{
+        font-size: 25px;
+        opacity: 0.8;
+        position: relative;
+        width: 420px;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: #559bd4;
+        }
+
+        @media (max-width: 768px) {
+          width: auto;
+        }
+      }
+      p{
+        font-size: 16px;
+      }
+    }
+
+
+  }
+}
