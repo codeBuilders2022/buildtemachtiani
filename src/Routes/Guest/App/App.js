@@ -15,6 +15,7 @@ import {
 
 import { useStateContext } from "../../../contexts/ContextProvider";
 import "./App.css";
+import Metrics from "../../../pages/Metrics/Metrics";
 
 const App = () => {
   const {
@@ -125,6 +126,14 @@ const App = () => {
                   element={
                     <Suspense fallback={<></>}>
                       <PageActual />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/metrics"
+                  element={
+                    <Suspense fallback={<></>}>
+                      <Metrics/>
                     </Suspense>
                   }
                 />

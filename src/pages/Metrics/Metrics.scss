@@ -1,0 +1,62 @@
+.Metrics {
+  .cards-body {
+    padding: 2.5rem;
+    margin: 2.5rem;
+    border-radius: 1.5rem;
+    background: white;
+
+    .title {
+      font-size: 2.25rem;
+    }
+    .categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+    .title-metric-category {
+      font-weight: bold;
+      font-size: 25px;
+    }
+    .metric-descrition {
+      font-size: 18px;
+    }
+  }
+  .parent-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+
+    .col1 {
+      grid-area: 1 / 1 / 2 / 2;
+    }
+    .col2 {
+      grid-area: 1 / 2 / 2 / 3;
+    }
+  }
+  .padingTablemetrics {
+    padding: 0 20%;
+  }
+  .metrics-table-font {
+    font-size: 20px;
+    margin: 10px 0;
+    text-align: center;
+  }
+  hr {
+    border-color: #3887CC;
+  }
+  .align-items {
+    align-items: center;
+    display: flex;
+  }
+  .text-plane
+  {
+    margin-top: 30px;
+    p
+    {
+      padding: 10px 0;
+    }
+  }
+}
