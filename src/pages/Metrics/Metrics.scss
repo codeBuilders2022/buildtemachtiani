@@ -1,9 +1,15 @@
 .Metrics {
+  // padding: 41px;
   .cards-body {
     padding: 2.5rem;
     margin: 2.5rem;
     border-radius: 1.5rem;
-    background: white;
+    border-radius: 20px;
+    // background: white;
+
+    // @media (min-width: 768px) {
+    //   margin-top: 128px;
+    // }
 
     .title {
       font-size: 2.25rem;
