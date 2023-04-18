@@ -83,7 +83,7 @@ const Home = () => {
             <div className="cnt_imag">
                 <img src={currentMode === "Dark" ?  svgWhite : svg} alt="Banner" className="img_" />
             </div>
-            <div className="dark:bg-gray-600 dark:text-white Journal">
+            <div className="dark:bg-gray-600 dark:text-white bg-white Journal">
                 <div className='container'>
                     {/* <div className="dark:bg-gray-500 bg-slate-100 flex w-full"> */}
                         <div className='cover'>
