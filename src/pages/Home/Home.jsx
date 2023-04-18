@@ -10,6 +10,8 @@ import cover from "../../assets/images/Revista01.png"
 import journal from "../../assets/PDF/RICEDUT-ENERO-2021.pdf"
 import svg from "../../assets/images/Titulo-2.svg";
 import svgWhite from "../../assets/images/Sidebar.svg";
+import logo_light from '../../assets/images/logo_light.png'
+import logo_dark from '../../assets/images/logo_dark.png'
 
 //components
 import { Tooltip } from 'primereact/tooltip';
@@ -79,7 +81,7 @@ const Home = () => {
     return (
         <div className="Home_binn">
             <div className="cnt_imag">
-                <img src={currentMode === "Dark" ?  svgWhite: svg} alt="Banner" className="img_" />
+                <img src={currentMode === "Dark" ?  svgWhite : svg} alt="Banner" className="img_" />
             </div>
             <div className="dark:bg-gray-600 dark:text-white Journal">
                 <div className='container'>
@@ -167,9 +169,6 @@ const Home = () => {
                             <h1 style={{color: currentColor}}>Artículos:</h1>
                         </div>
                         <div className="articles">
-
-
-
                             <div className="bg-slate-100 dark:bg-gray-500 card_articule">
                                 {!articles ?
                                     data.articles.map((article, index) => {
