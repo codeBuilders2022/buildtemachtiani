@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunktemachtiani=self.webpackChunktemachtiani||[]).push([[958],{2958:function(t,e,a){a.r(e);a(2791);var n=a(9556),c=a(184);e.default=function(){return(0,c.jsx)(c.Fragment,{children:(0,c.jsx)(n.tk,{mostrar:"revista educacion"})})}}}]);
+//# sourceMappingURL=958.d04c05f2.chunk.js.map
