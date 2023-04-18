@@ -7,7 +7,7 @@ import InputSearch from "../../atoms/InputSearch/InputSearch";
 //Assets
 import logo_dark from '../../../assets/images/mode_dark.png'
 import logo_light from '../../../assets/images/mode_light.png'
-import Logo_icon from '../../../assets/images/logo_icon.png'
+// import Logo_icon from '../../../assets/images/logo_icon.png'
 
 // const NavButton = ({ customFunc, icon, color, dotColor, text }) => (
 //   <button
@@ -153,7 +153,7 @@ const Navbar = () => {
               <NavLink
                 to="/"
                 className="relative dark:text-white  block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400 text-lg font-bold"
-                style={activeLinks}
+                // style={activeLinks}
               >
                 <span>Inicio</span>
               </NavLink>

@@ -22,7 +22,7 @@ const Sidebar = () => {
         // { id: 3, title: "Preguntas frecuentes", url: "#" },
         // { id: 4, title: "Guía para revisores", url: "#" },
         // { id: 5, title: "Mapa del sitio", url: "#" },
-        { id: 5, title: "Misión y Visión", url: "/mision-vision" },
+        { id: 5, title: "Misión y Visión", url: "/mission-vision" },
         { id: 5, title: "Politicas de la revista", url: "/magazine-policies" },
     ]
     const [events, setEvents] = useState([
