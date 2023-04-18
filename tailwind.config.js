@@ -14,9 +14,8 @@ module.exports = {
         "main-bg": "#FAFBFB",
         "input-color-lig": "#f1f5f9",
         "input-color-dark": "#b8babf",
-        "main-dark-bg": "#20232A",
-        "secondary-dark-bg": "#33373E",
-        "light-gray": "#F7F7F7",
+        "bg-gray-primary": "#bbc6d3",
+        "bg-dark-secondary": "#394352",
         "half-transparent": "rgba(0, 0, 0, 0.5)",
       },
       borderWidth: {

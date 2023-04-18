@@ -87,14 +87,14 @@ const App = () => {
                     </Suspense>
                   }
                 />
-                <Route
+                {/* <Route
                   path="/investigaciones"
                   element={
                     <Suspense fallback={<></>}>
                       <Investigaciones />
                     </Suspense>
                   }
-                />
+                /> */}
                 <Route
                   path="/guide-authors"
                   element={
@@ -112,21 +112,21 @@ const App = () => {
                   }
                 />
                 <Route
-                  path="/mision-vision"
+                  path="/mission-vision"
                   element={
                     <Suspense fallback={<></>}>
                       <Mision />
                     </Suspense>
                   }
                 />
-                <Route
+                {/* <Route
                   path="/ricedut/:id"
                   element={
                     <Suspense fallback={<></>}>
                       <Pdf />
                     </Suspense>
                   }
-                />
+                /> */}
                 {/* <Route
                   path="NumeroActual"
                   element={
