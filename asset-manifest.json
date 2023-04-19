@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.bd0583b2.css",
+    "main.css": "/static/css/main.c528d64c.css",
     "main.js": "/static/js/main.eea71f76.js",
     "static/css/862.af517650.chunk.css": "/static/css/862.af517650.chunk.css",
     "static/js/862.7a8ee5e3.chunk.js": "/static/js/862.7a8ee5e3.chunk.js",
@@ -35,7 +35,7 @@
     "static/media/Metropolis-Regular.otf": "/static/media/Metropolis-Regular.67a1988d7b65b0aaa16d.otf",
     "static/media/color.png": "/static/media/color.6441e63a57ccc5105bad.png",
     "index.html": "/index.html",
-    "main.bd0583b2.css.map": "/static/css/main.bd0583b2.css.map",
+    "main.c528d64c.css.map": "/static/css/main.c528d64c.css.map",
     "main.eea71f76.js.map": "/static/js/main.eea71f76.js.map",
     "862.af517650.chunk.css.map": "/static/css/862.af517650.chunk.css.map",
     "862.7a8ee5e3.chunk.js.map": "/static/js/862.7a8ee5e3.chunk.js.map",
@@ -47,7 +47,7 @@
     "317.6917648b.chunk.js.map": "/static/js/317.6917648b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bd0583b2.css",
+    "static/css/main.c528d64c.css",
     "static/js/main.eea71f76.js"
   ]
 }
