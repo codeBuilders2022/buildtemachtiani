@@ -74,11 +74,11 @@ const Metrics = () => {
                 <div className="bg-slate-100 dark:bg-gray-500 cards-body "> 
                     <div className="title">Métricas</div>
                     <div className="categories">
-                        <CategoryMetric style={{background: currentColor}}id={"IMPACTO"} title={"FACTOR DE IMPACTO 2021"} metric={"7,05"} />
-                        <CategoryMetric style={{background: currentColor}}id={"CITESCORE"} title={"CITESCORE 2021"} metric={"2,7"} />
-                        <CategoryMetric style={{background: currentColor}}id={"SJR"} title={"SJR 2021"} metric={"0,407"} />
-                        <CategoryMetric style={{background: currentColor}}id={"SNIP"} title={"SNIP 2021"} metric={"0,758"} />
-                        <CategoryMetric style={{background: currentColor}}id={"LEIDO"} title={"LO MAS LEÍDO"} metric={"Más datos..."} />
+                        <CategoryMetric id={"IMPACTO"} title={"FACTOR DE IMPACTO 2021"} metric={"7,05"} />
+                        <CategoryMetric id={"CITESCORE"} title={"CITESCORE 2021"} metric={"2,7"} />
+                        <CategoryMetric id={"SJR"} title={"SJR 2021"} metric={"0,407"} />
+                        <CategoryMetric id={"SNIP"} title={"SNIP 2021"} metric={"0,758"} />
+                        <CategoryMetric id={"LEIDO"} title={"LO MAS LEÍDO"} metric={"Más datos..."} />
                     </div>
                     <div className="title-metric-category">Factor de impacto</div>
                     <div className="metric-descrition">
@@ -119,7 +119,7 @@ const Metrics = () => {
 
                         </div>
                         <div className="col-2 align-items">
-                            <LineChartMetric width={size<=574?250:size<=1400?500:800} keyData="impact" data={MetricsDataLine}></LineChartMetric>
+                            <LineChartMetric width={size<=574?280:size<=1400?500:800} keyData="impact" data={MetricsDataLine}></LineChartMetric>
                         </div>
                     </div>
                     <div className="text-plane">
@@ -176,7 +176,7 @@ const Metrics = () => {
 
                         </div>
                         <div className="col-2 align-items">
-                            <LineChartMetric width={size<=574?250:size<=1400?500:800} keyData="citiescore" data={citiescoreDataLine}></LineChartMetric>
+                            <LineChartMetric width={size<=574?280:size<=1400?500:800} keyData="citiescore" data={citiescoreDataLine}></LineChartMetric>
                         </div>
                     </div>
                     <div className="text-plane">
@@ -234,7 +234,7 @@ const Metrics = () => {
 
                         </div>
                         <div className="col-2 align-items">
-                            <Chart  width={size<=574?250:size<=1400?500:800} keyData="snip" data={snipDataLine}></Chart>
+                            <Chart  width={size<=574?280:size<=1400?500:800} keyData="snip" data={snipDataLine}></Chart>
                         </div>
                     </div>
                     <div className="text-plane">
@@ -282,7 +282,7 @@ const Metrics = () => {
 
                         </div>
                         <div className="col-2 align-items">
-                            <Chart  width={size<=574?250:size<=1400?500:800} keyData="sjr" data={sjrDataLine}></Chart>
+                            <Chart  width={size<=574?280:size<=1400?500:800} keyData="sjr" data={sjrDataLine}></Chart>
                         </div>
                     </div>
                     <div className="text-plane">
