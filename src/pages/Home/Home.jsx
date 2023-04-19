@@ -180,10 +180,12 @@ const Home = () => {
                                         return (
                                             index < 4 &&
 
-                                            <div className='article' key={index}>
-                                                <a className={`hover:${currentColor}`}>{article}</a>
-                                                <span className='authors'> Francisco Palomo García, Alejandro Cardona Bustamante, Carlos Montecristo Torrens, Juan Carlos Yanes Fernandez </span>
-                                                <span className='date'>Disponible online desde el 11 de Abril de 2023</span>
+                                            <div className='article' key={index} >
+                                                <NavLink to={"/article"}>
+                                                    <a className={`hover:${currentColor}`}>{article}</a>
+                                                    <span className='authors'> Francisco Palomo García, Alejandro Cardona Bustamante, Carlos Montecristo Torrens, Juan Carlos Yanes Fernandez </span>
+                                                    <span className='date'>Disponible online desde el 11 de Abril de 2023</span>
+                                                </NavLink>
                                             </div>
 
                                         )

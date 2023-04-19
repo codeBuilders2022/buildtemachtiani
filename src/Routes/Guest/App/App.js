@@ -6,6 +6,7 @@ import { useStateContext } from "../../../contexts/ContextProvider";
 import "./App.scss";
 import Home from "../../../pages/Home/Home";
 import Metrics from "../../../pages/Metrics/Metrics";
+import Articles from "../../../pages/Home/Articles/Articles";
 
 //Lazy
 // const Investigaciones = lazy(() =>
@@ -114,6 +115,14 @@ const App = () => {
                   element={
                     <Suspense fallback={<></>}>
                       <MagazinePolicies />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/article"
+                  element={
+                    <Suspense fallback={<></>}>
+                      <Articles />
                     </Suspense>
                   }
                 />

@@ -1,0 +1,49 @@
+.Articles_{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    p{
+        font-size: 16px;
+        text-align: justify;
+    }
+
+    .secct1_s{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .title_secct_{
+            font-size: 26px;
+        }
+    }
+    
+
+    .secct2_s{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .title_secct2{
+            font-size: 26px;
+        }
+    }
+
+    .secct3_s{
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+
+        .cnt_pdf{
+
+            .img_pdf{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}
