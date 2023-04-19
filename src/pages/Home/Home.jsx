@@ -19,6 +19,7 @@ import Sidebar from "../../components/organisms/Sidebar/Sidebar"
 
 //react
 import { useState } from "react"
+import { NavLink } from "react-router-dom";
 
 const Home = () => {
     const [articles, setArticles] = useState(false)
@@ -153,7 +154,9 @@ const Home = () => {
                                         </>
                                     )
                                 })}
-                                <button>Ver más métricas</button>
+                                <NavLink to={"/metrics"}>
+                                    <button>Ver más métricas</button>
+                                </NavLink>
                             </div>
                         </div>
                     {/* </div> */}
