@@ -5,6 +5,10 @@
     margin: 2.5rem;
     border-radius: 1.5rem;
     border-radius: 20px;
+    @media screen and (max-width: 768px) {
+      padding: 12px;
+      margin: 20px 0;
+    }
     // background: white;
 
     // @media (min-width: 768px) {
@@ -13,7 +17,7 @@
 
     .title {
       font-size: 2.25rem;
-      @media screen and (max-width:574px) {
+      @media screen and (max-width: 574px) {
         font-size: 25px;
         text-align: justify;
       }
@@ -27,7 +31,7 @@
     .title-metric-category {
       font-weight: bold;
       font-size: 25px;
-      @media screen and (max-width:574px) {
+      @media screen and (max-width: 574px) {
         font-size: 25px;
         text-align: justify;
       }
@@ -42,7 +46,7 @@
     grid-template-rows: 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    @media screen and (max-width:1000px) {
+    @media screen and (max-width: 1000px) {
       display: flex;
       flex-direction: column;
     }
@@ -52,28 +56,23 @@
     .col2 {
       grid-area: 1 / 2 / 2 / 3;
     }
-    
   }
-  .parent-metrics-c
-  {
-    
+  .parent-metrics-c {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    .col-1-c
-    {
+    .col-1-c {
       grid-area: 1 / 1 / 2 / 2;
     }
-    .col-2-c
-    {
+    .col-2-c {
       grid-area: 1 / 2 / 2 / 3;
     }
   }
   .padingTablemetrics {
     padding: 0 20%;
-    @media screen and (max-width:574px) {
+    @media screen and (max-width: 574px) {
       padding: 0 0;
     }
   }
@@ -81,29 +80,27 @@
     font-size: 20px;
     margin: 10px 0;
     text-align: center;
-    @media screen and (max-width:574px) {
+    @media screen and (max-width: 574px) {
       font-size: 16px;
       text-align: center;
     }
   }
   hr {
-    border-color: #3887CC;
+    border-color: #3887cc;
   }
   .align-items {
     align-items: center;
     display: flex;
-    @media screen and (max-width:1000px){
+    @media screen and (max-width: 1000px) {
       justify-content: center;
       margin-top: 30px;
     }
   }
-  .text-plane
-  {
+  .text-plane {
     margin-top: 30px;
-    p
-    {
+    p {
       padding: 10px 0;
-      @media screen and (max-width:574px) {
+      @media screen and (max-width: 574px) {
         font-size: 16px;
         text-align: justify;
       }
