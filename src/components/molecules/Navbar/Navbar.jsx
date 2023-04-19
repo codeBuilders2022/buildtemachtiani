@@ -1,38 +1,14 @@
 import { NavLink } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { AiOutlineMenu } from "react-icons/ai";
 import { useStateContext } from "../../../contexts/ContextProvider";
 import InputSearch from "../../atoms/InputSearch/InputSearch";
 
 //Assets
 import logo_dark from '../../../assets/images/mode_dark.png'
 import logo_light from '../../../assets/images/mode_light.png'
-// import Logo_icon from '../../../assets/images/logo_icon.png'
-
-// const NavButton = ({ customFunc, icon, color, dotColor, text }) => (
-//   <button
-//     type="button"
-//     onClick={() => customFunc()}
-//     style={{ color }}
-//     className="group flex items-center rounded-full 
-//               bg-white/90 px-4 py-2 text-sm font-medium 
-//               text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 
-//               ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 
-//               dark:text-zinc-200 dark:ring-white/10 
-//               dark:hover:ring-white/20
-//               hover:text-teal-500 dark:hover:text-teal-400"
-//   >
-//     <span className="mr-1">{icon}</span>
-//     {text}
-//     <span
-//       style={{ background: dotColor }}
-//       className="absolute inline-flex rounded-full h-2 w-2 right-2 top-2"
-//     />
-//   </button>
-// );
 
 const Navbar = () => {
-  const { activeMenu, setActiveMenu, openNavbar, setOpenNavbar, currentColor, currentMode } =
+  const { openNavbar, setOpenNavbar, currentColor, currentMode } =
     useStateContext();
 
   const activeLinks = ({ isActive }) => {
@@ -41,7 +17,6 @@ const Navbar = () => {
     };
   };
 
-  const handleActiveMenu = () => setActiveMenu(!activeMenu);
   const handleActiveNavbar = () => setOpenNavbar(!openNavbar);
   const [navbarState, setNavbarState] = useState(false);
 
@@ -69,11 +44,6 @@ const Navbar = () => {
     <div
       className={`fixed bg-slate-100 dark:bg-gray-800 navbar w-full h-16 ${navbarState}`}
     >
-      {/* <NavButton
-        text="Ediciones"
-        customFunc={handleActiveMenu}
-        icon={<AiOutlineMenu />}
-      /> */}
 
       <div className="pointer-events-auto md:hidden h-full flex items-center justify-end px-6">
         <button

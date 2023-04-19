@@ -8,6 +8,10 @@ import numeroActual from "../assets/images/Revista01.png";
 //Mi paginas de trabajo
 export const themeColors = [
   {
+    color: "#87000C",
+    name: "Wine",
+  },
+  {
     name: "Azul",
     color: "#1A97F5",
   },
@@ -26,14 +30,6 @@ export const themeColors = [
   {
     name: "Verde",
     color: "#09b609",
-  },
-  {
-    color: "#FB9678",
-    name: "Salmon",
-  },
-  {
-    color: "#87000C",
-    name: "Wine",
   },
 ];
 
