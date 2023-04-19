@@ -14,8 +14,10 @@ import Sidebar from "../../components/organisms/Sidebar/Sidebar"
 
 //react
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+    const navigate = useNavigate()
     const [articles, setArticles] = useState(false)
     const data = {
         index: [
@@ -142,7 +144,7 @@ const Home = () => {
                                 </>
                             )
                         })}
-                        <button>Ver más métricas</button>
+                        <button onClick={()=>navigate("/metrics")}>Ver más métricas</button>
                     </div>
                 </div>
                 <div className='articles_container'>

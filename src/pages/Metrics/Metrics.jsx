@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import './Metrics.scss'
 // import MetricsDataLine from '../../DataTest/MetricsLineChart.json'
 import CategoryMetric from "../../components/atoms/CategoryMetric/CategoryMetric"
@@ -57,6 +57,13 @@ const Metrics = () => {
     ];
 
     
+
+    const [size,setSize] =useState()
+    useEffect(()=>{
+        setSize(window.screen.width)
+
+    },[])
+   
     return (
         <>
             <div className="Metrics">
@@ -69,14 +76,14 @@ const Metrics = () => {
                         <CategoryMetric id={"SNIP"} title={"SNIP 2021"} metric={"0,758"} />
                         <CategoryMetric id={"LEIDO"} title={"LO MAS LEÍDO"} metric={"Más datos..."} />
                     </div>
-                    <div className="title-metric-category">FACTOR DE IMPACTO</div>
+                    <div className="title-metric-category">Factor de impacto</div>
                     <div className="metric-descrition">
-                        El factor de impacto mide la media del número de citaciones recibidas en un año por trabajos publicados en la publicación durante los dos años anteriores.
+                        <p>El factor de impacto mide la media del número de citaciones recibidas en un año por trabajos publicados en la publicación durante los dos años anteriores.</p>
                     </div>
                     <div className="parent-metrics">
                         <div className="col-1">
-                            <div className="parent-metrics padingTablemetrics">
-                                <div className="col-1">
+                            <div className="parent-metrics-c padingTablemetrics">
+                                <div className="col-1-c">
                                     <div className="metrics-table-font">AÑO</div>
                                     <hr />
                                     {
@@ -90,7 +97,7 @@ const Metrics = () => {
                                         })
                                     }
                                 </div>
-                                <div className="col-2">
+                                <div className="col-2-c">
                                     <div className="metrics-table-font">IMPACTO</div>
                                     <hr />
                                     {
@@ -108,7 +115,7 @@ const Metrics = () => {
 
                         </div>
                         <div className="col-2 align-items">
-                            <LineChartMetric keyData="impact" data={MetricsDataLine}></LineChartMetric>
+                            <LineChartMetric width={size<=574?250:size<=1400?500:800} keyData="impact" data={MetricsDataLine}></LineChartMetric>
                         </div>
                     </div>
                     <div className="text-plane">
@@ -132,8 +139,8 @@ const Metrics = () => {
                     </div>
                     <div className="parent-metrics">
                         <div className="col-1">
-                            <div className="parent-metrics padingTablemetrics">
-                                <div className="col-1">
+                            <div className="parent-metrics-c padingTablemetrics">
+                                <div className="col-1-c">
                                     <div className="metrics-table-font">AÑO</div>
                                     <hr />
                                     {
@@ -147,7 +154,7 @@ const Metrics = () => {
                                         })
                                     }
                                 </div>
-                                <div className="col-2">
+                                <div className="col-2-c">
                                     <div className="metrics-table-font">CITESCORE</div>
                                     <hr />
                                     {
@@ -165,7 +172,7 @@ const Metrics = () => {
 
                         </div>
                         <div className="col-2 align-items">
-                            <LineChartMetric keyData="citiescore" data={citiescoreDataLine}></LineChartMetric>
+                            <LineChartMetric width={size<=574?250:size<=1400?500:800} keyData="citiescore" data={citiescoreDataLine}></LineChartMetric>
                         </div>
                     </div>
                     <div className="text-plane">
@@ -190,8 +197,8 @@ const Metrics = () => {
 
                     <div className="parent-metrics">
                         <div className="col-1">
-                            <div className="parent-metrics padingTablemetrics">
-                                <div className="col-1">
+                            <div className="parent-metrics-c padingTablemetrics">
+                                <div className="col-1-c">
                                     <div className="metrics-table-font">AÑO</div>
                                     <hr />
                                     {
@@ -205,7 +212,7 @@ const Metrics = () => {
                                         })
                                     }
                                 </div>
-                                <div className="col-2">
+                                <div className="col-2-c">
                                     <div className="metrics-table-font">SNIP</div>
                                     <hr />
                                     {
@@ -223,7 +230,7 @@ const Metrics = () => {
 
                         </div>
                         <div className="col-2 align-items">
-                            <Chart keyData="snip" data={snipDataLine}></Chart>
+                            <Chart  width={size<=574?250:size<=1400?500:800} keyData="snip" data={snipDataLine}></Chart>
                         </div>
                     </div>
                     <div className="text-plane">
@@ -238,8 +245,8 @@ const Metrics = () => {
                     </div>
                     <div className="parent-metrics">
                         <div className="col-1">
-                            <div className="parent-metrics padingTablemetrics">
-                                <div className="col-1">
+                            <div className="parent-metrics-c padingTablemetrics">
+                                <div className="col-1-c">
                                     <div className="metrics-table-font">AÑO</div>
                                     <hr />
                                     {
@@ -253,7 +260,7 @@ const Metrics = () => {
                                         })
                                     }
                                 </div>
-                                <div className="col-2">
+                                <div className="col-2-c">
                                     <div className="metrics-table-font">SJR</div>
                                     <hr />
                                     {
@@ -271,11 +278,11 @@ const Metrics = () => {
 
                         </div>
                         <div className="col-2 align-items">
-                            <Chart keyData="sjr" data={sjrDataLine}></Chart>
+                            <Chart  width={size<=574?250:size<=1400?500:800} keyData="sjr" data={sjrDataLine}></Chart>
                         </div>
                     </div>
                     <div className="text-plane">
-                        
+
                         <p>Source-Normalized Impact per Paper (SNIP) mide el impacto de las citas contextuales ponderando las citas en función del número total de citas en un campo temático. Esta perspectiva única permite la comparación directa de fuentes en diferentes campos temáticos. El impacto de una sola cita recibe un mayor valor en las áreas temáticas donde las citas son menos probables y viceversa.</p>
                         <p>Es una razón, con un numerador y un denominador. El numerador de SNIP es el impacto de una revista por publicación (IPP). Este es simplemente el número promedio de citas recibidas en un año en particular (por ejemplo, 2013) por artículos publicados en la revista durante los tres años anteriores (por ejemplo, 2010, 2011 y 2012).</p>
                         <p>El denominador de SNIP es el potencial de citas de la base de datos (DCP). Sabemos que existen grandes diferencias entre varios subcampos científicos en la frecuencia con la que los autores citan artículos. En vista de esto, para cada revista se calcula un indicador del potencial de citas en el campo temático que cubre. Este potencial de citación se incluye en el denominador del SNIP, el DCP. SNIP es IPP dividido por DCP.</p>

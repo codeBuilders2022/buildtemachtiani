@@ -1,9 +1,9 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import './LineChart.scss'
-function LineChartMetric({data,keyData="key"}) {
+function LineChartMetric({data,keyData="key",width}) {
     return (
         <div className='charLine'>
-        <BarChart width={800} height={300} data={data}>
+        <BarChart width={width} height={300} data={data}>
           <XAxis dataKey="year" />
           <YAxis />
           <CartesianGrid stroke="#eee" strokeDasharray="5 5" />

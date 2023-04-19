@@ -3,10 +3,10 @@ import './Chart.scss'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 
-const Chart = ({data,keyData}) => {
+const Chart = ({data,keyData,width}) => {
     return (
         <>
-            <LineChart width={800} height={300} data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+            <LineChart width={width} height={300} data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                 <XAxis dataKey="year" />
                 <YAxis />
                 <CartesianGrid strokeDasharray="3 3" />
