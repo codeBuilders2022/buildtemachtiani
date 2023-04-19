@@ -5,7 +5,7 @@ const StateContext = createContext();
 export const ContextProvider = ({ children }) => {
   const [activeMenu, setActiveMenu] = useState(false);
   const [screenSize, setScreenSize] = useState(window.screen.width);
-  const [currentColor, setCurrentColor] = useState("#03c9d7");
+  const [currentColor, setCurrentColor] = useState("#87000C");
   const [currentMode, setCurrentMode] = useState("Light");
   const [themeSettings, setThemeSettings] = useState(false);
   const [activeMenuRevistas, setActiveMenuRevistas] = useState(false);

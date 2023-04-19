@@ -4,19 +4,26 @@ import "./Sidebar.scss"
 //assets
 import books from "../../../assets/images/books.png"
 import img1 from "../../../assets/images/udg.jpg"
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import { useState } from "react"
 import director from "../../../assets/images/director.jpg"
 import revisor from "../../../assets/images/revisor.jpg"
 import editor from "../../../assets/images/editora.jpg"
 
+import { useStateContext } from "../../../contexts/ContextProvider";
+
 const Sidebar = () => {
+
+    const { currentColor } = useStateContext();
+
     const options = [
-        { title: "Guía para autores", url: "" },
-        { title: "Envío de manuscritos", url: "" },
-        { title: "Preguntas frecuentes", url: "" },
-        { title: "Guía para revisores", url: "" },
-        { title: "Mapa del sitio", url: "" },
+        { id: 1, title: "Guía para autores", url: "/guide-authors" },
+        { id: 2, title: "Acerca de", url: "/about" },
+        // { id: 3, title: "Preguntas frecuentes", url: "#" },
+        // { id: 4, title: "Guía para revisores", url: "#" },
+        // { id: 5, title: "Mapa del sitio", url: "#" },
+        { id: 5, title: "Misión y Visión", url: "/mission-vision" },
+        { id: 5, title: "Politicas de la revista", url: "/magazine-policies" },
     ]
     const [events, setEvents] = useState([
         { title: "Congreso Internacional de Educación para la Salud", date: "2023.06.03", urlSign: "https://registro-ciam.hcg.gob.mx/" },
@@ -30,8 +37,15 @@ const Sidebar = () => {
         { occupation: "Editor en jefe", name: "Julia Rocha Corona", grade: "Dra.", email: "joeltrincado@gmail.com", img: editor },
     ])
 
+    const activeLinks = ({ isActive }) => {
+        return {
+          color: isActive ? currentColor : null,
+          fontWeight: isActive ? "bold" : null
+        };
+      };
+
     return (
-        <aside className="Sidebar">
+        <aside className="dark:text-white Sidebar">
             <div className="posted">
                 <div className="title">
                     <img src={books} />
@@ -40,9 +54,9 @@ const Sidebar = () => {
                 <ul style={{ listStyleType: "square", marginLeft: '20px' }}>
                     {options.map((option, index) => {
                         return (
-                            <Link key={index}>
+                            <NavLink key={index} style={activeLinks} to={option.url}>
                                 <li>{option.title}</li>
-                            </Link>
+                            </NavLink>
                         )
                     })}
                 </ul>

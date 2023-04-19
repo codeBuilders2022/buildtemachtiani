@@ -5,7 +5,11 @@ import CategoryMetric from "../../components/atoms/CategoryMetric/CategoryMetric
 import LineChartMetric from "../../components/molecules/LineChart/LineChart"
 import Chart from "../../components/molecules/Chart/Chart"
 
+import { useStateContext } from "../../contexts/ContextProvider";
+
 const Metrics = () => {
+    const { currentColor } = useStateContext();
+
     const MetricsDataLine = [
         { year: '2010', impact: 1.95 },
         { year: '2011', impact: 2.10 },
@@ -66,15 +70,15 @@ const Metrics = () => {
    
     return (
         <>
-            <div className="Metrics">
-                <div className="cards-body">
+            <div className="dark:bg-gray-600 dark:text-white m-2 md:m-10 md:mt-32 mt-24 p-2 md:p-10 bg-white rounded-3xl flex Metrics">
+                <div className="bg-slate-100 dark:bg-gray-500 cards-body "> 
                     <div className="title">Métricas</div>
                     <div className="categories">
-                        <CategoryMetric id={"IMPACTO"} title={"FACTOR DE IMPACTO 2021"} metric={"7,05"} />
-                        <CategoryMetric id={"CITESCORE"} title={"CITESCORE 2021"} metric={"2,7"} />
-                        <CategoryMetric id={"SJR"} title={"SJR 2021"} metric={"0,407"} />
-                        <CategoryMetric id={"SNIP"} title={"SNIP 2021"} metric={"0,758"} />
-                        <CategoryMetric id={"LEIDO"} title={"LO MAS LEÍDO"} metric={"Más datos..."} />
+                        <CategoryMetric style={{background: currentColor}}id={"IMPACTO"} title={"FACTOR DE IMPACTO 2021"} metric={"7,05"} />
+                        <CategoryMetric style={{background: currentColor}}id={"CITESCORE"} title={"CITESCORE 2021"} metric={"2,7"} />
+                        <CategoryMetric style={{background: currentColor}}id={"SJR"} title={"SJR 2021"} metric={"0,407"} />
+                        <CategoryMetric style={{background: currentColor}}id={"SNIP"} title={"SNIP 2021"} metric={"0,758"} />
+                        <CategoryMetric style={{background: currentColor}}id={"LEIDO"} title={"LO MAS LEÍDO"} metric={"Más datos..."} />
                     </div>
                     <div className="title-metric-category">Factor de impacto</div>
                     <div className="metric-descrition">

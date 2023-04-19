@@ -12,9 +12,10 @@ module.exports = {
       },
       backgroundColor: {
         "main-bg": "#FAFBFB",
-        "main-dark-bg": "#20232A",
-        "secondary-dark-bg": "#33373E",
-        "light-gray": "#F7F7F7",
+        "input-color-lig": "#f1f5f9",
+        "input-color-dark": "#b8babf",
+        "bg-gray-primary": "#bbc6d3",
+        "bg-dark-secondary": "#394352",
         "half-transparent": "rgba(0, 0, 0, 0.5)",
       },
       borderWidth: {
