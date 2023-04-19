@@ -20,8 +20,10 @@ import Sidebar from "../../components/organisms/Sidebar/Sidebar"
 //react
 import { useState } from "react"
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+    const navigate = useNavigate()
     const [articles, setArticles] = useState(false)
     const { currentColor, currentMode } = useStateContext();
     const data = {
