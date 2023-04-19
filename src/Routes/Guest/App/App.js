@@ -8,17 +8,16 @@ import Home from "../../../pages/Home/Home";
 import Metrics from "../../../pages/Metrics/Metrics";
 
 //Lazy
-const Actual = lazy(() => import("../../../pages/Actual/Actual"));
-const Investigaciones = lazy(() =>
-  import("../../../pages/Investigaciones/Investigaciones")
-);
+// const Investigaciones = lazy(() =>
+//   import("../../../pages/Investigaciones/Investigaciones")
+// );
 const Instrucciones = lazy(() =>
   import("../../../pages/Instrucciones/Instrucciones")
 );
 const About = lazy(() => import("../../../pages/About/About"));
 const Mision = lazy(() => import("../../../pages/Mision/Mision"));
-const Pdf = lazy(() => import("../../../pages/Pdf/Pdf"));
-const PageActual = lazy(() => import("../../../pages/PageActual/PageActual"));
+// const Pdf = lazy(() => import("../../../pages/Pdf/Pdf"));
+// const PageActual = lazy(() => import("../../../pages/PageActual/PageActual"));
 const MagazinePolicies = lazy(() =>
   import("../../../pages/MagazinePolicies/MagazinePolicies")
 );
@@ -60,15 +59,6 @@ const App = () => {
               <FiSettings />
             </button>
           </div>
-          {/* {activeMenu ? (
-            <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-sky-900 ease-in-out duration-75">
-              <Sidebar />
-            </div>
-          ) : (
-            <div className="w-0 dark:bg-secondary-dark-bg">
-              <Sidebar />
-            </div>
-          )} */}
           <div
             // De esta clase cambias el color del fondo
             className={`dark:bg-gray-800 bg-slate-100 min-h-screen w-full ${
@@ -87,14 +77,6 @@ const App = () => {
                     </Suspense>
                   }
                 />
-                {/* <Route
-                  path="/investigaciones"
-                  element={
-                    <Suspense fallback={<></>}>
-                      <Investigaciones />
-                    </Suspense>
-                  }
-                /> */}
                 <Route
                   path="/guide-authors"
                   element={
@@ -119,22 +101,6 @@ const App = () => {
                     </Suspense>
                   }
                 />
-                {/* <Route
-                  path="/ricedut/:id"
-                  element={
-                    <Suspense fallback={<></>}>
-                      <Pdf />
-                    </Suspense>
-                  }
-                /> */}
-                {/* <Route
-                  path="NumeroActual"
-                  element={
-                    <Suspense fallback={<></>}>
-                      <PageActual />
-                    </Suspense>
-                  }
-                /> */}
                 <Route
                   path="/metrics"
                   element={
