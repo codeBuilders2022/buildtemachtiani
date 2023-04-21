@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useStateContext } from "../../../contexts/ContextProvider";
 import InputSearch from "../../atoms/InputSearch/InputSearch";
@@ -39,6 +39,9 @@ const Navbar = () => {
     { id: 4, text: "Misión y Visión", url: "/mission-vision" },
     { id: 5, text: "Políticas de la revista", url: "/magazine-policies" },
   ];
+
+  const header_location = useLocation()
+  const hasnNot = header_location.pathname.startsWith("/log")
 
   return (
     <div
@@ -117,7 +120,7 @@ const Navbar = () => {
                 <img className="w-full h-full object-cover" src={currentMode === "Dark" ?  logo_dark : logo_light} alt="" />
             </NavLink>
         </div>
-        <div className="">
+        <div className={`${hasnNot && "hidden"}`} id="inse_seun_3elem">
           <ul className="flex items-center gap-9">
             <li>
               <NavLink
@@ -129,6 +132,26 @@ const Navbar = () => {
               </NavLink>
             </li>
             <InputSearch />
+            <div className="flex">
+              <li>
+                <NavLink
+                  to="/"
+                  className="relative dark:text-white  block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400 text-lg font-bold"
+                  // style={activeLinks}
+                >
+                  <span>Inicia sesión</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/log"
+                  className="relative dark:text-white  block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400 text-lg font-bold"
+                  // style={activeLinks}
+                >
+                  <span>Únete</span>
+                </NavLink>
+              </li>
+            </div>
           </ul>
         </div>
       </nav>
