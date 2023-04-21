@@ -11,8 +11,7 @@ const Footer = () => {
     }
   }
   return (
-    <>
-      <main className="m-10 mt-24">
+      <footer className="m-10 mt-24">
         <div
           className="border-t-2 border-solid mb-5"
           style={{ borderColor: currentColor }}
@@ -166,8 +165,7 @@ const Footer = () => {
             </a>
           </div> */}
         </div>
-      </main>
-    </>
+      </footer>
   );
 };
 
