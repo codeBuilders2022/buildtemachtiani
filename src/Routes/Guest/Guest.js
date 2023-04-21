@@ -8,6 +8,7 @@ import App from "./App/App";
 import { Footer, Navbar, ThemeSettings } from "../../components";
 import { useEffect } from "react";
 import LogRoutes from "./LogRoutes/LogRoutes";
+import Navbarr from "../../components/molecules/Navbarr/Navbarr";
 
 const Guest = () => {
   const {
@@ -53,7 +54,8 @@ const Guest = () => {
               activeMenu ? "md:ml-72" : "flex-2"
             }`}
           >
-            <Navbar />
+            {/* <Navbar /> */}
+            <Navbarr />
             <>
               {themeSettings && <ThemeSettings />}
 
