@@ -7,7 +7,7 @@ import Back from "../../components/atoms/Back/Back";
 
 //Styles
 import "./Log.scss";
-import { ColorValidation, SubmitValidation, UpdateValue } from "../../utiles/Validations";
+import { ColorValidation, SubmitValidation, UpdateValue } from "../../utilities/Validations";
 
 const Log = () => {
 

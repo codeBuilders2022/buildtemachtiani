@@ -49,7 +49,7 @@ const Navbarr = () => {
             <div className="flex gap-5">
               <li>
                 <NavLink
-                  to="/"
+                  to="/login"
                   className="navlinks_s dark:text-white"
                   // style={activeLinks}
                 >
