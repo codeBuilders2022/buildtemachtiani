@@ -31,7 +31,6 @@ const Guest = () => {
       setCurrentMode(currentThemeMode);
     }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
