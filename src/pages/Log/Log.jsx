@@ -1,9 +1,13 @@
-import React from "react";
-import "./Log.scss";
-import Back from "../../components/atoms/Back/Back";
-import { NavLink } from "react-router-dom";
-import { Button, Input, InputPassword, Select, Shedule } from "../../components";
+import React, { useEffect } from "react";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
+
+import { Button, Input, InputPassword, Select, Shedule } from "../../components";
+import Back from "../../components/atoms/Back/Back";
+
+//Styles
+import "./Log.scss";
+import { ColorValidation, SubmitValidation, UpdateValue } from "../../utilities/validations_";
 
 const Log = () => {
 
@@ -12,6 +16,39 @@ const Log = () => {
     const [ocupat, setOcupat] = useState(null)
     const [genderOption, setGenderOption] = useState(null)
     const [country, setCountry] = useState(null)
+
+    const [inputList, setInputList] = useState({
+        names: { value: null, validationType: "empty" },
+        // lastName: { value: null, validationType: "empty" },
+        // country: { value: null, validationType: "empty" },
+        // date: { value: null, validationType: "empty" },
+        // gender: { value: null, validationType: "empty" },
+        // user: { value: null, validationType: "empty" },
+        // email: { value: null, validationType: "email" },
+        // password: { value: null, validationType: "empty" },
+        // password_confirm: { value: null, validationType: "empty" },
+        // orcid: { value: null, validationType: "empty" },
+        // ocupation: { value: null, validationType: "empty" },
+        // leveAcademic: { value: null, validationType: "empty" },
+    });
+
+    useEffect(() => {
+        for (const propertyName in inputList) {
+            if (document.getElementById(propertyName)) {
+                ColorValidation(propertyName, inputList);
+            }
+            // if (propertyName === "email") {
+            //     ColorValidation(propertyName, inputList, "email");
+            // }
+        }
+    }, [inputList]);
+
+      const handleSubmit = () => {
+        if (SubmitValidation(inputList, setInputList)) {
+            alert("Todo salio correctamente")
+        }
+      }
+      
 
     const [steps, setSteps] = useState({
         step_one: true,
@@ -66,8 +103,6 @@ const Log = () => {
         {id: 2, name: "Investigador", code: "investigador"},
     ]
 
-    console.log(steps, "steps")
-
   return (
     <div className="Log_">
       <div className="inside_log">
@@ -76,7 +111,7 @@ const Log = () => {
             <div className="tamanio_cards">
                 <h1>Datos personales</h1>
                 <div className="inside_card">
-                    <Input title={"Nombre(s)"} placeholder={"Nombre(s)"}/>
+                    <Input title={"Nombre(s)"} placeholder={"Nombre(s)"} id={"names"} onChange={(e) => UpdateValue(e, "names", inputList, setInputList)}/>
                     <Input title={"Apellidos"} placeholder={"Apellidos"}/>
                     <div className="cnt_selects">
                         <Select title={"País"} placeholder={"País"} value={country} setValue={setCountry}/>
@@ -120,7 +155,7 @@ const Log = () => {
                 </div>
                 <div className="cnt_btn th_">
                     <Button title={"Regresar"} className={"btn_cancel"} onCLick={() => handleReturnTwo()}/>
-                    <Button title={"Crear cuenta"} className={"btn_primary"}/>
+                    <Button title={"Crear cuenta"} className={"btn_primary"} onCLick={() => handleSubmit()}/>
                 </div>
                 { !steps.step_three && <div className="dark:bg-half-transparent-black layer_blur"></div> }
             </div>
