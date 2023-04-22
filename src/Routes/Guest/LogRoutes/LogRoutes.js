@@ -4,6 +4,7 @@ import Login from "../../../pages/Login/Login";
 import RecoverAccount from "../../../pages/RecoverAccount/RecoverAccount";
 import VerificationCode from "../../../pages/VerificationCode/VerificationCode";
 import NewPassword from "../../../pages/NewPassword/NewPassword";
+import LogSkeleton from "../../../pages/Log/LogSkeleton";
 
 const Log = lazy(() => import("../../../pages/Log/Log"));
 
@@ -13,7 +14,7 @@ const LogRoutes = () => {
           <Route
             path="/log"
             element={
-              <Suspense fallback={<></>}>
+              <Suspense fallback={<LogSkeleton />}>
                 <Log />
               </Suspense>
             }

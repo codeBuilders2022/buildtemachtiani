@@ -44,13 +44,15 @@ const Navbar = () => {
   const hasnNot = header_location.pathname.startsWith("/log")
 
   return (
-    <div
-      className={`fixed bg-slate-100 dark:bg-gray-800 navbar w-full h-16 ${navbarState}`}
-    >
-
-      <div className="pointer-events-auto md:hidden h-full flex items-center justify-end px-6">
-        <button
-          className="group flex items-center rounded-full bg-white/90 
+    <div className={`fixed bg-slate-100 dark:bg-gray-800 navbar w-full h-16 ${navbarState}`}>
+      <div className="pointer-events-auto md:hidden h-full flex items-center justify-end px-6 bg-bg-gray-primary dark:bg-bg-dark-secondary">
+        <div className="h-16">
+          <NavLink to={"/"}>
+                <img className="w-full h-full object-cover" src={currentMode === "Dark" ?  logo_dark : logo_light} alt="" />
+            </NavLink>
+        </div>
+        
+        <button className="group flex items-center rounded-full bg-white/90 
                       px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg 
                       shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur 
                       dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 
