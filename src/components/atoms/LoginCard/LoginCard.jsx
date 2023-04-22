@@ -2,10 +2,10 @@ import React from "react";
 import './LoginCard.scss'
 import logoIcon from '../../../assets/images/logo_dark.png'
 
-const LoginCard = ({ children, title, subTitle,logo }) => {
+const LoginCard = ({ children, title, subTitle,logo, className }) => {
     return (
         <>
-            <div className="LoginCard">
+            <div className={`LoginCard ${className}`}>
                 {
                     logo?
                         <>

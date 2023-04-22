@@ -3,6 +3,8 @@ import { BrowserRouter } from "react-router-dom";
 import { useStateContext } from "../../contexts/ContextProvider";
 import { FiSettings } from "react-icons/fi";
 
+import Paleta_color from '../../assets/images/Paleta_color.png'
+
 
 import App from "./App/App";
 import { Footer, Navbar, ThemeSettings } from "../../components";
@@ -44,7 +46,8 @@ const Guest = () => {
               style={{ background: currentColor, borderRadius: "50%" }}
               className="text-3xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray"
             >
-              <FiSettings />
+              <img src={Paleta_color} className="h-10 w-10"></img>
+              {/* <FiSettings /> */}
             </button>
           </div>
           <div
