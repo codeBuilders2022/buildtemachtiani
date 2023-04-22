@@ -41,7 +41,7 @@ const NewPassword = () => {
     return (
         <>
             <div className="NewPassword">
-                <LoginCard title={"Actualiza tus accesos"} subTitle="Ingresa la nueva contraseña">
+                <LoginCard title={"Actualiza tus accesos"} subTitle="Ingresa la nueva contraseña" logo>
                     <div className="inputs-container">
                         <InputPassword title={"Contraseña"} placeholder={"Contraseña"} id="password" onChange={(e) => { UpdateValue(e, "password", inputList, setInputList) }}></InputPassword>
                         <InputPassword title={"Confirmar contraseña"} placeholder={"Confirmar contraseña"} id="confirmPassword" onChange={(e) => { UpdateValue(e, "confirmPassword", inputList, setInputList) }}></InputPassword>

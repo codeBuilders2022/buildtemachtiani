@@ -81,9 +81,10 @@
       font-family: "Roboto";
       font-weight: bold;
       font-size: 40px;
-      background: rgba(255, 255, 255, 0.6);
+      background: #f2f6fa;
       color: rgba(255, 0, 0, 100);
       caret-color: red;
+      border-right: 1px solid red;
     }
 
     .styles_react-code-input-container__tpiKG {
