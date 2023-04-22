@@ -161,7 +161,7 @@ const Log = () => {
             </div>
         </div>
         <div className="dark:text-white Ihave_Account">
-            <NavLink className={"link_account"}>Ya tengo una cuenta</NavLink>
+            <NavLink className={"link_account"} to={"/login"}>Ya tengo una cuenta</NavLink>
         </div>
       </div>
     </div>
