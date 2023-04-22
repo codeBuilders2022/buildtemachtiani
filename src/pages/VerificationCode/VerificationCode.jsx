@@ -9,7 +9,7 @@ const VerificationCode = () => {
     return (
         <>
             <div className="VerificationCode">
-                <LoginCard logo title={"Recuperar cuenta"} subTitle={"Actualiza tus accesos"}>
+                <LoginCard className={"inside_verificationCode"} logo title={"Código de recuperación"} subTitle={"Ingresa el código enviado"}>
                     <div className="inputContainer">
                         <VerificationCodeInput></VerificationCodeInput>
                     </div>

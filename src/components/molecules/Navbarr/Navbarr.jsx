@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useStateContext } from "../../../contexts/ContextProvider";
 import { NavLink, useLocation } from 'react-router-dom'
 import "./Navbarr.scss"
@@ -12,9 +12,25 @@ import Menu_white from '../../../assets/images/menu_white.png'
 
 const Navbarr = () => {
   const { openNavbar, setOpenNavbar, currentColor, currentMode } = useStateContext();
-
+  const routes_header = ["/log", "/login", "/recover-account", "/verification-code", "/new-password"]
   const header_location = useLocation()
-  const hasnNot = header_location.pathname.startsWith("/log")
+  const [hasnNot, setHasnNot] = useState(false)
+
+  const log_ = header_location.pathname.startsWith("/log")
+  const login_ = header_location.pathname.startsWith("/login")
+  const recover_account = header_location.pathname.startsWith("/recover-account")
+  const verification_code = header_location.pathname.startsWith("/verification-code")
+  const new_password = header_location.pathname.startsWith("/new-password")
+  
+  useEffect(() => {
+    if(log_ || login_ || recover_account || verification_code || new_password){
+      return setHasnNot(true)
+    }
+
+    return setHasnNot(false)
+    
+  }, [header_location.pathname])
+  
 
   const handleActiveNavbar = () => setOpenNavbar(!openNavbar);
 

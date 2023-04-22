@@ -9,6 +9,8 @@ import { useEffect } from "react";
 import Cookies from "universal-cookie";
 import Button from "../Button/Button";
 var timers
+
+
 const VerificationCodeInput = ({ children }) => {
   const navigate = useNavigate();
   const [code, setCode] = useState();
