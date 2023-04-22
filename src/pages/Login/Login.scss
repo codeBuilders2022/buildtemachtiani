@@ -1,12 +1,21 @@
 .Login
 {
-    width: 100vw;
+   
+    
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #1E1E1E;
+    // background: #202A38;
     padding: 0 10px;
+    position: relative;
+    .back
+    {
+        margin: 30px;   
+        position: absolute;
+        top: 80px;
+        left: 0;
+    }
     .inputs-container
     {
         margin-top: 41px;

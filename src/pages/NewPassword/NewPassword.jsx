@@ -4,7 +4,7 @@ import LoginCard from "../../components/atoms/LoginCard/LoginCard";
 import { Button, Input, InputPassword } from "../../components";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { ColorValidation, SubmitValidation, UpdateValue } from "../../utiles/Validations";
+import { ColorValidation, SubmitValidation, UpdateValue } from "../../utilities/Validations";
 import { useEffect } from "react";
 
 

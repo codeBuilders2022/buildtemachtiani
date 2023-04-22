@@ -1,4 +1,4 @@
-//styles
+    //styles
 import "./Home.scss"
 import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme
 import 'primereact/resources/primereact.css';                       // core css

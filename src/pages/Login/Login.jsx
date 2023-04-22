@@ -3,7 +3,8 @@ import './Login.scss'
 import LoginCard from "../../components/atoms/LoginCard/LoginCard";
 import { Button, Input, InputPassword } from "../../components";
 import { NavLink, useNavigate } from "react-router-dom";
-import { ColorValidation, SubmitValidation, UpdateValue } from "../../utiles/Validations";
+import { ColorValidation, SubmitValidation, UpdateValue } from "../../utilities/Validations";
+import Back from "../../components/atoms/Back/Back";
 
 
 const Login = () => {
@@ -37,6 +38,7 @@ const navigate = useNavigate()
     return (
         <>
             <div className="Login">
+                <Back className={"back"}></Back>
                 <LoginCard title={"Inicio de sesión"} subTitle="Ingresar aquí">
                     <div className="inputs-container">
                         <Input title="Usuario" placeholder={"Usuario"} id="user" onChange={(e)=>{UpdateValue(e,"user",inputList,setInputList)}}></Input>
