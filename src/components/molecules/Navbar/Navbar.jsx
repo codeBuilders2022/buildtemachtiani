@@ -118,9 +118,9 @@ const Navbar = () => {
 
       <nav className="pointer-events-auto hidden  md:bg-bg-gray-primary md:ring-1 md:ring-zinc-900/5 md:dark:ring-white/10 md:backdrop-blur md:dark:bg-bg-dark-secondary md:z-50 h-full md:flex md:items-center md:w-full md:justify-between px-6">
         <div className="h-16">
-            <NavLink to={"/"}>
-                <img className="w-full h-full object-cover" src={currentMode === "Dark" ?  logo_dark : logo_light} alt="" />
-            </NavLink>
+          <NavLink to={"/"}>
+            <img className="w-full h-full object-cover" src={currentMode === "Dark" ? logo_dark : logo_light} alt="" />
+          </NavLink>
         </div>
         <div className={`${hasnNot && "hidden"}`} id="inse_seun_3elem">
           <ul className="flex items-center gap-9">
@@ -128,7 +128,7 @@ const Navbar = () => {
               <NavLink
                 to="/"
                 className="relative dark:text-white  block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400 text-lg font-bold"
-                // style={activeLinks}
+              // style={activeLinks}
               >
                 <span>Inicio</span>
               </NavLink>
@@ -139,16 +139,18 @@ const Navbar = () => {
                 <NavLink
                   to="/"
                   className="relative dark:text-white  block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400 text-lg font-bold"
-                  // style={activeLinks}
+                // style={activeLinks}
                 >
-                  <span>Inicia sesión</span>
+                  <NavLink to={"/login"}>
+                    <span>Inicia sesión</span>
+                  </NavLink>
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   to="/log"
                   className="relative dark:text-white  block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400 text-lg font-bold"
-                  // style={activeLinks}
+                // style={activeLinks}
                 >
                   <span>Únete</span>
                 </NavLink>

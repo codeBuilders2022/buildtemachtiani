@@ -21,6 +21,7 @@ import Sidebar from "../../components/organisms/Sidebar/Sidebar"
 import { useState } from "react"
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Home = () => {
     const navigate = useNavigate()

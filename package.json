@@ -18,8 +18,10 @@
     "react-icons": "^4.6.0",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
+    "react-verification-code-input": "^1.2.9",
     "recharts": "^2.5.0",
     "sass": "^1.62.0",
+    "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -30,12 +32,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
+ 
   "browserslist": {
     "production": [
       ">0.2%",

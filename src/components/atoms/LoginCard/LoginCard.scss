@@ -1,0 +1,31 @@
+.LoginCard {
+  background: #e8e9ea;
+  width: 100%;
+  max-width: 400px;
+  height: fit-content;
+  border-radius: 20px;
+  padding: 40px 25px;
+  @media screen and (max-width:420px) {
+    padding: 40px 10px;
+  }
+  .title-card {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .sub-title-card {
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(2, 2, 3, 0.5);
+    text-align: center;
+  }
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    
+    .logo {
+      width: 80%;
+    }
+  }
+ 
+}

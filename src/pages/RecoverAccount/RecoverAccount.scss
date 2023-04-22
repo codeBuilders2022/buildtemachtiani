@@ -1,0 +1,31 @@
+.RecoverAccount {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1e1e1e;
+  padding: 0 10px;
+  .inputContainer
+  {
+    margin-top: 60px;
+    margin-bottom: 79px;
+  }
+  .LoginCard 
+  {
+    .title-card
+    {
+        font-size: 20px!important;
+    }
+    .sub-title-card
+    {
+        font-size: 14px;
+    }
+  }
+  .buttonContainer
+  {
+    display: flex;
+    gap:10px;
+    
+  }
+}
