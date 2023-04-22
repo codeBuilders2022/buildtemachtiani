@@ -7,7 +7,6 @@ const LogSkeleton = () => {
   return (
     <div className="Log_">
       <div className="inside_log">
-        
         <div className="container">
             <div className="tamanio_cards">
                 <Skeleton width="250px" height="40px"/>
@@ -75,7 +74,7 @@ const LogSkeleton = () => {
                             </div>
                             <div style={{paddingLeft: 12, display: "flex", flexDirection: "column", gap: 4}}>
                                 {[...Array(3)].map((_, idx) => (
-                                    <Skeleton width="100%" height="8px"/>
+                                    <Skeleton width="100%" height="8px" key={idx}/>
                                 ))}
                             </div>
                         </div>
