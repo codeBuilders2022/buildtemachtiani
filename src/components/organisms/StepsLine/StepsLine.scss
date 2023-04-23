@@ -1,0 +1,46 @@
+.Steps_ {
+  .p-steps .p-steps-item .p-menuitem-link {
+    background: transparent;
+    pointer-events: none;
+  }
+
+  .p-steps .p-steps-item .p-menuitem-link .p-steps-number {
+    width: 106px;
+    height: 106px;
+    font-size: 40px;
+    font-weight: bold;
+    background: #0c4a6e;
+    color: #fff;
+    border: none;
+  }
+
+  .p-steps .p-steps-item .p-menuitem-link .p-steps-title {
+    color: #000;
+    font-size: 20px;
+  }
+
+  .p-steps .p-steps-item:before {
+    border-top: 8px solid #dee2e6;
+  }
+
+  .p-steps .p-steps-item.p-highlight .p-steps-title {
+    font-size: 25px;
+    color: #000;
+    font-weight: bold;
+  }
+
+  @media (max-width: 920px) {
+    .p-steps ul {
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .p-steps .p-steps-item:before {
+      border-top: 8px solid #dee2e6;
+      transform: rotate(90deg);
+      width: 174px;
+      left: calc(50% - 177px);
+      top: 56%;
+    }
+  }
+}
