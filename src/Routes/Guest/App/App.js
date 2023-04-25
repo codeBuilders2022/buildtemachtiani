@@ -3,9 +3,12 @@ import { Routes, Route } from "react-router-dom";
 
 //Styles
 import "./App.scss";
+// Skeletons
 import LineTimeSkeleton from "../../Auth/LineTime/LineTimeSkeleton";
-const LineTime = lazy(() => import("../../Auth/LineTime/LineTime"));
+import ArticlesSkeleton from "../../../pages/Home/Articles/ArticlesSkeleton";
 
+//Lazy
+const LineTime = lazy(() => import("../../Auth/LineTime/LineTime"));
 const Metrics = lazy(() => import("../../../pages/Metrics/Metrics"));
 const Articles = lazy(() => import("../../../pages/Home/Articles/Articles"));
 const Home = lazy(() => import("../../../pages/Home/Home"));
@@ -13,7 +16,6 @@ const Instrucciones = lazy(() => import("../../../pages/Instrucciones/Instruccio
 const About = lazy(() => import("../../../pages/About/About"));
 const Mision = lazy(() => import("../../../pages/Mision/Mision"));
 const MagazinePolicies = lazy(() => import("../../../pages/MagazinePolicies/MagazinePolicies"));
-
 
 const App = () => {
   return (
@@ -69,7 +71,7 @@ const App = () => {
       <Route
         path="/article"
         element={
-          <Suspense fallback={<></>}>
+          <Suspense fallback={<ArticlesSkeleton />}>
             <Articles />
           </Suspense>
         }
@@ -77,9 +79,8 @@ const App = () => {
       <Route
         path="/my-article"
         element={
-          <Suspense fallback={<></>}>
-            <LineTimeSkeleton />
-            {/* <LineTime /> */}
+          <Suspense fallback={<LineTimeSkeleton />}>
+            <LineTime />
           </Suspense>
         }
       />
