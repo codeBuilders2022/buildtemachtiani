@@ -101,7 +101,7 @@ const correct = ()=>
         <Button
           className={"btn_cancel"}
           title={"Cancelar"}
-          onCLick={() => navigate("/#")}
+          onCLick={() => navigate("/login")}
         ></Button>
         <Button
           className={"btn_primary"}
