@@ -3,7 +3,7 @@ import { Dropdown } from "primereact/dropdown";
 
 import "./Select.scss";
 
-const Select = ({ title, placeholder, options, value, setValue }) => {
+const Select = ({ title, placeholder, options, value, setValue, id, onChange}) => {
 
   const defaultOptions = [
     { name: "New York", code: "NY" },
@@ -17,8 +17,10 @@ const Select = ({ title, placeholder, options, value, setValue }) => {
     <div className="Select">
       {title && <label>{title}</label>}
       <Dropdown
+        id={id}
         value={value}
-        onChange={(e) => setValue(e.value)}
+        onChange={onChange}
+        // onChange={(e) => setValue(e.value)}
         options={options ? options : defaultOptions}
         optionLabel="name"
         placeholder={placeholder ? placeholder : "Seleccione una opción"}

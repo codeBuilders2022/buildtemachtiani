@@ -11,25 +11,19 @@ import { ColorValidation, SubmitValidation, UpdateValue } from "../../utilities/
 
 const Log = () => {
 
-    const [date, setDate] = useState(null);
-    const [level, setLevel] = useState(null)
-    const [ocupat, setOcupat] = useState(null)
-    const [genderOption, setGenderOption] = useState(null)
-    const [country, setCountry] = useState(null)
-
     const [inputList, setInputList] = useState({
         names: { value: null, validationType: "empty" },
-        // lastName: { value: null, validationType: "empty" },
-        // country: { value: null, validationType: "empty" },
-        // date: { value: null, validationType: "empty" },
-        // gender: { value: null, validationType: "empty" },
-        // user: { value: null, validationType: "empty" },
-        // email: { value: null, validationType: "email" },
-        // password: { value: null, validationType: "empty" },
-        // password_confirm: { value: null, validationType: "empty" },
-        // orcid: { value: null, validationType: "empty" },
-        // ocupation: { value: null, validationType: "empty" },
-        // leveAcademic: { value: null, validationType: "empty" },
+        lastName: { value: null, validationType: "empty" },
+        country: { value: null, validationType: "empty" },
+        date: { value: null, validationType: "empty" },
+        gender: { value: null, validationType: "empty" },
+        user: { value: null, validationType: "empty" },
+        email: { value: null, validationType: "email" },
+        password: { value: null, validationType: "empty" },
+        password_confirm: { value: null, validationType: "empty" },
+        orcid: { value: null, validationType: "empty" },
+        ocupation: { value: null, validationType: "empty" },
+        leveAcademic: { value: null, validationType: "empty" },
     });
 
     useEffect(() => {
@@ -37,9 +31,9 @@ const Log = () => {
             if (document.getElementById(propertyName)) {
                 ColorValidation(propertyName, inputList);
             }
-            // if (propertyName === "email") {
-            //     ColorValidation(propertyName, inputList, "email");
-            // }
+            if (propertyName === "email") {
+                ColorValidation(propertyName, inputList, "email");
+            }
         }
     }, [inputList]);
 
@@ -112,12 +106,12 @@ const Log = () => {
                 <h1>Datos personales</h1>
                 <div className="inside_card">
                     <Input title={"Nombre(s)"} placeholder={"Nombre(s)"} id={"names"} onChange={(e) => UpdateValue(e, "names", inputList, setInputList)}/>
-                    <Input title={"Apellidos"} placeholder={"Apellidos"}/>
+                    <Input title={"Apellidos"} placeholder={"Apellidos"} id="lastName" onChange={(e) => UpdateValue(e, "lastName", inputList, setInputList)}/>
                     <div className="cnt_selects">
-                        <Select title={"País"} placeholder={"País"} value={country} setValue={setCountry}/>
-                        <Select title={"Género"} placeholder={"Género"} options={gender} value={genderOption} setValue={setGenderOption}/>
+                        <Select title={"País"} placeholder={"País"} value={inputList.country.value} id={"country"} onChange={(e) => UpdateValue(e, "country", inputList, setInputList)}/>
+                        <Select title={"Género"} placeholder={"Género"} options={gender} value={inputList.gender.value} id={"gender"}onChange={(e) => UpdateValue(e, "gender", inputList, setInputList)}/>
                     </div>
-                    <Shedule title={"Fecha de nacimiento"} placeholder={"Fecha de nacimiento"} value={date} setValue={setDate}/>
+                    <Shedule title={"Fecha de nacimiento"} placeholder={"Fecha de nacimiento"} value={inputList.date.value} id={"date"} onChange={(e) => UpdateValue(e, "date", inputList, setInputList)}/>
                     <div className="cnt_btn">
                         <Button title={"Siguiente"} className={"btn_primary"} onCLick={() => handleStepOne()}/>
                     </div>
@@ -127,10 +121,10 @@ const Log = () => {
             <div className="tamanio_cards">
                 <h1>Cuenta</h1>
                 <div className="inside_card">
-                    <Input title={"Usuario"} placeholder={"Usuario"}/>
-                    <Input title={"Correo electrónico"} placeholder={"Correo electrónico"}/>
-                    <InputPassword title={"Contraseña"}/>
-                    <InputPassword title={"Confirmar contraseña"}/>
+                    <Input title={"Usuario"} placeholder={"Usuario"} id={"user"} onChange={(e) => UpdateValue(e, "user", inputList, setInputList)}/>
+                    <Input title={"Correo electrónico"} placeholder={"Correo electrónico"} id={"email"} onChange={(e) => UpdateValue(e, "email", inputList, setInputList)}/>
+                    <InputPassword title={"Contraseña"} placeholder={"Contraseña"} id={"password"} onChange={(e) => UpdateValue(e, "password", inputList, setInputList)}/>
+                    <InputPassword title={"Confirmar contraseña"} placeholder={"Confirmar contraseña"} id={"password_confirm"} onChange={(e) => UpdateValue(e, "password_confirm", inputList, setInputList)}/>
                     <div className="cnt_btn btn_second">
                         <Button title={"Regresar"} className={"btn_cancel"} onCLick={() => handleReturnOne()}/>
                         <Button title={"Siguiente"} className={"btn_primary"} onCLick={() => handleStepTwo()}/>
@@ -143,14 +137,14 @@ const Log = () => {
                     <h1>Tipo de cuenta</h1>
                     <div className="inside_card">
                         <div className="cnt-orcid">
-                            <Input title={"Orcid ID"} placeholder={"Orcid ID"}/>
+                            <Input title={"Orcid ID"} placeholder={"Orcid ID"} id={"orcid"} onChange={(e) => UpdateValue(e, "orcid", inputList, setInputList)}/>
                             <label className="orcid_">Solo el <a href="https://orcid.org/" className="ur_l">Registro ORCID</a> puede asignar ORCID iDs. Debes aceptar sus 
                                     estándares para disponer de ORCID iDs e incluir la URL completa 
                                     (pe. https://orcid.org/0000-0002-1825-0097).
                             </label>
                         </div>
-                        <Select title={"Ocupación"} placeholder={"Ocupación"} options={ocupation} value={ocupat} setValue={setOcupat}/>
-                        <Select title={"Nivel académico"} placeholder={"Nivel académico"} options={academic} value={level} setValue={setLevel}/>
+                        <Select title={"Ocupación"} placeholder={"Ocupación"} options={ocupation} value={inputList.ocupation.value} id={"ocupation"} onChange={(e) => UpdateValue(e, "ocupation", inputList, setInputList)}/>
+                        <Select title={"Nivel académico"} placeholder={"Nivel académico"} options={academic} value={inputList.leveAcademic.value} id={"leveAcademic"} onChange={(e) => UpdateValue(e, "leveAcademic", inputList, setInputList)}/>
                     </div>
                 </div>
                 <div className="cnt_btn th_">
