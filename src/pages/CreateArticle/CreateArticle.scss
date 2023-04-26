@@ -1,0 +1,137 @@
+.CreateArticle {
+  margin-top: 190px;
+  ._back_ {
+    position: absolute;
+    top: 110px;
+    left: 30px;
+
+    @media (max-width: 768px) {
+      top: 80px;
+      left: 10px;
+    }
+  }
+  .grid-patern-CreateArticle {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    @media screen and (max-width: 1023px) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      grid-column-gap: 0px;
+      grid-row-gap: 0px;
+    }
+    @media screen and (max-width:441px) {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+    .col1 {
+      grid-area: 1 / 1 / 3 / 2;
+      @media screen and (max-width: 1023px) {
+        grid-area: 1 / 1 / 2 / 2;
+        
+      }
+      @media screen and (max-width:769px) {
+          justify-content: flex-start;
+        }
+        @media screen and (max-width: 441px) {
+         
+          justify-content: center;
+        }
+      display: flex;
+      justify-content: center;
+      padding-top: 48px;
+    }
+    .col2 {
+        grid-area: 1 / 2 / 3 / 3;
+        @media screen and (max-width: 1023px) {
+            grid-area: 1 / 2 / 2 / 3;
+            margin-left: 0px;
+        }
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-left: 21px;
+    }
+    .col3 {
+      grid-area: 3 / 1 / 5 / 3;
+      @media screen and (max-width: 1023px) {
+        grid-area: 2 / 1 / 3 / 3;
+      }
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .col4 {
+      grid-area: 1 / 3 / 5 / 6;
+      @media screen and (max-width: 1023px) {
+        grid-area: 3 / 1 / 5 / 3;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      display: initial;
+    }
+  }
+  .cardInteriorCreateArticle {
+    padding-top: 80px;
+  }
+  .minititle {
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 7px;
+    padding-left: 18px;
+  }
+  .inputDate {
+    color: black !important;
+    width: 163px;
+    margin-bottom: 4px;
+    @media screen and (max-width: 1023px) {
+        width: 100%;
+    }
+  }
+  .description {
+    font-size: 12px;
+    color: white;
+    max-width: 237px;
+    padding-left: 18px;
+  }
+  .inputArticleName {
+    max-width: 350px;
+    input
+    {
+        color: black;
+    }
+  }
+  .textArea-createArticle {
+    resize: none;
+    width: 90%!important;
+    height: 90%!important;
+    border-radius: 15px;
+    color: black;
+    padding: 10px;
+    color: #00000080;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 20px;
+    outline: none;
+    @media screen and (max-width: 441px) {
+        width: 100%!important;
+        height: 400px!important;
+        margin-left: 0px;
+      }
+  }
+  .wordName
+  {
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 150px;
+  }
+}

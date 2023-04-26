@@ -1,14 +1,18 @@
 import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
-import Login from "../../../pages/Login/Login";
-import RecoverAccount from "../../../pages/RecoverAccount/RecoverAccount";
-import VerificationCode from "../../../pages/VerificationCode/VerificationCode";
-import NewPassword from "../../../pages/NewPassword/NewPassword";
 import LogSkeleton from "../../../pages/Log/LogSkeleton";
+import LoginSkeleton from "../../../pages/Login/LoginSkeleton";
+import RecoverAccountSkeleton from "../../../pages/RecoverAccount/RecoverAccountSkeleton";
+import VerificationCodeSkeleton from "../../../pages/VerificationCode/VerificationCodeSkeleton";
+import NewPasswordSkeleton from "../../../pages/NewPassword/NewPasswordSkeleton";
 
+const NewPassword = lazy(()=>import("../../../pages/NewPassword/NewPassword"));
+const VerificationCode = lazy(()=>import("../../../pages/VerificationCode/VerificationCode"));
+const RecoverAccount = lazy(()=>import("../../../pages/RecoverAccount/RecoverAccount"));
+const Login = lazy(()=>import("../../../pages/Login/Login"));
 const Log = lazy(() => import("../../../pages/Log/Log"));
 
-const LogRoutes = () => {
+const LogRoutes = ({setAuth}) => {
   return (
         <Routes>
           <Route
@@ -22,32 +26,32 @@ const LogRoutes = () => {
           <Route
             path="/login"
             element={
-              <Suspense fallback={<></>}>
-                <Login/>
+              <Suspense fallback={<LoginSkeleton/>}>
+                <Login setAuth={setAuth}/>
               </Suspense>
             }
           />
           <Route
             path="/recover-account"
             element={
-              <Suspense fallback={<></>}>
-                <RecoverAccount></RecoverAccount>
+              <Suspense fallback={<RecoverAccountSkeleton/>}>
+                <RecoverAccount/>
               </Suspense>
             }
           />
           <Route
             path="/verification-code"
             element={
-              <Suspense fallback={<></>}>
-                <VerificationCode></VerificationCode>
+              <Suspense fallback={<VerificationCodeSkeleton/>}>
+                <VerificationCode/>
               </Suspense>
             }
           />
           <Route
             path="/new-password"
             element={
-              <Suspense fallback={<></>}>
-                <NewPassword></NewPassword>
+              <Suspense fallback={<NewPasswordSkeleton/>}>
+                <NewPassword setAuth={setAuth}/>
               </Suspense>
             }
           />

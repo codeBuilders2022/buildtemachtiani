@@ -8,21 +8,20 @@ import { useEffect } from "react";
 // import moment from "]moment";
 import Cookies from "universal-cookie";
 import Button from "../Button/Button";
-var timers
+import { Skeleton } from "primereact/skeleton";
+var timers;
 
-
-const VerificationCodeInput = ({ children }) => {
+const VerificationCodeInput = ({ children, skeleton }) => {
   const navigate = useNavigate();
   const [code, setCode] = useState();
   const [isCliked, setIsCliked] = useState(0);
   const [timeTotal, setTimeTotal] = useState(false);
-  const [stopInterval,setStopInterval] = useState(false);
+  const [stopInterval, setStopInterval] = useState(false);
   const timeCookie = new Cookies();
-  function timer(start,response) {
+  function timer(start, response) {
     var sec = start;
     timers = setInterval(function () {
-      if(document.getElementById("safeTimerDisplay"))
-      {
+      if (document.getElementById("safeTimerDisplay")) {
         document.getElementById("safeTimerDisplay").innerHTML = "00:" + sec;
       }
       // console.log("sec",sec);
@@ -31,15 +30,12 @@ const VerificationCodeInput = ({ children }) => {
       sec--;
       if (sec < 0) {
         clearInterval(timers);
-        if(document.getElementById("safeTimerDisplay"))
-        {
-          document.getElementById("safeTimerDisplay").innerHTML = "Reenviar código";
+        if (document.getElementById("safeTimerDisplay")) {
+          document.getElementById("safeTimerDisplay").innerHTML =
+            "Reenviar código";
         }
-        
-        
       }
-      if(stopInterval == -2)
-      {
+      if (stopInterval == -2) {
         clearInterval(timers);
       }
     }, 1000);
@@ -52,21 +48,19 @@ const VerificationCodeInput = ({ children }) => {
       timer(0);
     }
   }, []);
-  
 
-const correct = ()=>
-{
-  // setStopInterval(true)
-  clearInterval(timers);
-  navigate("/new-password")
-}
+  const correct = () => {
+    // setStopInterval(true)
+    clearInterval(timers);
+    navigate("/new-password");
+  };
   return (
     <>
       {isCliked ? (
         <>
-          {code === "12345" ? 
-              correct()            
-          : (
+          {code === "12345" ? (
+            correct()
+          ) : (
             <>
               <div className="code-box-red">
                 <div className="code-border-red">
@@ -86,38 +80,70 @@ const correct = ()=>
         <>
           <div className="code-box">
             <div className="code-border">
-              <ReactCodeInput
-                fields={5}
-                fieldWidth={50}
-                fieldHeight={80}
-                className="input-code"
-                onComplete={(e) => setCode(e)}
-              ></ReactCodeInput>
+              {!skeleton ? (
+                <>
+                  <ReactCodeInput
+                    fields={5}
+                    fieldWidth={50}
+                    fieldHeight={80}
+                    className="input-code"
+                    onComplete={(e) => setCode(e)}
+                  ></ReactCodeInput>
+                </>
+              ) : (
+                <>
+                  <Skeleton width="328px" height="98px"></Skeleton>
+                </>
+              )}
             </div>
           </div>
         </>
       )}
       <div className="buttonContainer-code">
-        <Button
-          className={"btn_cancel"}
-          title={"Cancelar"}
-          onCLick={() => navigate("/login")}
-        ></Button>
-        <Button
-          className={"btn_primary"}
-          title={"Enviar código"}
-          onCLick={() => setIsCliked(1)}
-        ></Button>
+        {!skeleton ? (
+          <>
+            <Button
+              className={"btn_cancel"}
+              title={"Cancelar"}
+              onCLick={() => navigate("/login")}
+            ></Button>
+            <Button
+              className={"btn_primary"}
+              title={"Enviar código"}
+              onCLick={() => setIsCliked(1)}
+            ></Button>
+          </>
+        ) : (
+          <>
+            <Button
+              className={"btn_cancel"}
+              skeleton
+            ></Button>
+            <Button
+              className={"btn_primary"}
+              skeleton
+            ></Button>
+          </>
+        )}
       </div>
 
       <div className="bottom-link" onClick={() => {}}>
-        <Link
+        {
+          !skeleton?
+          <>
+          <Link
           to="#"
           id="safeTimerDisplay"
           onClick={() => {
             timeTotal == 0 ? timer(60) : "";
           }}
         ></Link>
+          </>:
+          <>
+          <Skeleton width="108px" height="21px"></Skeleton>
+          </>
+        }
+        
       </div>
     </>
   );

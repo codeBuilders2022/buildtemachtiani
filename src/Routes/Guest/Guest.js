@@ -12,7 +12,7 @@ import { useEffect } from "react";
 import LogRoutes from "./LogRoutes/LogRoutes";
 import Navbarr from "../../components/molecules/Navbarr/Navbarr";
 
-const Guest = () => {
+const Guest = ({setAuth}) => {
   const {
     activeMenu,
     themeSettings,
@@ -62,7 +62,7 @@ const Guest = () => {
               {themeSettings && <ThemeSettings />}
 
               <App />
-              <LogRoutes />
+              <LogRoutes setAuth={setAuth}/>
               
             </>
             <Footer />

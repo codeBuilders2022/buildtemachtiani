@@ -7,7 +7,7 @@ import { ColorValidation, SubmitValidation, UpdateValue } from "../../utilities/
 import Back from "../../components/atoms/Back/Back";
 
 
-const Login = () => {
+const Login = ({setAuth}) => {
 const navigate = useNavigate()
 
     const [inputList,setInputList] = useState({
@@ -32,7 +32,8 @@ const navigate = useNavigate()
         {
             // ----------------------------------------------------------------------------poner ruta de auth cuado ya este
             alert("acaba de iniciar sesión")
-            navigate("/#")
+            setAuth(true)
+            navigate("/")
         }
     }
     return (

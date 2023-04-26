@@ -1,9 +1,9 @@
 import React from "react";
 
 import "./LineTime.scss";
-import { Header } from "../../../components";
-import StepsLine from "../../../components/organisms/StepsLine/StepsLine";
-import Back from "../../../components/atoms/Back/Back";
+import { Header } from "../../components";
+import StepsLine from "../../components/organisms/StepsLine/StepsLine";
+import Back from "../../components/atoms/Back/Back";
 
 const LineTime = () => {
   return (
