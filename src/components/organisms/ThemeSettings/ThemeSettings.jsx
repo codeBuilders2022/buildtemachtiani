@@ -36,7 +36,6 @@ const ThemeSettings = () => {
               onChange={setMode}
               checked={currentMode === "Light"}
             />
-            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label htmlFor="light" className="ml-2 text-md cursor-pointer">
               Ligero
             </label>
@@ -51,7 +50,6 @@ const ThemeSettings = () => {
               className="cursor-pointer"
               checked={currentMode === "Dark"}
             />
-            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label htmlFor="dark" className="ml-2 text-md cursor-pointer">
               Oscuro
             </label>
