@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunktemachtiani=self.webpackChunktemachtiani||[]).push([[873],{9873:function(e,i,n){n.r(i);n(2791),n(2317);var a=n(4844),c=(n(6726),n(8815)),s=n(184);i.default=function(){return(0,s.jsx)(s.Fragment,{children:(0,s.jsx)("div",{className:"VerificationCode",children:(0,s.jsx)(a.Z,{className:"inside_verificationCode",logo:!0,title:"C\xf3digo de recuperaci\xf3n",subTitle:"Ingresa el c\xf3digo enviado",children:(0,s.jsx)("div",{className:"inputContainer",children:(0,s.jsx)(c.Z,{})})})})})}}}]);
+//# sourceMappingURL=873.42798bf8.chunk.js.map
