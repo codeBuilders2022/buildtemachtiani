@@ -1,0 +1,48 @@
+.UploadWord
+{
+    .upload-square {
+        width: 150px;
+        height: 175px;
+        border: 2px solid black;
+        background: #F2F6FA;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        border-radius: 25px;
+      }
+      
+      
+      #word-file-input {
+        display: none;
+      }
+      .wordNoData
+      {
+        font-size: 20px;
+        color: #00000080;
+        font-weight: bold;
+      }
+      .circle-pencil
+      {
+        position: absolute;
+        top: -10px;
+        right: -12px;
+        width: 40px;
+        height: 40px;
+        color: #cccccc;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 100%;
+        background: #0C4A6E;
+      }
+      .word-img
+      {
+        width: 90px;
+      }
+      .pencil-icon
+      {
+        width: 20px;
+      }
+}

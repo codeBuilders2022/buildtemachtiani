@@ -13,6 +13,7 @@ import Guest from "./Routes/Guest/Guest";
 
 //Styles
 import "./index.css";
+import Auth from "./Routes/Auth/Auth";
 
 export default function RootRoute() {
   const [auth, setAuth] = useState(false);
@@ -20,9 +21,10 @@ export default function RootRoute() {
   return (
     <main>
       {auth ? (
-          <h1>Este lado es el autenticado</h1>
+          // <h1>Este lado es el autenticado</h1>
+          <Auth></Auth>
       ) : (
-          <Guest />
+          <Guest setAuth={setAuth}/>
       )}
     </main>
   );

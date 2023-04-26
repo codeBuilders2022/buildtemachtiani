@@ -8,7 +8,7 @@ import { ColorValidation, SubmitValidation, UpdateValue } from "../../utilities/
 import { useEffect } from "react";
 
 
-const NewPassword = () => {
+const NewPassword = ({setAuth}) => {
     const navigate = useNavigate()
 
     const [inputList, setInputList] = useState({
@@ -31,7 +31,9 @@ const NewPassword = () => {
         }
 
         if (inputList.password.value == inputList.confirmPassword.value && inputList.password.value) {
+            setAuth(true)
             navigate("/")
+
         }
         else {
             alert("ingrese las contraseñas iguales")

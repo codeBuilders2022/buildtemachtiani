@@ -1,0 +1,23 @@
+.headerflex
+{
+    display: flex;
+    justify-content: space-between;
+    @media screen and (max-width:570px) {
+        display: initial;
+    }
+}
+.buttonsize
+{
+    min-width: 250px;
+    margin-top: 0px;
+    @media screen and (max-width:570px) {
+        margin-top: 10px;
+    }
+}
+.centerText
+{
+    text-align: left;
+    @media screen and (max-width:570px) {
+        text-align: center;
+    }
+}

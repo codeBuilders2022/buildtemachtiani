@@ -1,0 +1,11 @@
+.ExteriorCard {
+  border-radius: 24px;
+  margin: 190px 40px 40px 40px;
+  padding: 40px 40px 40px 40px;
+
+  @media (max-width: 768px) {
+    margin: 8px;
+    margin-top: 160px;
+    padding: 20px;
+  }
+}

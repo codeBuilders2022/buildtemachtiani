@@ -4,11 +4,11 @@ import { Routes, Route } from "react-router-dom";
 //Styles
 import "./App.scss";
 // Skeletons
-import LineTimeSkeleton from "../../Auth/LineTime/LineTimeSkeleton";
+import LineTimeSkeleton from "../../../pages/LineTime/LineTimeSkeleton";
 import ArticlesSkeleton from "../../../pages/Home/Articles/ArticlesSkeleton";
 
 //Lazy
-const LineTime = lazy(() => import("../../Auth/LineTime/LineTime"));
+const LineTime = lazy(() => import("../../../pages/LineTime/LineTime"));
 const Metrics = lazy(() => import("../../../pages/Metrics/Metrics"));
 const Articles = lazy(() => import("../../../pages/Home/Articles/Articles"));
 const Home = lazy(() => import("../../../pages/Home/Home"));
@@ -76,14 +76,14 @@ const App = () => {
           </Suspense>
         }
       />
-      <Route
+      {/* <Route
         path="/my-article"
         element={
           <Suspense fallback={<LineTimeSkeleton />}>
             <LineTime />
           </Suspense>
         }
-      />
+      /> */}
     </Routes>
   );
 };

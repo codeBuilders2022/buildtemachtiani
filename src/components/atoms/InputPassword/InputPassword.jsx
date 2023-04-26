@@ -43,37 +43,42 @@ const InputPassword = ({
       } else {
         document.getElementById(id).style.border = "1px solid #A0A0A3";
       }
-    } catch (e) {}
+    } catch (e) { }
   }, [errors]);
 
   return !skeleton ? (
     <div className={`cj-input-text-password ${className}`}>
       {title && <label className="title">{title}</label>}
-      
-    <div className="cnt_input">
-      <input
-        onKeyDown={onKeyDown}
-        id={id}
-        name={name}
-        value={value}
-        onChange={onChange}
-        onBlur={onBlur}
-        className={`input-pass`}
-        placeholder={placeholder}
-        type={passwordShown ? type : "password"}
-        autoComplete={autoComplete}
-        disabled={disabled}
-      />
-      {iconsChange ? (
-        <img className="input-icon-password" src={closeEye} onClick={togglePassword} />
-      ) : (
-        <img className="input-icon-password" src={eye} onClick={togglePassword} />
-      )}
 
-    </div>
+      <div className="cnt_input">
+        <input
+          onKeyDown={onKeyDown}
+          id={id}
+          name={name}
+          value={value}
+          onChange={onChange}
+          onBlur={onBlur}
+          className={`input-pass`}
+          placeholder={placeholder}
+          type={passwordShown ? type : "password"}
+          autoComplete={autoComplete}
+          disabled={disabled}
+        />
+        {iconsChange ? (
+          <img className="input-icon-password" src={closeEye} onClick={togglePassword} />
+        ) : (
+          <img className="input-icon-password" src={eye} onClick={togglePassword} />
+        )}
+
+      </div>
     </div>
   ) : (
-    <Skeleton width={width || "100%"} className={className} height="48px" />
+    <>
+      <div style={{width:"100%",display:"flex",flexDirection:"column",gap:"7px"}}>
+        <Skeleton width="100px" height="23px"></Skeleton>
+        <Skeleton width={width || "100%"} className={className} height="48px" />
+      </div>
+    </>
   );
 };
 export default InputPassword;
