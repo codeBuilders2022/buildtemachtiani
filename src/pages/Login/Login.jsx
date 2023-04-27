@@ -7,7 +7,7 @@ import { ColorValidation, SubmitValidation, UpdateValue } from "../../utilities/
 import Back from "../../components/atoms/Back/Back";
 
 
-const Login = ({setAuth}) => {
+const Login = () => {
 const navigate = useNavigate()
 
     const [inputList,setInputList] = useState({
@@ -32,8 +32,11 @@ const navigate = useNavigate()
         {
             // ----------------------------------------------------------------------------poner ruta de auth cuado ya este
             alert("acaba de iniciar sesión")
-            setAuth(true)
-            navigate("/")
+            localStorage.setItem("auth", true)
+
+            window.location.replace('/dashboard');
+            
+            // navigate("/dashboard", {replace: false})
         }
     }
     return (
