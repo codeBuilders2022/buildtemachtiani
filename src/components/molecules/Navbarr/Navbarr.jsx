@@ -30,7 +30,14 @@ const Navbarr = () => {
     return setHasnNot(false)
     
   }, [header_location.pathname])
-  
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado de inicio de sesión
+
+  useEffect(() => {
+    const loggedIn = localStorage.getItem('auth') === 'true';
+    setIsLoggedIn(loggedIn);
+  }, []);
+
 
   const handleActiveNavbar = () => setOpenNavbar(!openNavbar);
 
@@ -43,6 +50,12 @@ const Navbarr = () => {
     { id: 4, text: "Misión y Visión", url: "/mission-vision" },
     { id: 5, text: "Políticas de la revista", url: "/magazine-policies" },
   ];
+
+  const handleLog = () => {
+    localStorage.setItem("auth", false)
+    
+    window.location.replace('/');
+  }
 
   return (
     <nav className='bg-bg-gray-primary dark:bg-bg-dark-secondary Navbarr_'>
@@ -62,26 +75,29 @@ const Navbarr = () => {
               </NavLink>
             </li>
             <InputSearch />
-            <div className="flex gap-5">
-              <li>
-                <NavLink
-                  to="/login"
-                  className="navlinks_s dark:text-white"
-                  // style={activeLinks}
-                >
-                  <span>Inicia sesión</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/log"
-                  className="navlinks_s dark:text-white"
-                  // style={activeLinks}
-                >
-                  <span>Únete</span>
-                </NavLink>
-              </li>
-            </div>
+            {isLoggedIn ? (
+              <button onClick={() => handleLog()}>LogOut</button>
+              ) : (
+                <div className="flex gap-5">
+                <li>
+                  <NavLink
+                    to="/login"
+                    className="navlinks_s dark:text-white"
+                    // style={activeLinks}
+                  >
+                    <span>Inicia sesión</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/log"
+                    className="navlinks_s dark:text-white"
+                    // style={activeLinks}
+                  >
+                    <span>Únete</span>
+                  </NavLink>
+                </li>
+              </div>)}
           </ul>
         </div>
 

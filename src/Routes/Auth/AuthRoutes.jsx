@@ -11,7 +11,8 @@ const AuthRoutes = () => {
     return (
         <Routes>
             <Route
-                path="/"
+                exact
+                path="/dashboard"
                 element={
                     <Suspense fallback={<></>}>
                         <h1>este es auth</h1>
@@ -24,6 +25,7 @@ const AuthRoutes = () => {
                 }
             />
             <Route
+                exact
                 path="/my-article"
                 element={
                     <Suspense fallback={<LineTimeSkeleton />}>
