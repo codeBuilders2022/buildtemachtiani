@@ -9,7 +9,7 @@
 /coverage
 
 #style
-.vscode
+/.vscode
 
 
 # production

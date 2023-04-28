@@ -58,7 +58,7 @@ const Navbarr = () => {
   }
 
   return (
-    <nav className='bg-bg-gray-primary dark:bg-bg-dark-secondary Navbarr_'>
+    <nav className='bg-bg-gray-primary dark:bg-bg-dark-secondary Navbarr_' id='nav_header1'>
         <div className="cnt_logo">
             <NavLink to={"/"}>
                 <img className="img_logo" src={currentMode === "Dark" ?  logo_dark : logo_light} alt="" />
