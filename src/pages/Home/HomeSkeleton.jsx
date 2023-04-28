@@ -7,15 +7,10 @@ import { useStateContext } from "../../contexts/ContextProvider";
 
 //assets
 import cover from "../../assets/images/Revista01.png"
-import journal from "../../assets/PDF/RICEDUT-ENERO-2021.pdf"
-import svg from "../../assets/images/Titulo-2.svg";
-import svgWhite from "../../assets/images/Sidebar.svg";
-import logo_light from '../../assets/images/logo_light.png'
-import logo_dark from '../../assets/images/logo_dark.png'
+
 
 //components
-import { Tooltip } from 'primereact/tooltip';
-import Sidebar from "../../components/organisms/Sidebar/Sidebar"
+
 
 //react
 import { useState } from "react"

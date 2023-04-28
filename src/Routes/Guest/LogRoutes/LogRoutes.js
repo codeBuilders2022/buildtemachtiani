@@ -6,11 +6,18 @@ import RecoverAccountSkeleton from "../../../pages/RecoverAccount/RecoverAccount
 import VerificationCodeSkeleton from "../../../pages/VerificationCode/VerificationCodeSkeleton";
 import NewPasswordSkeleton from "../../../pages/NewPassword/NewPasswordSkeleton";
 import CommitteeSkeleton from "../../../pages/Committee/CommitteeSkeleton";
+import Page404 from "../../../pages/Page404/Page404";
 
-const NewPassword = lazy(()=>import("../../../pages/NewPassword/NewPassword"));
-const VerificationCode = lazy(()=>import("../../../pages/VerificationCode/VerificationCode"));
-const RecoverAccount = lazy(()=>import("../../../pages/RecoverAccount/RecoverAccount"));
-const Login = lazy(()=>import("../../../pages/Login/Login"));
+const NewPassword = lazy(() =>
+  import("../../../pages/NewPassword/NewPassword")
+);
+const VerificationCode = lazy(() =>
+  import("../../../pages/VerificationCode/VerificationCode")
+);
+const RecoverAccount = lazy(() =>
+  import("../../../pages/RecoverAccount/RecoverAccount")
+);
+const Login = lazy(() => import("../../../pages/Login/Login"));
 const Log = lazy(() => import("../../../pages/Log/Log"));
 const Committee = lazy(() => import("../../../pages/Committee/Committee"));
 
