@@ -54,9 +54,8 @@ const Guest = () => {
           </div>
           <div
             // De esta clase cambias el color del fondo
-            className={`dark:bg-gray-800 bg-slate-100 min-h-screen w-full ${
-              activeMenu ? "md:ml-72" : "flex-2"
-            }`}
+            className={`dark:bg-gray-800 bg-slate-100 min-h-screen w-full ${activeMenu ? "md:ml-72" : "flex-2"
+              }`}
           >
             {/* <Navbar /> */}
             <Navbarr />

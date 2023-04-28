@@ -5,8 +5,10 @@ import { Routes, Route } from "react-router-dom";
 import "./App.scss";
 // Skeletons
 import LineTimeSkeleton from "../../../pages/LineTime/LineTimeSkeleton";
+import TableArticlesSkeleton from "../../../pages/TableArticles/TableArticlesSkeleton";
 import ArticlesSkeleton from "../../../pages/Home/Articles/ArticlesSkeleton";
 import Page404 from "../../../pages/Page404/Page404";
+import HomeSkeleton from "../../../pages/Home/HomeSkeleton";
 
 //Lazy
 const LineTime = lazy(() => import("../../../pages/LineTime/LineTime"));
@@ -21,6 +23,9 @@ const Mision = lazy(() => import("../../../pages/Mision/Mision"));
 const MagazinePolicies = lazy(() =>
   import("../../../pages/MagazinePolicies/MagazinePolicies")
 );
+const TableArticles = lazy(() =>
+  import("../../../pages/TableArticles/TableArticles")
+);
 
 const App = () => {
   return (
@@ -29,7 +34,7 @@ const App = () => {
         exact
         path="/"
         element={
-          <Suspense fallback={<></>}>
+          <Suspense fallback={<HomeSkeleton />}>
             <Home />
           </Suspense>
         }
@@ -88,6 +93,22 @@ const App = () => {
           </Suspense>
         }
       />
+      <Route
+        path="/articles"
+        element={
+          <Suspense fallback={<TableArticlesSkeleton />}>
+            <TableArticles />
+          </Suspense>
+        }
+      />
+      {/* <Route
+        path="/my-article"
+        element={
+          <Suspense fallback={<LineTimeSkeleton />}>
+            <LineTime />
+          </Suspense>
+        }
+      /> */}
 
       {/* <Route path="*" element={<Page404 />} /> */}
     </Routes>
