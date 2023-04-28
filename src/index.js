@@ -16,16 +16,11 @@ import "./index.css";
 import Auth from "./Routes/Auth/Auth";
 
 export default function RootRoute() {
-  const [auth, setAuth] = useState(false);
+  // const [auth, setAuth] = useState(false);
 
   return (
     <main>
-      {auth ? (
-          // <h1>Este lado es el autenticado</h1>
-          <Auth></Auth>
-      ) : (
-          <Guest setAuth={setAuth}/>
-      )}
+          <Guest />
     </main>
   );
 }

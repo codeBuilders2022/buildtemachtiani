@@ -12,7 +12,7 @@ const RecoverAccount = lazy(()=>import("../../../pages/RecoverAccount/RecoverAcc
 const Login = lazy(()=>import("../../../pages/Login/Login"));
 const Log = lazy(() => import("../../../pages/Log/Log"));
 
-const LogRoutes = ({setAuth}) => {
+const LogRoutes = () => {
   return (
         <Routes>
           <Route
@@ -27,7 +27,7 @@ const LogRoutes = ({setAuth}) => {
             path="/login"
             element={
               <Suspense fallback={<LoginSkeleton/>}>
-                <Login setAuth={setAuth}/>
+                <Login />
               </Suspense>
             }
           />
@@ -51,7 +51,7 @@ const LogRoutes = ({setAuth}) => {
             path="/new-password"
             element={
               <Suspense fallback={<NewPasswordSkeleton/>}>
-                <NewPassword setAuth={setAuth}/>
+                <NewPassword />
               </Suspense>
             }
           />

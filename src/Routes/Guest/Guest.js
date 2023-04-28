@@ -11,8 +11,10 @@ import { Footer, Navbar, ThemeSettings } from "../../components";
 import { useEffect } from "react";
 import LogRoutes from "./LogRoutes/LogRoutes";
 import Navbarr from "../../components/molecules/Navbarr/Navbarr";
+import Auth from "../Auth/Auth";
+import AuthRoutes from "../Auth/AuthRoutes";
 
-const Guest = ({setAuth}) => {
+const Guest = () => {
   const {
     activeMenu,
     themeSettings,
@@ -62,8 +64,8 @@ const Guest = ({setAuth}) => {
               {themeSettings && <ThemeSettings />}
 
               <App />
-              <LogRoutes setAuth={setAuth}/>
-              
+              <LogRoutes />
+              <AuthRoutes />
             </>
             <Footer />
           </div>
