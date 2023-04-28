@@ -6,6 +6,8 @@ import "./App.scss";
 // Skeletons
 import LineTimeSkeleton from "../../../pages/LineTime/LineTimeSkeleton";
 import ArticlesSkeleton from "../../../pages/Home/Articles/ArticlesSkeleton";
+import HomeSkeleton from "../../../pages/Home/HomeSkeleton"
+import TableArticlesSkeleton from "../../../pages/TableArticles/TableArticlesSkeleton";
 
 //Lazy
 const LineTime = lazy(() => import("../../../pages/LineTime/LineTime"));
@@ -16,6 +18,7 @@ const Instrucciones = lazy(() => import("../../../pages/Instrucciones/Instruccio
 const About = lazy(() => import("../../../pages/About/About"));
 const Mision = lazy(() => import("../../../pages/Mision/Mision"));
 const MagazinePolicies = lazy(() => import("../../../pages/MagazinePolicies/MagazinePolicies"));
+const TableArticles = lazy(() => import("../../../pages/TableArticles/TableArticles"));
 
 const App = () => {
   return (
@@ -23,7 +26,7 @@ const App = () => {
       <Route
         path="/"
         element={
-          <Suspense fallback={<></>}>
+          <Suspense fallback={<HomeSkeleton />}>
             <Home />
           </Suspense>
         }
@@ -73,6 +76,14 @@ const App = () => {
         element={
           <Suspense fallback={<ArticlesSkeleton />}>
             <Articles />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/articles"
+        element={
+          <Suspense fallback={<TableArticlesSkeleton />}>
+            <TableArticles />
           </Suspense>
         }
       />
