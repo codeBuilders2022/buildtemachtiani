@@ -35,7 +35,7 @@ const Auth = () => {
         <div className={currentMode === "Dark" ? "dark" : ""}>
           <BrowserRouter>
             <div className="flex relative dark:bg-main-dark-bg">
-              <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
+              <div className="fixed right-4 bottom-4" id="theme_the10" style={{ zIndex: "1000" }}>
                 <button
                   type="button"
                   onClick={() => setThemeSettings(true)}

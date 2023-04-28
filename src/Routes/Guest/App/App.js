@@ -6,21 +6,27 @@ import "./App.scss";
 // Skeletons
 import LineTimeSkeleton from "../../../pages/LineTime/LineTimeSkeleton";
 import ArticlesSkeleton from "../../../pages/Home/Articles/ArticlesSkeleton";
+import Page404 from "../../../pages/Page404/Page404";
 
 //Lazy
 const LineTime = lazy(() => import("../../../pages/LineTime/LineTime"));
 const Metrics = lazy(() => import("../../../pages/Metrics/Metrics"));
 const Articles = lazy(() => import("../../../pages/Home/Articles/Articles"));
 const Home = lazy(() => import("../../../pages/Home/Home"));
-const Instrucciones = lazy(() => import("../../../pages/Instrucciones/Instrucciones"));
+const Instrucciones = lazy(() =>
+  import("../../../pages/Instrucciones/Instrucciones")
+);
 const About = lazy(() => import("../../../pages/About/About"));
 const Mision = lazy(() => import("../../../pages/Mision/Mision"));
-const MagazinePolicies = lazy(() => import("../../../pages/MagazinePolicies/MagazinePolicies"));
+const MagazinePolicies = lazy(() =>
+  import("../../../pages/MagazinePolicies/MagazinePolicies")
+);
 
 const App = () => {
   return (
     <Routes>
       <Route
+        exact
         path="/"
         element={
           <Suspense fallback={<></>}>
@@ -29,6 +35,7 @@ const App = () => {
         }
       />
       <Route
+        exact
         path="/guide-authors"
         element={
           <Suspense fallback={<></>}>
@@ -37,6 +44,7 @@ const App = () => {
         }
       />
       <Route
+        exact
         path="/about"
         element={
           <Suspense fallback={<></>}>
@@ -45,6 +53,7 @@ const App = () => {
         }
       />
       <Route
+        exact
         path="/mission-vision"
         element={
           <Suspense fallback={<></>}>
@@ -53,6 +62,7 @@ const App = () => {
         }
       />
       <Route
+        exact
         path="/metrics"
         element={
           <Suspense fallback={<></>}>
@@ -61,6 +71,7 @@ const App = () => {
         }
       />
       <Route
+        exact
         path="/magazine-policies"
         element={
           <Suspense fallback={<></>}>
@@ -69,6 +80,7 @@ const App = () => {
         }
       />
       <Route
+        exact
         path="/article"
         element={
           <Suspense fallback={<ArticlesSkeleton />}>
@@ -76,14 +88,8 @@ const App = () => {
           </Suspense>
         }
       />
-      {/* <Route
-        path="/my-article"
-        element={
-          <Suspense fallback={<LineTimeSkeleton />}>
-            <LineTime />
-          </Suspense>
-        }
-      /> */}
+
+      {/* <Route path="*" element={<Page404 />} /> */}
     </Routes>
   );
 };
