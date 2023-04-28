@@ -38,9 +38,18 @@ const Log = () => {
     }, [inputList]);
 
       const handleSubmit = () => {
-        if (SubmitValidation(inputList, setInputList)) {
-            alert("Todo salio correctamente")
+        const validate = SubmitValidation(inputList, setInputList)
+        const formData = new FormData()
+        if(validate){
+            Object.entries(inputList).forEach(([key, value]) => {
+                if(value.value.uuid){
+                    formData.append(key, value.value.uuid)
+                } else {
+                    formData.append(key, value.value)
+                }
+            });
         }
+        console.log(formData)
       }
       
 
@@ -96,6 +105,8 @@ const Log = () => {
         {id: 1, name: "Estudiante", code: "estudiante"},
         {id: 2, name: "Investigador", code: "investigador"},
     ]
+
+    
 
   return (
     <div className="Log_">
