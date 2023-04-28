@@ -4,6 +4,8 @@ import "./TableArticles.scss"
 //react
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import ExteriorCard from "../../components/atoms/ExteriorCard/ExteriorCard";
+import { Header } from "../../components";
 
 const TableArticles = () => {
 
@@ -54,18 +56,17 @@ const TableArticles = () => {
 
     return (
         <div className='TableArticles'>
-            <div className="container">
-                <div className="title">
-                    <p>Mis artículos</p>
-                    <button>Enviar un nuevo artículo</button>
+            <ExteriorCard>
+                <div className="container">
+                    <Header title={"Mis artículos"} button="Enviar nuevo artículo" />
+                    <DataTable value={data} stripedRows tableStyle={{ minWidth: '30rem' }}>
+                        <Column field="title" header="Título"></Column>
+                        <Column field="date" header="Fecha"></Column>
+                        <Column field="status" header="Estado"></Column>
+                        <Column field="actions" header="Acciones" body={actionTemplate}></Column>
+                    </DataTable>
                 </div>
-                <DataTable value={data} stripedRows tableStyle={{ minWidth: '30rem' }}>
-                    <Column field="title" header="Título"></Column>
-                    <Column field="date" header="Fecha"></Column>
-                    <Column field="status" header="Estado"></Column>
-                    <Column field="actions" header="Acciones" body={actionTemplate}></Column>
-                </DataTable>
-            </div>
+            </ExteriorCard>
         </div>
     )
 }

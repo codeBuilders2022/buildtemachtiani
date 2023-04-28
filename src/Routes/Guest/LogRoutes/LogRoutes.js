@@ -5,12 +5,14 @@ import LoginSkeleton from "../../../pages/Login/LoginSkeleton";
 import RecoverAccountSkeleton from "../../../pages/RecoverAccount/RecoverAccountSkeleton";
 import VerificationCodeSkeleton from "../../../pages/VerificationCode/VerificationCodeSkeleton";
 import NewPasswordSkeleton from "../../../pages/NewPassword/NewPasswordSkeleton";
+import CommitteeSkeleton from "../../../pages/Committee/CommitteeSkeleton";
 
 const NewPassword = lazy(()=>import("../../../pages/NewPassword/NewPassword"));
 const VerificationCode = lazy(()=>import("../../../pages/VerificationCode/VerificationCode"));
 const RecoverAccount = lazy(()=>import("../../../pages/RecoverAccount/RecoverAccount"));
 const Login = lazy(()=>import("../../../pages/Login/Login"));
 const Log = lazy(() => import("../../../pages/Log/Log"));
+const Committee = lazy(() => import("../../../pages/Committee/Committee"));
 
 const LogRoutes = () => {
   return (
@@ -52,6 +54,14 @@ const LogRoutes = () => {
             element={
               <Suspense fallback={<NewPasswordSkeleton/>}>
                 <NewPassword />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/committee"
+            element={
+              <Suspense fallback={<CommitteeSkeleton/>}>
+              <Committee/>
               </Suspense>
             }
           />
