@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import LineTimeSkeleton from "../../pages/LineTime/LineTimeSkeleton";
 import { lazy } from "react";
 import CreateArticleSkeleton from "../../pages/CreateArticle/CreateArticleSkeleton";
+const TableArticles = lazy(()=> import("../../pages/TableArticles/TableArticles"));
 const CreateArticle =lazy(()=>import("../../pages/CreateArticle/CreateArticle"));
 const LineTime = lazy(()=>import("../../pages/LineTime/LineTime"));
 
