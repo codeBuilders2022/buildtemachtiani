@@ -5,6 +5,8 @@ import { Route, Routes } from "react-router-dom";
 import LineTimeSkeleton from "../../../pages/LineTime/LineTimeSkeleton";
 import CreateArticleSkeleton from "../../../pages/CreateArticle/CreateArticleSkeleton";
 import Page404 from "../../../pages/Page404/Page404";
+const TableArticles = lazy(() => import("../../../pages/TableArticles/TableArticles"));
+import TableArticlesSkeleton from "../../../pages/TableArticles/TableArticlesSkeleton";
 
 //Lazy
 const CreateArticle = lazy(() =>
@@ -19,19 +21,14 @@ const AuthRoutes = () => {
         exact
         path="/dashboard"
         element={
-          <Suspense fallback={<></>}>
-            <h1>este es auth</h1>
-            <h1>este es auth</h1>
-            <h1>este es auth</h1>
-            <h1>este es auth</h1>
-            <h1>este es auth</h1>
-            <h1>este es auth</h1>
+          <Suspense fallback={<TableArticlesSkeleton />}>
+            <TableArticles />
           </Suspense>
         }
       />
       <Route
         exact
-        path="/my-article"
+        path="/my-article/:id"
         element={
           <Suspense fallback={<LineTimeSkeleton />}>
             <LineTime />

@@ -2,8 +2,9 @@ import React from 'react';
 import Button from '../../atoms/Button/Button';
 import './Header.scss'
 import { Skeleton } from 'primereact/skeleton';
+import { NavLink } from 'react-router-dom';
 
-const Header = ({ category, title, button, onClick, skeleton }) => {
+const Header = ({ category, title, button, onClick, skeleton, url }) => {
   return (
     <>
       {
@@ -20,7 +21,9 @@ const Header = ({ category, title, button, onClick, skeleton }) => {
                 {
                   button ?
                     <>
-                      <Button className={"btn_primary buttonsize"} onCLick={onClick} title={button}></Button>
+                      <NavLink to={url}>
+                        <Button className={"btn_primary buttonsize"} title={button} />
+                      </NavLink>
                     </> : ""
                 }
               </div>
