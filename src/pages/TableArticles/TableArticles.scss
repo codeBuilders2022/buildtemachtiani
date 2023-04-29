@@ -1,8 +1,4 @@
 .TableArticles {
-    display: grid;
-    place-items: center;
-    max-width: 100vw;
-    overflow-x: hidden;
 
     .container {
         @media (max-width: 280px) {

@@ -13,10 +13,8 @@ import Guest from "./Routes/Guest/Guest";
 
 //Styles
 import "./index.css";
-import Auth from "./Routes/Auth/Auth";
 
 export default function RootRoute() {
-  // const [auth, setAuth] = useState(false);
 
   return (
     <main>

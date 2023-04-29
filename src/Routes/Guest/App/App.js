@@ -93,22 +93,6 @@ const App = () => {
           </Suspense>
         }
       />
-      <Route
-        path="/articles"
-        element={
-          <Suspense fallback={<TableArticlesSkeleton />}>
-            <TableArticles />
-          </Suspense>
-        }
-      />
-      {/* <Route
-        path="/my-article"
-        element={
-          <Suspense fallback={<LineTimeSkeleton />}>
-            <LineTime />
-          </Suspense>
-        }
-      /> */}
 
       {/* <Route path="*" element={<Page404 />} /> */}
     </Routes>
