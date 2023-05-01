@@ -19,15 +19,16 @@ export const postAxiosRegister = async (url, form) => {
 };
 
 
-export const getAxiosGuest = async (url, resThen, resErr) => {
-    const server = process.env.MIX_APP_URL_API
-    return axios.get(`${server}${url}`).then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-};
+export const getAxiosCountrys = async (url) => {
+    const server = process.env.REACT_APP_URL_API
+    try {
+      const response = await axios.get(`${server}${url}`);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      return error;
+    }
+  };
 
 // export const postAxiosGuest = async (url, resThen, resErr, form) => {
 //     const server = process.env.MIX_APP_URL_API

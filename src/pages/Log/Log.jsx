@@ -8,12 +8,9 @@ import Back from "../../components/atoms/Back/Back";
 //Styles
 import "./Log.scss";
 import { ColorValidation, SubmitValidation, UpdateValue } from "../../utilities/Validations";
-import { postAxiosRegister } from "../../utilities/Axios";
+import { getAxiosCountrys, postAxiosRegister } from "../../utilities/Axios";
 
 const Log = () => {
-
-    // const [first, setfirst] = useState(second)
-
     const [inputList, setInputList] = useState({
         "name": { value: null, validationType: "empty" },
         "lastname": { value: null, validationType: "empty" },
@@ -28,6 +25,11 @@ const Log = () => {
         "ocupation": { value: null, validationType: "empty" },
         "academic_level": { value: null, validationType: "empty" },
     });
+
+    // useEffect(() => {
+    //     getAxiosGuest('/api/countries', setOptionsState)
+    // },[])
+
 
     useEffect(() => {
         for (const propertyName in inputList) {
@@ -136,6 +138,30 @@ const Log = () => {
         {id: 2, name: "Investigador", code: "investigador"},
     ]
 
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+      axiosData();
+    }, []);
+
+    const axiosData = async () => {
+      try {
+        const response = await getAxiosCountrys("/api/countries");
+        const data = response.data;
+        setData(data);
+
+        const newData = data.map(({ id, attributes: { country } }) => ({
+          id,
+          country,
+        }));
+
+        setData(newData);
+      } catch (error) {
+
+        console.log(error, "error");
+      }
+    };
+
     
 
   return (
@@ -149,7 +175,7 @@ const Log = () => {
                     <Input title={"Nombre(s)"} placeholder={"Nombre(s)"} id={"name"} onChange={(e) => UpdateValue(e, "name", inputList, setInputList)}/>
                     <Input title={"Apellidos"} placeholder={"Apellidos"} id="lastname" onChange={(e) => UpdateValue(e, "lastname", inputList, setInputList)}/>
                     <div className="cnt_selects">
-                        <Select title={"País"} placeholder={"País"} value={inputList.country.value} id={"country"} onChange={(e) => UpdateValue(e, "country", inputList, setInputList)}/>
+                        <Select title={"País"} placeholder={"País"} optionLabel="country" value={inputList.country.value} options={data} id={"country"} onChange={(e) => UpdateValue(e, "country", inputList, setInputList)}/>
                         <Select title={"Género"} placeholder={"Género"} options={gender} value={inputList.gender.value} id={"gender"}onChange={(e) => UpdateValue(e, "gender", inputList, setInputList)}/>
                     </div>
                     <Input type="date" title={"Fecha de nacimiento"} placeholder={"Fecha de nacimiento"} value={inputList.birthdate.value} id={"birthdate"} onChange={(e) => UpdateValue(e, "birthdate", inputList, setInputList)}/>
