@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react"
 
 //Axios
-import { getSelect } from "../utilities/GeneralAxios"
+import { getAxiosGuest } from "../utilities/Axios"
 
 export const useLadaWithState = () => {
     const [optionsState, setOptionsState] = useState('')
     const [optionsLada, setOptionsLada] = useState('')
 
+    const resThen = (res) => {
+        setData(res.data.data)
+    }
     useEffect(() => {
-        getSelect('api/mobile/general/republic-states', setOptionsState)
-        getSelect('api/general/ladas', setOptionsLada)
+        getAxiosGuest('/api/countries', setOptionsState)
     },[])
 
-    return { optionsState, optionsLada }
+    console.log(optionsState, "optionState")
+
+    return { optionsState }
 }
