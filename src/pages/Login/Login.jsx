@@ -38,7 +38,7 @@ const navigate = useNavigate()
                 "password":inputList.password.value
             }
             let res;
-            loginConfir(data,setAuth,navigate)
+            loginConfir(data,navigate)
            
             
             // navigate("/dashboard", {replace: false})

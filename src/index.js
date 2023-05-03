@@ -13,7 +13,7 @@ import Guest from "./Routes/Guest/Guest";
 
 //Styles
 import "./index.css";
-import Auth from "./Routes/Auth/Auth";
+// import Auth from "./Routes/Auth/Auth";
 import axios from "axios";
 
 const urlApi = process.env.REACT_APP_API_URL 
