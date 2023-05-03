@@ -97,7 +97,7 @@ const Navbarr = () => {
                   </div>
                 }
               </div>
-              // <button onClick={() => handleLog()}>LogOut</button>
+      
               ) : (
                 <div className="flex gap-5">
                 <li>
