@@ -9,6 +9,7 @@ import Back from "../../components/atoms/Back/Back";
 import "./Log.scss";
 import { ColorValidation, SubmitValidation, UpdateValue } from "../../utilities/Validations";
 import { getAxiosCountrys, postAxiosRegister } from "../../utilities/Axios";
+import { CorrectModal } from "../../components/molecules/modals/Modals";
 
 const Log = () => {
 
@@ -72,18 +73,37 @@ const Log = () => {
         const keysToTransform = ["country", "gender", "ocupation", "academic_level"];
         if (validate) {
             for (const [key, { value: data }] of Object.entries(inputList)) {
-                objetData[key] = keysToTransform.includes(key) ? data.name : data;
+                objetData.data[key] = keysToTransform.includes(key) ? data.name : data;
               }
+            try {
+                const response = await postAxiosRegister('/api/registers', objetData);
 
-              console.log(objetData)
-            // try {
-            //     const response = await postAxiosRegister('/api/registers', objetData);
-            //     alert("Datos guardados correctamente")
-            //   } 
-            // catch (error) {
-            //     console.log(error)
-            //     alert("Error de subir los datos a la api")
-            // }
+                if(response.status === 200){
+                    registerUser()
+                }
+                CorrectModal("Registro correctamente")
+              } 
+            catch (error) {
+                console.log(error)
+                alert("Error de subir los datos a la api")
+            }
+            // if (validate) {
+            //           for (const datas in inputList) {
+            //             if (
+            //               datas == "country" ||
+            //               datas == "gender" ||
+            //               datas == "ocupation" ||
+            //               datas == "academic_level"
+            //             ) {
+            //               objetData["data"][datas] = inputList[datas].value.name;
+            //             } else {
+            //               objetData["data"][datas] = inputList[datas].value;
+            //             }
+            //           }
+            //           postAxiosRegister("/api/registers", objetData);
+            //         }
+
+                    console.log(objetData)
         }
 
         console.log(objetData)

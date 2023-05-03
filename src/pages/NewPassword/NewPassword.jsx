@@ -48,7 +48,7 @@ const NewPassword = ({setAuth}) => {
                         <InputPassword title={"Contraseña"} placeholder={"Contraseña"} id="password" onChange={(e) => { UpdateValue(e, "password", inputList, setInputList) }}></InputPassword>
                         <InputPassword title={"Confirmar contraseña"} placeholder={"Confirmar contraseña"} id="confirmPassword" onChange={(e) => { UpdateValue(e, "confirmPassword", inputList, setInputList) }}></InputPassword>
                     </div>
-                    <Button className={"btn_primary"} title="Iniciar sesión" onCLick={() => { validationFunction() }}></Button>
+                    <Button className={"btn_primary"} title="Iniciar sesión" onClick={() => { validationFunction() }}></Button>
                 </LoginCard>
             </div>
         </>
