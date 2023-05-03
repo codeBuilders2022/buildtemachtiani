@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useStateContext } from "../../../contexts/ContextProvider";
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import "./Navbarr.scss"
 
 //Assets
@@ -8,11 +8,12 @@ import logo_dark from '../../../assets/images/logo_70.png'
 import logo_light from '../../../assets/images/logo_70_black.png'
 import InputSearch from '../../atoms/InputSearch/InputSearch';
 import Menu_white from '../../../assets/images/menu_white.png'
+import ArrowDonw from '../../../assets/images/down_.png'
+import Avatar from '../../../assets/images/Oval.png'
 
 
 const Navbarr = () => {
   const { openNavbar, setOpenNavbar, currentColor, currentMode } = useStateContext();
-  const routes_header = ["/log", "/login", "/recover-account", "/verification-code", "/new-password"]
   const header_location = useLocation()
   const [hasnNot, setHasnNot] = useState(false)
 
@@ -30,7 +31,14 @@ const Navbarr = () => {
     return setHasnNot(false)
     
   }, [header_location.pathname])
-  
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado de inicio de sesión
+
+  useEffect(() => {
+    const loggedIn = localStorage.getItem('auth') === 'true';
+    setIsLoggedIn(loggedIn);
+  }, []);
+
 
   const handleActiveNavbar = () => setOpenNavbar(!openNavbar);
 
@@ -44,8 +52,21 @@ const Navbarr = () => {
     { id: 5, text: "Políticas de la revista", url: "/magazine-policies" },
   ];
 
+  const navigate = useNavigate()
+
+  const handleLogOut = () => {
+    localStorage.setItem("auth", false)
+    window.location.replace('/');
+  }
+
+  const [openModal, setOpenModal] = useState(false)
+
+  // const handleLogOut = () => {
+
+  // }
+
   return (
-    <nav className='bg-bg-gray-primary dark:bg-bg-dark-secondary Navbarr_'>
+    <nav className='bg-bg-gray-primary dark:bg-bg-dark-secondary Navbarr_' id='nav_header1'>
         <div className="cnt_logo">
             <NavLink to={"/"}>
                 <img className="img_logo" src={currentMode === "Dark" ?  logo_dark : logo_light} alt="" />
@@ -62,26 +83,42 @@ const Navbarr = () => {
               </NavLink>
             </li>
             <InputSearch />
-            <div className="flex gap-5">
-              <li>
-                <NavLink
-                  to="/login"
-                  className="navlinks_s dark:text-white"
-                  // style={activeLinks}
-                >
-                  <span>Inicia sesión</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/log"
-                  className="navlinks_s dark:text-white"
-                  // style={activeLinks}
-                >
-                  <span>Únete</span>
-                </NavLink>
-              </li>
-            </div>
+            {isLoggedIn ? (
+              <div className='profile_a'>
+                <div className="cnt_profile" onClick={() => navigate("/dashboard")}>
+                  <h1 className='dark:text-white'>DV</h1>
+                </div>
+                <button onClick={() => setOpenModal(!openModal)}>
+                  <img src={ArrowDonw} alt="" className={`Arrow_donw ${openModal && "rotate_"}`}/>
+                </button>
+                {openModal && 
+                  <div className="modal_">
+                    <button className="log_out" onClick={() => handleLogOut()}>Cerrar sesión</button>
+                  </div>
+                }
+              </div>
+              // <button onClick={() => handleLog()}>LogOut</button>
+              ) : (
+                <div className="flex gap-5">
+                <li>
+                  <NavLink
+                    to="/login"
+                    className="navlinks_s dark:text-white"
+                    // style={activeLinks}
+                  >
+                    <span>Inicia sesión</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/log"
+                    className="navlinks_s dark:text-white"
+                    // style={activeLinks}
+                  >
+                    <span>Únete</span>
+                  </NavLink>
+                </li>
+              </div>)}
           </ul>
         </div>
 

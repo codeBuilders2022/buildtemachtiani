@@ -50,12 +50,7 @@ export default function RootRoute() {
  
   return (
     <main>
-      {auth ? (
-          // <h1>Este lado es el autenticado</h1>
-          <Auth></Auth>
-      ) : (
-          <Guest setAuth={setAuth}/>
-      )}
+          <Guest />
     </main>
   );
 }

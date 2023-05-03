@@ -11,7 +11,7 @@ const Footer = () => {
     }
   }
   return (
-      <footer className="m-10 mt-24">
+      <footer className="m-10 mt-24" id="footer_foo1">
         <div
           className="border-t-2 border-solid mb-5"
           style={{ borderColor: currentColor }}

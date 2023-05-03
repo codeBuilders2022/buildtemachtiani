@@ -9,9 +9,11 @@ export const loginConfir = async (data,setAuth,navigate)=>
         .then((res)=>
         {
             CorrectModal("Credenciales correctas")
-            setAuth(true)
-            navigate("/")
-            console.log("res",res)
+            // setAuth(true)
+            localStorage.setItem("auth", true)
+            window.location.replace('/dashboard');
+            // navigate("/")
+            // console.log("res",res)
             localStorage.setItem("token",res.data.jwt)
         })
         .catch(()=>

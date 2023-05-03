@@ -81,9 +81,7 @@
     padding-top: 80px;
   }
   .minititle {
-    font-size: 12px;
-    font-weight: bold;
-    color: white;
+    font-size: 15px;
     margin-bottom: 7px;
     padding-left: 18px;
   }
@@ -96,8 +94,7 @@
     }
   }
   .description {
-    font-size: 12px;
-    color: white;
+    font-size: 8px;
     max-width: 237px;
     padding-left: 18px;
   }
@@ -113,13 +110,15 @@
     width: 90%!important;
     height: 90%!important;
     border-radius: 15px;
-    color: black;
     padding: 10px;
-    color: #00000080;
+    color: #000;
     font-size: 12px;
     font-weight: bold;
     margin-left: 20px;
+    background: #f2f6fa;
     outline: none;
+    border: 2px solid #020203;
+
     @media screen and (max-width: 441px) {
         width: 100%!important;
         height: 400px!important;

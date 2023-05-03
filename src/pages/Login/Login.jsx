@@ -8,7 +8,7 @@ import Back from "../../components/atoms/Back/Back";
 import { loginConfir } from "../../Api/login/apiLogic";
 
 
-const Login = ({setAuth}) => {
+const Login = () => {
 const navigate = useNavigate()
 
     const [inputList,setInputList] = useState({
@@ -39,8 +39,9 @@ const navigate = useNavigate()
             }
             let res;
             loginConfir(data,setAuth,navigate)
-            
            
+            
+            // navigate("/dashboard", {replace: false})
         }
     }
     return (
@@ -55,7 +56,7 @@ const navigate = useNavigate()
                     <NavLink to={"/recover-account"}>
                         <div className="rememberPassword">Olvidé mi contraseña</div>
                     </NavLink>
-                    <Button className={"btn_primary"} title="Iniciar sesión" onCLick={()=>{validationFunction()}}></Button>
+                    <Button className={"btn_primary"} title="Iniciar sesión" onClick={()=>{validationFunction()}}></Button>
                     <NavLink to={"/log"}>
                         <div className="register">Aun no tengo una cuenta</div>
                     </NavLink>

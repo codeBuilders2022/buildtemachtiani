@@ -10,6 +10,7 @@ export const ContextProvider = ({ children }) => {
   const [themeSettings, setThemeSettings] = useState(false);
   const [activeMenuRevistas, setActiveMenuRevistas] = useState(false);
   const [openNavbar, setOpenNavbar] = useState(false)
+  const [openNavbar1, setOpenNavbar1] = useState(false)
 
   const setMode = (e) => {
     setCurrentMode(e.target.value);
@@ -45,6 +46,8 @@ export const ContextProvider = ({ children }) => {
         setActiveMenuRevistas,
         openNavbar, 
         setOpenNavbar,
+        openNavbar1, 
+        setOpenNavbar1,
       }}
     >
       {children}

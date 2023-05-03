@@ -5,14 +5,23 @@ import LoginSkeleton from "../../../pages/Login/LoginSkeleton";
 import RecoverAccountSkeleton from "../../../pages/RecoverAccount/RecoverAccountSkeleton";
 import VerificationCodeSkeleton from "../../../pages/VerificationCode/VerificationCodeSkeleton";
 import NewPasswordSkeleton from "../../../pages/NewPassword/NewPasswordSkeleton";
+import CommitteeSkeleton from "../../../pages/Committee/CommitteeSkeleton";
+import Page404 from "../../../pages/Page404/Page404";
 
-const NewPassword = lazy(()=>import("../../../pages/NewPassword/NewPassword"));
-const VerificationCode = lazy(()=>import("../../../pages/VerificationCode/VerificationCode"));
-const RecoverAccount = lazy(()=>import("../../../pages/RecoverAccount/RecoverAccount"));
-const Login = lazy(()=>import("../../../pages/Login/Login"));
+const NewPassword = lazy(() =>
+  import("../../../pages/NewPassword/NewPassword")
+);
+const VerificationCode = lazy(() =>
+  import("../../../pages/VerificationCode/VerificationCode")
+);
+const RecoverAccount = lazy(() =>
+  import("../../../pages/RecoverAccount/RecoverAccount")
+);
+const Login = lazy(() => import("../../../pages/Login/Login"));
 const Log = lazy(() => import("../../../pages/Log/Log"));
+const Committee = lazy(() => import("../../../pages/Committee/Committee"));
 
-const LogRoutes = ({setAuth}) => {
+const LogRoutes = () => {
   return (
         <Routes>
           <Route
@@ -27,7 +36,7 @@ const LogRoutes = ({setAuth}) => {
             path="/login"
             element={
               <Suspense fallback={<LoginSkeleton/>}>
-                <Login setAuth={setAuth}/>
+                <Login />
               </Suspense>
             }
           />
@@ -51,7 +60,15 @@ const LogRoutes = ({setAuth}) => {
             path="/new-password"
             element={
               <Suspense fallback={<NewPasswordSkeleton/>}>
-                <NewPassword setAuth={setAuth}/>
+                <NewPassword />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/committee"
+            element={
+              <Suspense fallback={<CommitteeSkeleton/>}>
+              <Committee/>
               </Suspense>
             }
           />
