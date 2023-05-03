@@ -26,6 +26,8 @@ const Log = () => {
         leveAcademic: { value: null, validationType: "empty" },
     });
 
+    
+
     useEffect(() => {
         for (const propertyName in inputList) {
             if (document.getElementById(propertyName)) {
