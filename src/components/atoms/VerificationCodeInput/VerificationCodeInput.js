@@ -105,7 +105,7 @@ const VerificationCodeInput = ({ children, skeleton }) => {
             <Button
               className={"btn_cancel"}
               title={"Cancelar"}
-              onCLick={() => navigate("/login")}
+              onClick={() => navigate("/login")}
             ></Button>
             <Button
               className={"btn_primary"}
@@ -118,6 +118,7 @@ const VerificationCodeInput = ({ children, skeleton }) => {
             <Button
               className={"btn_cancel"}
               skeleton
+              onClick={() => navigate("/recover-account")}
             ></Button>
             <Button
               className={"btn_primary"}
