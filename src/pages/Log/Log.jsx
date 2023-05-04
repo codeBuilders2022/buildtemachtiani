@@ -7,12 +7,11 @@ import Back from "../../components/atoms/Back/Back";
 
 //Styles
 import "./Log.scss";
-import { ColorValidation, SubmitValidation, UpdateValue } from "../../utilities/Validations";
-import { getAxiosCountrys, postAxiosRegister } from "../../utilities/Axios";
+import { ColorValidation, SubmitValidation, UpdateValue, ValidationPassword } from "../../utilities/Validations";
+import { CorrectModal, IncorrectModal } from "../../components/molecules/modals/Modals";
+import { getAxiosCountrys, postAxiosRegister, userAxiosPost } from "../../Api/Register/Register";
 
 const Log = () => {
-
-    const [dateToday, setdateToday] = useState()
 
 
     const [inputList, setInputList] = useState({
@@ -30,11 +29,6 @@ const Log = () => {
         "academic_level": { value: null, validationType: "empty" },
     });
 
-    // useEffect(() => {
-    //     getAxiosGuest('/api/countries', setOptionsState)
-    // },[])
-
-
     useEffect(() => {
         for (const propertyName in inputList) {
             if (document.getElementById(propertyName)) {
@@ -47,46 +41,34 @@ const Log = () => {
     }, [inputList]);
 
 
-    // const objetData = {"data":{}}
-    //     if (validate) {
-    //       for (const datas in inputList) {
-    //         if (
-    //           datas == "country" ||
-    //           datas == "gender" ||
-    //           datas == "ocupation" ||
-    //           datas == "academic_level"
-    //         ) {
-    //           objetData["data"][datas.toString()] = inputList[datas].value.name;
-    //         } else {
-    //           objetData["data"][datas] = inputList[datas].value;
-    //         }
-    //       }
-    //       postAxiosRegister("/api/registers", objetData);
-    //     }
-        
-
-
       const handleSubmit = async () => {
         const validate = SubmitValidation(inputList, setInputList);
         const objetData = {"data":{}};
         const keysToTransform = ["country", "gender", "ocupation", "academic_level"];
         if (validate) {
             for (const [key, { value: data }] of Object.entries(inputList)) {
-                objetData[key] = keysToTransform.includes(key) ? data.name : data;
+                objetData.data[key] = keysToTransform.includes(key) ? data.name : data;
               }
+              try {
+                const saveUser = {
+                  username: inputList.user.value,
+                  email: inputList.email.value,
+                  password: inputList.password.value,
+                };
+                const response = await userAxiosPost("/api/auth/local/register", saveUser);
+                if (response.status === 200) {
+                    const res = await postAxiosRegister("/api/registers", objetData);
+                    if (res.status === 200) {
+                      CorrectModal("Registro correctamente");
 
-              console.log(objetData)
-            // try {
-            //     const response = await postAxiosRegister('/api/registers', objetData);
-            //     alert("Datos guardados correctamente")
-            //   } 
-            // catch (error) {
-            //     console.log(error)
-            //     alert("Error de subir los datos a la api")
-            // }
+                    } else {
+                      IncorrectModal("¡Algo salió mal, intentalo más tarde!", true)
+                    }
+                }
+              } catch (error) {
+                    IncorrectModal("El correo electrónico o el nombre de usuario ya están en uso", true);
+              } 
         }
-
-        console.log(objetData)
       }
       
     const [steps, setSteps] = useState({
@@ -96,6 +78,7 @@ const Log = () => {
     })
 
     const handleStepOne = () => {
+
         setSteps(prevState => ({
             ...prevState,
             step_one: false,
@@ -112,11 +95,21 @@ const Log = () => {
     }
 
     const handleStepTwo = () => {
-        setSteps(prevState => ({
-            ...prevState,
-            step_three: true,
-            step_two: false
-          }));
+        const validate = ValidationPassword(inputList.password.value);
+        if (!validate) {
+            IncorrectModal(
+              "La contraseña debe contener al menos un dígito, una letra mayúscula y un carácter especial, y tener al menos 8 caracteres.",
+              true
+            );
+        } else if (inputList.password.value !== inputList.confirm_password.value) {
+            IncorrectModal("Las contraseñas no coinciden", true);
+        } else {
+            setSteps((prevState) => ({
+                ...prevState,
+                step_three: true,
+                step_two: false,
+            }));
+        }
     }
 
     const handleReturnTwo = () => {
@@ -148,13 +141,11 @@ const Log = () => {
       axiosData();
     }, []);
 
-
     const axiosData = async () => {
       try {
         const response = await getAxiosCountrys("/api/countries");
         const data = response.data;
         setData(data);
-
         const newData = data.map(({ id, attributes: { name } }) => ({
           id,
           name,
@@ -162,11 +153,9 @@ const Log = () => {
 
         setData(newData);
       } catch (error) {
-        alert("Error en la Api")
+        IncorrectModal("¡Algo salió mal, intentalo más tarde!", true)
       }
     };
-
-    
 
   return (
     <div className="Log_">
@@ -194,7 +183,11 @@ const Log = () => {
                 <div className="inside_card">
                     <Input title={"Usuario"} placeholder={"Usuario"} id={"user"} onChange={(e) => UpdateValue(e, "user", inputList, setInputList)}/>
                     <Input title={"Correo electrónico"} placeholder={"Correo electrónico"} id={"email"} onChange={(e) => UpdateValue(e, "email", inputList, setInputList)}/>
-                    <InputPassword title={"Contraseña"} placeholder={"Contraseña"} id={"password"} onChange={(e) => UpdateValue(e, "password", inputList, setInputList)}/>
+                    <div className="instructions_pass">
+                        <InputPassword title={"Contraseña"} placeholder={"Contraseña"} id={"password"} onChange={(e) => UpdateValue(e, "password", inputList, setInputList)}/>
+                        <div className="desxr_">Utiliza ocho caracteres como mínimo con una combinación de letras, números y símbolos</div>
+                    </div>
+                    
                     <InputPassword title={"Confirmar contraseña"} placeholder={"Confirmar contraseña"} id={"confirm_password"} onChange={(e) => UpdateValue(e, "confirm_password", inputList, setInputList)}/>
                     <div className="cnt_btn btn_second">
                         <Button title={"Regresar"} className={"btn_cancel"} onClick={() => handleReturnOne()}/>

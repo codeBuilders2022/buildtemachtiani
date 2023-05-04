@@ -110,7 +110,7 @@ const VerificationCodeInput = ({ children, skeleton }) => {
             <Button
               className={"btn_primary"}
               title={"Enviar código"}
-              onCLick={() => setIsCliked(1)}
+              onClick={() => setIsCliked(1)}
             ></Button>
           </>
         ) : (

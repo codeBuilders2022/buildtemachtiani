@@ -42,7 +42,7 @@ const RecoverAccount = () => {
                         <Input title={"Correo electrónico"} placeholder={"Correo electrónico"} id="email" onChange={(e)=>{UpdateValue(e,"email",inputList,setInputList)}}></Input>
                     </div>
                     <div className="buttonContainer">
-                        <Button className={"btn_cancel"} title={"Cancelar"} onCLick={()=>{navigate("/login")}}></Button>
+                        <Button className={"btn_cancel"} title={"Cancelar"} onClick={()=>{navigate("/login")}}></Button>
                         <Button className={"btn_primary"} title={"Enviar código"} onClick={()=>{validationFunction()}}></Button>
                     </div>
                 </LoginCard>
