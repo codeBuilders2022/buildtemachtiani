@@ -2,6 +2,8 @@ import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import correct from './img/iconos-02.png'
 import incorrect from './img/iconos-03.png'
+import "./Modals.scss"
+
 export const CorrectModal = (description)=>
 {
     Swal.fire({
@@ -16,17 +18,21 @@ export const CorrectModal = (description)=>
         timer: 2000,
       });
 }
-export const IncorrectModal = (description)=>
+export const IncorrectModal = (description, btn_close = false)=>
 {
     Swal.fire({
-        html: `<div style="display:flex;flex-direction:column;align-items:center;"><img style="width:100px" src=${incorrect}><br><span style="font-size:15px;font-weight:bold;color:black;">${description}</span></div>`,
+        html: `<div style="display:flex;flex-direction:column;align-items:center;"><img style="width:150px" src=${incorrect}><br><span style="font-size:15px;font-weight:bold;color:black;">${description}</span></div>`,
         showCloseButton: false,
-        showConfirmButton: false,
+        showConfirmButton: btn_close,
+        confirmButtonClass: 'my-swal-confirm-button',
         allowOutsideClick: false,
         allowEscapeKey: false,
         allowEnterKey: false,
         focusConfirm: false,
+        customClass: {
+          popup: 'my-swal_error',
+        },
         backdrop: 'rgba(0,0,0,0.4)',
-        timer: 2000,
+        // timer: 2000,
       });
 }
