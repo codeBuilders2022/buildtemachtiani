@@ -8,8 +8,13 @@ import Back from "../../components/atoms/Back/Back";
 //Styles
 import "./Log.scss";
 import { ColorValidation, SubmitValidation, UpdateValue } from "../../utilities/Validations";
+import { getAxiosCountrys, postAxiosRegister } from "../../utilities/Axios";
+import { CorrectModal } from "../../components/molecules/modals/Modals";
 
 const Log = () => {
+
+    const [dateToday, setdateToday] = useState()
+
 
     const [inputList, setInputList] = useState({
         names: { value: null, validationType: "empty" },
@@ -26,6 +31,11 @@ const Log = () => {
         leveAcademic: { value: null, validationType: "empty" },
     });
 
+    // useEffect(() => {
+    //     getAxiosGuest('/api/countries', setOptionsState)
+    // },[])
+
+
     useEffect(() => {
         for (const propertyName in inputList) {
             if (document.getElementById(propertyName)) {
@@ -37,22 +47,68 @@ const Log = () => {
         }
     }, [inputList]);
 
-      const handleSubmit = () => {
-        const validate = SubmitValidation(inputList, setInputList)
-        const formData = new FormData()
-        if(validate){
-            Object.entries(inputList).forEach(([key, value]) => {
-                if(value.value.uuid){
-                    formData.append(key, value.value.uuid)
-                } else {
-                    formData.append(key, value.value)
+
+    // const objetData = {"data":{}}
+    //     if (validate) {
+    //       for (const datas in inputList) {
+    //         if (
+    //           datas == "country" ||
+    //           datas == "gender" ||
+    //           datas == "ocupation" ||
+    //           datas == "academic_level"
+    //         ) {
+    //           objetData["data"][datas.toString()] = inputList[datas].value.name;
+    //         } else {
+    //           objetData["data"][datas] = inputList[datas].value;
+    //         }
+    //       }
+    //       postAxiosRegister("/api/registers", objetData);
+    //     }
+        
+
+
+      const handleSubmit = async () => {
+        const validate = SubmitValidation(inputList, setInputList);
+        const objetData = {"data":{}};
+        const keysToTransform = ["country", "gender", "ocupation", "academic_level"];
+        if (validate) {
+            for (const [key, { value: data }] of Object.entries(inputList)) {
+                objetData.data[key] = keysToTransform.includes(key) ? data.name : data;
+              }
+            try {
+                const response = await postAxiosRegister('/api/registers', objetData);
+
+                if(response.status === 200){
+                    registerUser()
                 }
-            });
+                CorrectModal("Registro correctamente")
+              } 
+            catch (error) {
+                console.log(error)
+                alert("Error de subir los datos a la api")
+            }
+            // if (validate) {
+            //           for (const datas in inputList) {
+            //             if (
+            //               datas == "country" ||
+            //               datas == "gender" ||
+            //               datas == "ocupation" ||
+            //               datas == "academic_level"
+            //             ) {
+            //               objetData["data"][datas] = inputList[datas].value.name;
+            //             } else {
+            //               objetData["data"][datas] = inputList[datas].value;
+            //             }
+            //           }
+            //           postAxiosRegister("/api/registers", objetData);
+            //         }
+
+                    console.log(objetData)
         }
-        console.log(formData)
+
+        console.log(objetData)
       }
       
-
     const [steps, setSteps] = useState({
         step_one: true,
         step_two: false,
@@ -106,6 +162,30 @@ const Log = () => {
         {id: 2, name: "Investigador", code: "investigador"},
     ]
 
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+      axiosData();
+    }, []);
+
+
+    const axiosData = async () => {
+      try {
+        const response = await getAxiosCountrys("/api/countries");
+        const data = response.data;
+        setData(data);
+
+        const newData = data.map(({ id, attributes: { name } }) => ({
+          id,
+          name,
+        }));
+
+        setData(newData);
+      } catch (error) {
+        alert("Error en la Api")
+      }
+    };
+
     
 
   return (
@@ -119,7 +199,7 @@ const Log = () => {
                     <Input title={"Nombre(s)"} placeholder={"Nombre(s)"} id={"names"} onChange={(e) => UpdateValue(e, "names", inputList, setInputList)}/>
                     <Input title={"Apellidos"} placeholder={"Apellidos"} id="lastName" onChange={(e) => UpdateValue(e, "lastName", inputList, setInputList)}/>
                     <div className="cnt_selects">
-                        <Select title={"País"} placeholder={"País"} value={inputList.country.value} id={"country"} onChange={(e) => UpdateValue(e, "country", inputList, setInputList)}/>
+                        <Select title={"País"} placeholder={"País"} value={inputList.country.value} options={data} id={"country"} onChange={(e) => UpdateValue(e, "country", inputList, setInputList)}/>
                         <Select title={"Género"} placeholder={"Género"} options={gender} value={inputList.gender.value} id={"gender"}onChange={(e) => UpdateValue(e, "gender", inputList, setInputList)}/>
                     </div>
                     <Shedule title={"Fecha de nacimiento"} placeholder={"Fecha de nacimiento"} value={inputList.date.value} id={"date"} onChange={(e) => UpdateValue(e, "date", inputList, setInputList)}/>
@@ -155,7 +235,7 @@ const Log = () => {
                             </label>
                         </div>
                         <Select title={"Ocupación"} placeholder={"Ocupación"} options={ocupation} value={inputList.ocupation.value} id={"ocupation"} onChange={(e) => UpdateValue(e, "ocupation", inputList, setInputList)}/>
-                        <Select title={"Nivel académico"} placeholder={"Nivel académico"} options={academic} value={inputList.leveAcademic.value} id={"leveAcademic"} onChange={(e) => UpdateValue(e, "leveAcademic", inputList, setInputList)}/>
+                        <Select title={"Nivel académico"} placeholder={"Nivel académico"} options={academic} value={inputList.academic_level.value} id={"academic_level"} onChange={(e) => UpdateValue(e, "academic_level", inputList, setInputList)}/>
                     </div>
                 </div>
                 <div className="cnt_btn th_">

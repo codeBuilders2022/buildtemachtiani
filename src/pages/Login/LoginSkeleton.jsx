@@ -23,7 +23,7 @@ const LoginSkeleton = () => {
                             <Skeleton width="150px" height="16px"></Skeleton>
                         </div>
                     </NavLink>
-                    <Button skeleton className={"btn_primary"} title="Iniciar sesión" onCLick={() => { validationFunction() }}></Button>
+                    <Button skeleton className={"btn_primary"} title="Iniciar sesión" onClick={() => { validationFunction() }}></Button>
                     {/* <NavLink to={"/log"}>
                     </NavLink> */}
                     <div style={{ display: "flex", justifyContent: "center",width:"100%",marginTop:"10px" }}>

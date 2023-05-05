@@ -16,8 +16,8 @@ const RecoverAccountSkeleton = () => {
                         <Input skeleton></Input>
                     </div>
                     <div className="buttonContainer">
-                        <Button skeleton className={"btn_cancel"} title={"Cancelar"} onCLick={()=>{navigate("/login")}}></Button>
-                        <Button skeleton className={"btn_primary"} title={"Enviar código"} onCLick={()=>{validationFunction()}}></Button>
+                        <Button skeleton className={"btn_cancel"} title={"Cancelar"} onClick={()=>{navigate("/login")}}></Button>
+                        <Button skeleton className={"btn_primary"} title={"Enviar código"} onClick={()=>{validationFunction()}}></Button>
                     </div>
                 </LoginCard>
             </div>
