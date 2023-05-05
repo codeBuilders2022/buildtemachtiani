@@ -5,10 +5,19 @@ import Swal from 'sweetalert2'
 export const postAxiosRegister = async (url, form) => {
     try {
       const server = process.env.REACT_APP_URL_API;
-      const response = await axios.post(`${server}${url}`, form, {
-        
-      });
-      return response.data;
+      const response = await axios.post(`${server}${url}`, form);
+      return response;
+    } catch (error) {
+        console.error(error);
+      throw error;
+    }
+  };
+
+  export const userAxiosPost = async (url, form) => {
+    try {
+      const server = process.env.REACT_APP_URL_API;
+      const response = await axios.post(`${server}${url}`, form);
+      return response;
     } catch (error) {
         console.error(error);
       throw error;

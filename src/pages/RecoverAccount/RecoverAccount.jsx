@@ -6,6 +6,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ColorValidation, SubmitValidation, UpdateValue } from "../../utilities/Validations";
 import { useEffect } from "react";
+import { VerifyEmail } from "../../Api/login/recover_account";
 
 const RecoverAccount = () => {
     const navigate = useNavigate()
@@ -30,7 +31,7 @@ const RecoverAccount = () => {
     {
         if(SubmitValidation(inputList,setInputList))
         {
-            navigate("/verification-code")
+            VerifyEmail(inputList.email.value,navigate)
         }
     }
     return (

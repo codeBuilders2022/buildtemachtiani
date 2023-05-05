@@ -6,11 +6,7 @@ import "./Select.scss";
 const Select = ({ title, placeholder, options, value, setValue, id, onChange, optionLabel = "name"}) => {
 
   const defaultOptions = [
-    { name: "New York", code: "NY" },
-    { name: "Rome", code: "RM" },
-    { name: "London", code: "LDN" },
-    { name: "Istanbul", code: "IST" },
-    { name: "Paris", code: "PRS" },
+    { name: "", code: "" },
   ];
 
   return (

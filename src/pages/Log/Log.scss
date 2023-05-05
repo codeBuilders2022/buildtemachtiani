@@ -66,6 +66,15 @@
 
           position: relative;
 
+          .instructions_pass{
+            .desxr_{
+              line-height: 11px;
+              margin-top: 5px;
+              font-size: 10px;
+              padding: 0 15px;
+            }
+          }
+
           .cnt_selects {
             width: 100%;
             gap: 12px;
