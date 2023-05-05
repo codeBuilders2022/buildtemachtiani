@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import { Button, Input, InputPassword, Select, Shedule } from "../../components";
 import Back from "../../components/atoms/Back/Back";
@@ -39,6 +39,8 @@ const Log = () => {
             }
         }
     }, [inputList]);
+    
+    const navigate = useNavigate()
 
 
       const handleSubmit = async () => {
@@ -59,10 +61,10 @@ const Log = () => {
                 if (response.status === 200) {
                     const res = await postAxiosRegister("/api/registers", objetData);
                     if (res.status === 200) {
-                      CorrectModal("Registro correctamente");
-
+                      CorrectModal("Registro correctamente", 3000);
+                      setTimeout(() => { navigate("/login") }, 3500)
                     } else {
-                      IncorrectModal("¡Algo salió mal, intentalo más tarde!", true)
+                      IncorrectModal("¡Algo salió mal, intentalo más tarde!", 4000)
                     }
                 }
               } catch (error) {
