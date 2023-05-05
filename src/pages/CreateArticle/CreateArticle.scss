@@ -81,9 +81,14 @@
     padding-top: 80px;
   }
   .minititle {
-    font-size: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    // color: WHITE;
     margin-bottom: 7px;
     padding-left: 18px;
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
   }
   .inputDate {
     color: black !important;

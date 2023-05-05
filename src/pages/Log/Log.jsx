@@ -7,9 +7,12 @@ import Back from "../../components/atoms/Back/Back";
 
 //Styles
 import "./Log.scss";
-import { ColorValidation, SubmitValidation, UpdateValue } from "../../utilities/Validations";
+import { ColorValidation, SubmitValidation, UpdateValue, ValidationPassword } from "../../utilities/Validations";
+import { CorrectModal, IncorrectModal } from "../../components/molecules/modals/Modals";
+import { getAxiosCountrys, postAxiosRegister, userAxiosPost } from "../../Api/Register/Register";
 
 const Log = () => {
+
 
     const [inputList, setInputList] = useState({
         names: { value: null, validationType: "empty" },
@@ -39,22 +42,37 @@ const Log = () => {
         }
     }, [inputList]);
 
-      const handleSubmit = () => {
-        const validate = SubmitValidation(inputList, setInputList)
-        const formData = new FormData()
-        if(validate){
-            Object.entries(inputList).forEach(([key, value]) => {
-                if(value.value.uuid){
-                    formData.append(key, value.value.uuid)
-                } else {
-                    formData.append(key, value.value)
+
+      const handleSubmit = async () => {
+        const validate = SubmitValidation(inputList, setInputList);
+        const objetData = {"data":{}};
+        const keysToTransform = ["country", "gender", "ocupation", "academic_level"];
+        if (validate) {
+            for (const [key, { value: data }] of Object.entries(inputList)) {
+                objetData.data[key] = keysToTransform.includes(key) ? data.name : data;
+              }
+              try {
+                const saveUser = {
+                  username: inputList.user.value,
+                  email: inputList.email.value,
+                  password: inputList.password.value,
+                };
+                const response = await userAxiosPost("/api/auth/local/register", saveUser);
+                if (response.status === 200) {
+                    const res = await postAxiosRegister("/api/registers", objetData);
+                    if (res.status === 200) {
+                      CorrectModal("Registro correctamente");
+
+                    } else {
+                      IncorrectModal("¡Algo salió mal, intentalo más tarde!", true)
+                    }
                 }
-            });
+              } catch (error) {
+                    IncorrectModal("El correo electrónico o el nombre de usuario ya están en uso", true);
+              } 
         }
-        console.log(formData)
       }
       
-
     const [steps, setSteps] = useState({
         step_one: true,
         step_two: false,
@@ -62,6 +80,7 @@ const Log = () => {
     })
 
     const handleStepOne = () => {
+
         setSteps(prevState => ({
             ...prevState,
             step_one: false,
@@ -78,11 +97,21 @@ const Log = () => {
     }
 
     const handleStepTwo = () => {
-        setSteps(prevState => ({
-            ...prevState,
-            step_three: true,
-            step_two: false
-          }));
+        const validate = ValidationPassword(inputList.password.value);
+        if (!validate) {
+            IncorrectModal(
+              "La contraseña debe contener al menos un dígito, una letra mayúscula y un carácter especial, y tener al menos 8 caracteres.",
+              true
+            );
+        } else if (inputList.password.value !== inputList.confirm_password.value) {
+            IncorrectModal("Las contraseñas no coinciden", true);
+        } else {
+            setSteps((prevState) => ({
+                ...prevState,
+                step_three: true,
+                step_two: false,
+            }));
+        }
     }
 
     const handleReturnTwo = () => {
@@ -108,7 +137,27 @@ const Log = () => {
         {id: 2, name: "Investigador", code: "investigador"},
     ]
 
-    
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+      axiosData();
+    }, []);
+
+    const axiosData = async () => {
+      try {
+        const response = await getAxiosCountrys("/api/countries");
+        const data = response.data;
+        setData(data);
+        const newData = data.map(({ id, attributes: { name } }) => ({
+          id,
+          name,
+        }));
+
+        setData(newData);
+      } catch (error) {
+        IncorrectModal("¡Algo salió mal, intentalo más tarde!", true)
+      }
+    };
 
   return (
     <div className="Log_">
@@ -121,7 +170,7 @@ const Log = () => {
                     <Input title={"Nombre(s)"} placeholder={"Nombre(s)"} id={"names"} onChange={(e) => UpdateValue(e, "names", inputList, setInputList)}/>
                     <Input title={"Apellidos"} placeholder={"Apellidos"} id="lastName" onChange={(e) => UpdateValue(e, "lastName", inputList, setInputList)}/>
                     <div className="cnt_selects">
-                        <Select title={"País"} placeholder={"País"} value={inputList.country.value} id={"country"} onChange={(e) => UpdateValue(e, "country", inputList, setInputList)}/>
+                        <Select title={"País"} placeholder={"País"} value={inputList.country.value} options={data} id={"country"} onChange={(e) => UpdateValue(e, "country", inputList, setInputList)}/>
                         <Select title={"Género"} placeholder={"Género"} options={gender} value={inputList.gender.value} id={"gender"}onChange={(e) => UpdateValue(e, "gender", inputList, setInputList)}/>
                     </div>
                     <Shedule title={"Fecha de nacimiento"} placeholder={"Fecha de nacimiento"} value={inputList.date.value} id={"date"} onChange={(e) => UpdateValue(e, "date", inputList, setInputList)}/>
@@ -136,8 +185,12 @@ const Log = () => {
                 <div className="inside_card">
                     <Input title={"Usuario"} placeholder={"Usuario"} id={"user"} onChange={(e) => UpdateValue(e, "user", inputList, setInputList)}/>
                     <Input title={"Correo electrónico"} placeholder={"Correo electrónico"} id={"email"} onChange={(e) => UpdateValue(e, "email", inputList, setInputList)}/>
-                    <InputPassword title={"Contraseña"} placeholder={"Contraseña"} id={"password"} onChange={(e) => UpdateValue(e, "password", inputList, setInputList)}/>
-                    <InputPassword title={"Confirmar contraseña"} placeholder={"Confirmar contraseña"} id={"password_confirm"} onChange={(e) => UpdateValue(e, "password_confirm", inputList, setInputList)}/>
+                    <div className="instructions_pass">
+                        <InputPassword title={"Contraseña"} placeholder={"Contraseña"} id={"password"} onChange={(e) => UpdateValue(e, "password", inputList, setInputList)}/>
+                        <div className="desxr_">Utiliza ocho caracteres como mínimo con una combinación de letras, números y símbolos</div>
+                    </div>
+                    
+                    <InputPassword title={"Confirmar contraseña"} placeholder={"Confirmar contraseña"} id={"confirm_password"} onChange={(e) => UpdateValue(e, "confirm_password", inputList, setInputList)}/>
                     <div className="cnt_btn btn_second">
                         <Button title={"Regresar"} className={"btn_cancel"} onCLick={() => handleReturnOne()}/>
                         <Button title={"Siguiente"} className={"btn_primary"} onCLick={() => handleStepTwo()}/>
@@ -157,7 +210,7 @@ const Log = () => {
                             </label>
                         </div>
                         <Select title={"Ocupación"} placeholder={"Ocupación"} options={ocupation} value={inputList.ocupation.value} id={"ocupation"} onChange={(e) => UpdateValue(e, "ocupation", inputList, setInputList)}/>
-                        <Select title={"Nivel académico"} placeholder={"Nivel académico"} options={academic} value={inputList.leveAcademic.value} id={"leveAcademic"} onChange={(e) => UpdateValue(e, "leveAcademic", inputList, setInputList)}/>
+                        <Select title={"Nivel académico"} placeholder={"Nivel académico"} options={academic} value={inputList.academic_level.value} id={"academic_level"} onChange={(e) => UpdateValue(e, "academic_level", inputList, setInputList)}/>
                     </div>
                 </div>
                 <div className="cnt_btn th_">

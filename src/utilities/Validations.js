@@ -7,6 +7,10 @@ export const ValidationNumbers = (string) => {
     }
 }
 
+export const ValidationPassword = (string) => {
+    return /^(?=.*\d)(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\S]{8,}$/.test(string);
+}
+
 export const ValidationNumbers4D = (string) => {
     if (/^[0-9]+(?:\.\d{0,4})?$/.test(string)) {
         return true;

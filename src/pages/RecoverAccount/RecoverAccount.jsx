@@ -6,6 +6,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ColorValidation, SubmitValidation, UpdateValue } from "../../utilities/Validations";
 import { useEffect } from "react";
+import { VerifyEmail } from "../../Api/login/recover_account";
 
 const RecoverAccount = () => {
     const navigate = useNavigate()
@@ -30,7 +31,7 @@ const RecoverAccount = () => {
     {
         if(SubmitValidation(inputList,setInputList))
         {
-            navigate("/verification-code")
+            VerifyEmail(inputList.email.value,navigate)
         }
     }
     return (
@@ -41,8 +42,8 @@ const RecoverAccount = () => {
                         <Input title={"Correo electrónico"} placeholder={"Correo electrónico"} id="email" onChange={(e)=>{UpdateValue(e,"email",inputList,setInputList)}}></Input>
                     </div>
                     <div className="buttonContainer">
-                        <Button className={"btn_cancel"} title={"Cancelar"} onCLick={()=>{navigate("/login")}}></Button>
-                        <Button className={"btn_primary"} title={"Enviar código"} onCLick={()=>{validationFunction()}}></Button>
+                        <Button className={"btn_cancel"} title={"Cancelar"} onClick={()=>{navigate("/login")}}></Button>
+                        <Button className={"btn_primary"} title={"Enviar código"} onClick={()=>{validationFunction()}}></Button>
                     </div>
                 </LoginCard>
             </div>

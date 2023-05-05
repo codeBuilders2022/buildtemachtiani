@@ -105,12 +105,12 @@ const VerificationCodeInput = ({ children, skeleton }) => {
             <Button
               className={"btn_cancel"}
               title={"Cancelar"}
-              onCLick={() => navigate("/login")}
+              onClick={() => navigate("/login")}
             ></Button>
             <Button
               className={"btn_primary"}
               title={"Enviar código"}
-              onCLick={() => setIsCliked(1)}
+              onClick={() => setIsCliked(1)}
             ></Button>
           </>
         ) : (
@@ -118,6 +118,7 @@ const VerificationCodeInput = ({ children, skeleton }) => {
             <Button
               className={"btn_cancel"}
               skeleton
+              onClick={() => navigate("/recover-account")}
             ></Button>
             <Button
               className={"btn_primary"}

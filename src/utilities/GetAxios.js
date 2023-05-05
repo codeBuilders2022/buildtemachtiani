@@ -6,5 +6,6 @@ export const getSelect = (url, setData) => {
         setData(res.data.data)
     }
 
-    getAxiosGuest(url, resThen, errorResponse)
+    const datas = getAxiosGuest(url, resThen, errorResponse)
+    console.log(datas.data, "estod datos")
 }
