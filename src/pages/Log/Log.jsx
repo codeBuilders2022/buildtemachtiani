@@ -51,6 +51,8 @@ const Log = () => {
             for (const [key, { value: data }] of Object.entries(inputList)) {
                 objetData.data[key] = keysToTransform.includes(key) ? data.name : data;
               }
+
+              console.log(objetData)
               try {
                 const saveUser = {
                   username: inputList.user.value,
@@ -62,7 +64,7 @@ const Log = () => {
                     const res = await postAxiosRegister("/api/registers", objetData);
                     if (res.status === 200) {
                       CorrectModal("Registro correctamente", 3000);
-                      setTimeout(() => { navigate("/login") }, 3500)
+                      // setTimeout(() => { navigate("/login") }, 3500)
                     } else {
                       IncorrectModal("¡Algo salió mal, intentalo más tarde!", 4000)
                     }
