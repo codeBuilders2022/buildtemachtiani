@@ -33,6 +33,6 @@ export const IncorrectModal = (description, btn_close = false)=>
           popup: 'my-swal_error',
         },
         backdrop: 'rgba(0,0,0,0.4)',
-        // timer: 2000,
+        timer: 2000,
       });
 }
