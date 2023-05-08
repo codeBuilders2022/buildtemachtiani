@@ -9,29 +9,29 @@ const Committee = () => {
     const [active, setActive] = useState(false)
 
     const [data, setData] = useState([
+        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "México" },
+        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "México" },
+        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "México" },
+        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "México" },
+        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Cuba" },
+        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "México" },
         { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Panamá" },
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Panamá" },
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Panamá" },
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Panamá" },
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Panamá" },
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Panamá" },
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Panamá" },
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Panamá" },
+        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "México" },
     ])
     const [data1, setData1] = useState([
         { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Cuba" },
         { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Cuba" },
+        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "México" },
         { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Cuba" },
         { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Cuba" },
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Cuba" },
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Cuba" },
+        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "México" },
         { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Cuba" },
         { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Cuba" },
     ])
     return (
         <div className="Committee">
             <ExteriorCard>
-                <Back className={"_back_"} />
+                <Back className={"_back_"}  url={"/"}/>
                 <main className="container">
                     <Header title={"COMITÉ"} />
                     <div className="type">

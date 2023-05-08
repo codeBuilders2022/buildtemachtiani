@@ -66,7 +66,7 @@ const TableArticles = () => {
     return (
         <div className='TableArticles'>
             <ExteriorCard>
-                <div className="container">
+                <div className="containerr">
                     <Header title={"Mis artículos"} button="Enviar nuevo artículo" url={"/article-create"}/>
                     <DataTable value={data} stripedRows tableStyle={{ minWidth: '30rem' }}>
                         <Column field="title" header="Título"></Column>
