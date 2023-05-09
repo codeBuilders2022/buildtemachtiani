@@ -4,7 +4,7 @@ import correct from './img/iconos-02.png'
 import incorrect from './img/iconos-03.png'
 import "./Modals.scss"
 
-export const CorrectModal = (description)=>
+export const CorrectModal = (description, timer = 3000)=>
 {
     Swal.fire({
         html: `<div style="display:flex;flex-direction:column;align-items:center;"><img style="width:100px" src=${correct}><br><span style="font-size:15px;font-weight:bold;color:black;">${description}</span></div>`,
@@ -15,10 +15,10 @@ export const CorrectModal = (description)=>
         allowEnterKey: false,
         focusConfirm: false,
         backdrop: 'rgba(0,0,0,0.4)',
-        timer: 2000,
+        timer: timer,
       });
 }
-export const IncorrectModal = (description, btn_close = false)=>
+export const IncorrectModal = (description, btn_close = false, timer = 3000)=>
 {
     Swal.fire({
         html: `<div style="display:flex;flex-direction:column;align-items:center;"><img style="width:150px" src=${incorrect}><br><span style="font-size:15px;font-weight:bold;color:black;">${description}</span></div>`,
@@ -33,6 +33,6 @@ export const IncorrectModal = (description, btn_close = false)=>
           popup: 'my-swal_error',
         },
         backdrop: 'rgba(0,0,0,0.4)',
-        // timer: 2000,
+         timer: btn_close ? null : timer,
       });
 }
