@@ -10,7 +10,7 @@ import { VerifyEmail } from "../../Api/login/recover_account";
 
 const RecoverAccount = () => {
     const navigate = useNavigate()
-
+    const [correct,setCorrect] = useState()
     const [inputList,setInputList] = useState({
         email:{value:null, validationType:"email"},
         
@@ -34,6 +34,8 @@ const RecoverAccount = () => {
             VerifyEmail(inputList.email.value,navigate)
         }
     }
+
+    
     return (
         <>
             <div className="RecoverAccount">
