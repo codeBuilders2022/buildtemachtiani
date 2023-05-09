@@ -49,7 +49,7 @@ const LogRoutes = () => {
             }
           />
           <Route
-            path="/verification-code"
+            path="/verification-code/:code/:id/:idUser"
             element={
               <Suspense fallback={<VerificationCodeSkeleton/>}>
                 <VerificationCode/>
@@ -57,7 +57,7 @@ const LogRoutes = () => {
             }
           />
           <Route
-            path="/new-password"
+            path="/new-password/:id/:idUser"
             element={
               <Suspense fallback={<NewPasswordSkeleton/>}>
                 <NewPassword />

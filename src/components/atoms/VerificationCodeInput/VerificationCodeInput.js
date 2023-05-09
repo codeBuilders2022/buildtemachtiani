@@ -3,16 +3,18 @@ import "./VerificationCodeInput.scss";
 // import logo from '../../../img/register/logo.png';
 import ReactCodeInput from "react-verification-code-input";
 // import Button from "../../../globalComponents/Button/Button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 // import moment from "]moment";
 import Cookies from "universal-cookie";
 import Button from "../Button/Button";
 import { Skeleton } from "primereact/skeleton";
+import { GetCode } from "./api";
 var timers;
 
-const VerificationCodeInput = ({ children, skeleton }) => {
+const VerificationCodeInput = ({ children, skeleton,codeApi,idencript,idUser }) => {
   const navigate = useNavigate();
+  const {id} = useParams()
   const [code, setCode] = useState();
   const [isCliked, setIsCliked] = useState(0);
   const [timeTotal, setTimeTotal] = useState(false);
@@ -48,17 +50,18 @@ const VerificationCodeInput = ({ children, skeleton }) => {
       timer(0);
     }
   }, []);
-
   const correct = () => {
     // setStopInterval(true)
     clearInterval(timers);
-    navigate("/new-password");
+    console.log("idencript",idencript)
+    navigate(`/new-password/${idencript}/${idUser}`);
   };
+  
   return (
     <>
       {isCliked ? (
         <>
-          {code === "12345" ? (
+          {code === codeApi ? (
             correct()
           ) : (
             <>
@@ -118,7 +121,7 @@ const VerificationCodeInput = ({ children, skeleton }) => {
             <Button
               className={"btn_cancel"}
               skeleton
-              onClick={() => navigate("/recover-account")}
+              onClick={() => navigate(`/recover-account`)}
             ></Button>
             <Button
               className={"btn_primary"}
