@@ -64,7 +64,7 @@ const Log = () => {
                     const res = await postAxiosRegister("/api/registers", objetData);
                     if (res.status === 200) {
                       CorrectModal("Registro correctamente", 3000);
-                      // setTimeout(() => { navigate("/login") }, 3500)
+                      setTimeout(() => { navigate("/login") }, 3300)
                     } else {
                       IncorrectModal("¡Algo salió mal, intentalo más tarde!", 4000)
                     }
