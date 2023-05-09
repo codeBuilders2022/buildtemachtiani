@@ -39,10 +39,10 @@ const Sidebar = () => {
 
     const activeLinks = ({ isActive }) => {
         return {
-          color: isActive ? currentColor : null,
-          fontWeight: isActive ? "bold" : null
+            color: isActive ? currentColor : null,
+            fontWeight: isActive ? "bold" : null
         };
-      };
+    };
 
     return (
         <aside className="dark:text-white Sidebar">
@@ -107,7 +107,9 @@ const Sidebar = () => {
                             )
                         })}
                         <div className="seeComite">
-                            <button>Ver más...</button>
+                            <Link to="/committee">
+                                <button>Ver más...</button>
+                            </Link>
                         </div>
                     </div>
                 </div>
