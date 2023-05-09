@@ -2,15 +2,18 @@ import React from "react";
 import './NewPassword.scss'
 import LoginCard from "../../components/atoms/LoginCard/LoginCard";
 import { Button, Input, InputPassword } from "../../components";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
-import { ColorValidation, SubmitValidation, UpdateValue } from "../../utilities/Validations";
+import { ColorValidation, SubmitValidation, UpdateValue, ValidationPassword } from "../../utilities/Validations";
 import { useEffect } from "react";
+import { IncorrectModal } from "../../components/molecules/modals/Modals";
+import { changePassword } from "./api";
+import { Decrypt } from "../../Api/login/recover_account";
 
 
 const NewPassword = ({setAuth}) => {
     const navigate = useNavigate()
-
+    const {id,idUser} = useParams()
     const [inputList, setInputList] = useState({
         password: { value: null, validationType: "email" },
         confirmPassword: { value: null, validationType: "email" },
@@ -31,15 +34,31 @@ const NewPassword = ({setAuth}) => {
         }
 
         if (inputList.password.value == inputList.confirmPassword.value && inputList.password.value) {
-            setAuth(true)
-            navigate("/")
+                
+            if( ValidationPassword(inputList.confirmPassword.value))
+            {
+
+                changePassword(id,inputList,idUser,navigate)
+            }
+            else
+            {
+                IncorrectModal(
+                    "La contraseña debe contener al menos un dígito, una letra mayúscula y un carácter especial, y tener al menos 8 caracteres.",
+                    true
+                  );
+
+            }
+
+            
 
         }
         else {
-            alert("ingrese las contraseñas iguales")
+            IncorrectModal("Las contraseñas no coinciden",true)
         }
 
     }
+
+    
     return (
         <>
             <div className="NewPassword">
