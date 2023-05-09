@@ -4,34 +4,59 @@ import "./Committee.scss"
 import ExteriorCard from "../../components/atoms/ExteriorCard/ExteriorCard"
 import Back from "../../components/atoms/Back/Back"
 import { Header } from "../../components"
+import { getAxios } from "../../utilities/Axios"
+import { useEffect } from "react"
+import { IncorrectModal } from "../../components/molecules/modals/Modals"
+import { getAxiosCommittee } from "../../Api/Committee/Committee"
 
 const Committee = () => {
     const [active, setActive] = useState(false)
+    const server = process.env.REACT_APP_API_URL
+    const [data, setData] = useState([])
+    const [data1, setData1] = useState([])
+    const scientific = []
+    const editorial = []
 
-    const [data, setData] = useState([
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "México" },
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "México" },
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "México" },
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "México" },
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Cuba" },
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "México" },
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Panamá" },
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "México" },
-    ])
-    const [data1, setData1] = useState([
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Cuba" },
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Cuba" },
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "México" },
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Cuba" },
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Cuba" },
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "México" },
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Cuba" },
-        { ocupation: "Dr", name: "Carlos Rivera Jimenez", contry: "Cuba" },
-    ])
+
+    useEffect(() => {
+        getDatas()
+    }, []);
+
+    const getDatas = async () => {
+        try {
+            // Hacemos una llamada concurrente a la API utilizando Promise.all()
+            const [resCommittees] = await Promise.all([
+                getAxiosCommittee("/api/committees?populate=profile")
+            ]);
+            // Mapeamos los datos obtenidos de los comités y extraemos los atributos relevantes
+            const committeeData = resCommittees.data.map(({ id, attributes: { committee, country, email, fullname, profile: { data: { attributes: { formats: { large: { url } } } } } } }) => ({
+                id,
+                image: process.env.REACT_APP_API_URL + url, // Construimos la URL de la imagen del perfil concatenando la URL de la API y la URL de la imagen
+                committee,
+                country,
+                email,
+                fullname,
+            }));
+            // Asignamos los datos de los comités a los estados correspondientes en el componente
+            committeeData.map((e) => {
+                if (e.committee == 'Editorial') {
+                    editorial.push(e)
+                    setData(editorial)
+                }
+                if (e.committee == 'Científico') {
+                    scientific.push(e)
+                    setData1(scientific)
+                }
+
+            })
+        } catch (error) {
+            IncorrectModal("¡Algo salió mal, intentalo más tarde!", true);
+        }
+    };
     return (
         <div className="Committee">
             <ExteriorCard>
-                <Back className={"_back_"}  url={"/"}/>
+                <Back className={"_back_"} url={"/"} />
                 <main className="container">
                     <Header title={"COMITÉ"} />
                     <div className="type">
@@ -43,17 +68,19 @@ const Committee = () => {
                         {!active ? data.map((e, index) => {
                             return (
                                 <div className="data" key={index}>
-                                    <div className="avatar"></div>
-                                    <p>{e.ocupation}. {e.name}</p>
-                                    <p>{e.contry}</p>
+                                    <img className="avatar" src={e.image} />
+                                    <p> {e.fullname}</p>
+                                    <p>{e.email}</p>
+                                    <p>{e.country}</p>
                                 </div>
                             )
                         }) : data1.map((e, index) => {
                             return (
                                 <div className="data" key={index}>
-                                    <div className="avatar"></div>
-                                    <p>{e.ocupation}. {e.name}</p>
-                                    <p>{e.contry}</p>
+                                    <img className="avatar" src={e.image} />
+                                    <p>{e.fullname}. </p>
+                                    <p>{e.email}</p>
+                                    <p>{e.country}</p>
                                 </div>
                             )
                         })}
