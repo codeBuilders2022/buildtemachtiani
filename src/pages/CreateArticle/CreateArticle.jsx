@@ -53,7 +53,7 @@ const CreateArticle = () => {
         <>
             <div className="CreateArticle">
                 <ExteriorCard>
-                    <Back className={"_back_"} url={"/dashboard"} />
+                    <Back className={"_back_"} url={"/article/dashboard"} />
                     <Header title={"Nuevo articulo"} button="Enviar articulo" onClick={() => submit()} />
                     <InteriorCard className={"cardInteriorCreateArticle"}>
                         <div className="grid-patern-CreateArticle">
