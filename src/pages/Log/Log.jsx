@@ -22,10 +22,10 @@ const Log = () => {
     user: { value: null, validationType: "empty" },
     email: { value: null, validationType: "email" },
     password: { value: null, validationType: "empty" },
-    password_confirm: { value: null, validationType: "empty" },
+    confirm_password: { value: null, validationType: "empty" },
     orcid: { value: null, validationType: "empty" },
     ocupation: { value: null, validationType: "empty" },
-    leveAcademic: { value: null, validationType: "empty" },
+    academic_level: { value: null, validationType: "empty" },
   });
 
 
@@ -57,14 +57,19 @@ const Log = () => {
           password: inputList.password.value,
         };
         const response = await userAxiosPost("/api/auth/local/register", saveUser);
-        if (response.status === 200) {
-          const res = await postAxiosRegister("/api/registers", objetData);
-          if (res.status === 200) {
-            CorrectModal("Registro correctamente");
+        console.log(response)
+        // if (response.status === 200) {
+        //   const res = await postAxiosRegister("/api/registers", objetData);
+        //   if (res.status === 200) {
+        //     CorrectModal("Registro correctamente");
 
-          } else {
-            IncorrectModal("¡Algo salió mal, intentalo más tarde!", true)
-          }
+        //   } else {
+        //     IncorrectModal("¡Algo salió mal, intentalo más tarde!", true)
+        //   }
+        // }
+
+        if (response.status === 400) {
+          IncorrectModal(`Se envio una correo de confimacion a la siguiente direccion: ${inputList.email.value}`)
         }
       } catch (error) {
         IncorrectModal("El correo electrónico o el nombre de usuario ya están en uso", true);
@@ -122,18 +127,18 @@ const Log = () => {
   }
 
   const gender = [
-    { name: "Masculino", code: "masculino" },
-    { name: "Femenino", code: "femenino" },
-    { name: "Otros", code: "otro" },
+    { value: "Masculino", code: "masculino" },
+    { value: "Femenino", code: "femenino" },
+    { value: "Otros", code: "otro" },
   ];
 
   const academic = [
-    { id: 1, name: "Nivel Superior", code: "nivel superior" }
+    { id: 1, value: "Nivel Superior", code: "nivel superior" }
   ]
 
   const ocupation = [
-    { id: 1, name: "Estudiante", code: "estudiante" },
-    { id: 2, name: "Investigador", code: "investigador" },
+    { id: 1, value: "Estudiante", code: "estudiante" },
+    { id: 2, value: "Investigador", code: "investigador" },
   ]
 
   const [data, setData] = useState([]);
@@ -146,10 +151,9 @@ const Log = () => {
     try {
       const response = await getAxiosCountrys("/api/countries");
       const data = response.data;
-      setData(data);
-      const newData = data.map(({ id, attributes: { name } }) => ({
+      const newData = data.map(({ id, attributes: { value } }) => ({
         id,
-        name,
+        value,
       }));
 
       setData(newData);
@@ -172,9 +176,9 @@ const Log = () => {
                 <Select title={"País"} placeholder={"País"} value={inputList.country.value} options={data} id={"country"} onChange={(e) => UpdateValue(e, "country", inputList, setInputList)} />
                 <Select title={"Género"} placeholder={"Género"} options={gender} value={inputList.gender.value} id={"gender"} onChange={(e) => UpdateValue(e, "gender", inputList, setInputList)} />
               </div>
-              <Shedule title={"Fecha de nacimiento"} placeholder={"Fecha de nacimiento"} value={inputList.date.value} id={"date"} onChange={(e) => UpdateValue(e, "date", inputList, setInputList)} />
+              <Input type="date" title={"Fecha de nacimiento"} placeholder={"Fecha de nacimiento"} value={inputList.date.value} id={"date"} onChange={(e) => UpdateValue(e, "date", inputList, setInputList)} />
               <div className="cnt_btn">
-                <Button title={"Siguiente"} className={"btn_primary"} onCLick={() => handleStepOne()} />
+                <Button title={"Siguiente"} className={"btn_primary"} onClick={() => handleStepOne()} />
               </div>
             </div>
             {!steps.step_one && <div className="dark:bg-half-transparent-black layer_blur"></div>}
@@ -191,8 +195,8 @@ const Log = () => {
 
               <InputPassword title={"Confirmar contraseña"} placeholder={"Confirmar contraseña"} id={"confirm_password"} onChange={(e) => UpdateValue(e, "confirm_password", inputList, setInputList)} />
               <div className="cnt_btn btn_second">
-                <Button title={"Regresar"} className={"btn_cancel"} onCLick={() => handleReturnOne()} />
-                <Button title={"Siguiente"} className={"btn_primary"} onCLick={() => handleStepTwo()} />
+                <Button title={"Regresar"} className={"btn_cancel"} onClick={() => handleReturnOne()} />
+                <Button title={"Siguiente"} className={"btn_primary"} onClick={() => handleStepTwo()} />
               </div>
             </div>
             {!steps.step_two && <div className="dark:bg-half-transparent-black layer_blur"></div>}
@@ -213,8 +217,8 @@ const Log = () => {
               </div>
             </div>
             <div className="cnt_btn th_">
-              <Button title={"Regresar"} className={"btn_cancel"} onCLick={() => handleReturnTwo()} />
-              <Button title={"Crear cuenta"} className={"btn_primary"} onCLick={() => handleSubmit()} />
+              <Button title={"Regresar"} className={"btn_cancel"} onClick={() => handleReturnTwo()} />
+              <Button title={"Crear cuenta"} className={"btn_primary"} onClick={() => handleSubmit()} />
             </div>
             {!steps.step_three && <div className="dark:bg-half-transparent-black layer_blur"></div>}
           </div>
