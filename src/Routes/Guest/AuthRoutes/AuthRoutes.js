@@ -37,7 +37,7 @@ const AuthRoutes = () => {
       />
       <Route
         exact
-        path="article/article-create"
+        path="/article/article-create"
         element={
           <Suspense fallback={<CreateArticleSkeleton />}>
             <CreateArticle />
