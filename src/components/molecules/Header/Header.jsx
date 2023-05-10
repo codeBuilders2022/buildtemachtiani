@@ -4,7 +4,7 @@ import './Header.scss'
 import { Skeleton } from 'primereact/skeleton';
 import { NavLink } from 'react-router-dom';
 
-const Header = ({ category, title, button, onClick, skeleton, url }) => {
+const Header = ({ category, title, button, onClick, skeleton, url='#' }) => {
   return (
     <>
       {
@@ -22,7 +22,7 @@ const Header = ({ category, title, button, onClick, skeleton, url }) => {
                   button ?
                     <>
                       <NavLink to={url}>
-                        <Button className={"btn_primary buttonsize"} title={button} />
+                        <Button className={"btn_primary buttonsize"} title={button} onClick={onClick} />
                       </NavLink>
                     </> : ""
                 }
