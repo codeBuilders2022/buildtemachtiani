@@ -1,6 +1,6 @@
 .TableArticles {
 
-    .container {
+    .containerr {
         @media (max-width: 280px) {
             padding: 100px 10px 0 10px;
         }
@@ -8,10 +8,10 @@
         @media (max-width: 1280px) {
 
             max-width: 100vw;
-            width: 90%;
+            width: 100%;
         }
 
-        max-width: 1200px;
+        // max-width: 1200px;
         padding: 0px 20px;
         width: 100%;
         display: flex;

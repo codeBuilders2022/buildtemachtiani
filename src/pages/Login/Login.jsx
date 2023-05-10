@@ -47,7 +47,7 @@ const navigate = useNavigate()
     return (
         <>
             <div className="Login">
-                <Back className={"back"}></Back>
+                <Back className={"back"} url={"/"}></Back>
                 <LoginCard title={"Inicio de sesión"} subTitle="Ingresar aquí">
                     <div className="inputs-container">
                         <Input title="Usuario" placeholder={"Usuario"} id="identifier" onChange={(e)=>{UpdateValue(e,"identifier",inputList,setInputList)}}></Input>

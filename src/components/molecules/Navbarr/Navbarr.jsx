@@ -16,6 +16,9 @@ const Navbarr = () => {
   const { openNavbar, setOpenNavbar, currentColor, currentMode } = useStateContext();
   const header_location = useLocation()
   const [hasnNot, setHasnNot] = useState(false)
+  // const [hidden_input, setHidden_input] = useState(false)
+
+  const hiddenInput = header_location.pathname.startsWith("/article")
 
   const log_ = header_location.pathname.startsWith("/log")
   const login_ = header_location.pathname.startsWith("/login")
@@ -27,10 +30,15 @@ const Navbarr = () => {
     if(log_ || login_ || recover_account || verification_code || new_password){
       return setHasnNot(true)
     }
-
     return setHasnNot(false)
-    
   }, [header_location.pathname])
+
+  // useEffect(() => {
+  //   if(hiddenInput){
+  //     return setHasnNot(true)
+  //   }
+  //   return setHasnNot(false)
+  // }, [header_location.pathname])
 
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado de inicio de sesión
 
@@ -61,9 +69,6 @@ const Navbarr = () => {
 
   const [openModal, setOpenModal] = useState(false)
 
-  // const handleLogOut = () => {
-
-  // }
 
   return (
     <nav className='bg-bg-gray-primary dark:bg-bg-dark-secondary Navbarr_' id='nav_header1'>
@@ -82,10 +87,12 @@ const Navbarr = () => {
                 <span>Inicio</span>
               </NavLink>
             </li>
-            <InputSearch />
+            {!hiddenInput &&
+              <InputSearch placeholder={"Buscar... ejemplo: Autor, titulo"} id={"search199"}/>
+            }
             {isLoggedIn ? (
               <div className='profile_a'>
-                <div className="cnt_profile" onClick={() => navigate("/dashboard")}>
+                <div className="cnt_profile" onClick={() => navigate("/article/dashboard")}>
                   <h1 className='dark:text-white'>DV</h1>
                 </div>
                 <button onClick={() => setOpenModal(!openModal)}>

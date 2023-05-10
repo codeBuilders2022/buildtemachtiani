@@ -12,7 +12,7 @@ const TableArticles = () => {
 
     const actionTemplate = ({id}) => {
         return (
-            <NavLink to={`/my-article/${id}`}>
+            <NavLink to={`/article/my-article/${id}`}>
                 <div className="actionTemplate">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#8A8A8A" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -66,7 +66,7 @@ const TableArticles = () => {
     return (
         <div className='TableArticles'>
             <ExteriorCard>
-                <div className="container">
+                <div className="containerr">
                     <Header title={"Mis artículos"} button="Enviar nuevo artículo" url={"/article-create"}/>
                     <DataTable value={data} stripedRows tableStyle={{ minWidth: '30rem' }}>
                         <Column field="title" header="Título"></Column>
