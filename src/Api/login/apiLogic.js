@@ -11,7 +11,7 @@ export const loginConfir = async (data,setAuth,navigate)=>
             CorrectModal("Credenciales correctas")
             // setAuth(true)
             localStorage.setItem("auth", true)
-            window.location.replace('/dashboard');
+            window.location.replace('/article/dashboard');
             console.log(authenticated)
             // navigate("/")
             // console.log("res",res)
