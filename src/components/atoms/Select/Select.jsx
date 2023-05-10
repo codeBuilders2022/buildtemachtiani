@@ -3,10 +3,10 @@ import { Dropdown } from "primereact/dropdown";
 
 import "./Select.scss";
 
-const Select = ({ title, placeholder, options, value, setValue, id, onChange, optionLabel = "name"}) => {
+const Select = ({ title, placeholder, options, value, setValue, id, onChange, optionLabel = "value"}) => {
 
   const defaultOptions = [
-    { name: "", code: "" },
+    { value: "", code: "" },
   ];
 
   return (

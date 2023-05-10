@@ -7,15 +7,17 @@ import InteriorCard from "../../components/atoms/InteriorCard/InteriorCard";
 import UploadWord from "../../components/molecules/UploadWord/UploadWord";
 import { ColorValidation, SubmitValidation, UpdateValue } from "../../utilities/Validations";
 import { CorrectModal } from "../../components/molecules/modals/Modals";
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
+import { uploadArticle } from "./api";
 
 const CreateArticle = () => {
     const [word, setWord] = useState(null)
     const [textAreaConter, setTextAreaConter] = useState("")
+    const [textAreaConterword, setTextAreaConterword] = useState(0)
     const navigate = useNavigate()
     const [inputList, setInputList] = useState({
         word: { value: null, validationType: "empty" },
-        date: { value: null, validationType: "empty" },
+        // date: { value: null, validationType: "empty" },
         name: { value: null, validationType: "empty" },
         resume: { value: null, validationType: "empty" },
     })
@@ -33,20 +35,29 @@ const CreateArticle = () => {
     }, [word])
 
     const submit = () => {
+        
+
         if (SubmitValidation(inputList, setInputList)) {
-            CorrectModal("¡Artículo enviado correctamente!");
-            navigate("/")
+            
+           
+            uploadArticle(inputList,textAreaConter,navigate)
+            // CorrectModal("¡Artículo enviado correctamente!");
+            // navigate("/")
         }
+
     }
     function handleInput(event) {
         const nuevoTexto = event.target.value;
-
-        if (nuevoTexto.length <= 500) {
+        const words = nuevoTexto.split(/\s+/);
+        const count = words.length > 1 ? words.length - 1 : 0; // cuenta las palabras y elimina los espacios adicionales
+        console.log("count",count)
+        if (count <= 500) {
             setTextAreaConter(nuevoTexto);
+            setTextAreaConterword(count)
         } else {
-            const textoRecortado = nuevoTexto.substring(0, 500);
-            console.log("textoRecortado", textoRecortado)
-            setTextAreaConter(textoRecortado);
+            // const textoRecortado = nuevoTexto.substring(0, 500);
+            // console.log("textoRecortado", textoRecortado)
+            // setTextAreaConter(textoRecortado);
         }
     }
     return (
@@ -63,13 +74,13 @@ const CreateArticle = () => {
                                     <div className="wordName">{word?.name}</div>
                                 </div>
                             </div>
-                            <div className="col2">
-                                <div className="minititle">Fecha de publicación</div>
+                            {/* <div className="col2"> */}
+                                {/* <div className="minititle">Fecha de publicación</div>
                                 <Input type="date" className={"inputDate"} id="date" onChange={(e) => { UpdateValue(e, "date", inputList, setInputList) }}></Input>
                                 <div className="description">
                                     *La fecha se agrega automáticamente cuando se envía un nuevo artículo.
-                                </div>
-                            </div>
+                                </div> */}
+                            {/* </div> */}
                             <div className="col3">
                                 <Input title={"Nombre del artículo"} placeholder={"Nombre del artículo"} className={"inputArticleName"} id="name" onChange={(e) => { UpdateValue(e, "name", inputList, setInputList) }}></Input>
                             </div>
@@ -77,7 +88,7 @@ const CreateArticle = () => {
 
                                 <div className="minititle">
                                     <div>Resumen</div>
-                                    <div>{textAreaConter.length}/500</div>
+                                    <div>{textAreaConterword}/500</div>
                                 </div>
                                 <textarea  value={textAreaConter} className="textArea-createArticle" id="resume" onChange={(e) => { UpdateValue(e, "resume", inputList, setInputList) }} onInput={handleInput}></textarea>
 
