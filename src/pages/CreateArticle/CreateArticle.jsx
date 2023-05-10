@@ -17,7 +17,7 @@ const CreateArticle = () => {
     const navigate = useNavigate()
     const [inputList, setInputList] = useState({
         word: { value: null, validationType: "empty" },
-        // date: { value: null, validationType: "empty" },
+        autor: { value: null, validationType: "empty" },
         name: { value: null, validationType: "empty" },
         resume: { value: null, validationType: "empty" },
     })
@@ -35,12 +35,12 @@ const CreateArticle = () => {
     }, [word])
 
     const submit = () => {
-        
+
 
         if (SubmitValidation(inputList, setInputList)) {
-            
-           
-            uploadArticle(inputList,textAreaConter,navigate)
+
+
+            uploadArticle(inputList, textAreaConter, navigate)
             // CorrectModal("¡Artículo enviado correctamente!");
             // navigate("/")
         }
@@ -50,7 +50,7 @@ const CreateArticle = () => {
         const nuevoTexto = event.target.value;
         const words = nuevoTexto.split(/\s+/);
         const count = words.length > 1 ? words.length - 1 : 0; // cuenta las palabras y elimina los espacios adicionales
-        console.log("count",count)
+        console.log("count", count)
         if (count <= 500) {
             setTextAreaConter(nuevoTexto);
             setTextAreaConterword(count)
@@ -75,14 +75,17 @@ const CreateArticle = () => {
                                 </div>
                             </div>
                             {/* <div className="col2"> */}
-                                {/* <div className="minititle">Fecha de publicación</div>
+                            {/* <div className="minititle">Fecha de publicación</div>
                                 <Input type="date" className={"inputDate"} id="date" onChange={(e) => { UpdateValue(e, "date", inputList, setInputList) }}></Input>
                                 <div className="description">
                                     *La fecha se agrega automáticamente cuando se envía un nuevo artículo.
                                 </div> */}
                             {/* </div> */}
                             <div className="col3">
-                                <Input title={"Nombre del artículo"} placeholder={"Nombre del artículo"} className={"inputArticleName"} id="name" onChange={(e) => { UpdateValue(e, "name", inputList, setInputList) }}></Input>
+                              
+                                    <Input title={"Nombre del artículo"} placeholder={"Nombre del artículo"} className={"inputArticleName"} id="name" onChange={(e) => { UpdateValue(e, "name", inputList, setInputList) }}></Input>
+                                    <Input title={"Nombre del autor(s)"} placeholder={"Nombre del autor(s)"} className={"inputArticleName"} id="autor" onChange={(e) => { UpdateValue(e, "autor", inputList, setInputList) }}></Input>
+                              
                             </div>
                             <div className="col4">
 
@@ -90,7 +93,7 @@ const CreateArticle = () => {
                                     <div>Resumen</div>
                                     <div>{textAreaConterword}/500</div>
                                 </div>
-                                <textarea  value={textAreaConter} className="textArea-createArticle" id="resume" onChange={(e) => { UpdateValue(e, "resume", inputList, setInputList) }} onInput={handleInput}></textarea>
+                                <textarea value={textAreaConter} className="textArea-createArticle" id="resume" onChange={(e) => { UpdateValue(e, "resume", inputList, setInputList) }} onInput={handleInput}></textarea>
 
                             </div>
                         </div>
