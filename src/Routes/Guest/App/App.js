@@ -86,7 +86,7 @@ const App = () => {
       />
       <Route
         exact
-        path="/article"
+        path="/article/:id"
         element={
           <Suspense fallback={<ArticlesSkeleton />}>
             <Articles />
