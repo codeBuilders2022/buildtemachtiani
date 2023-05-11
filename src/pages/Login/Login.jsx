@@ -4,12 +4,14 @@ import LoginCard from "../../components/atoms/LoginCard/LoginCard";
 import { Button, Input, InputPassword } from "../../components";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ColorValidation, SubmitValidation, UpdateValue } from "../../utilities/Validations";
+import { useStateContext } from "../../contexts/ContextProvider";
 import Back from "../../components/atoms/Back/Back";
 import { loginConfir } from "../../Api/login/apiLogic";
 
 
 const Login = () => {
 const navigate = useNavigate()
+
 
     const [inputList,setInputList] = useState({
         "identifier":{value:null, validationType:"empty"},

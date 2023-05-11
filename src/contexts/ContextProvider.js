@@ -12,6 +12,8 @@ export const ContextProvider = ({ children }) => {
   const [openNavbar, setOpenNavbar] = useState(false)
   const [openNavbar1, setOpenNavbar1] = useState(false)
   const [idArticle, setIdArticle] = useState(1);
+  const [name, setName] = useState("")
+  const [lastName, setLastName] = useState("")
 
   const setMode = (e) => {
     setCurrentMode(e.target.value);
@@ -51,6 +53,7 @@ export const ContextProvider = ({ children }) => {
         setOpenNavbar,
         openNavbar1, 
         setOpenNavbar1,
+        setName,
       }}
     >
       {children}
