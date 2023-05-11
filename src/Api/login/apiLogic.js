@@ -1,5 +1,5 @@
 import axios from "axios"
-import { CorrectModal, IncorrectModal } from "../../components/molecules/modals/Modals";
+import { CorrectModal, IncorrectModal, InfoModal } from "../../components/molecules/modals/Modals";
 const urlApi = process.env.REACT_APP_API_URL;
 export const loginConfir = async (data,setAuth,navigate)=>
 {
@@ -8,19 +8,24 @@ export const loginConfir = async (data,setAuth,navigate)=>
         const authenticated = axios.post(urlApi+"/api/auth/local",data) 
         .then((res)=>
         {
-            CorrectModal("Credenciales correctas")
-            // setAuth(true)
-            localStorage.setItem("auth", true)
-            window.location.replace('/article/dashboard');
-            console.log(authenticated)
-            // navigate("/")
-            // console.log("res",res)
-            localStorage.setItem("token",res.data.jwt)
+
+            if(res.data.user.confirmed === true){
+                localStorage.setItem("token",res.data.jwt)
+                CorrectModal("Credenciales correctas")
+                setTimeout(() => {
+                    window.location.replace('/article/dashboard');
+                }, 3500)
+
+            }
         })
-        .catch(()=>
+        .catch((error)=>
         {
-            IncorrectModal("Credenciales incorrectas")
-            setRes(false)
+            if(error.response.data.error.name === "ApplicationError"){
+                InfoModal("Para iniciar sesión, necesitamos que confirmes tu cuenta.", " Por favor, sigue las instrucciones en tu correo electrónico para completar el proceso de autenticación. Si necesitas ayuda, contáctanos. ¡Gracias!")
+            }
+            else if(error.response.data.error.name === "ValidationError"){
+                IncorrectModal("Credenciales incorrectas")
+            }
         })
     }
 }

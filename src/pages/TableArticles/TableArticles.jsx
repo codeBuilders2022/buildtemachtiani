@@ -10,17 +10,20 @@ import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getDataArticles } from "./api";
 
+import View from '../../assets/images/eye.png'
+
 const TableArticles = () => {
 
     const actionTemplate = ({id}) => {
         return (
             <NavLink to={`/article/my-article/${id}`}>
                 <div className="actionTemplate">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#8A8A8A" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    {/* <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#8A8A8A" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <circle cx="12" cy="12" r="2" />
                         <path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7" />
-                    </svg>
+                    </svg> */}
+                    <img src={View} className="ImgView_"/>
                 </div>
             </NavLink>
         )

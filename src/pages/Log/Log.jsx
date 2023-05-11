@@ -8,7 +8,7 @@ import Back from "../../components/atoms/Back/Back";
 //Styles
 import "./Log.scss";
 import { ColorValidation, SubmitValidation, UpdateValue, ValidationPassword } from "../../utilities/Validations";
-import { CorrectModal, IncorrectModal } from "../../components/molecules/modals/Modals";
+import { CorrectModal, IncorrectModal, RegistroModal } from "../../components/molecules/modals/Modals";
 import { getAxiosCountrys, postAxiosRegister, userAxiosPost } from "../../Api/Register/Register";
 
 const Log = () => {
@@ -17,7 +17,7 @@ const Log = () => {
     names: { value: null, validationType: "empty" },
     lastName: { value: null, validationType: "empty" },
     country: { value: null, validationType: "empty" },
-    date: { value: null, validationType: "empty" },
+    birthdate : { value: null, validationType: "empty" },
     gender: { value: null, validationType: "empty" },
     user: { value: null, validationType: "empty" },
     email: { value: null, validationType: "email" },
@@ -42,13 +42,14 @@ const Log = () => {
   }, [inputList]);
 
 
+  const [completedRegister, setCompletedRegister] = useState(false)
   const handleSubmit = async () => {
     const validate = SubmitValidation(inputList, setInputList);
     const objetData = { "data": {} };
     const keysToTransform = ["country", "gender", "ocupation", "academic_level"];
     if (validate) {
       for (const [key, { value: data }] of Object.entries(inputList)) {
-        objetData.data[key] = keysToTransform.includes(key) ? data.name : data;
+        objetData.data[key] = keysToTransform.includes(key) ? data : data;
       }
       try {
         const saveUser = {
@@ -56,17 +57,19 @@ const Log = () => {
           email: inputList.email.value,
           password: inputList.password.value,
         };
-        const response = await userAxiosPost("/api/auth/local/register", saveUser);
-        console.log(response)
-        // if (response.status === 200) {
-        //   const res = await postAxiosRegister("/api/registers", objetData);
-        //   if (res.status === 200) {
-        //     CorrectModal("Registro correctamente");
 
-        //   } else {
-        //     IncorrectModal("¡Algo salió mal, intentalo más tarde!", true)
-        //   }
-        // }
+        const response = await userAxiosPost("/api/auth/local/register", saveUser);
+        if (response.status === 200) {
+          const res = await postAxiosRegister("/api/registers", objetData);
+          if (res.status === 200) {
+            RegistroModal("¡Gracias por registrarte!", "Revisa tu correo para confirmar tu cuenta haciendo clic en el enlace de confirmación. ¡Bienvenido/a a nuestra comunidad en línea!");
+            setTimeout(() => {
+              setCompletedRegister(true)
+            }, 5000)
+          } else {
+            IncorrectModal("¡Algo salió mal, intentalo más tarde!", true)
+          }
+        }
 
         if (response.status === 400) {
           IncorrectModal(`Se envio una correo de confimacion a la siguiente direccion: ${inputList.email.value}`)
@@ -133,11 +136,12 @@ const Log = () => {
   ];
 
   const academic = [
-    { id: 1, value: "Nivel Superior", code: "nivel superior" }
+    { id: 1, value: "Maestria", code: "maestria" },
+    { id: 2, value: "Doctorado", code: "dosctorado" }
   ]
 
   const ocupation = [
-    { id: 1, value: "Estudiante", code: "estudiante" },
+    { id: 1, value: "Académico", code: "academico" },
     { id: 2, value: "Investigador", code: "investigador" },
   ]
 
@@ -164,7 +168,7 @@ const Log = () => {
 
   return (
     <div className="Log_">
-      <div className="inside_log">
+      <div className={`inside_log ${completedRegister && "hiddenMenu"}`}>
         <Back className={"btn_return"} url={"/"} />
         <div className="container">
           <div className="tamanio_cards">
@@ -176,7 +180,7 @@ const Log = () => {
                 <Select title={"País"} placeholder={"País"} value={inputList.country.value} options={data} id={"country"} onChange={(e) => UpdateValue(e, "country", inputList, setInputList)} />
                 <Select title={"Género"} placeholder={"Género"} options={gender} value={inputList.gender.value} id={"gender"} onChange={(e) => UpdateValue(e, "gender", inputList, setInputList)} />
               </div>
-              <Input type="date" title={"Fecha de nacimiento"} placeholder={"Fecha de nacimiento"} value={inputList.date.value} id={"date"} onChange={(e) => UpdateValue(e, "date", inputList, setInputList)} />
+              <Input type="date" title={"Fecha de nacimiento"} placeholder={"Fecha de nacimiento"} value={inputList.birthdate.value} id={"birthdate"} onChange={(e) => UpdateValue(e, "birthdate", inputList, setInputList)} />
               <div className="cnt_btn">
                 <Button title={"Siguiente"} className={"btn_primary"} onClick={() => handleStepOne()} />
               </div>
@@ -190,9 +194,8 @@ const Log = () => {
               <Input title={"Correo electrónico"} placeholder={"Correo electrónico"} id={"email"} onChange={(e) => UpdateValue(e, "email", inputList, setInputList)} />
               <div className="instructions_pass">
                 <InputPassword title={"Contraseña"} placeholder={"Contraseña"} id={"password"} onChange={(e) => UpdateValue(e, "password", inputList, setInputList)} />
-                <div className="desxr_">Utiliza ocho caracteres como mínimo con una combinación de letras, números y símbolos</div>
+                <div className="desxr_">Utiliza ocho caracteres como mínimo con una combinación de una letra, un número y un símbolo</div>
               </div>
-
               <InputPassword title={"Confirmar contraseña"} placeholder={"Confirmar contraseña"} id={"confirm_password"} onChange={(e) => UpdateValue(e, "confirm_password", inputList, setInputList)} />
               <div className="cnt_btn btn_second">
                 <Button title={"Regresar"} className={"btn_cancel"} onClick={() => handleReturnOne()} />
@@ -207,7 +210,7 @@ const Log = () => {
               <div className="inside_card">
                 <div className="cnt-orcid">
                   <Input title={"Orcid ID"} placeholder={"Orcid ID"} id={"orcid"} onChange={(e) => UpdateValue(e, "orcid", inputList, setInputList)} />
-                  <label className="orcid_">Solo el <a href="https://orcid.org/" className="ur_l">Registro ORCID</a> puede asignar ORCID iDs. Debes aceptar sus
+                  <label className="orcid_">Solo el <a href="https://orcid.org/" style={{color: "blue"}} target="_blank" rel="noreferrer">Registro ORCID</a> puede asignar ORCID iDs. Debes aceptar sus
                     estándares para disponer de ORCID iDs e incluir la URL completa
                     (pe. https://orcid.org/0000-0002-1825-0097).
                   </label>
@@ -226,6 +229,10 @@ const Log = () => {
         <div className="dark:text-white Ihave_Account">
           <NavLink className={"link_account"} to={"/login"}>Ya tengo una cuenta</NavLink>
         </div>
+      </div>
+      <div className={`hiddenDiv dark:text-white ${completedRegister && "completedRegister"}`}>
+            <label htmlFor="">¡Registro Completo!</label>
+          Revisa tu bandeja de correo electrónico:{" "} <b>{inputList.email.value}</b>
       </div>
     </div>
   );
