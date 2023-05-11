@@ -16,7 +16,7 @@ export const loginConfir = async (data,setName,navigate)=>
                 localStorage.setItem("username", res.data.user.username)
                 CorrectModal("Credenciales correctas")
                 setTimeout(() => {
-                    window.location.replace('/article/dashboard');
+                    window.location.replace('/user/dashboard');
                 }, 3500)
 
             }

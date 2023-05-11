@@ -36,7 +36,12 @@ const Navbarr = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem("username")
-    if(user.length > 0){
+    if(user === null || user === "undefined"){
+      let letter = "user"
+      let firstLetter = letter.charAt(0).toUpperCase();
+      setUsername(firstLetter)
+    }
+    else{
       let firstLetter = user.charAt(0).toUpperCase();
       setUsername(firstLetter)
     }
