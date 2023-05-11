@@ -9,17 +9,16 @@ import logo_light from '../../../assets/images/logo_70_black.png'
 import InputSearch from '../../atoms/InputSearch/InputSearch';
 import Menu_white from '../../../assets/images/menu_white.png'
 import ArrowDonw from '../../../assets/images/down_.png'
-import Avatar from '../../../assets/images/Oval.png'
 
 
 const Navbarr = () => {
   const { openNavbar, setOpenNavbar, currentColor, currentMode } = useStateContext();
   const header_location = useLocation()
   const [hasnNot, setHasnNot] = useState(false)
-  // const [hidden_input, setHidden_input] = useState(false)
-
+  const [openModal, setOpenModal] = useState(false)
   const hiddenInput = header_location.pathname.startsWith("/article")
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado de inicio de sesión
+  const navigate = useNavigate()
   const log_ = header_location.pathname.startsWith("/log")
   const login_ = header_location.pathname.startsWith("/login")
   const recover_account = header_location.pathname.startsWith("/recover-account")
@@ -32,21 +31,13 @@ const Navbarr = () => {
     }
     return setHasnNot(false)
   }, [header_location.pathname])
-
-  // useEffect(() => {
-  //   if(hiddenInput){
-  //     return setHasnNot(true)
-  //   }
-  //   return setHasnNot(false)
-  // }, [header_location.pathname])
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado de inicio de sesión
-
+  
   useEffect(() => {
-    const loggedIn = localStorage.getItem('auth') === 'true';
-    setIsLoggedIn(loggedIn);
+    const token = localStorage.getItem('token');
+    if(token){
+      setIsLoggedIn(true);
+    }
   }, []);
-
 
   const handleActiveNavbar = () => setOpenNavbar(!openNavbar);
 
@@ -60,16 +51,12 @@ const Navbarr = () => {
     { id: 5, text: "Políticas de la revista", url: "/magazine-policies" },
   ];
 
-  const navigate = useNavigate()
-
   const handleLogOut = () => {
-    localStorage.setItem("auth", false)
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
     window.location.replace('/');
   }
-
-  const [openModal, setOpenModal] = useState(false)
-
-
+ 
   return (
     <nav className='bg-bg-gray-primary dark:bg-bg-dark-secondary Navbarr_' id='nav_header1'>
         <div className="cnt_logo">
