@@ -11,11 +11,19 @@
 .btn_primary {
   background: #5d869e;
   color: white;
+
+  &:hover{
+    background: #3079a3;
+  }
 }
 
 .btn_cancel {
   background: #202a38;
   color: white;
+
+  &:hover{
+    background: #070d14;
+  }
 }
 .skeletonbutton
 {
