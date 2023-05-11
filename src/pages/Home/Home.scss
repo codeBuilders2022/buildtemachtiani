@@ -1,8 +1,8 @@
-.Home_binn{
+.Home_binn {
     width: 100%;
     padding-top: 66px;
 
-    .cnt_imag{
+    .cnt_imag {
         width: 100%;
         height: 370px;
         display: flex;
@@ -13,7 +13,7 @@
             height: 120px;
         }
 
-        .img_{
+        .img_ {
             width: 800px;
 
             @media (max-width: 768px) {
@@ -26,22 +26,23 @@
     .Journal {
         min-height: calc(100vh - 270px);
         // width: 100%;
-    //   background: #fff;
-      padding: 40px;
-      margin: 40px;
-      border-radius: 24px;
+        //   background: #fff;
+        padding: 40px;
+        margin: 40px;
+        border-radius: 24px;
 
-      @media (max-width: 768px) {
-        padding: 40px 8px 8px 8px;
-        // padding: 8px;
-        margin: 40px 8px 8px 8px;
-      }
-    
+        @media (max-width: 768px) {
+            padding: 40px 8px 8px 8px;
+            // padding: 8px;
+            margin: 40px 8px 8px 8px;
+        }
+
         .container {
             @media (max-width: 768px) {
                 display: flex;
                 flex-direction: column;
             }
+
             width: min(95%, 1200px);
             // padding: 50px 0;
             // padding: 41px 82px 41px 82px;
@@ -50,43 +51,45 @@
             display: grid;
             grid-template-columns: 60% 35%;
             gap: 40px;
-    
+
             .cover {
                 @media (max-width: 480px) {
                     flex-direction: column;
                 }
+
                 display: flex;
                 gap: 20px;
-    
+
                 p {
                     font-size: 16px;
                     text-align: justify;
                 }
-    
+
                 .cover_left {
                     display: flex;
                     flex-direction: column;
-    
+
                     img {
                         @media (max-width: 480px) {
                             height: 350px;
                         }
+
                         min-width: 200px;
                         height: 300px;
                         object-fit: cover;
                         object-position: top;
                     }
-    
+
                     p {
                         color: gray;
                     }
                 }
-    
+
                 .data {
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
-    
+
                     p {
                         @media (max-width: 1024px) {
                             display: -webkit-box;
@@ -94,22 +97,23 @@
                             -webkit-line-clamp: 16;
                             overflow: hidden;
                         }
+
                         @media (max-width: 480px) {
                             -webkit-line-clamp: 12;
                         }
                     }
-    
-    
+
+
                     .download {
                         @media (max-width: 1280px) {
                             max-width: 300px;
                             width: 100%;
                         }
-    
+
                         @media (max-width: 480px) {
                             max-width: 100%;
                         }
-    
+
                         height: 40px;
                         border-radius: 13px;
                         // background: #87000C;
@@ -125,7 +129,7 @@
                         display: grid;
                         place-items: center;
                         cursor: pointer;
-    
+
                         // &:hover {
                         //     color: #87000C;
                         //     background: #825b5b41;
@@ -135,55 +139,55 @@
                     }
                 }
             }
-    
+
             .metrics {
                 @media (max-width: 1280px) {
                     display: flex;
                     flex-direction: column-reverse;
                     padding-left: 0;
                     border-left: 0;
-    
+
                 }
-    
+
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
                 gap: 20px;
                 border-left: 1px solid gainsboro;
                 padding-left: 20px;
-    
+
                 .left {
                     @media (max-width: 1280px) {
                         gap: 10px;
                     }
-    
+
                     display: flex;
                     flex-direction: column;
                     gap: 20px;
-    
+
                     .title {
                         font-size: 24px;
                         margin: 0;
                     }
-    
+
                     .in {
                         @media (max-width: 1280px) {
                             display: flex;
                             flex-wrap: wrap;
                         }
                     }
-    
+
                     .icons {
                         display: flex;
                         align-items: center;
                         gap: 5px;
-    
+
                         svg {
                             width: 25px;
                             height: 25px;
                             cursor: pointer;
                             transform: scale(1);
                             fill: gray;
-    
+
                             &:hover {
                                 transform: scale(1.1);
                                 stroke: #87000C;
@@ -192,10 +196,10 @@
                             }
                         }
                     }
-    
+
                     .index {
                         display: flex;
-    
+
                         p {
                             margin: 0;
                             font-size: 14px;
@@ -203,13 +207,13 @@
                         }
                     }
                 }
-    
+
                 .right {
                     display: flex;
                     flex-direction: column;
                     gap: 7px;
-    
-    
+
+
                     .cardGraph {
                         width: 100%;
                         height: 60px;
@@ -221,38 +225,38 @@
                         padding: 10px;
                         cursor: pointer;
                         transform: scale(1);
-    
+
                         &:hover {
                             transform: scale(1.1);
                             transition: transform .2s linear;
                         }
-    
+
                         p {
                             text-transform: uppercase;
                             margin: 0;
                             font-size: 12px;
                         }
-    
+
                         .data {
                             font-size: 16px;
                             font-weight: 700;
                         }
                     }
-    
+
                     button {
                         text-align: right;
                         font-size: 12px;
                         font-style: italic;
                         color: gray;
-    
+
                         // &:hover {
                         //     color: #87000C;
                         // }
                     }
                 }
-    
+
             }
-    
+
             .articles_container {
                 display: flex;
                 flex-direction: column;
@@ -261,29 +265,30 @@
                 border-top: 10px solid rgba(128, 128, 128, 0.306);
                 padding-top: 50px;
                 height: 100%;
-    
+
                 h1 {
                     font-size: 26px;
                     font-style: italic;
                     font-weight: 700;
                     color: #706a81;
                 }
-    
+
                 .seeArticles {
                     @media (max-width: 768px) {
                         justify-content: center;
                     }
+
                     width: 100%;
                     display: flex;
                     justify-content: right;
                     border-bottom: 1px solid rgba(128, 128, 128, 0.306);
                     padding-bottom: 20px;
-    
+
                     button {
                         @media (max-width: 480px) {
                             max-width: 100%;
                         }
-    
+
                         height: 40px;
                         max-width: 300px;
                         width: 100%;
@@ -297,7 +302,7 @@
                         display: grid;
                         place-items: center;
                         cursor: pointer;
-    
+
                         // &:hover {
                         //     color: #87000C;
                         //     background: #825b5b41;
@@ -305,31 +310,34 @@
                         //     transition: color .2s linear;
                         // }
                     }
-    
-    
+
+
                 }
-    
+
                 .articles {
                     @media (max-width: 992px) {
                         gap: 60px;
                     }
+
                     @media (max-width: 768px) {
                         gap: 40px;
                         grid-template-columns: 55% 35%;
                     }
+
                     @media (max-width: 480px) {
                         display: flex;
                         flex-direction: column;
                     }
+
                     display: grid;
                     grid-template-columns: 65% 25%;
                     gap: 120px;
                     width: 100%;
 
-                    .card_articule{
+                    .card_articule {
                         padding: 40px;
                         border-radius: 20px;
-                        
+
                         @media (max-width: 768px) {
                             padding: 40px 12px 12px;
                         }
@@ -341,48 +349,55 @@
                             gap: 5px;
                             border-bottom: 1px solid rgb(140, 132, 160);
                             margin-bottom: 20px;
-        
-                            a {
+
+                            button {
+                                text-align: left;
                                 margin: 0;
                                 font-style: italic;
                                 font-weight: 400;
+                                text-transform: lowercase;
                                 cursor: pointer;
                                 // color: rgb(140, 132, 160);
-        
+
+                                &::first-letter {
+                                    text-transform: capitalize;
+                                }
+
                                 &:hover {
                                     text-decoration: underline;
                                     color: #87000C;
                                 }
                             }
-        
+
                             span {
                                 opacity: 0.7;
                                 margin: 0;
-        
+
                             }
-        
+
                             .authors {
                                 font-size: 12.6px;
                                 font-style: italic;
                             }
-        
+
                             .date {
                                 font-size: 14px;
                                 color: rgba(128, 128, 128, 0.783);
                             }
                         }
                     }
-    
+
                 }
-    
+
                 .preVol {
                     @media (max-width: 480px) {
                         justify-content: center;
                     }
+
                     display: flex;
                     flex-wrap: wrap;
                     gap: 30px;
-    
+
                     .cardVol {
                         display: flex;
                         flex-direction: column;
@@ -394,12 +409,12 @@
                             width: 300px;
                             align-items: center;
                         }
-    
+
                         &:hover {
                             transform: scale(1.1);
                             transition: transform .3s linear;
                         }
-    
+
                         img {
                             width: 140px;
                             height: 230px;
@@ -410,22 +425,22 @@
                                 height: 280px;
                                 align-items: center;
                             }
-    
+
                         }
-    
+
                         .p {
                             font-size: 12px;
                             margin: 0;
                             font-style: italic;
                             color: #706a81;
                         }
-    
+
                         .title {
                             color: #87000C;
                         }
                     }
                 }
-    
+
                 .containerNumbers {
                     display: flex;
                     align-items: center;
@@ -434,13 +449,13 @@
                     @media (max-width: 768px) {
                         margin-top: 20px;
                     }
-    
+
                     .titleNumbers {
                         display: flex;
                         width: 100%;
                         align-items: center;
                         gap: 30px;
-    
+
                         .alert {
                             cursor: pointer;
                         }
