@@ -7,6 +7,8 @@ import { Column } from 'primereact/column';
 import ExteriorCard from "../../components/atoms/ExteriorCard/ExteriorCard";
 import { Header } from "../../components";
 import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getDataArticles } from "./api";
 
 import View from '../../assets/images/eye.png'
 
@@ -26,46 +28,13 @@ const TableArticles = () => {
             </NavLink>
         )
     }
-    const data =
-        [
-            {
-                id: 1,
-                title: 'Atención al shock cardiogénico en centros con programa de código infarto sin cirugía cardiaca. ',
-                date: "2023/05/7",
-                status: 'Pendiente',
-            },
-            {
-                id: 2,
-                title: 'Atención al shock cardiogénico en centros con programa de código infarto sin cirugía cardiaca. ',
-                date: "2023/05/7",
-                status: 'Aprobado',
-            },
-            {
-                id: 3,
-                title: 'Atención al shock cardiogénico en centros con programa de código infarto sin cirugía cardiaca. ',
-                date: "2023/05/7",
-                status: 'Pendiente',
-            },
-            {
-                id: 4,
-                title: 'Atención al shock cardiogénico en centros con programa de código infarto sin cirugía cardiaca. ',
-                date: "2023/05/7",
-                status: 'Aprobado',
-            },
-            {
-                id: 5,
-                title: 'Atención al shock cardiogénico en centros con programa de código infarto sin cirugía cardiaca. ',
-                date: "2023/05/7",
-                status: 'Pendiente',
-            },
-            {
-                id: 6,
-                title: 'Atención al shock cardiogénico en centros con programa de código infarto sin cirugía cardiaca. ',
-                date: "2023/05/7",
-                status: 'Pendiente',
-            },
-        ];
-
+   
+        const [data,setData] = useState()
+        useEffect(()=>
+        {
+            getDataArticles(setData)
+        },[])
+        console.log("data",data)
     return (
         <div className='TableArticles'>
             <ExteriorCard>
@@ -73,8 +42,8 @@ const TableArticles = () => {
                     <Header title={"Mis artículos"} button="Enviar nuevo artículo" url={"/article/article-create"}/>
                     <DataTable value={data} stripedRows tableStyle={{ minWidth: '30rem' }}>
                         <Column field="title" header="Título"></Column>
-                        <Column field="date" header="Fecha"></Column>
-                        <Column field="status" header="Estado"></Column>
+                        <Column field="createdat" header="Fecha"></Column>
+                        <Column field="estatus" header="Estado"></Column>
                         <Column field="actions" header="Acciones" body={actionTemplate}></Column>
                     </DataTable>
                 </div>

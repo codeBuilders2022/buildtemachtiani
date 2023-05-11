@@ -9,7 +9,6 @@ export const loginConfir = async (data,setAuth,navigate)=>
         .then((res)=>
         {
 
-            console.log(res, "Auth")
             if(res.data.user.confirmed === true){
                 localStorage.setItem("token",res.data.jwt)
                 CorrectModal("Credenciales correctas")

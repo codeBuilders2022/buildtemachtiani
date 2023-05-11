@@ -40,8 +40,6 @@ const navigate = useNavigate()
             let res;
             loginConfir(data,navigate)
            
-            
-            // navigate("/dashboard", {replace: false})
         }
     }
     return (
