@@ -16,7 +16,7 @@ const Navbarr = () => {
   const header_location = useLocation()
   const [hasnNot, setHasnNot] = useState(false)
   const [openModal, setOpenModal] = useState(false)
-  const hiddenInput = header_location.pathname.startsWith("/article")
+  const hiddenInput = header_location.pathname.startsWith("/user")
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado de inicio de sesión
   const navigate = useNavigate()
   const log_ = header_location.pathname.startsWith("/log")
@@ -24,6 +24,7 @@ const Navbarr = () => {
   const recover_account = header_location.pathname.startsWith("/recover-account")
   const verification_code = header_location.pathname.startsWith("/verification-code")
   const new_password = header_location.pathname.startsWith("/new-password")
+  const [username, setUsername] = useState("")
   
   useEffect(() => {
     if(log_ || login_ || recover_account || verification_code || new_password){
@@ -34,6 +35,16 @@ const Navbarr = () => {
   
   useEffect(() => {
     const token = localStorage.getItem('token');
+    const user = localStorage.getItem("username")
+    if(user === null || user === "undefined"){
+      let letter = "user"
+      let firstLetter = letter.charAt(0).toUpperCase();
+      setUsername(firstLetter)
+    }
+    else{
+      let firstLetter = user.charAt(0).toUpperCase();
+      setUsername(firstLetter)
+    }
     if(token){
       setIsLoggedIn(true);
     }
@@ -80,7 +91,7 @@ const Navbarr = () => {
             {isLoggedIn ? (
               <div className='profile_a'>
                 <div className="cnt_profile" onClick={() => navigate("/article/dashboard")}>
-                  <h1 className='dark:text-white'>DV</h1>
+                  <h1 className='dark:text-white'>{username}</h1>
                 </div>
                 <button onClick={() => setOpenModal(!openModal)}>
                   <img src={ArrowDonw} alt="" className={`Arrow_donw ${openModal && "rotate_"}`}/>

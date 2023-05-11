@@ -11,6 +11,9 @@ export const ContextProvider = ({ children }) => {
   const [activeMenuRevistas, setActiveMenuRevistas] = useState(false);
   const [openNavbar, setOpenNavbar] = useState(false)
   const [openNavbar1, setOpenNavbar1] = useState(false)
+  const [idArticle, setIdArticle] = useState(1);
+  const [name, setName] = useState("")
+  const [lastName, setLastName] = useState("")
 
   const setMode = (e) => {
     setCurrentMode(e.target.value);
@@ -31,6 +34,8 @@ export const ContextProvider = ({ children }) => {
     <StateContext.Provider
       value={{
         activeMenu,
+        idArticle,
+        setIdArticle,
         setActiveMenu,
         screenSize,
         setScreenSize,
@@ -48,6 +53,7 @@ export const ContextProvider = ({ children }) => {
         setOpenNavbar,
         openNavbar1, 
         setOpenNavbar1,
+        setName,
       }}
     >
       {children}
