@@ -16,7 +16,7 @@ const Navbarr = () => {
   const header_location = useLocation()
   const [hasnNot, setHasnNot] = useState(false)
   const [openModal, setOpenModal] = useState(false)
-  const hiddenInput = header_location.pathname.startsWith("/article")
+  const hiddenInput = header_location.pathname.startsWith("/user")
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado de inicio de sesión
   const navigate = useNavigate()
   const log_ = header_location.pathname.startsWith("/log")
