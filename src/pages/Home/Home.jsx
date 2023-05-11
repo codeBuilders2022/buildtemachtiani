@@ -1,9 +1,8 @@
-    //styles
+//styles
 import "./Home.scss"
 import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme
 import 'primereact/resources/primereact.css';                       // core css
 import 'primeicons/primeicons.css';
-import { useStateContext } from "../../contexts/ContextProvider";
 
 //assets
 import cover from "../../assets/images/Revista01.png"
@@ -16,15 +15,59 @@ import { Tooltip } from 'primereact/tooltip';
 import Sidebar from "../../components/organisms/Sidebar/Sidebar"
 
 //react
+import { useStateContext } from "../../contexts/ContextProvider";
 import { useState } from "react"
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { IncorrectModal } from "../../components/molecules/modals/Modals";
+import { getAxiosHomeArticles } from "../../Api/Home/home";
 
 const Home = () => {
     const navigate = useNavigate()
+    const { setIdArticle } = useStateContext()
     const [articles, setArticles] = useState(false)
     const { currentColor, currentMode } = useStateContext();
+    const [dataArt, setDataArt] = useState([])
+    const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+    useEffect(() => {
+        getDatas()
+    }, []);
+
+    const getDatas = async () => {
+        try {
+            // Hacemos una llamada concurrente a la API utilizando Promise.all()
+            const [resCommittees] = await Promise.all([
+                getAxiosHomeArticles("/api/current-issues")
+            ]);
+            // Mapeamos los datos obtenidos de los comités y extraemos los atributos relevantes
+            const committeeData = resCommittees.data.map(({ id, attributes: { publishedAt, title, authors, doi, issue, abstract, info } }) => ({
+                id,
+                title,
+                authors,
+                doi,
+                issue,
+                abstract,
+                info,
+                publishedAt,
+            }));
+            // Asignamos los datos de los comités a los estados correspondientes en el componente
+            const issue = []
+            committeeData.map((e, index) => {
+                e['year'] = Number(e.publishedAt.substring(0, 4))
+                const month = months.filter((m, index) => index + 1 == Number(e.publishedAt.substring(5, 7)))
+                e['month'] = month[0]
+                e['day'] = Number(e.publishedAt.substring(8, 10))
+                issue.push(e)
+            })
+            setDataArt(issue)
+        } catch (error) {
+            IncorrectModal("¡Algo salió mal, intentalo más tarde!", true);
+        }
+    };
+
+
+
     const data = {
         index: [
             "Journal Citation Reports and Science Citation Index Expanded",
@@ -38,28 +81,6 @@ const Home = () => {
             "Scopus"
         ]
         ,
-
-        articles: [
-            "Sed ullamcorper risus at tortor feugiat, vitae fringilla arcu rutrum. Curabitur vulputate risus quis purus viverra viverra. Praesent scelerisque diam vitae commodo feugiat. Praesent ut metus tellus.",
-            "Quisque et fermentum purus. Aliquam dignissim orci enim, in iaculis risus efficitur dignissim. Nam aliquet in mauris quis euismod. Pellentesque et dui faucibus, cursus leo ac, lobortis eros.",
-            "Vestibulum vestibulum eu lorem eget porttitor. Nullam sed accumsan quam. Morbi mi nibh, egestas vitae eros ut, dapibus auctor magna. Morbi faucibus magna eu ex iaculis lacinia.",
-            " Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque et fermentum purus. Aliquam dignissim orci enim, in iaculis risus efficitur dignissim. Nam aliquet in mauris quis euismod. Pellentesque et dui faucibus, cursus leo ac, lobortis eros.",
-            "Nullam diam quam, facilisis non faucibus id, sodales non leo. Cras eleifend tellus quis felis sagittis, congue iaculis justo aliquet.",
-            "Proin tortor nisi, auctor at feugiat vel, porta id orci. Mauris feugiat, elit ac varius venenatis, felis dui ornare augue, vel placerat nisi urna sed nisl. Nulla eleifend ut lacus vitae dignissim.",
-            "Aenean non elit a est porta rhoncus. Aenean efficitur nisi ac justo elementum, a suscipit risus scelerisque. Mauris feugiat consequat risus suscipit gravida",
-            "Ut suscipit vestibulum dignissim. Duis ornare consectetur leo vel fermentum. Nunc suscipit porttitor neque, a efficitur mauris suscipit a.",
-            "Sed ullamcorper risus at tortor feugiat, vitae fringilla arcu rutrum. Curabitur vulputate risus quis purus viverra viverra. Praesent scelerisque diam vitae commodo feugiat. Praesent ut metus tellus.",
-            "Quisque et fermentum purus. Aliquam dignissim orci enim, in iaculis risus efficitur dignissim. Nam aliquet in mauris quis euismod. Pellentesque et dui faucibus, cursus leo ac, lobortis eros.",
-            "Vestibulum vestibulum eu lorem eget porttitor. Nullam sed accumsan quam. Morbi mi nibh, egestas vitae eros ut, dapibus auctor magna. Morbi faucibus magna eu ex iaculis lacinia.",
-            " Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque et fermentum purus. Aliquam dignissim orci enim, in iaculis risus efficitur dignissim. Nam aliquet in mauris quis euismod. Pellentesque et dui faucibus, cursus leo ac, lobortis eros.",
-            "Nullam diam quam, facilisis non faucibus id, sodales non leo. Cras eleifend tellus quis felis sagittis, congue iaculis justo aliquet.",
-            "Proin tortor nisi, auctor at feugiat vel, porta id orci. Mauris feugiat, elit ac varius venenatis, felis dui ornare augue, vel placerat nisi urna sed nisl. Nulla eleifend ut lacus vitae dignissim.",
-            "Aenean non elit a est porta rhoncus. Aenean efficitur nisi ac justo elementum, a suscipit risus scelerisque. Mauris feugiat consequat risus suscipit gravida",
-            "Ut suscipit vestibulum dignissim. Duis ornare consectetur leo vel fermentum. Nunc suscipit porttitor neque, a efficitur mauris suscipit a.",
-
-        ]
-
-
     }
 
     const dataMethric = [
@@ -83,83 +104,83 @@ const Home = () => {
     return (
         <div className="Home_binn">
             <div className="cnt_imag">
-                <img src={currentMode === "Dark" ?  svgWhite : svg} alt="Banner" className="img_" />
+                <img src={currentMode === "Dark" ? svgWhite : svg} alt="Banner" className="img_" />
             </div>
             <div className="dark:bg-gray-600 dark:text-white bg-white Journal">
                 <div className='container'>
                     {/* <div className="dark:bg-gray-500 bg-slate-100 flex w-full"> */}
-                        <div className='cover'>
-                            <div className="cover_left">
-                                <img src={cover} />
-                                <p>ISSN: 0500-9871</p>
-                                <p>e-ISSN: 5185-2132</p>
-                            </div>
-                            <div className='data'>
-                                <p>Duis condimentum elementum tellus.
-                                    Lorem ipsum dolor sit amet,
-                                    consectetur adipiscing elit. Quisque
-                                    metus purus, condimentum vel commodo eget,
-                                    porttitor nec urna. Curabitur feugiat
-                                    sollicitudin tortor, eget mattis nibh.
-                                    Pellentesque habitant morbi tristique
-                                    senectus et netus et malesuada fames ac
-                                    turpis egestas. Quisque et fermentum purus.
-                                    Aliquam dignissim orci enim, in iaculis
-                                    risus efficitur dignissim. Nam aliquet
-                                    in mauris quis euismod. Pellentesque et
-                                    dui faucibus, cursus leo ac, lobortis eros.
-                                    Curabitur venenatis faucibus tincidunt.
-                                    Cras molestie malesuada metus at facilisis.
-                                    Integer eget est velit. Vivamus ac turpis
-                                    accumsan, facilisis tortor et, posuere nunc.</p>
-                                <a className='download' href={journal} style={{background: currentColor}} download>Descargar</a>
-                            </div>
+                    <div className='cover'>
+                        <div className="cover_left">
+                            <img src={cover} />
+                            <p>ISSN: 0500-9871</p>
+                            <p>e-ISSN: 5185-2132</p>
                         </div>
-                        <div className='metrics'>
-                            <div className='left'>
-                                <p className='title'>Indexada en:</p>
-                                <div className="in">
-                                    {data.index.map((element, index) => {
-                                        return (
-                                            <div className='index' key={index}>
-                                                <p>{element}</p>
-                                                {index !== data.index.length - 1 && (
-                                                    <p>/</p>
-                                                )}
-                                            </div>
-                                        )
-                                    })}
-                                </div>
-                                <div className="icons">
-                                    <p style={{ marginRight: '10px' }}>Síguenos: </p>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-facebook" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#9e9e9e" fill="none" stroke-linecap="round" strokeLinejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#9e9e9e" fill="none" stroke-linecap="round" strokeLinejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div className='right'>
-                                {dataMethric.map((e, index) => {
+                        <div className='data'>
+                            <p>Duis condimentum elementum tellus.
+                                Lorem ipsum dolor sit amet,
+                                consectetur adipiscing elit. Quisque
+                                metus purus, condimentum vel commodo eget,
+                                porttitor nec urna. Curabitur feugiat
+                                sollicitudin tortor, eget mattis nibh.
+                                Pellentesque habitant morbi tristique
+                                senectus et netus et malesuada fames ac
+                                turpis egestas. Quisque et fermentum purus.
+                                Aliquam dignissim orci enim, in iaculis
+                                risus efficitur dignissim. Nam aliquet
+                                in mauris quis euismod. Pellentesque et
+                                dui faucibus, cursus leo ac, lobortis eros.
+                                Curabitur venenatis faucibus tincidunt.
+                                Cras molestie malesuada metus at facilisis.
+                                Integer eget est velit. Vivamus ac turpis
+                                accumsan, facilisis tortor et, posuere nunc.</p>
+                            <a className='download' href={journal} style={{ background: currentColor }} download>Descargar</a>
+                        </div>
+                    </div>
+                    <div className='metrics'>
+                        <div className='left'>
+                            <p className='title'>Indexada en:</p>
+                            <div className="in">
+                                {data.index.map((element, index) => {
                                     return (
-                                        <>
-
-                                            <div className='cardGraph'
-                                                key={index}>
-                                                <p>{e.title}:</p>
-                                                <p className="data">{e.data}</p>
-                                            </div>
-                                        </>
+                                        <div className='index' key={index}>
+                                            <p>{element}</p>
+                                            {index !== data.index.length - 1 && (
+                                                <p>/</p>
+                                            )}
+                                        </div>
                                     )
                                 })}
-                                <NavLink to={"/metrics"}>
-                                    <button>Ver más métricas</button>
-                                </NavLink>
+                            </div>
+                            <div className="icons">
+                                <p style={{ marginRight: '10px' }}>Síguenos: </p>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-facebook" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#9e9e9e" fill="none" stroke-linecap="round" strokeLinejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#9e9e9e" fill="none" stroke-linecap="round" strokeLinejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+                                </svg>
                             </div>
                         </div>
+                        <div className='right'>
+                            {dataMethric.map((e, index) => {
+                                return (
+                                    <>
+
+                                        <div className='cardGraph'
+                                            key={index}>
+                                            <p>{e.title}:</p>
+                                            <p className="data">{e.data}</p>
+                                        </div>
+                                    </>
+                                )
+                            })}
+                            <NavLink to={"/metrics"}>
+                                <button>Ver más métricas</button>
+                            </NavLink>
+                        </div>
+                    </div>
                     {/* </div> */}
                     <div className='articles_container'>
                         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -170,40 +191,46 @@ const Home = () => {
                                 <line x1="8" y1="12" x2="12" y2="12" />
                                 <line x1="8" y1="16" x2="12" y2="16" />
                             </svg>
-                            <h1 style={{color: currentColor}}>Artículos:</h1>
+                            <h1 style={{ color: currentColor }}>Artículos:</h1>
                         </div>
                         <div className="articles">
                             <div className="bg-slate-100 dark:bg-gray-500 card_articule">
                                 {!articles ?
-                                    data.articles.map((article, index) => {
+                                    dataArt.map((article, index) => {
                                         return (
                                             index < 4 &&
 
                                             <div className='article' key={index} >
-                                                <NavLink to={"/article"}>
-                                                    <a className={`hover:${currentColor}`}>{article}</a>
-                                                    <span className='authors'> Francisco Palomo García, Alejandro Cardona Bustamante, Carlos Montecristo Torrens, Juan Carlos Yanes Fernandez </span>
-                                                    <span className='date'>Disponible online desde el 11 de Abril de 2023</span>
-                                                </NavLink>
+                                                <button onClick={() => { setIdArticle(index + 1), navigate(`/article/${article.id}`) }}>
+                                                    <p className={`hover:${currentColor}`}>{article.title}</p>
+                                                </button>
+                                                <span className='authors'>{article.authors}</span>
+                                                <span className='date'>Disponible online desde el {article.day} de {article.month} de {article.year}</span>
                                             </div>
 
                                         )
                                     }) :
-                                    data.articles.map((article, index) => {
+                                    dataArt.map((article, index) => {
+                                        setIdArticle(index)
                                         return (
-                                            <div className='article' key={index}>
-                                                <a>{article}</a>
-                                                <span className='authors'> Francisco Palomo García, Alejandro Cardona Bustamante, Carlos Montecristo Torrens, Juan Carlos Yanes Fernandez </span>
-                                                <span className='date'>Disponible online desde el 11 de Abril de 2023</span>
+                                            <div className='article' key={index} >
+                                                <button onClick={() => { setIdArticle(index + 1), navigate(`/article/${article.id}`) }}>
+                                                    <p className={`hover:${currentColor}`}>{article.title}</p>
+                                                </button>
+                                                <span className='authors'>{article.authors}</span>
+                                                <span className='date'>Disponible online desde el {article.day} de {article.month} de {article.year}</span>
                                             </div>
 
                                         )
                                     })
                                 }
-                                <div className="seeArticles">
-                                    {!articles ? <button style={{background: currentColor}} onClick={() => setArticles(true)}>Ver más</button> :
-                                        <button style={{background: currentColor}} onClick={() => setArticles(false)}>Ver menos</button>}
-                                </div>
+                                {
+                                    dataArt.length > 4 &&
+                                    <div className="seeArticles">
+                                        {!articles ? <button style={{ background: currentColor }} onClick={() => setArticles(true)}>Ver más</button> :
+                                            <button style={{ background: currentColor }} onClick={() => setArticles(false)}>Ver menos</button>}
+                                    </div>
+                                }
                                 <div>
                                     <div className="containerNumbers">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bookmarks" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#706a81" fill="none" stroke-linecap="round" strokeLinejoin="round">
@@ -226,7 +253,7 @@ const Home = () => {
                                         })}
                                     </div>
                                     <div className="seeArticles">
-                                        <button style={{background: currentColor}}>Ver más</button>
+                                        <button style={{ background: currentColor }}>Ver más</button>
                                     </div>
                                 </div>
                                 <div>
@@ -264,7 +291,7 @@ const Home = () => {
                                         })}
                                     </div>
                                     <div className="seeArticles">
-                                        <button style={{background: currentColor}}>Ver más</button>
+                                        <button style={{ background: currentColor }}>Ver más</button>
                                     </div>
                                 </div>
                             </div>
