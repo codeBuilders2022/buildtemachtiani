@@ -193,7 +193,7 @@ const CreateArticle = () => {
                             <div className="col3">
 
                                 <Input title={"Nombre del artículo"} placeholder={"Nombre del artículo"} className={"inputArticleName"} id="name" onChange={(e) => { UpdateValue(e, "name", inputList, setInputList) }}></Input>
-                                <Input title={"Nombre del autor(s)"} placeholder={"Nombre del autor(s)"} className={"inputArticleName"} id="autor" onChange={(e) => { UpdateValue(e, "autor", inputList, setInputList) }}></Input>
+                                <Input title={"Nombre del autor"} placeholder={"Nombre del autor"} className={"inputArticleName"} id="autor" onChange={(e) => { UpdateValue(e, "autor", inputList, setInputList) }}></Input>
 
                             </div>
                             <div className="col4">
