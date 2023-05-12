@@ -25,6 +25,7 @@ const Log = () => {
     confirm_password: { value: null, validationType: "empty" },
     orcid: { value: null, validationType: "empty" },
     ocupation: { value: null, validationType: "empty" },
+    institute: {value: null, validationType: "empty"},
     academic_level: { value: null, validationType: "empty" },
   });
 
@@ -207,7 +208,7 @@ const Log = () => {
           <div className="tamanio_cards three_card">
             <div className="inside_three">
               <h1>Tipo de cuenta</h1>
-              <div className="inside_card">
+              <div className="inside_card inside_card_three">
                 <div className="cnt-orcid">
                   <Input title={"Orcid ID"} placeholder={"Orcid ID"} id={"orcid"} onChange={(e) => UpdateValue(e, "orcid", inputList, setInputList)} />
                   <label className="orcid_">Solo el <a href="https://orcid.org/" style={{color: "blue"}} target="_blank" rel="noreferrer">Registro ORCID</a> puede asignar ORCID iDs. Debes aceptar sus
@@ -215,6 +216,7 @@ const Log = () => {
                     (pe. https://orcid.org/0000-0002-1825-0097).
                   </label>
                 </div>
+                <Input title={"Instituto"} placeholder={"Instituto" } id={"institute"} onChange={(e) => UpdateValue(e, "institute", inputList, setInputList)}/>
                 <Select title={"Ocupación"} placeholder={"Ocupación"} options={ocupation} value={inputList.ocupation.value} id={"ocupation"} onChange={(e) => UpdateValue(e, "ocupation", inputList, setInputList)} />
                 <Select title={"Nivel académico"} placeholder={"Nivel académico"} options={academic} value={inputList.academic_level.value} id={"academic_level"} onChange={(e) => UpdateValue(e, "academic_level", inputList, setInputList)} />
               </div>

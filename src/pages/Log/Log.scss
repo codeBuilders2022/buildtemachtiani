@@ -130,7 +130,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 9px;
+            // gap: 9px;
+
+            .inside_card_three{
+              gap: 20px;
+            }
           }
 
           .th_ {
