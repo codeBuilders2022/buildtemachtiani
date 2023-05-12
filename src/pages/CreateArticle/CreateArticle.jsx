@@ -9,6 +9,7 @@ import { ColorValidation, SubmitValidation, UpdateValue } from "../../utilities/
 import { CorrectModal } from "../../components/molecules/modals/Modals";
 import { json, useNavigate } from "react-router-dom";
 import { uploadArticle } from "./api";
+import { Editor } from 'primereact/editor';
 
 const CreateArticle = () => {
     const [word, setWord] = useState(null)
@@ -23,7 +24,11 @@ const CreateArticle = () => {
         idiom: { value: null, validationType: "empty" },
         claveWord: { value: null, validationType: "empty" },
         interesConflict: { value: null, interesConflict: "empty" },
+        reference: { value: null, interesConflict: "empty" },
     })
+    const [textAreaResume, setTextAreaResume] = useState(null)
+    const [textAreaInteresConflict, setTextAreaInteresConflict] = useState(null)
+    const [textAreaReference, setTextAreaReference] = useState(null)
     useEffect(() => {
         for (const propertyName in inputList) {
             if (document.getElementById(propertyName)) {
@@ -31,6 +36,15 @@ const CreateArticle = () => {
             }
         }
     }, [inputList])
+    useEffect(()=>
+    {
+        const inputListCopy = {...inputList}
+        inputListCopy.resume.value = textAreaResume;
+        inputListCopy.interesConflict.value = textAreaInteresConflict;
+        inputListCopy.reference.value = textAreaReference;
+        setInputList(inputListCopy)
+        console.log("textAreaResume",textAreaResume)
+    },[textAreaResume,textAreaInteresConflict,textAreaReference])
     useEffect(() => {
         let inputListCopy = { ...inputList }
         inputListCopy.word.value = word;
@@ -68,6 +82,7 @@ const CreateArticle = () => {
         { name: "Ingles", value: "en" },
         { name: "Nauatl", value: "nu" },
     ]
+    console.log("inputList.interesConflict.value", inputList)
     return (
         <>
             <div className="CreateArticle">
@@ -97,11 +112,14 @@ const CreateArticle = () => {
                             </div>
                             <div className="col4">
 
-                                <div className="minititle">
-                                    <div>Resumen</div>
-                                    <div>{textAreaConterword}/500</div>
+                                <div className="textArea-createArticle">
+                                    <div className="minititle">
+                                        <div>Resumen</div>
+                                        <div>{textAreaConterword}/500</div>
+                                    </div>
+                                    <Editor value={textAreaResume} id="resume" onTextChange={(e) => { setTextAreaResume(e.htmlValue) }} style={{ height: '300px' }} />
                                 </div>
-                                <textarea value={textAreaConter} className="textArea-createArticle" id="resume" onChange={(e) => { UpdateValue(e, "resume", inputList, setInputList) }} onInput={handleInput}></textarea>
+                                {/* <textarea value={textAreaConter} className="textArea-createArticle" id="resume" onChange={(e) => { UpdateValue(e, "resume", inputList, setInputList) }} onInput={handleInput}></textarea> */}
                             </div>
                         </div>
                         <div className="extra-parent">
@@ -110,20 +128,27 @@ const CreateArticle = () => {
                                 <Input title={"Palabra clave"} placeholder={"Palabra clave"} className={"inputArticleName"} id="claveWord" onChange={(e) => { UpdateValue(e, "claveWord", inputList, setInputList) }}></Input>
                             </div>
                             <div className="cole2">
-                                <div className="minititle">
-                                    <div>Conflicto de interés</div>
+                                {/* <textarea value={inputList.interesConflict.value} className="textArea-createArticle" id="interesConflict" onChange={(e) => { UpdateValue(e, "interesConflict", inputList, setInputList) }} ></textarea> */}
+                                <div className="textArea-createArticle">
+                                    <div className="minititle">
+                                        <div>Conflicto de interés</div>
+                                    </div>
+                                    <Editor value={textAreaInteresConflict} id="interesConflict" onTextChange={(e) => { setTextAreaInteresConflict(e.htmlValue) }} style={{ height: '80px' }} />
                                 </div>
-                                <textarea value={inputList.interesConflict.value} className="textArea-createArticle" id="interesConflict" onChange={(e) => { UpdateValue(e, "interesConflict", inputList, setInputList) }} ></textarea>
-
                             </div>
 
                         </div>
 
-                        <div className="TextAreaContainer">
-                            <div className="minititle" style={{ marginTop: '8px' }}>
-                                <div>Conflicto de interés</div>
+                        <div className="TextAreaContainer" style={{ marginTop: '30px' }}>
+                            <div className="textArea-createArticle">
+                                <div className="minititle" >
+                                    <div>Conflicto de interés</div>
+                                </div>
+                                <Editor value={textAreaReference} id="reference" onTextChange={(e) => { setTextAreaReference(e.htmlValue) }} style={{ height: '150px' }} />
+
                             </div>
-                            <textarea style={{ height: "150px" }} value={inputList.interesConflict.value} className="textArea-createArticle" id="interesConflict" onChange={(e) => { UpdateValue(e, "interesConflict", inputList, setInputList) }} ></textarea>
+                            {/* <textarea style={{ height: "150px" }} value={inputList.interesConflict.value} className="textArea-createArticle" id="interesConflict" onChange={(e) => { UpdateValue(e, "interesConflict", inputList, setInputList) }} ></textarea> */}
+
                         </div>
                         <div className="staking-parent">
                             <div className="cols1">

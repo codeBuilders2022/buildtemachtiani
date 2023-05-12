@@ -113,7 +113,7 @@
   .textArea-createArticle {
     resize: none;
     width: 90%;
-    height: 90%;
+    height: fit-content;
     border-radius: 15px;
     padding: 10px;
     color: #000;
@@ -122,11 +122,12 @@
     margin-left: 20px;
     background: #f2f6fa;
     outline: none;
-    border: 2px solid #020203;
+    border: 2px solid transparent;
+
 
     @media screen and (max-width: 441px) {
       width: 100% !important;
-      height: 400px !important;
+      // height: 400px !important;
       margin-left: 0px;
     }
   }
@@ -180,6 +181,8 @@
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     margin-top: 8px;
+    padding: 0 5%;
+    gap: 20px;
     .cols1 {
       display: flex;
       justify-content: center;
