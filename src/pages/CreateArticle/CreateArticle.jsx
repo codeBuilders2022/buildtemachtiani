@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import './CreateArticle.scss'
 import ExteriorCard from "../../components/atoms/ExteriorCard/ExteriorCard";
 import Back from "../../components/atoms/Back/Back";
-import { Header, Input, Select } from "../../components";
+import { Button, Header, Input, Select } from "../../components";
 import InteriorCard from "../../components/atoms/InteriorCard/InteriorCard";
 import UploadWord from "../../components/molecules/UploadWord/UploadWord";
-import { ColorValidation, SubmitValidation, UpdateValue } from "../../utilities/Validations";
-import { CorrectModal } from "../../components/molecules/modals/Modals";
+import { ColorValidation, SubmitValidation, SubmitValidationStaking, UpdateValue, UpdateValueStaking } from "../../utilities/Validations";
+import { CorrectModal, IncorrectModal } from "../../components/molecules/modals/Modals";
 import { json, useNavigate } from "react-router-dom";
 import { uploadArticle } from "./api";
 import { Editor } from 'primereact/editor';
@@ -26,25 +26,110 @@ const CreateArticle = () => {
         interesConflict: { value: null, interesConflict: "empty" },
         reference: { value: null, interesConflict: "empty" },
     })
+
+
+    //----------------------------------------------------------------------------------------------------->>>>>>> STAKING INPUT LOGIC <<<<<<<<<<<<<<<<<-----------------------
+    //NESECITAMOS UNA VARIABLE QUE LLEVE LA CUENTA DEL SIGUIENTE ELEMENTO A AÑADIR (se incia en -1 por que si sumamos o agramos uno)
+    const [counterStaking, setCounterStaking] = useState(-1)
+    //SE DELARARA ASI EL INPUT LIST YA QUE ES UN ARREGLO DINAMICO NECESITAMOS PONERLE UN CONTADOR 
+    const [inputListstaking, setinputListstaking] = useState([])
+ 
+    //funcion para añadir nuevo elemento al arreglo 
+    const addNewElement = () => {
+        //se coloca la nueva funcion SubmitValidationStaking para validar staking inputs
+        if (SubmitValidationStaking(inputListstaking, setinputListstaking)) {
+            let newCont = counterStaking;
+            // se agrega nuevo elemento sumando uno al contador gloval counterStaking
+            newCont = newCont + 1
+            let inputListstakingCopy = [...inputListstaking];
+            inputListstakingCopy.push({
+                [`nameStaking${newCont}`]: { value: null, validationType: "empty" },
+                [`lastName${newCont}`]: { value: null, validationType: "empty" },
+                [`Orcid${newCont}`]: { value: null, validationType: "empty" },
+                [`Titulo${newCont}`]: { value: null, validationType: "empty" },
+                [`Email${newCont}`]: { value: null, validationType: "empty" },
+                [`pais${newCont}`]: { value: null, validationType: "empty" },
+            })
+            setinputListstaking(inputListstakingCopy);
+            setCounterStaking(newCont)
+        }
+
+    }
+
+    useEffect(() => {
+        //nesecitamos itera input list staking para recorrer cada uno de los objetos y validalos por separado
+        inputListstaking.map((item, key) => {
+
+            for (const propertyName in item) {
+                if (document.getElementById(propertyName)) {
+
+                    ColorValidation(propertyName, item);
+                }
+            }
+        })
+        // }
+
+    }, [inputListstaking])
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------
     const [textAreaResume, setTextAreaResume] = useState(null)
     const [textAreaInteresConflict, setTextAreaInteresConflict] = useState(null)
     const [textAreaReference, setTextAreaReference] = useState(null)
+    const [isWrited, setIsWrited] = useState({
+        textAreaResumeW: false,
+        textAreaInteresConflictW: false,
+        textAreaReferenceW: false,
+    })
+
     useEffect(() => {
+        if (textAreaResume) {
+            let isWritedCopy = { ...isWrited };
+            isWritedCopy.textAreaResumeW = true
+            setIsWrited(isWritedCopy)
+        }
+        if (textAreaInteresConflict) {
+            let isWritedCopy = { ...isWrited };
+            isWritedCopy.textAreaInteresConflictW = true
+            setIsWrited(isWritedCopy)
+        }
+        if (textAreaReference) {
+            let isWritedCopy = { ...isWrited };
+            isWritedCopy.textAreaReferenceW = true;
+            setIsWrited(isWritedCopy)
+        }
+
+
+
+        if (isWrited.textAreaResumeW == true && textAreaResume == null) {
+            let inputListCopy = { ...inputList }
+            inputListCopy.resume.value = ""
+            setInputList(inputListCopy)
+        }
+        if (isWrited.textAreaInteresConflictW == true && textAreaInteresConflict == null) {
+            let inputListCopy = { ...inputList }
+            inputListCopy.interesConflict.value = ""
+            setInputList(inputListCopy)
+        }
+        if (isWrited.textAreaReferenceW == true && textAreaReference == null) {
+            let inputListCopy = { ...inputList }
+            inputListCopy.reference.value = ""
+            setInputList(inputListCopy)
+        }
+
         for (const propertyName in inputList) {
             if (document.getElementById(propertyName)) {
                 ColorValidation(propertyName, inputList);
             }
         }
     }, [inputList])
-    useEffect(()=>
-    {
-        const inputListCopy = {...inputList}
+    useEffect(() => {
+        const inputListCopy = { ...inputList }
         inputListCopy.resume.value = textAreaResume;
         inputListCopy.interesConflict.value = textAreaInteresConflict;
         inputListCopy.reference.value = textAreaReference;
         setInputList(inputListCopy)
-        console.log("textAreaResume",textAreaResume)
-    },[textAreaResume,textAreaInteresConflict,textAreaReference])
+        console.log("textAreaResume", textAreaResume)
+    }, [textAreaResume, textAreaInteresConflict, textAreaReference])
     useEffect(() => {
         let inputListCopy = { ...inputList }
         inputListCopy.word.value = word;
@@ -55,11 +140,17 @@ const CreateArticle = () => {
 
 
         if (SubmitValidation(inputList, setInputList)) {
+            if (SubmitValidationStaking(inputListstaking, setinputListstaking)) {
+                uploadArticle(inputList,inputListstaking, navigate)
+                // navigate("/")
+            }
+            else {
+                IncorrectModal("¡Ingrese todos los campos requeridos!")
+            }
 
-
-            uploadArticle(inputList, textAreaConter, navigate)
-            // CorrectModal("¡Artículo enviado correctamente!");
-            // navigate("/")
+        }
+        else {
+            IncorrectModal("¡Ingrese todos los datos del autor!")
         }
 
     }
@@ -72,9 +163,6 @@ const CreateArticle = () => {
             setTextAreaConter(nuevoTexto);
             setTextAreaConterword(count)
         } else {
-            // const textoRecortado = nuevoTexto.substring(0, 500);
-            // console.log("textoRecortado", textoRecortado)
-            // setTextAreaConter(textoRecortado);
         }
     }
     const idiomOprions = [
@@ -82,7 +170,12 @@ const CreateArticle = () => {
         { name: "Ingles", value: "en" },
         { name: "Nauatl", value: "nu" },
     ]
-    console.log("inputList.interesConflict.value", inputList)
+    const paisOprions = [
+        { name: "México", value: "México" },
+        { name: "Cuba", value: "Cuba" },
+        { name: "Canada", value: "Canada" },
+    ]
+
     return (
         <>
             <div className="CreateArticle">
@@ -97,13 +190,6 @@ const CreateArticle = () => {
                                     <div className="wordName">{word?.name}</div>
                                 </div>
                             </div>
-                            {/* <div className="col2"> */}
-                            {/* <div className="minititle">Fecha de publicación</div>
-                                <Input type="date" className={"inputDate"} id="date" onChange={(e) => { UpdateValue(e, "date", inputList, setInputList) }}></Input>
-                                <div className="description">
-                                    *La fecha se agrega automáticamente cuando se envía un nuevo artículo.
-                                </div> */}
-                            {/* </div> */}
                             <div className="col3">
 
                                 <Input title={"Nombre del artículo"} placeholder={"Nombre del artículo"} className={"inputArticleName"} id="name" onChange={(e) => { UpdateValue(e, "name", inputList, setInputList) }}></Input>
@@ -117,7 +203,7 @@ const CreateArticle = () => {
                                         <div>Resumen</div>
                                         <div>{textAreaConterword}/500</div>
                                     </div>
-                                    <Editor value={textAreaResume} id="resume" onTextChange={(e) => { setTextAreaResume(e.htmlValue) }} style={{ height: '300px' }} />
+                                    <Editor className="editor" value={textAreaResume} id="resume" onTextChange={(e) => { setTextAreaResume(e.htmlValue) }} style={{ height: '300px' }} />
                                 </div>
                                 {/* <textarea value={textAreaConter} className="textArea-createArticle" id="resume" onChange={(e) => { UpdateValue(e, "resume", inputList, setInputList) }} onInput={handleInput}></textarea> */}
                             </div>
@@ -133,49 +219,77 @@ const CreateArticle = () => {
                                     <div className="minititle">
                                         <div>Conflicto de interés</div>
                                     </div>
-                                    <Editor value={textAreaInteresConflict} id="interesConflict" onTextChange={(e) => { setTextAreaInteresConflict(e.htmlValue) }} style={{ height: '80px' }} />
+                                    <Editor className="editor" value={textAreaInteresConflict} id="interesConflict" onTextChange={(e) => { setTextAreaInteresConflict(e.htmlValue) }} style={{ height: '80px' }} />
                                 </div>
                             </div>
 
                         </div>
 
-                        <div className="TextAreaContainer" style={{ marginTop: '30px' }}>
+                        {/* <div className="TextAreaContainer" style={{ marginTop: '30px' }}>
                             <div className="textArea-createArticle">
                                 <div className="minititle" >
-                                    <div>Conflicto de interés</div>
+                                    <div>Referencias</div>
                                 </div>
-                                <Editor value={textAreaReference} id="reference" onTextChange={(e) => { setTextAreaReference(e.htmlValue) }} style={{ height: '150px' }} />
+                                <Editor value={textAreaReference}   className="editor" id="reference" onTextChange={(e) => { setTextAreaReference(e.htmlValue) }} style={{ height: '150px' }} />
 
                             </div>
-                            {/* <textarea style={{ height: "150px" }} value={inputList.interesConflict.value} className="textArea-createArticle" id="interesConflict" onChange={(e) => { UpdateValue(e, "interesConflict", inputList, setInputList) }} ></textarea> */}
 
+                        </div> */}
+
+                        <div className="parent-editor">
+                            <div className="colE1">
+                                <Button className={"buttonStaking btn_primary"} title={"Añadir nuevo autor"} onClick={() => addNewElement()}></Button>
+                            </div>
+                            <div className="colE2">
+                                {/* <div className="TextAreaContainer" style={{ marginTop: '30px' }}> */}
+                                    <div className="textArea-createArticle" style={{ marginTop: '30px' }}>
+                                        <div className="minititle" >
+                                            <div>Referencias</div>
+                                        </div>
+                                        <Editor value={textAreaReference} className="editor" id="reference" onTextChange={(e) => { setTextAreaReference(e.htmlValue) }} style={{ height: '150px' }} />
+
+                                    </div>
+
+                                </div>
+                            {/* </div> */}
                         </div>
-                        <div className="staking-parent">
-                            <div className="cols1">
-                                <Input title={"nombre"} placeholder={"nombre"} className={"inputArticleName"} id="nameStaking" onChange={(e) => { UpdateValue(e, "nameStaking", inputList, setInputList) }}></Input>
 
-                            </div>
-                            <div className="cols2">
-                                <Input title={"Palabra clave"} placeholder={"Palabra clave"} className={"inputArticleName"} id="claveWord" onChange={(e) => { UpdateValue(e, "claveWord", inputList, setInputList) }}></Input>
+                        {
+                            inputListstaking.map((item, key) => {
+                                return (
+                                    <>
+                                        <div className="staking-parent">
+                                            <div className="cols1">
+                                                <Input title={"nombre"} placeholder={"nombre"} className={"inputArticleName"} id={`nameStaking${key}`} onChange={(e) => { UpdateValueStaking(e, `nameStaking${key}`, key, inputListstaking, setinputListstaking) }}></Input>
 
-                            </div>
-                            <div className="cols3">
-                                <Input title={"Palabra clave"} placeholder={"Palabra clave"} className={"inputArticleName"} id="claveWord" onChange={(e) => { UpdateValue(e, "claveWord", inputList, setInputList) }}></Input>
+                                            </div>
+                                            <div className="cols2">
+                                                <Input title={"Apellido"} placeholder={"Apellido"} className={"inputArticleName"} id={`lastName${key}`} onChange={(e) => { UpdateValueStaking(e, `lastName${key}`, key, inputListstaking, setinputListstaking) }}></Input>
 
-                            </div>
-                            <div className="cols4">
-                                <Input title={"Palabra clave"} placeholder={"Palabra clave"} className={"inputArticleName"} id="claveWord" onChange={(e) => { UpdateValue(e, "claveWord", inputList, setInputList) }}></Input>
+                                            </div>
+                                            <div className="cols3">
+                                                <Input title={"Orcid"} placeholder={"Orcid"} className={"inputArticleName"} id={`Orcid${key}`} onChange={(e) => { UpdateValueStaking(e, `Orcid${key}`, key, inputListstaking, setinputListstaking) }}></Input>
 
-                            </div>
-                            <div className="cols5">
-                                <Input title={"Palabra clave"} placeholder={"Palabra clave"} className={"inputArticleName"} id="claveWord" onChange={(e) => { UpdateValue(e, "claveWord", inputList, setInputList) }}></Input>
+                                            </div>
+                                            <div className="cols4">
+                                                <Input title={"Titulo"} placeholder={"Titulo"} className={"inputArticleName"} id={`Titulo${key}`} onChange={(e) => { UpdateValueStaking(e, `Titulo${key}`, key, inputListstaking, setinputListstaking) }}></Input>
 
-                            </div>
-                            <div className="cols6">
-                                <Input title={"Palabra clave"} placeholder={"Palabra clave"} className={"inputArticleName"} id="claveWord" onChange={(e) => { UpdateValue(e, "claveWord", inputList, setInputList) }}></Input>
+                                            </div>
+                                            <div className="cols5">
+                                                <Input title={"Email"} placeholder={"Email"} className={"inputArticleName"} id={`Email${key}`} onChange={(e) => { UpdateValueStaking(e, `Email${key}`, key, inputListstaking, setinputListstaking) }}></Input>
 
-                            </div>
-                        </div>
+                                            </div>
+                                            <div className="cols6">
+                                                <Select title={"País"} value={item[`pais${key}`].value} options={paisOprions} placeholder={"País"} className={"selectSize"} id={`pais${key}`} onChange={(e) => { UpdateValueStaking(e, `pais${key}`, key, inputListstaking, setinputListstaking) }}></Select>
+
+                                            </div>
+                                        </div>
+                                        <hr className="hrstaking" />
+                                    </>
+                                )
+
+                            })
+                        }
 
                     </InteriorCard>
                 </ExteriorCard>
