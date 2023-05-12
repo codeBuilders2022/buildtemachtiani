@@ -217,4 +217,17 @@
       grid-area: 2 / 5 / 3 / 7;
     }
   }
+  .stakingButonContainer
+  {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px 0;
+    .buttonsStaking
+    {
+      width: 40px;
+      height: 40px;
+      font-size: 50px;
+      
+    }
+  }
 }
