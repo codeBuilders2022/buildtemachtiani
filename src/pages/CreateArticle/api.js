@@ -2,14 +2,19 @@ import axios from "axios"
 import { CorrectModal, IncorrectModal } from "../../components/molecules/modals/Modals";
 const urlApi = process.env.REACT_APP_API_URL;
 
-export const uploadArticle = async(inputList,textAreaConter,navigate)=>
+export const uploadArticle = async(inputList,inputListstaking,navigate)=>
 {
     const data = {
-        // "word":inputList.word.value,
-        "name":inputList.name.value,
-        "resume":textAreaConter,
-        "autor":inputList.autor.value,
-        "estatus":0
+        "dataArticle":
+        {
+            "name":inputList.name.value,
+            "autor":inputList.autor.value,
+            "estatus":0,
+            "resume":inputList.resume.value,
+            "interesConflict":inputList.interesConflict.value,
+            "reference":inputList.reference.value,
+            "stakingInputData":inputListstaking
+        }
     }
     const formData = new FormData();
     formData.append("files.word",inputList.word.value)
@@ -17,7 +22,7 @@ export const uploadArticle = async(inputList,textAreaConter,navigate)=>
     await axios.post(`${urlApi}/api/articles`,formData).then(()=>
     {
         CorrectModal("Articulo subido")
-        navigate("/article/dashboard")
+        // navigate("/article/dashboard")
     })
     .catch((res)=>
     {
