@@ -2,9 +2,9 @@ import React from 'react';
 import Button from '../../atoms/Button/Button';
 import './Header.scss'
 import { Skeleton } from 'primereact/skeleton';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
-const Header = ({ category, title, button, onClick, skeleton, url='#' }) => {
+const Header = ({ category, day, month, year, title, button, onClick, skeleton, url = '#' }) => {
   return (
     <>
       {
@@ -12,10 +12,12 @@ const Header = ({ category, title, button, onClick, skeleton, url='#' }) => {
           <>
             <div className={`mb-10 p-3 ${button ? "headerflex" : ""}`}>
               <div>
-                <h2 className="text-4xl dark:text-gray-400">{category}</h2>
-                <h1 className="centerText text-3xl font-extrabold tracking-tight dark:text-white text-black">
+                <h2 className="text-4xl lowercase first-letter:capitalize dark:text-gray-400">{category}</h2>
+                <h1 className="mt-10 mb-2 centerText text-2xl font-extrabold tracking-tight dark:text-white text-black">
                   {title}
                 </h1>
+                <p className="font-bold">Publicado: {day} {month} {year} </p>
+                <Link className="font-bold">DOI: https://doi.org/10.1093/icesjms/fsy035</Link>
               </div>
               <div>
                 {
@@ -35,7 +37,7 @@ const Header = ({ category, title, button, onClick, skeleton, url='#' }) => {
               <div>
                 {/* <h2 className="text-4xl dark:text-gray-400">{category}</h2> */}
                 <h1 className="centerText text-3xl font-extrabold tracking-tight dark:text-white text-black">
-                <Skeleton width='250px' height='36px'></Skeleton>
+                  <Skeleton width='250px' height='36px'></Skeleton>
                   {/* {title} */}
                 </h1>
               </div>

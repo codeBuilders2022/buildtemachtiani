@@ -92,7 +92,9 @@ const Sidebar = () => {
                     </div>
                 </div>
                 <div className="editorial">
-                    <button className="comite">Comité Editorial</button>
+                    <Link to="/committee">
+                        <button className="comite">Comité Editorial</button>
+                    </Link>
                     <div className="team">
                         {comite.map((position, index) => {
                             return (
