@@ -57,7 +57,7 @@ const Committee = () => {
         <div className="Committee">
             <ExteriorCard>
                 <Back className={"_back_"} url={"/"} />
-                <main className="container">
+                <div className="container">
                     <Header title={"COMITÉ"} />
                     <div className="type">
                         <button className={!active && "active"} onClick={() => { setActive(false) }}>Editorial</button>
@@ -86,7 +86,7 @@ const Committee = () => {
                         })}
 
                     </div>
-                </main>
+                </div>
             </ExteriorCard>
         </div >
     )
