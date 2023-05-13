@@ -90,7 +90,7 @@ const Navbarr = () => {
             }
             {isLoggedIn ? (
               <div className='profile_a'>
-                <div className="cnt_profile" onClick={() => navigate("/article/dashboard")}>
+                <div className="cnt_profile" onClick={() => navigate("/user/dashboard")}>
                   <h1 className='dark:text-white'>{username}</h1>
                 </div>
                 <button onClick={() => setOpenModal(!openModal)}>
