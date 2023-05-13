@@ -11,52 +11,60 @@ import revisor from "../../../assets/images/revisor.jpg"
 import editor from "../../../assets/images/editora.jpg"
 
 import { useStateContext } from "../../../contexts/ContextProvider";
-import { getAxiosCommittee } from "../../../Api/Committee/Committee"
+import { getAxiosData } from "../../../Api/Committee/Committee"
 import { IncorrectModal } from "../../molecules/modals/Modals"
 
 const Sidebar = () => {
 
     const { currentColor } = useStateContext();
+    const [committeeDtas, setCommitteeDtas] = useState([]);
+    const [events, setEvents] = useState([])
 
     const options = [
         { id: 1, title: "Guía para autores", url: "/guide-authors" },
         { id: 2, title: "Acerca de", url: "/about" },
-        // { id: 3, title: "Preguntas frecuentes", url: "#" },
-        // { id: 4, title: "Guía para revisores", url: "#" },
-        // { id: 5, title: "Mapa del sitio", url: "#" },
         { id: 5, title: "Misión y Visión", url: "/mission-vision" },
         { id: 5, title: "Politicas de la revista", url: "/magazine-policies" },
     ]
 
-    // const [events, setEvents] = useState([])
-
-    // useEffect(() => { getDatas()}, [])
-
-    // const getDatas = async () => {
-    //     try {
-    //         const [resCommittees] = await Promise.all([getAxiosCommittee("/api/events")]);
-    //         const commiteData = resCommittees.data.map(({id, attributes: { events, date, url}}) => {
-    //             return {id, events, date, url}
-    //         })
-    //         setEvents(commiteData)
-    //     } catch (error) {
-    //         IncorrectModal("¡Algo salió mal, intentalo más tarde!", true);
-    //     }
-    // }
-
     
 
-    const [events, setEvents] = useState([
-        { events: "Congreso Internacional de Educación para la Salud", date: "2023.06.03", url: "https://registro-ciam.hcg.gob.mx/" },
-        { events: "Congreso Internacional de Estudiantes de Ciencias de la Salud", date: "2023.08.14", url: "https://registro-ciam.hcg.gob.mx/" },
-        { events: "XXV Congreso Internacional Avances en Medicina", date: "2024.03.17", url: "https://registro-ciam.hcg.gob.mx/" },
-    ])
+    useEffect(() => { getDatas()}, [])
+    //Obtenemos los datos de la API
+    const getDatas = async () => {
+        try {
+            const [resCommittees] = await Promise.all([getAxiosData("/api/events")]);
+            const commiteData = resCommittees.data.map(({id, attributes: { events, date, siteurl}}) => {
+                return {id, events, date, siteurl}
+            })
+            setEvents(commiteData)
+        } catch (error) {
+            IncorrectModal("¡Algo salió mal, intentalo más tarde!", true);
+        }
+    }
 
-    const [comite, setComite] = useState([
-        { occupation: "Director", name: "Elena Cardona Álvarez", grade: "Dra.", email: "joel@gmail.com", img: director },
-        { occupation: "Revisor en jefe", name: "Carlos Millán Blanco", grade: "Dr.", email: "joelarian@gmail.com", img: revisor },
-        { occupation: "Editor en jefe", name: "Julia Rocha Corona", grade: "Dra.", email: "joeltrincado@gmail.com", img: editor },
-    ])
+    useEffect(() => { getDatasCommittee() },[]);
+
+    const getDatasCommittee = async () => {
+      try {
+        // Hacemos una llamada concurrente a la API utilizando Promise.all()
+        const [resCommittees] = await Promise.all([ getAxiosData("/api/committees?populate=profile") ]);
+
+        console.log(resCommittees, "REs")
+        
+        // // Mapeamos los datos obtenidos de los comités y extraemos los atributos relevantes
+        const committeeData = resCommittees.data.map(({ id, attributes: { committee, email, fullname, profile: { data: { attributes: { formats } } } } }) => {
+          const url = formats?.large?.url || formats?.medium?.url || formats?.small?.url || formats?.thumbnail?.url || resCommittees?.data[0]?.attributes?.profile?.data?.attributes?.url;
+          return { id, committee, email, fullname, image: process.env.REACT_APP_API_URL + url };
+        });
+
+        console.log(committeeData, "satas")
+        // // Asignamos los datos de los comités a los estados correspondientes en el componente
+        setCommitteeDtas(committeeData.slice(0, 3));
+      } catch (error) {
+        IncorrectModal("¡Algo salió mal, intentalo más tarde!", true);
+      }
+    };
 
     const activeLinks = ({ isActive }) => {
         return {
@@ -84,14 +92,18 @@ const Sidebar = () => {
                 <div className="events_container">
                     <div className="headerEvent">Próximos Eventos</div>
                     <div className="events">
-                        {events.map((e, index) => {
-                            return (
-                                <div className="event" key={index}>
-                                    <p className="date">{e.date}</p>
-                                    <a href={`${e.url}`} className="titleEvent">{e.events}</a>
-                                </div>
-                            )
-                        })}
+                        {events.length === 0 ? (
+                            <label className="nextText">Aún no hay eventos próximos.</label>
+                        ):(
+                            events.map((e, index) => {
+                                return (
+                                    <div className="event" key={index}>
+                                        <p className="date">{e.date}</p>
+                                        <a href={e.siteurl} target="_blank" rel="noreferrer"  className="titleEvent">{e.events}</a>
+                                    </div>
+                                )
+                            })
+                        )}
                     </div>
                 </div>
                 <div className="cnt_bank_">
@@ -101,40 +113,44 @@ const Sidebar = () => {
                             <path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
                             <circle cx="12" cy="13" r="3" />
                         </svg>
-                        <div style={{display: "flex", gap: 5, alignItems: "center", color: "#8a8a8a" }}>
-                            <strong>Banco de imágenes</strong>
-                            <label style={{fontSize: 8}}>proximante</label>
-                        </div>
+                        <strong>Banco de imágenes</strong>
                     </div>
                     <div className="imgBank">
                         <img src={img1} />
                         <div className="eye">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-eye" width="60" height="60" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#ffffff" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                            {/* <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-eye" width="60" height="60" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#ffffff" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <circle cx="12" cy="12" r="2" />
                                 <path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7" />
-                            </svg>
+                            </svg> */}
+                            <label>Proximamente</label>
                         </div>
                     </div>
-                    <div className="mant-black"></div>
                 </div>
                 <div className="editorial">
                     <Link to="/committee">
                         <button className="comite">Comité Editorial</button>
                     </Link>
                     <div className="team">
-                        {comite.map((position, index) => {
-                            return (
-                                <div className="cardTeam" key={index}>
-                                    <img src={position.img} />
-                                    <div className="info">
-                                        <p>{position.grade} {position.name}</p>
-                                        <p style={{ fontStyle: 'italic' }}>{position.occupation}</p>
-                                        <p style={{ fontStyle: 'italic' }}>{position.email}</p>
+                        {committeeDtas.length === 0 ? (
+                            <label>Aún no hay comité</label>
+                        ):(
+                            committeeDtas.map((position, index) => {
+                                return (
+                                    <div className="cardTeam" key={index}>
+                                        <div className="cnt_imagen_">
+                                            <img src={position.image} className="Imag_g"/>
+    
+                                        </div>
+                                        <div className="info">
+                                            <p>{position.fullname}</p>
+                                            <p style={{ fontStyle: 'italic' }}>{position.committee}</p>
+                                            <p style={{ fontStyle: 'italic' }}>{position.email}</p>
+                                        </div>
                                     </div>
-                                </div>
-                            )
-                        })}
+                                )
+                            })
+                        )}
                         <div className="seeComite">
                             <Link to="/committee">
                                 <button>Ver más...</button>
