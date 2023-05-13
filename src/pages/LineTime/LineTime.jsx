@@ -33,7 +33,7 @@ const LineTime = () => {
   
   return (
     <div className="dark:bg-gray-600 bg-white dark:text-white LineTime">
-    <Back className={"_back_"} url={"/article/dashboard"}/>
+    <Back className={"_back_"} url={"/user/dashboard"}/>
       <Header title={"Etapas de mi artículo"} />
       <div className="cnt_steps bg-slate-100 dark:bg-gray-500">
         <StepsLine estatus={data?.estatus}/>
