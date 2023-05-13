@@ -5,12 +5,14 @@ import "./Sidebar.scss"
 import books from "../../../assets/images/books.png"
 import img1 from "../../../assets/images/udg.jpg"
 import { Link, NavLink } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import director from "../../../assets/images/director.jpg"
 import revisor from "../../../assets/images/revisor.jpg"
 import editor from "../../../assets/images/editora.jpg"
 
 import { useStateContext } from "../../../contexts/ContextProvider";
+import { getAxiosCommittee } from "../../../Api/Committee/Committee"
+import { IncorrectModal } from "../../molecules/modals/Modals"
 
 const Sidebar = () => {
 
@@ -25,10 +27,29 @@ const Sidebar = () => {
         { id: 5, title: "Misión y Visión", url: "/mission-vision" },
         { id: 5, title: "Politicas de la revista", url: "/magazine-policies" },
     ]
+
+    // const [events, setEvents] = useState([])
+
+    // useEffect(() => { getDatas()}, [])
+
+    // const getDatas = async () => {
+    //     try {
+    //         const [resCommittees] = await Promise.all([getAxiosCommittee("/api/events")]);
+    //         const commiteData = resCommittees.data.map(({id, attributes: { events, date, url}}) => {
+    //             return {id, events, date, url}
+    //         })
+    //         setEvents(commiteData)
+    //     } catch (error) {
+    //         IncorrectModal("¡Algo salió mal, intentalo más tarde!", true);
+    //     }
+    // }
+
+    
+
     const [events, setEvents] = useState([
-        { title: "Congreso Internacional de Educación para la Salud", date: "2023.06.03", urlSign: "https://registro-ciam.hcg.gob.mx/" },
-        { title: "Congreso Internacional de Estudiantes de Ciencias de la Salud", date: "2023.08.14", urlSign: "https://registro-ciam.hcg.gob.mx/" },
-        { title: "XXV Congreso Internacional Avances en Medicina", date: "2024.03.17", urlSign: "https://registro-ciam.hcg.gob.mx/" },
+        { events: "Congreso Internacional de Educación para la Salud", date: "2023.06.03", url: "https://registro-ciam.hcg.gob.mx/" },
+        { events: "Congreso Internacional de Estudiantes de Ciencias de la Salud", date: "2023.08.14", url: "https://registro-ciam.hcg.gob.mx/" },
+        { events: "XXV Congreso Internacional Avances en Medicina", date: "2024.03.17", url: "https://registro-ciam.hcg.gob.mx/" },
     ])
 
     const [comite, setComite] = useState([
@@ -67,7 +88,7 @@ const Sidebar = () => {
                             return (
                                 <div className="event" key={index}>
                                     <p className="date">{e.date}</p>
-                                    <a href={`${e.urlSign}`} className="titleEvent">{e.title}</a>
+                                    <a href={`${e.url}`} className="titleEvent">{e.events}</a>
                                 </div>
                             )
                         })}
