@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 import "./LineTime.scss";
-import { Header } from "../../components";
-import StepsLine from "../../components/organisms/StepsLine/StepsLine";
-import Back from "../../components/atoms/Back/Back";
+import { Header } from "../../../components";
+import StepsLine from "../../../components/organisms/StepsLine/StepsLine";
+import Back from "../../../components/atoms/Back/Back";
 import { useParams } from "react-router-dom";
 import { getDataLine } from "./api";
 
@@ -24,7 +24,6 @@ const LineTime = () => {
       {
         namesCpy = [...namesCpy]
         namesCpy.push(item[`nameStaking${key}`].value +" "+item[`lastName${key}`].value)
-        console.log("item",item[`nameStaking${key}`].value +" "+item[`lastName${key}`].value )
       })
       setNames(namesCpy)
     }

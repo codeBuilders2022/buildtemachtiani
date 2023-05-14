@@ -23,7 +23,6 @@ export const changePassword = async (id,inputList,idUser,navigate)=>
     await axios.put(`${urlApi}/api/registers/${encriptaId}`,dataSend)
     .then((res)=>
     {
-        console.log("registers",res)
         
     })
     .catch(()=>
@@ -33,7 +32,6 @@ export const changePassword = async (id,inputList,idUser,navigate)=>
     await axios.put(`${urlApi}/api/users/${encriptaIdUser}`,passUser)
     .then((res)=>
     {
-        console.log("users",res)
         CorrectModal("Credenciales actualizadas")
         navigate("/")
     })

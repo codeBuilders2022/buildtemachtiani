@@ -49,16 +49,11 @@ const Sidebar = () => {
       try {
         // Hacemos una llamada concurrente a la API utilizando Promise.all()
         const [resCommittees] = await Promise.all([ getAxiosData("/api/committees?populate=profile") ]);
-
-        console.log(resCommittees, "REs")
-        
         // // Mapeamos los datos obtenidos de los comités y extraemos los atributos relevantes
         const committeeData = resCommittees.data.map(({ id, attributes: { committee, email, fullname, profile: { data: { attributes: { formats } } } } }) => {
           const url = formats?.large?.url || formats?.medium?.url || formats?.small?.url || formats?.thumbnail?.url || resCommittees?.data[0]?.attributes?.profile?.data?.attributes?.url;
           return { id, committee, email, fullname, image: process.env.REACT_APP_API_URL + url };
         });
-
-        console.log(committeeData, "satas")
         // // Asignamos los datos de los comités a los estados correspondientes en el componente
         setCommitteeDtas(committeeData.slice(0, 3));
       } catch (error) {
@@ -153,7 +148,11 @@ const Sidebar = () => {
                         )}
                         <div className="seeComite">
                             <Link to="/committee">
-                                <button>Ver más...</button>
+                                {committeeDtas.length === 0 ?(
+                                    null
+                                ):(
+                                    <button>Ver más...</button>
+                                )}
                             </Link>
                         </div>
                     </div>

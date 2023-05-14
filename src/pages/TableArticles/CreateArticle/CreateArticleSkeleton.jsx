@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import './CreateArticle.scss'
-import ExteriorCard from "../../components/atoms/ExteriorCard/ExteriorCard";
-import Back from "../../components/atoms/Back/Back";
-import { Header, Input } from "../../components";
-import InteriorCard from "../../components/atoms/InteriorCard/InteriorCard";
-import UploadWord from "../../components/molecules/UploadWord/UploadWord";
-import { ColorValidation, SubmitValidation, UpdateValue } from "../../utilities/Validations";
-import { CorrectModal } from "../../components/molecules/modals/Modals";
+import ExteriorCard from "../../../components/atoms/ExteriorCard/ExteriorCard";
+import Back from "../../../components/atoms/Back/Back";
+import { Header, Input } from "../../../components";
+import InteriorCard from "../../../components/atoms/InteriorCard/InteriorCard";
+import UploadWord from "../../../components/molecules/UploadWord/UploadWord";
+import { ColorValidation, SubmitValidation, UpdateValue } from "../../../utilities/Validations";
+import { CorrectModal } from "../../../components/molecules/modals/Modals";
 import { useNavigate } from "react-router-dom";
 import { Skeleton } from "primereact/skeleton";
 

@@ -161,6 +161,8 @@ const Log = () => {
         value,
       }));
 
+      newData.sort((a, b) => a.value.localeCompare(b.value, undefined, { sensitivity: 'base' }))
+
       setData(newData);
     } catch (error) {
       IncorrectModal("¡Algo salió mal, intentalo más tarde!", true)

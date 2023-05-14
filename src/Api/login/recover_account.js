@@ -47,7 +47,6 @@ const generateCode = () => {
 //////////////////////////////////////////////////////////////////////////////////////////////////
 const createCodeApi = async (email, code, navigate, id) => {
   let idUsers = await getIdUsers(email);
-  console.log("idUsers", idUsers);
 
   const data = {
     data: {
@@ -73,14 +72,11 @@ const findEmailF = async (email) => {
     );
 
     if (response.data.data.length != 0) {
-      console.log("true", response.data.data);
       return true;
     } else {
-      console.log("false", response.data.data);
       return false;
     }
   } catch (error) {
-    console.log("error en find email", error);
     throw error;
   }
 };
@@ -94,14 +90,11 @@ const sendEmail = async (email, subject, text) => {
       subject: subject,
       text: codestring,
     };
-    console.log("codestring", codestring);
     await axios
       .post(`${urlApi}/api/email`, data)
       .then((res) => {
-        console.log("entro");
       })
       .catch((res) => {
-        console.log("fallo");
       });
   } else {
   }
@@ -112,7 +105,6 @@ const updateCode = async (data, email, navigate, id) => {
     `${urlApi}/api/verify-codes?filters[email][$eq]=${email}`
   );
   let idUsers = await getIdUsers(email);
-  console.log("idUsers",idUsers);
   let newCode = generateCode();
   const newData = {
     data: {
@@ -124,8 +116,6 @@ const updateCode = async (data, email, navigate, id) => {
     newData
   );
   sendEmail(email, "Este es un código de verificación de temachtiani", newCode);
-  console.log("newCode", newCode.toString());
-  console.log("key", key);
   //encriptacion de codigo
   let codeEncrypt = Encrypt(newCode);
   codeEncrypt = codeEncrypt.replace(/\//g, "_");

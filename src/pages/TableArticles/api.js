@@ -33,6 +33,6 @@ export const getDataArticles = async (setData) => {
       setData(newData);
     })
     .catch((res) => {
-      console.log("res", res);
+      console.log(res);
     });
 };

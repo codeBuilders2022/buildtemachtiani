@@ -4,14 +4,10 @@ import { Routes, Route } from "react-router-dom";
 //Styles
 import "./App.scss";
 // Skeletons
-import LineTimeSkeleton from "../../../pages/LineTime/LineTimeSkeleton";
-import TableArticlesSkeleton from "../../../pages/TableArticles/TableArticlesSkeleton";
 import ArticlesSkeleton from "../../../pages/Home/Articles/ArticlesSkeleton";
-import Page404 from "../../../pages/Page404/Page404";
 import HomeSkeleton from "../../../pages/Home/HomeSkeleton";
 
 //Lazy
-const LineTime = lazy(() => import("../../../pages/LineTime/LineTime"));
 const Metrics = lazy(() => import("../../../pages/Metrics/Metrics"));
 const Articles = lazy(() => import("../../../pages/Home/Articles/Articles"));
 const Home = lazy(() => import("../../../pages/Home/Home"));
