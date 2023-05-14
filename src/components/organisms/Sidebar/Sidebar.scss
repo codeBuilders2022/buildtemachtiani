@@ -55,6 +55,13 @@
                     cursor: pointer;
                     background-color: #73639a85;
                     border-radius: 5px;
+
+                    label{
+                        font-size: 12px;
+                        text-align: center;
+                        font-style: italic;
+                        color: #fff;
+                    }
     
                     &:hover {
                         background-color: #73639aa2;
@@ -103,6 +110,12 @@
 
                 display: flex;
                 gap: 20px;
+
+                label{
+                    font-size: 12px;
+                    text-align: center;
+                    font-style: italic;
+                }
 
                 .cardTeam {
                     display: flex;

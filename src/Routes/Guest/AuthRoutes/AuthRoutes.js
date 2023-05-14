@@ -2,17 +2,17 @@ import React, { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 
 //Components
-import LineTimeSkeleton from "../../../pages/LineTime/LineTimeSkeleton";
-import CreateArticleSkeleton from "../../../pages/CreateArticle/CreateArticleSkeleton";
+import LineTimeSkeleton from "../../../pages/TableArticles/LineTime/LineTimeSkeleton";
+import CreateArticleSkeleton from "../../../pages/TableArticles/CreateArticle/CreateArticleSkeleton";
 import Page404 from "../../../pages/Page404/Page404";
 const TableArticles = lazy(() => import("../../../pages/TableArticles/TableArticles"));
 import TableArticlesSkeleton from "../../../pages/TableArticles/TableArticlesSkeleton";
 
 //Lazy
 const CreateArticle = lazy(() =>
-  import("../../../pages/CreateArticle/CreateArticle")
+  import("../../../pages/TableArticles/CreateArticle/CreateArticle")
 );
-const LineTime = lazy(() => import("../../../pages/LineTime/LineTime"));
+const LineTime = lazy(() => import("../../../pages/TableArticles/LineTime/LineTime"));
 
 const AuthRoutes = () => {
   return (

@@ -1,5 +1,5 @@
 import axios from "axios"
-import { CorrectModal, IncorrectModal } from "../../components/molecules/modals/Modals";
+import { CorrectModal, IncorrectModal } from "../../../components/molecules/modals/Modals";
 const urlApi = process.env.REACT_APP_API_URL;
 
 export const uploadArticle = async(inputList,inputListstaking,navigate)=>
@@ -26,7 +26,6 @@ export const uploadArticle = async(inputList,inputListstaking,navigate)=>
     })
     .catch((res)=>
     {
-        console.log(res)
         IncorrectModal("Fallo al subir articulo")
     })
 }

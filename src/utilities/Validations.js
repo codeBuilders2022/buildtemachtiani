@@ -157,7 +157,6 @@ export const UpdateValueStaking = (e, id, counter, inputList, setInputList) => {
   //     setInputList(inputCopy);
   // } else {
   if (e?.value) {
-    console.log("inputListStaking", inputList);
     let inputCopy = [...inputList];
     inputCopy[counter][id].value = e.value;
     setInputList(inputCopy);
@@ -374,7 +373,6 @@ export const SubmitValidationStaking = (
       ) {
         let inputCopy =  [...inputList ];
         inputCopy[i][inputName].value = "";
-        console.log("inputCopy",inputCopy)
         setInputList(inputCopy);
       }
 
