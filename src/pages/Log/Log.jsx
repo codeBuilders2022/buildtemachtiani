@@ -10,6 +10,7 @@ import "./Log.scss";
 import { ColorValidation, SubmitValidation, UpdateValue, ValidationPassword } from "../../utilities/Validations";
 import { CorrectModal, IncorrectModal, RegistroModal } from "../../components/molecules/modals/Modals";
 import { getAxiosCountrys, postAxiosRegister, userAxiosPost } from "../../Api/Register/Register";
+import { Encrypt } from "../../utilities/Hooks";
 
 const Log = () => {
 
@@ -45,6 +46,7 @@ const Log = () => {
 
   const [completedRegister, setCompletedRegister] = useState(false)
   const handleSubmit = async () => {
+    const type = Encrypt(process.env.REACT_APP_ACCOUNTTYPE)
     const validate = SubmitValidation(inputList, setInputList);
     const objetData = { "data": {} };
     const keysToTransform = ["country", "gender", "ocupation", "academic_level"];
@@ -57,6 +59,7 @@ const Log = () => {
           username: inputList.user.value,
           email: inputList.email.value,
           password: inputList.password.value,
+          typeAccount: type
         };
 
         const response = await userAxiosPost("/api/auth/local/register", saveUser);
