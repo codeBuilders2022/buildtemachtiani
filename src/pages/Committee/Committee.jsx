@@ -7,7 +7,7 @@ import { Header } from "../../components"
 import { getAxios } from "../../utilities/Axios"
 import { useEffect } from "react"
 import { IncorrectModal } from "../../components/molecules/modals/Modals"
-import { getAxiosCommittee } from "../../Api/Committee/Committee"
+import { getAxiosData } from "../../Api/Committee/Committee"
 
 const Committee = () => {
     const [active, setActive] = useState(false)
@@ -26,7 +26,7 @@ const Committee = () => {
         try {
             // Hacemos una llamada concurrente a la API utilizando Promise.all()
             const [resCommittees] = await Promise.all([
-                getAxiosCommittee("/api/committees?populate=profile")
+                getAxiosData("/api/committees?populate=profile")
             ]);
 
             // Mapeamos los datos obtenidos de los comités y extraemos los atributos relevantes
@@ -54,7 +54,7 @@ const Committee = () => {
         <div className="Committee">
             <ExteriorCard>
                 <Back className={"_back_"} url={"/"} />
-                <main className="container">
+                <div className="container">
                     <Header title={"COMITÉ"} />
                     <div className="type">
                         <button className={!active && "active"} onClick={() => { setActive(false) }}>Editorial</button>
@@ -83,7 +83,7 @@ const Committee = () => {
                         })}
 
                     </div>
-                </main>
+                </div>
             </ExteriorCard>
         </div >
     )

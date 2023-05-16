@@ -33,7 +33,7 @@ const CommitteeSkeleton = () => {
         <div className="Committee">
             <ExteriorCard>
                 <Back skeleton={true} className={"_back_"} />
-                <main className="container">
+                <div className="container">
                     <Header skeleton={true} title={"COMITÉ"} />
                     <div className="type">
                         <Skeleton width="100px" height="30px" />
@@ -60,7 +60,7 @@ const CommitteeSkeleton = () => {
                         })}
 
                     </div>
-                </main>
+                </div>
             </ExteriorCard>
         </div >
     )

@@ -9,7 +9,6 @@ export const loginConfir = async (data,setName,navigate)=>
         const authenticated = axios.post(urlApi+"/api/auth/local",data) 
         .then((res)=>
         {
-            console.log(res.data.user.username)
             if(res.data.user.confirmed === true){
                 setName(res.data)
                 localStorage.setItem("token",res.data.jwt)

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useStateContext } from "../../../contexts/ContextProvider";
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { Button } from "primereact/button";
 import "./Navbarr.scss"
 
 //Assets
@@ -54,16 +55,19 @@ const Navbarr = () => {
 
   const routes = [
     { id: 1, text: "Inicio", url: "/" },
-    { id: 1, text: "Inicia sesión", url: "/" },
-    { id: 1, text: "Únete", url: "/log" },
-    { id: 2, text: "Guia para autores", url: "/guide-authors" },
-    { id: 3, text: "Acerca de", url: "/about" },
-    { id: 4, text: "Misión y Visión", url: "/mission-vision" },
-    { id: 5, text: "Políticas de la revista", url: "/magazine-policies" },
+    { id: 8, text: "Mi perfil", url: "/user/dashboard" },
+    { id: 2, text: "Inicia sesión", url: "/login" },
+    { id: 3, text: "Únete", url: "/log" },
+    { id: 4, text: "Guia para autores", url: "/guide-authors" },
+    { id: 5, text: "Acerca de", url: "/about" },
+    { id: 6, text: "Misión y Visión", url: "/mission-vision" },
+    { id: 7, text: "Políticas de la revista", url: "/magazine-policies" },
+    { id: 9, text: "Cerrar sesión", url: "/logout" },
   ];
 
   const handleLogOut = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem("username")
     setIsLoggedIn(false);
     window.location.replace('/');
   }
@@ -90,9 +94,10 @@ const Navbarr = () => {
             }
             {isLoggedIn ? (
               <div className='profile_a'>
-                <div className="cnt_profile" onClick={() => navigate("/article/dashboard")}>
-                  <h1 className='dark:text-white'>{username}</h1>
-                </div>
+                <button></button>
+                <Button tooltip='Mi perfil' tooltipOptions={{position: 'bottom'}} className='cnt_profile' onClick={() => navigate("/user/dashboard")} >
+                  {username}
+                </Button>
                 <button onClick={() => setOpenModal(!openModal)}>
                   <img src={ArrowDonw} alt="" className={`Arrow_donw ${openModal && "rotate_"}`}/>
                 </button>
@@ -162,15 +167,64 @@ const Navbarr = () => {
               </div>
               <nav className="mt-6">
                 <ul className="my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
-                  {routes.map((_, idx) => (
-                    <li
-                      key={idx}
-                      onClick={() => setOpenNavbar(false)}
-                      className="relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400"
-                    >
-                      <NavLink to={_.url}>{_.text}</NavLink>
-                    </li>
-                  ))}
+                {routes.map((route, idx) => {
+                    if (route.text === "Inicia sesión" || route.text === "Únete") {
+                      if (isLoggedIn) {
+                        return null;
+                      } else {
+                        return (
+                          <li
+                            key={route.id}
+                            onClick={() => setOpenNavbar(false)}
+                            className="relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400"
+                          >
+                            <NavLink to={route.url}>{route.text}</NavLink>
+                          </li>
+                        );
+                      }
+                    } else if (route.text === "Mi perfil") {
+                      if (isLoggedIn) {
+                        return (
+                          <li
+                            key={route.id}
+                            onClick={() => setOpenNavbar(false)}
+                            className="relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400"
+                          >
+                            <NavLink to={route.url}>{route.text}</NavLink>
+                          </li>
+                        );
+                      } else {
+                        return null;
+                      }
+                    } else if (route.text === "Cerrar sesión") {
+                      if (isLoggedIn) {
+                        return (
+                          <li
+                            key={route.id}
+                            onClick={() => {
+                              handleLogOut();
+                              setOpenNavbar(false);
+                            }}
+                            className="relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400"
+                          >
+                            <NavLink to={route.url}>{route.text}</NavLink>
+                          </li>
+                        );
+                      } else {
+                        return null;
+                      }
+                    } else {
+                      return (
+                        <li
+                          key={route.id}
+                          onClick={() => setOpenNavbar(false)}
+                          className="relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400"
+                        >
+                          <NavLink to={route.url}>{route.text}</NavLink>
+                        </li>
+                      );
+                    }
+                  })}
                 </ul>
               </nav>
             </div>

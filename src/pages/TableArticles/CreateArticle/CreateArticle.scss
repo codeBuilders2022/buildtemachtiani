@@ -1,0 +1,279 @@
+.CreateArticle {
+  margin-top: 190px;
+  ._back_ {
+    position: absolute;
+    top: 110px;
+    left: 30px;
+
+    @media (max-width: 768px) {
+      top: 80px;
+      left: 10px;
+    }
+  }
+
+  .cardInteriorCreateArticle {
+    padding-top: 80px;
+    display: flex;
+    justify-content: space-between;
+
+    @media (max-width: 768px) {
+      display: block;
+    }
+
+    .grid-patern-CreateArticle{
+      width: 50%;
+      padding-left: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      @media (max-width: 768px) {
+        width: 100%;
+        padding-left: unset;
+        align-items: center;
+      }
+
+      .new_inputs{
+        width: 100%;
+        display: flex;
+
+        
+
+        .buttonStaking{
+          width: 165px;
+          height: 36px;
+        }
+      }
+    }
+
+    .entry_left{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  // .grid-patern-CreateArticle {
+  //   display: grid;
+  //   grid-template-columns: repeat(5, 1fr);
+  //   grid-template-rows: repeat(4, 1fr);
+  //   grid-column-gap: 0px;
+  //   grid-row-gap: 0px;
+  //   @media screen and (max-width: 1023px) {
+  //     display: grid;
+  //     grid-template-columns: repeat(2, 1fr);
+  //     grid-template-rows: repeat(4, 1fr);
+  //     grid-column-gap: 0px;
+  //     grid-row-gap: 0px;
+  //   }
+  //   @media screen and (max-width: 441px) {
+  //     display: flex;
+  //     flex-direction: column;
+  //     gap: 40px;
+  //   }
+  //   .col1 {
+  //     // grid-area: 1 / 1 / 3 / 2;
+  //     grid-area: 1/1/3/3;
+  //     @media screen and (max-width: 1023px) {
+  //       grid-area: 1/3/2/1;
+  //     }
+  //     // @media screen and (max-width:769px) {
+  //     //     // justify-content: flex-start;
+  //     //   }
+  //     @media screen and (max-width: 441px) {
+  //       justify-content: center;
+  //     }
+  //     display: flex;
+  //     justify-content: center;
+  //     padding-top: 48px;
+  //   }
+  //   .col2 {
+  //     grid-area: 1 / 2 / 3 / 3;
+  //     @media screen and (max-width: 1023px) {
+  //       grid-area: 1 / 2 / 2 / 3;
+  //       margin-left: 0px;
+  //     }
+  //     display: flex;
+  //     flex-direction: column;
+  //     justify-content: center;
+  //     margin-left: 21px;
+  //   }
+  //   .col3 {
+  //     grid-area: 3 / 1 / 5 / 3;
+  //     @media screen and (max-width: 1023px) {
+  //       grid-area: 2 / 1 / 3 / 3;
+  //     }
+  //     display: flex;
+  //     flex-direction: column;
+  //     justify-content: center;
+  //     align-items: center;
+  //     row-gap: 8px;
+  //   }
+  //   .col4 {
+  //     grid-area: 1 / 3 / 5 / 6;
+  //     @media screen and (max-width: 1023px) {
+  //       grid-area: 3 / 1 / 5 / 3;
+  //       display: flex;
+  //       flex-direction: column;
+  //       justify-content: center;
+  //       align-items: center;
+  //     }
+  //     display: initial;
+  //   }
+  // }
+  
+  .minititle {
+    font-size: 12px;
+    font-weight: bold;
+    // color: WHITE;
+    margin-bottom: 7px;
+    padding-left: 18px;
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+  }
+  .inputDate {
+    color: black !important;
+    width: 163px;
+    margin-bottom: 4px;
+    @media screen and (max-width: 1023px) {
+      width: 100%;
+    }
+  }
+  .description {
+    font-size: 8px;
+    max-width: 237px;
+    padding-left: 18px;
+  }
+  .inputArticleName {
+    max-width: 350px;
+    input {
+      color: black;
+    }
+  }
+  .textArea-createArticle {
+    resize: none;
+    width: 90%;
+    height: fit-content;
+    border-radius: 15px;
+    padding: 10px;
+    color: #000;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 20px;
+    background: #f2f6fa;
+    outline: none;
+    border: 2px solid transparent;
+
+    @media screen and (max-width: 441px) {
+      width: 100% !important;
+      // height: 400px !important;
+      margin-left: 0px;
+    }
+  }
+  .wordName {
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 150px;
+  }
+  .extra-parent {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    @media screen and (max-width: 1023px) {
+      display: flex;
+      flex-direction: column;
+    }
+    .cole1 {
+      grid-area: 1 / 1 / 2 / 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .cole2 {
+      grid-area: 1 / 3 / 2 / 6;
+      @media screen and (max-width: 1023px) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 8px;
+      }
+    }
+  }
+  .selectSize {
+    max-width: 350px;
+  }
+  .TextAreaContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+
+
+  .staking-parent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .statk_in{
+      display: flex;
+      gap: 10px;
+
+      @media (max-width: 768px) {
+        width: 100%;
+        flex-direction: column;
+      }
+    }
+
+    .Line_line{
+      margin: 5px 0;
+      width: 100%;
+      border-bottom: 1px solid #000;
+    }
+  }
+  .stakingButonContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px 0;
+    .buttonsStaking {
+      width: 40px;
+      height: 40px;
+      font-size: 50px;
+    }
+  }
+  .hrstaking {
+    // margin: 15px 0;
+  }
+  .editor {
+    border: 2px solid black;
+    border-radius: 10px;
+  }
+
+  .parent-editor {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    .colE1 {
+      grid-area: 1 / 1 / 2 / 3;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      .buttonStaking
+      {
+        width: 180px;
+      }
+    }
+    .colE2 {
+      grid-area: 1 / 3 / 2 / 6;
+    }
+  }
+}

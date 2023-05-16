@@ -10,9 +10,12 @@ import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getDataArticles } from "./api";
 
+
 import View from '../../assets/images/eye.png'
 
 const TableArticles = () => {
+
+    
 
     const actionTemplate = ({id}) => {
         return (
@@ -34,7 +37,6 @@ const TableArticles = () => {
         {
             getDataArticles(setData)
         },[])
-        console.log("data",data)
     return (
         <div className='TableArticles'>
             <ExteriorCard>

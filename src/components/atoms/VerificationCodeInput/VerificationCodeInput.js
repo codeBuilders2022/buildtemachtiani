@@ -26,7 +26,6 @@ const VerificationCodeInput = ({ children, skeleton,codeApi,idencript,idUser }) 
       if (document.getElementById("safeTimerDisplay")) {
         document.getElementById("safeTimerDisplay").innerHTML = "00:" + sec;
       }
-      // console.log("sec",sec);
       setTimeTotal(sec);
       timeCookie.set("time", sec, { path: "/verification-code" });
       sec--;
@@ -53,7 +52,6 @@ const VerificationCodeInput = ({ children, skeleton,codeApi,idencript,idUser }) 
   const correct = () => {
     // setStopInterval(true)
     clearInterval(timers);
-    console.log("idencript",idencript)
     navigate(`/new-password/${idencript}/${idUser}`);
   };
   
