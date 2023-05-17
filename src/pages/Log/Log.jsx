@@ -32,6 +32,9 @@ const Log = () => {
 
 
 
+  // Prueba
+
+
   useEffect(() => {
     for (const propertyName in inputList) {
       if (document.getElementById(propertyName)) {
