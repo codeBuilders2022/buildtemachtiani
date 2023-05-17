@@ -21,6 +21,9 @@ export const loginConfir = async (data,setName,navigate)=>
                 }, 3500)
 
             }
+            else{
+                IncorrectModal("Credenciales incorrectas")
+            }
         })
         .catch((error)=>
         {
