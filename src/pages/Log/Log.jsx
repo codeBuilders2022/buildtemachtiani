@@ -59,7 +59,7 @@ const Log = () => {
           username: inputList.user.value,
           email: inputList.email.value,
           password: inputList.password.value,
-          typeAccount: type
+          accounttype: type
         };
 
         const response = await userAxiosPost("/api/auth/local/register", saveUser);
