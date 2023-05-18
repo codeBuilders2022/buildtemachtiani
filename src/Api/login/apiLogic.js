@@ -1,8 +1,9 @@
 import axios from "axios"
 import { CorrectModal, IncorrectModal, InfoModal } from "../../components/molecules/modals/Modals";
-import { Decrypt } from "../../utilities/Hooks";
+// import { Decrypt } from "../../utilities/Hooks";
 import cryptojs from 'crypto-js'
 const key = process.env.REACT_APP_SECRET_KEY
+import { Decrypt, Encrypt } from "../../utilities/Hooks";
 const urlApi = process.env.REACT_APP_API_URL;
 export const loginConfir = async (data,setName,navigate)=>
 {
@@ -13,12 +14,14 @@ export const loginConfir = async (data,setName,navigate)=>
         .then((res)=>
         {
             const typeAcc = Decrypt(res.data.user.accounttype)
+            const IdCrip = Encrypt(res.data.user.id)
             if(res.data.user.confirmed === true && process.env.REACT_APP_ACCOUNTTYPE === typeAcc){
                 setName(res.data)
                 console.log("res.data",res.data.user.id)
                 localStorage.setItem("token",res.data.jwt)
                 
                 localStorage.setItem("username", res.data.user.username)
+                localStorage.setItem("jeyaiodl", IdCrip)
                 CorrectModal("Credenciales correctas")
                 let idEncrypt = EncryptNB(res.data.user.id) 
                 localStorage.setItem("ref",idEncrypt)
