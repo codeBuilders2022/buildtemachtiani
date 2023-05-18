@@ -1,6 +1,8 @@
 import axios from "axios"
 import { CorrectModal, IncorrectModal, InfoModal } from "../../components/molecules/modals/Modals";
 import { Decrypt } from "../../utilities/Hooks";
+import cryptojs from 'crypto-js'
+const key = process.env.REACT_APP_SECRET_KEY
 const urlApi = process.env.REACT_APP_API_URL;
 export const loginConfir = async (data,setName,navigate)=>
 {
@@ -13,11 +15,15 @@ export const loginConfir = async (data,setName,navigate)=>
             const typeAcc = Decrypt(res.data.user.accounttype)
             if(res.data.user.confirmed === true && process.env.REACT_APP_ACCOUNTTYPE === typeAcc){
                 setName(res.data)
+                console.log("res.data",res.data.user.id)
                 localStorage.setItem("token",res.data.jwt)
+                
                 localStorage.setItem("username", res.data.user.username)
                 CorrectModal("Credenciales correctas")
+                let idEncrypt = EncryptNB(res.data.user.id) 
+                localStorage.setItem("ref",idEncrypt)
                 setTimeout(() => {
-                    window.location.replace('/user/dashboard');
+                    window.location.replace(`/user/dashboard/${idEncrypt}`);
                 }, 3500)
 
             }
@@ -36,3 +42,16 @@ export const loginConfir = async (data,setName,navigate)=>
         })
     }
 }
+
+export const EncryptNB = (text)=>
+{
+    let encrypt = cryptojs.AES.encrypt(text.toString(), key).toString();
+    encrypt = encrypt.replace(/\//g, "_")
+    return encrypt
+}
+
+export const DecryptNB = (encriptText) => {
+    let decrypt = encriptText.replace(/_/g, "/")
+    const iv = "a0d5ebe6a0d5ebe6a0d5ebe6a0d5ebe6";
+    return cryptojs.AES.decrypt(decrypt, key, { iv: cryptojs.enc.Hex.parse(iv)}).toString(cryptojs.enc.Utf8);
+};
