@@ -5,10 +5,10 @@ import "./StepsLine.scss"
 
 const StepsLine = ({estatus = 0}) => {
     const items = [
-        { id: 0, label: 'Enviado' },
-        { id: 1, label: 'En espera' },
-        { id: 2, label: 'Revisando normas' },
-        { id: 3, label: 'Aprobado' },
+        { id: 0, label: 'Pendiente' },
+        { id: 1, label: 'Evaluando' },
+        { id: 2, label: 'Revisión' },
+        { id: 3, label: 'Notificación' },
         { id: 4, label: 'Publicado' }
     ];
 

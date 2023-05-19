@@ -3,7 +3,7 @@ import { CorrectModal, IncorrectModal } from "../../../components/molecules/moda
 import { Decrypt } from "../../../utilities/Hooks";
 const urlApi = process.env.REACT_APP_API_URL;
 
-export const uploadArticle = async(inputList,inputListstaking,navigate)=>
+export const uploadArticle = async(inputList,inputListstaking,navigate,idUser)=>
 {
     const IdEncrip = localStorage.getItem("jeyaiodl")
     const ID = Decrypt(IdEncrip)
@@ -28,7 +28,7 @@ export const uploadArticle = async(inputList,inputListstaking,navigate)=>
     await axios.post(`${urlApi}/api/articles`,formData).then(()=>
     {
         CorrectModal("Articulo subido")
-        // navigate("/article/dashboard")
+        navigate(`/user/dashboard/${idUser}`)
     })
     .catch((res)=>
     {

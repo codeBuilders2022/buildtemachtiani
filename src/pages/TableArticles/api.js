@@ -18,13 +18,13 @@ export const getDataArticles = async (setData) => {
           createdat: fecha.toLocaleDateString(),
           estatus:
             item.attributes.dataArticle.estatus == 0
-              ? "Enviado"
+              ? "Pendiente"
               : item.attributes.dataArticle.estatus == 1
-              ? "En espera"
+              ? "Evaluando"
               : item.attributes.dataArticle.estatus == 2
-              ? "Revisando normas"
+              ? "Revisión"
               : item.attributes.dataArticle.estatus == 3
-              ? "Aprobado"
+              ? "Notificación"
               : item.attributes.dataArticle.estatus == 4
               ? "Publicado"
               : "",
