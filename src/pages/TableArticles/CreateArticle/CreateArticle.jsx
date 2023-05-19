@@ -143,7 +143,7 @@ const CreateArticle = () => {
     const submit = () => {
         if (SubmitValidation(inputList, setInputList)) {
             if (SubmitValidationStaking(inputListstaking, setinputListstaking)) {
-                uploadArticle(inputList,inputListstaking, navigate)
+                uploadArticle(inputList,inputListstaking, navigate,idUser)
                 // navigate("/")
             }
             else {
