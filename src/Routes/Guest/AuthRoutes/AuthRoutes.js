@@ -19,7 +19,7 @@ const AuthRoutes = () => {
     <Routes>
       <Route
         exact
-        path="/user/dashboard"
+        path="/user/dashboard/:idUser"
         element={
           <Suspense fallback={<TableArticlesSkeleton />}>
             <TableArticles />
@@ -28,7 +28,7 @@ const AuthRoutes = () => {
       />
       <Route
         exact
-        path="/user/my-article/:id"
+        path="/user/my-article/:id/:idUser"
         element={
           <Suspense fallback={<LineTimeSkeleton />}>
             <LineTime />
@@ -37,7 +37,7 @@ const AuthRoutes = () => {
       />
       <Route
         exact
-        path="/user/article-create"
+        path="/user/article-create/:idUser"
         element={
           <Suspense fallback={<CreateArticleSkeleton />}>
             <CreateArticle />

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useStateContext } from "../../../contexts/ContextProvider";
-import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { Button } from "primereact/button";
 import "./Navbarr.scss"
 
@@ -50,12 +50,18 @@ const Navbarr = () => {
       setIsLoggedIn(true);
     }
   }, []);
-
+  const {idUser} = useParams()
+  const [idUserLocal,setIdUserLocal] = useState()
   const handleActiveNavbar = () => setOpenNavbar(!openNavbar);
+  useEffect(()=>
+  {
+
+    setIdUserLocal(localStorage.getItem("ref"))
+  },[])
 
   const routes = [
     { id: 1, text: "Inicio", url: "/" },
-    { id: 8, text: "Mi perfil", url: "/user/dashboard" },
+    { id: 8, text: "Mi perfil", url: `/user/dashboard/${idUserLocal}` },
     { id: 2, text: "Inicia sesión", url: "/login" },
     { id: 3, text: "Únete", url: "/log" },
     { id: 4, text: "Guia para autores", url: "/guide-authors" },
@@ -95,7 +101,7 @@ const Navbarr = () => {
             {isLoggedIn ? (
               <div className='profile_a'>
                 <button></button>
-                <Button tooltip='Mi perfil' tooltipOptions={{position: 'bottom'}} className='cnt_profile' onClick={() => navigate("/user/dashboard")} >
+                <Button tooltip='Mi perfil' tooltipOptions={{position: 'bottom'}} className='cnt_profile' onClick={() => navigate(`/user/dashboard/${idUserLocal}`)} >
                   {username}
                 </Button>
                 <button onClick={() => setOpenModal(!openModal)}>

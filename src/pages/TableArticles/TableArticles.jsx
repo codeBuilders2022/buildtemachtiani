@@ -6,7 +6,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import ExteriorCard from "../../components/atoms/ExteriorCard/ExteriorCard";
 import { Header } from "../../components";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getDataArticles } from "./api";
 
@@ -15,11 +15,12 @@ import View from '../../assets/images/eye.png'
 
 const TableArticles = () => {
 
-    
+    const {idUser} = useParams()
 
     const actionTemplate = ({id}) => {
+        console.log("id",id)
         return (
-            <NavLink to={`/user/my-article/${id}`}>
+            <NavLink to={`/user/my-article/${id}/${idUser}`}>
                 <div className="actionTemplate">
                     {/* <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#8A8A8A" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -33,15 +34,17 @@ const TableArticles = () => {
     }
    
         const [data,setData] = useState()
+        console.log("data",data);
         useEffect(()=>
         {
+            
             getDataArticles(setData)
         },[])
     return (
         <div className='TableArticles'>
             <ExteriorCard>
                 <div className="containerr">
-                    <Header title={"Mis artículos"} button="Enviar nuevo artículo" url={"/user/article-create"}/>
+                    <Header title={"Mis artículos"} button="Enviar nuevo artículo" url={`/user/article-create/${idUser}`}/>
                     <DataTable value={data} stripedRows tableStyle={{ minWidth: '30rem' }}>
                         <Column field="title" header="Título"></Column>
                         <Column field="createdat" header="Fecha"></Column>

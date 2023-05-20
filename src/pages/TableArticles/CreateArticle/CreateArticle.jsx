@@ -7,7 +7,7 @@ import InteriorCard from "../../../components/atoms/InteriorCard/InteriorCard";
 import UploadWord from "../../../components/molecules/UploadWord/UploadWord";
 import { ColorValidation, SubmitValidation, SubmitValidationStaking, UpdateValue, UpdateValueStaking } from "../../../utilities/Validations";
 import { CorrectModal, IncorrectModal } from "../../../components/molecules/modals/Modals";
-import { json, useNavigate } from "react-router-dom";
+import { json, useNavigate, useParams } from "react-router-dom";
 import { uploadArticle } from "./api";
 import { Editor } from 'primereact/editor';
 import { getAxiosCountrys } from "../../../Api/Register/Register";
@@ -16,6 +16,7 @@ const CreateArticle = () => {
     const [word, setWord] = useState(null)
     const [data, setData] = useState([]);
     const [textAreaConter, setTextAreaConter] = useState("")
+    const {idUser} = useParams()
     const [textAreaConterword, setTextAreaConterword] = useState(0)
     const navigate = useNavigate()
     const [inputList, setInputList] = useState({
@@ -142,7 +143,7 @@ const CreateArticle = () => {
     const submit = () => {
         if (SubmitValidation(inputList, setInputList)) {
             if (SubmitValidationStaking(inputListstaking, setinputListstaking)) {
-                uploadArticle(inputList,inputListstaking, navigate)
+                uploadArticle(inputList,inputListstaking, navigate,idUser)
                 // navigate("/")
             }
             else {
@@ -202,7 +203,7 @@ const CreateArticle = () => {
         <>
             <div className="CreateArticle">
                 <ExteriorCard>
-                    <Back className={"_back_"} url={"/user/dashboard"} />
+                    <Back className={"_back_"} url={`/user/dashboard/${idUser}`} />
                     <Header title={"Nuevo articulo"} button="Enviar articulo" onClick={() => submit()} />
                     <InteriorCard className={"cardInteriorCreateArticle"}>
                         <div className="grid-patern-CreateArticle">
