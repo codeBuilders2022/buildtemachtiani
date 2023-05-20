@@ -7,7 +7,7 @@ import InteriorCard from "../../../components/atoms/InteriorCard/InteriorCard";
 import UploadWord from "../../../components/molecules/UploadWord/UploadWord";
 import { ColorValidation, SubmitValidation, SubmitValidationStaking, UpdateValue, UpdateValueStaking } from "../../../utilities/Validations";
 import { CorrectModal, IncorrectModal } from "../../../components/molecules/modals/Modals";
-import { json, useNavigate } from "react-router-dom";
+import { json, useNavigate, useParams } from "react-router-dom";
 import { uploadArticle } from "./api";
 import { Editor } from 'primereact/editor';
 import { getAxiosCountrys } from "../../../Api/Register/Register";
@@ -16,6 +16,7 @@ const CreateArticle = () => {
     const [word, setWord] = useState(null)
     const [data, setData] = useState([]);
     const [textAreaConter, setTextAreaConter] = useState("")
+    const {idUser} = useParams()
     const [textAreaConterword, setTextAreaConterword] = useState(0)
     const navigate = useNavigate()
     const [inputList, setInputList] = useState({
@@ -24,6 +25,7 @@ const CreateArticle = () => {
         name: { value: null, validationType: "empty" },
         resume: { value: null, validationType: "empty" },
         idiom: { value: null, validationType: "empty" },
+        country: { value: null, validationType: "empty" },
         claveWord: { value: null, validationType: "empty" },
         interesConflict: { value: null, interesConflict: "empty" },
         reference: { value: null, interesConflict: "empty" },
@@ -131,6 +133,7 @@ const CreateArticle = () => {
         inputListCopy.reference.value = textAreaReference;
         setInputList(inputListCopy)
     }, [textAreaResume, textAreaInteresConflict, textAreaReference])
+
     useEffect(() => {
         let inputListCopy = { ...inputList }
         inputListCopy.word.value = word;
@@ -140,7 +143,7 @@ const CreateArticle = () => {
     const submit = () => {
         if (SubmitValidation(inputList, setInputList)) {
             if (SubmitValidationStaking(inputListstaking, setinputListstaking)) {
-                uploadArticle(inputList,inputListstaking, navigate)
+                uploadArticle(inputList,inputListstaking, navigate,idUser)
                 // navigate("/")
             }
             else {
@@ -200,7 +203,7 @@ const CreateArticle = () => {
         <>
             <div className="CreateArticle">
                 <ExteriorCard>
-                    <Back className={"_back_"} url={"/user/dashboard"} />
+                    <Back className={"_back_"} url={`/user/dashboard/${idUser}`} />
                     <Header title={"Nuevo articulo"} button="Enviar articulo" onClick={() => submit()} />
                     <InteriorCard className={"cardInteriorCreateArticle"}>
                         <div className="grid-patern-CreateArticle">
@@ -211,6 +214,7 @@ const CreateArticle = () => {
                             <Input title={"Título del artículo"} placeholder={"Título del artículo"} className={"inputArticleName"} id="name" onChange={(e) => { UpdateValue(e, "name", inputList, setInputList) }}></Input>
                             <Input title={"Nombre del autor"} placeholder={"Nombre del autor"} className={"inputArticleName"} id="autor" onChange={(e) => { UpdateValue(e, "autor", inputList, setInputList) }}></Input>
                             <Select title={"Idioma"} options={idiomOprions} value={inputList.idiom.value} placeholder={"Seleccione el idioma del artículo"} className={"selectSize"} id="idiom" onChange={(e) => { UpdateValue(e, "idiom", inputList, setInputList) }}></Select>
+                            <Select title={"País"} options={data} value={inputList.country.value} placeholder={"Seleccione un país"} className={"selectSize"} id="country" onChange={(e) => { UpdateValue(e, "country", inputList, setInputList) }}></Select>
                             <Input title={"Palabra clave"} placeholder={"Palabra clave"} className={"inputArticleName"} id="claveWord" onChange={(e) => { UpdateValue(e, "claveWord", inputList, setInputList) }}></Input>
                             {
                             inputListstaking.map((item, key) => {
