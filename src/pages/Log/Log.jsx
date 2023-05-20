@@ -29,11 +29,7 @@ const Log = () => {
     institute: {value: null, validationType: "empty"},
     academic_level: { value: null, validationType: "empty" },
   });
-
-
-
-  // Prueba
-
+  const [contriesOptions, setContriesOptions] = useState(null)
 
   useEffect(() => {
     for (const propertyName in inputList) {
@@ -48,6 +44,7 @@ const Log = () => {
 
 
   const [completedRegister, setCompletedRegister] = useState(false)
+
   const handleSubmit = async () => {
     const type = Encrypt(process.env.REACT_APP_ACCOUNTTYPE)
     const validate = SubmitValidation(inputList, setInputList);
@@ -153,28 +150,21 @@ const Log = () => {
     { id: 2, value: "Investigador", code: "investigador" },
   ]
 
-  const [data, setData] = useState([]);
+  
 
   useEffect(() => {
-    axiosData();
-  }, []);
+    axiosCountries();
+}, []);
 
-  const axiosData = async () => {
+
+const axiosCountries = async () => {
     try {
-      const response = await getAxiosCountrys("/api/countries");
-      const data = response.data;
-      const newData = data.map(({ id, attributes: { value } }) => ({
-        id,
-        value,
-      }));
-
-      newData.sort((a, b) => a.value.localeCompare(b.value, undefined, { sensitivity: 'base' }))
-
-      setData(newData);
+        const response = await getAxiosCountrys();         
+        setContriesOptions(response);
     } catch (error) {
-      IncorrectModal("¡Algo salió mal, intentalo más tarde!", true)
+        IncorrectModal("¡Algo salió mal, intentalo más tarde!", true)
     }
-  };
+};
 
   return (
     <div className="Log_">
@@ -187,7 +177,7 @@ const Log = () => {
               <Input title={"Nombre(s)"} placeholder={"Nombre(s)"} id={"names"} onChange={(e) => UpdateValue(e, "names", inputList, setInputList)} />
               <Input title={"Apellidos"} placeholder={"Apellidos"} id="lastName" onChange={(e) => UpdateValue(e, "lastName", inputList, setInputList)} />
               <div className="cnt_selects">
-                <Select title={"País"} placeholder={"País"} value={inputList.country.value} options={data} id={"country"} onChange={(e) => UpdateValue(e, "country", inputList, setInputList)} />
+                <Select title={"País"} placeholder={"País"} value={inputList.country.value} options={contriesOptions} id={"country"} onChange={(e) => UpdateValue(e, "country", inputList, setInputList)} />
                 <Select title={"Género"} placeholder={"Género"} options={gender} value={inputList.gender.value} id={"gender"} onChange={(e) => UpdateValue(e, "gender", inputList, setInputList)} />
               </div>
               <Input type="date" title={"Fecha de nacimiento"} placeholder={"Fecha de nacimiento"} value={inputList.birthdate.value} id={"birthdate"} onChange={(e) => UpdateValue(e, "birthdate", inputList, setInputList)} />

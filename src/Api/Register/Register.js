@@ -22,13 +22,25 @@ export const userAxiosPost = async (url, form) => {
   }
 };
 
-export const getAxiosCountrys = async (url) => {
-  const server = process.env.REACT_APP_API_URL;
+export const getAxiosCountrys = async () => {
+  const server = process.env.REACT_APP_API_CONTRIES;
+  const contriesArray = []
+  const contriesArrayOr = []
   try {
-    const response = await axios.get(`${server}${url}`);
-    return response.data;
+    const response = await axios.get(server);
+    const data = response.data;
+    data.map((contry, index) => {
+      let name = contry.translations.spa.common
+      contriesArray.push(name)
+    })
+    contriesArray.sort((a, b) => a.localeCompare(b))
+    contriesArray.map((contry, index) => {
+      const c = { name: contry, value: contry }
+      contriesArrayOr.push(c)
+    })
+    return contriesArrayOr;
   } catch (error) {
     console.error(error);
     return error;
   }
-};
+}
