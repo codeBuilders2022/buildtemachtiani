@@ -36,7 +36,10 @@
       .new_inputs{
         width: 100%;
         display: flex;
-
+        justify-content: initial;
+        @media (max-width: 768px) {
+          justify-content: center;
+        }
         
 
         .buttonStaking{
@@ -254,6 +257,7 @@
   .editor {
     border: 2px solid black;
     border-radius: 10px;
+    max-width: 630px;
   }
 
   .parent-editor {
