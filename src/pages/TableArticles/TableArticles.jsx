@@ -12,6 +12,7 @@ import { getDataArticles } from "./api";
 
 
 import View from '../../assets/images/eye.png'
+import { Decrypt } from "../../utilities/Hooks";
 
 const TableArticles = () => {
 
@@ -34,11 +35,11 @@ const TableArticles = () => {
     }
    
         const [data,setData] = useState()
-        console.log("data",data);
+        
         useEffect(()=>
         {
-            
-            getDataArticles(setData)
+            const idUserDecrypt = Decrypt(idUser)
+            getDataArticles(idUserDecrypt,setData)
         },[])
     return (
         <div className='TableArticles'>

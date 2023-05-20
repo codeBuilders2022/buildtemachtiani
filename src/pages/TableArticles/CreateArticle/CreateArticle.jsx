@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import './CreateArticle.scss'
 import ExteriorCard from "../../../components/atoms/ExteriorCard/ExteriorCard";
 import Back from "../../../components/atoms/Back/Back";
@@ -16,7 +16,7 @@ const CreateArticle = () => {
     const [word, setWord] = useState(null)
     const [data, setData] = useState([]);
     const [textAreaConter, setTextAreaConter] = useState("")
-    const {idUser} = useParams()
+    const { idUser } = useParams()
     const [textAreaConterword, setTextAreaConterword] = useState(0)
     const navigate = useNavigate()
     const [inputList, setInputList] = useState({
@@ -37,7 +37,7 @@ const CreateArticle = () => {
     const [counterStaking, setCounterStaking] = useState(-1)
     //SE DELARARA ASI EL INPUT LIST YA QUE ES UN ARREGLO DINAMICO NECESITAMOS PONERLE UN CONTADOR 
     const [inputListstaking, setinputListstaking] = useState([])
- 
+
     //funcion para añadir nuevo elemento al arreglo 
     const addNewElement = () => {
         //se coloca la nueva funcion SubmitValidationStaking para validar staking inputs
@@ -143,7 +143,7 @@ const CreateArticle = () => {
     const submit = () => {
         if (SubmitValidation(inputList, setInputList)) {
             if (SubmitValidationStaking(inputListstaking, setinputListstaking)) {
-                uploadArticle(inputList,inputListstaking, navigate,idUser)
+                uploadArticle(inputList, inputListstaking, navigate, idUser)
                 // navigate("/")
             }
             else {
@@ -156,49 +156,116 @@ const CreateArticle = () => {
         }
 
     }
-    function handleInput(event) {
-        const nuevoTexto = event.target.value;
-        const words = nuevoTexto.split(/\s+/);
-        const count = words.length > 1 ? words.length - 1 : 0; // cuenta las palabras y elimina los espacios adicionales
-        if (count <= 500) {
-            setTextAreaConter(nuevoTexto);
-            setTextAreaConterword(count)
-        } else {
+    // function handleInput(event) {
+    //     const nuevoTexto = event;
+    //     let words=""
+    //     if(event!=null)
+    //     {
+    //          words = nuevoTexto.split(/\s+/);
+    //     }
+    //     else
+    //     {
+    //         setTextAreaResume("");
+    //     }
+    //     const count = words.length > 1 ? words.length - 1 : 0; // cuenta las palabras y elimina los espacios adicionales
+    //     if (count <= 500) {
+
+    //         setTextAreaResume(nuevoTexto);
+    //         setTextAreaConterword(count)
+    //     } else {
+    //         console.log("entro al else")
+
+    //     }
+    //     console.log("conunt",count)
+    // }
+    const [habilitado, setHabilitado] = useState(true);
+    const contarPalabrasEditor = (event) => {
+        const textoIngresado = event.htmlValue;
+        let palabras = "";
+        if (textoIngresado != null) {
+            palabras = textoIngresado.trim().split(/\s+/);
         }
-    }
+        else {
+            setTextAreaResume("");
+        }
+        const cantidadPalabras = palabras.length;
+
+        if (cantidadPalabras > 500) {
+            const textoRecortado = palabras.slice(0, 500).join(" ");
+            setTextAreaResume(textoRecortado);
+            setHabilitado(false)
+        } else {
+            setHabilitado(true)
+            setTextAreaConterword(cantidadPalabras)
+            setTextAreaResume(textoIngresado);
+        }
+
+    };
+    const onEditorKeyPress = (event) => {
+        if (!habilitado) {
+            event.preventDefault();
+        }
+    };
+    const onEditorPaste = (event) => {
+        event.preventDefault();
+        const textoPegado = (event.clipboardData || window.clipboardData).getData("text");
+        const textoIngresado = event.htmlValue || "";
+      
+        const palabrasPegadas = textoPegado.trim().split(/\s+/);
+        const palabrasActuales = textoIngresado.trim().split(/\s+/).length;
+        const palabrasTotales = palabrasActuales + palabrasPegadas.length;
+        const palabrasRestantes = 500 - palabrasTotales;
+      
+        if (palabrasTotales > 500) {
+          return;
+        } else if (palabrasRestantes < 0) {
+          const textoRecortado = palabrasPegadas.slice(0, Math.abs(palabrasRestantes)).join(" ");
+          const nuevoTexto = textoIngresado + " " + textoRecortado;
+          setTextAreaResume(nuevoTexto);
+          setTextAreaConterword(500);
+        } else {
+          const nuevoTexto = textoIngresado + " " + textoPegado;
+          setTextAreaResume(nuevoTexto);
+          setTextAreaConterword(palabrasTotales);
+        }
+    };
+
+
+
+
+
+
+
+
     const idiomOprions = [
-        { name: "Español", value: "es" },
-        { name: "Ingles", value: "en" },
-        { name: "Nauatl", value: "nu" },
+        { name: "Español", value: "Español" },
+        { name: "Ingles", value: "Ingles" },
+        { name: "Nauatl", value: "Nauatl" },
     ]
-    const paisOprions = [
-        { name: "México", value: "México" },
-        { name: "Cuba", value: "Cuba" },
-        { name: "Canada", value: "Canada" },
-    ]
+
 
     useEffect(() => {
         axiosData();
-      }, []);
-    
-      const axiosData = async () => {
+    }, []);
+
+    const axiosData = async () => {
         try {
-          const response = await getAxiosCountrys("/api/countries");
-          const data = response.data;
-      
-          const newData = data.map(({ id, attributes: { value } }) => ({
-            id,
-            value,
-          }));
-      
-          newData.sort((a, b) => a.value.localeCompare(b.value, undefined, { sensitivity: 'base' }))
-      
-          setData(newData);
+            const response = await getAxiosCountrys("/api/countries");
+            const data = response.data;
+
+            const newData = data.map(({ id, attributes: { value } }) => ({
+                id,
+                value,
+            }));
+
+            newData.sort((a, b) => a.value.localeCompare(b.value, undefined, { sensitivity: 'base' }))
+
+            setData(newData);
         } catch (error) {
-          IncorrectModal("¡Algo salió mal, intentalo más tarde!", true)
+            IncorrectModal("¡Algo salió mal, intentalo más tarde!", true)
         }
-      };
-      
+    };
+
     return (
         <>
             <div className="CreateArticle">
@@ -207,7 +274,7 @@ const CreateArticle = () => {
                     <Header title={"Nuevo articulo"} button="Enviar articulo" onClick={() => submit()} />
                     <InteriorCard className={"cardInteriorCreateArticle"}>
                         <div className="grid-patern-CreateArticle">
-                            <div style={{marginBottom: 25}}>
+                            <div style={{ marginBottom: 25 }}>
                                 <UploadWord id="word" setValue={setWord}></UploadWord>
                                 <div className="wordName">{word?.name}</div>
                             </div>
@@ -217,30 +284,30 @@ const CreateArticle = () => {
                             <Select title={"País"} options={data} value={inputList.country.value} placeholder={"Seleccione un país"} className={"selectSize"} id="country" onChange={(e) => { UpdateValue(e, "country", inputList, setInputList) }}></Select>
                             <Input title={"Palabra clave"} placeholder={"Palabra clave"} className={"inputArticleName"} id="claveWord" onChange={(e) => { UpdateValue(e, "claveWord", inputList, setInputList) }}></Input>
                             {
-                            inputListstaking.map((item, key) => {
-                                return (
-                                    <>
-                                        <div className="staking-parent">
-                                            <div className="statk_in">
-                                                <Input title={"Nombre"} placeholder={"Nombre"} className={"inputArticleName"} id={`nameStaking${key}`} onChange={(e) => { UpdateValueStaking(e, `nameStaking${key}`, key, inputListstaking, setinputListstaking) }}></Input>
-                                                <Input title={"Apellido"} placeholder={"Apellido"} className={"inputArticleName"} id={`lastName${key}`} onChange={(e) => { UpdateValueStaking(e, `lastName${key}`, key, inputListstaking, setinputListstaking) }}></Input>
+                                inputListstaking.map((item, key) => {
+                                    return (
+                                        <>
+                                            <div className="staking-parent">
+                                                <div className="statk_in">
+                                                    <Input title={"Nombre"} placeholder={"Nombre"} className={"inputArticleName"} id={`nameStaking${key}`} onChange={(e) => { UpdateValueStaking(e, `nameStaking${key}`, key, inputListstaking, setinputListstaking) }}></Input>
+                                                    <Input title={"Apellido"} placeholder={"Apellido"} className={"inputArticleName"} id={`lastName${key}`} onChange={(e) => { UpdateValueStaking(e, `lastName${key}`, key, inputListstaking, setinputListstaking) }}></Input>
+                                                </div>
+                                                <div className="statk_in">
+                                                    <Input title={"Orcid"} placeholder={"Orcid"} className={"inputArticleName"} id={`Orcid${key}`} onChange={(e) => { UpdateValueStaking(e, `Orcid${key}`, key, inputListstaking, setinputListstaking) }}></Input>
+                                                    <Input title={"Titulo"} placeholder={"Titulo"} className={"inputArticleName"} id={`Titulo${key}`} onChange={(e) => { UpdateValueStaking(e, `Titulo${key}`, key, inputListstaking, setinputListstaking) }}></Input>
+                                                </div>
+                                                <div className="statk_in">
+                                                    <Input title={"Email"} placeholder={"Email"} className={"inputArticleName"} id={`Email${key}`} onChange={(e) => { UpdateValueStaking(e, `Email${key}`, key, inputListstaking, setinputListstaking) }}></Input>
+                                                    <Select title={"País"} value={item[`pais${key}`].value} options={data} placeholder={"País"} className={"selectSize"} id={`pais${key}`} onChange={(e) => { UpdateValueStaking(e, `pais${key}`, key, inputListstaking, setinputListstaking) }}></Select>
+                                                </div>
+                                                <div className="Line_line"></div>
                                             </div>
-                                            <div className="statk_in">
-                                                <Input title={"Orcid"} placeholder={"Orcid"} className={"inputArticleName"} id={`Orcid${key}`} onChange={(e) => { UpdateValueStaking(e, `Orcid${key}`, key, inputListstaking, setinputListstaking) }}></Input>
-                                                <Input title={"Titulo"} placeholder={"Titulo"} className={"inputArticleName"} id={`Titulo${key}`} onChange={(e) => { UpdateValueStaking(e, `Titulo${key}`, key, inputListstaking, setinputListstaking) }}></Input>
-                                            </div>
-                                            <div className="statk_in">
-                                                <Input title={"Email"} placeholder={"Email"} className={"inputArticleName"} id={`Email${key}`} onChange={(e) => { UpdateValueStaking(e, `Email${key}`, key, inputListstaking, setinputListstaking) }}></Input>
-                                                <Select title={"País"} value={item[`pais${key}`].value} options={data} placeholder={"País"} className={"selectSize"} id={`pais${key}`} onChange={(e) => { UpdateValueStaking(e, `pais${key}`, key, inputListstaking, setinputListstaking) }}></Select>
-                                            </div>
-                                            <div className="Line_line"></div>
-                                        </div>
-                                        <hr className="hrstaking" />
-                                    </>
-                                )
-                            })
-                        }
-                        <div className="new_inputs">
+                                            <hr className="hrstaking" />
+                                        </>
+                                    )
+                                })
+                            }
+                            <div className="new_inputs">
                                 <Button className={"buttonStaking btn_primary"} title={"Añadir nuevo autor"} onClick={() => addNewElement()} />
                             </div>
                         </div>
@@ -250,7 +317,7 @@ const CreateArticle = () => {
                                     <div>Resumen</div>
                                     <div>{textAreaConterword}/500</div>
                                 </div>
-                                <Editor className="editor" value={textAreaResume} id="resume" onTextChange={(e) => { setTextAreaResume(e.htmlValue) }} style={{ height: '300px' }} />
+                                <Editor onPaste={onEditorPaste} onKeyPress={onEditorKeyPress} readOnly={!habilitado} className="editor" value={textAreaResume} id="resume" onTextChange={contarPalabrasEditor} style={{ height: '300px' }} />
                             </div>
                             <div className="textArea-createArticle">
                                 <div className="minititle">

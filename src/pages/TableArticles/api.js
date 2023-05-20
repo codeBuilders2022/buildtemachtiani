@@ -1,9 +1,10 @@
 import axios from "axios";
 import { Encrypt } from "../../Api/login/recover_account";
 const urlApi = process.env.REACT_APP_API_URL;
-export const getDataArticles = async (setData) => {
+export const getDataArticles = async (id,setData) => {
+  console.log("idxxxxxxxxxxxxxxx",id)
   await axios
-    .get(`${urlApi}/api/articles`)
+    .get(`${urlApi}/api/articles?filters[idUser][$eq]=${id}`)
     .then((res) => {
       let newData = [];
       res.data.data.map((item, key) => {
