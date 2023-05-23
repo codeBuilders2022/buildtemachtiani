@@ -22,6 +22,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { IncorrectModal } from "../../components/molecules/modals/Modals";
 import { getAxiosHomeArticles } from "../../Api/Home/home";
+import {Encrypt} from "../../utilities/Hooks"
 
 
 const Home = () => {
@@ -39,11 +40,11 @@ const Home = () => {
     const getDatas = async () => {
         try {
             // Hacemos una llamada concurrente a la API utilizando Promise.all()
-            const [resCommittees] = await Promise.all([
+            const [resarticless] = await Promise.all([
                 getAxiosHomeArticles("/api/current-issues")
             ]);
             // Mapeamos los datos obtenidos de los comités y extraemos los atributos relevantes
-            const committeeData = resCommittees.data.map(({ id, attributes: { publishedAt, title, authors, doi, issue, abstract, info } }) => ({
+            const articlesData = resarticless.data.map(({ id, attributes: { publishedAt, title, authors, doi, issue, abstract, info } }) => ({
                 id,
                 title,
                 authors,
@@ -55,7 +56,7 @@ const Home = () => {
             }));
             // Asignamos los datos de los comités a los estados correspondientes en el componente
             const issue = []
-            committeeData.map((e, index) => {
+            articlesData.map((e, index) => {
                 e['year'] = Number(e.publishedAt.substring(0, 4))
                 const month = months.filter((m, index) => index + 1 == Number(e.publishedAt.substring(5, 7)))
                 e['month'] = month[0]
@@ -108,20 +109,20 @@ const Home = () => {
     useEffect(() => {
         setDataArt((prevMagazine) => {
             const filteredMagazine = !search_
-            ? data_list
-            : prevMagazine.filter((articule) =>
-                articule.title.toLowerCase().includes(search_.toLowerCase()) ||
-                articule.doi.toLowerCase().includes(search_.toLowerCase()) ||
-                articule.authors.toLowerCase().includes(search_.toLowerCase())       
+                ? data_list
+                : prevMagazine.filter((articule) =>
+                    articule.title.toLowerCase().includes(search_.toLowerCase()) ||
+                    articule.doi.toLowerCase().includes(search_.toLowerCase()) ||
+                    articule.authors.toLowerCase().includes(search_.toLowerCase())
                 );
             return filteredMagazine;
         });
 
         if (search_) {
             setTimeout(() => {
-              document.getElementById(`articles_456s`)?.scrollIntoView({ behavior: "smooth" });
+                document.getElementById(`articles_456s`)?.scrollIntoView({ behavior: "smooth" });
             }, 0);
-          }
+        }
     }, [search_]);
 
     return (
@@ -135,8 +136,8 @@ const Home = () => {
                     <div className='cover'>
                         <div className="cover_left">
                             <img src={cover} />
-                            <p>ISSN: 0500-9871</p>
-                            <p>e-ISSN: 5185-2132</p>
+                            <p>ISSN: -</p>
+                            <p>e-ISSN: -</p>
                         </div>
                         <div className='data'>
                             <p>Duis condimentum elementum tellus.
@@ -224,7 +225,7 @@ const Home = () => {
                                             index < 4 &&
 
                                             <div className='article' key={index} >
-                                                <button onClick={() => { setIdArticle(index + 1), navigate(`/article/${article.id}`) }}>
+                                                <button onClick={() => { setIdArticle(Encrypt(article.id)), navigate(`/article/${Encrypt(article.id)}`) }}>
                                                     <p className={`hover:${currentColor}`}>{article.title}</p>
                                                 </button>
                                                 <span className='authors'>{article.authors}</span>
@@ -237,7 +238,7 @@ const Home = () => {
                                         setIdArticle(index)
                                         return (
                                             <div className='article' key={index} >
-                                                <button onClick={() => { setIdArticle(index + 1), navigate(`/article/${article.id}`) }}>
+                                                <button onClick={() => { setIdArticle(article.id), navigate(`/article/${article.id}`) }}>
                                                     <p className={`hover:${currentColor}`}>{article.title}</p>
                                                 </button>
                                                 <span className='authors'>{article.authors}</span>
@@ -265,7 +266,7 @@ const Home = () => {
                                                 </svg>
                                                 <h1>Números anteriores:</h1>
                                             </div>
-                                        
+
                                             <div className="preVol">
                                                 {preVol.map((vol, index) => {
                                                     return (
