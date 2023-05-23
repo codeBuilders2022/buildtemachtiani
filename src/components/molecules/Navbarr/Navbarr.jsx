@@ -13,7 +13,7 @@ import ArrowDonw from '../../../assets/images/down_.png'
 
 
 const Navbarr = () => {
-  const { openNavbar, setOpenNavbar, currentColor, currentMode } = useStateContext();
+  const { openNavbar, setOpenNavbar, currentColor, currentMode, setSearch_ } = useStateContext();
   const header_location = useLocation()
   const [hasnNot, setHasnNot] = useState(false)
   const [openModal, setOpenModal] = useState(false)
@@ -37,12 +37,7 @@ const Navbarr = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem("username")
-    if(user === null || user === "undefined"){
-      let letter = "user"
-      let firstLetter = letter.charAt(0).toUpperCase();
-      setUsername(firstLetter)
-    }
-    else{
+    if(user){
       let firstLetter = user.charAt(0).toUpperCase();
       setUsername(firstLetter)
     }
@@ -50,6 +45,7 @@ const Navbarr = () => {
       setIsLoggedIn(true);
     }
   }, []);
+  
   const {idUser} = useParams()
   const [idUserLocal,setIdUserLocal] = useState()
   const handleActiveNavbar = () => setOpenNavbar(!openNavbar);
@@ -96,7 +92,7 @@ const Navbarr = () => {
               </NavLink>
             </li>
             {!hiddenInput &&
-              <InputSearch placeholder={"Buscar... ejemplo: Autor, titulo"} id={"search199"}/>
+              <InputSearch placeholder={"Buscar... ejemplo: Autor, titulo"} id={"search199"} onChange={(e) => setSearch_(e.target.value)}/>
             }
             {isLoggedIn ? (
               <div className='profile_a'>
