@@ -36,40 +36,81 @@ const Home = () => {
         getDatas()
     }, []);
 
+    // const getDatas = async () => {
+    //     try {
+    //         // Hacemos una llamada concurrente a la API utilizando Promise.all()
+    //         const [resCommittees] = await Promise.all([
+    //             getAxiosHomeArticles("/api/current-issues")
+    //         ]);
+
+    //         // const [resArticle] = await Promise.all([getAxiosHomeArticles("/api/articles")])
+    //         // Mapeamos los datos obtenidos de los comités y extraemos los atributos relevantes
+    //         const committeeData = resCommittees.data.map(({ id, attributes: { publishedAt, title, authors, doi, issue, abstract, info } }) => ({
+    //             id,
+    //             title,
+    //             authors,
+    //             doi,
+    //             issue,
+    //             abstract,
+    //             info,
+    //             publishedAt,
+    //         }));
+    //         // Asignamos los datos de los comités a los estados correspondientes en el componente
+    //         const issue = []
+    //         committeeData.map((e, index) => {
+    //             e['year'] = Number(e.publishedAt.substring(0, 4))
+    //             const month = months.filter((m, index) => index + 1 == Number(e.publishedAt.substring(5, 7)))
+    //             e['month'] = month[0]
+    //             e['day'] = Number(e.publishedAt.substring(8, 10))
+    //             issue.push(e)
+    //         })
+    //         setDataArt(issue)
+    //         setData_list(issue)
+    //     } catch (error) {
+    //         IncorrectModal("¡Algo salió mal, intentalo más tarde!", true);
+    //     }
+    // };
+
+
+    const [allArticles, setAllArticles] = useState([])
     const getDatas = async () => {
         try {
-            // Hacemos una llamada concurrente a la API utilizando Promise.all()
-            const [resCommittees] = await Promise.all([
-                getAxiosHomeArticles("/api/current-issues")
-            ]);
-            // Mapeamos los datos obtenidos de los comités y extraemos los atributos relevantes
-            const committeeData = resCommittees.data.map(({ id, attributes: { publishedAt, title, authors, doi, issue, abstract, info } }) => ({
-                id,
-                title,
-                authors,
-                doi,
-                issue,
-                abstract,
-                info,
-                publishedAt,
-            }));
-            // Asignamos los datos de los comités a los estados correspondientes en el componente
-            const issue = []
-            committeeData.map((e, index) => {
-                e['year'] = Number(e.publishedAt.substring(0, 4))
-                const month = months.filter((m, index) => index + 1 == Number(e.publishedAt.substring(5, 7)))
-                e['month'] = month[0]
-                e['day'] = Number(e.publishedAt.substring(8, 10))
-                issue.push(e)
-            })
-            setDataArt(issue)
-            setData_list(issue)
+          const [resCommittees, resArticles] = await Promise.all([
+            getAxiosHomeArticles("/api/current-issues"),
+            getAxiosHomeArticles("/api/numbers?populate=img")
+          ]);
+
+          console.log(resArticles, "resArticle")
+          //procesamiento de los datos de resArticles
+          const allArticles_ = resArticles.data.map(({id, attributes: { dataNumber: { name }, img: { data: { attributes: { url }}}, publishedAt}}) => ({
+            id,
+            name,
+            image: process.env.REACT_APP_API_URL + url,
+            month: months[Number(publishedAt.substring(5, 7)) -1],
+            year: Number(publishedAt.substring(0, 4))
+          }))
+
+          setAllArticles(allArticles_)
+          
+      
+          // Procesamiento de los datos de los comités
+          const committeeData = resCommittees.data.map(({ id, attributes }) => ({
+            id,
+            ...attributes,
+            year: Number(attributes.publishedAt.substring(0, 4)),
+            month: months[Number(attributes.publishedAt.substring(5, 7)) - 1],
+            day: Number(attributes.publishedAt.substring(8, 10))
+          }));
+      
+          setDataArt(committeeData);
+          setData_list(committeeData);
         } catch (error) {
-            IncorrectModal("¡Algo salió mal, intentalo más tarde!", true);
+          IncorrectModal("¡Algo salió mal, inténtalo más tarde!", true);
         }
-    };
+      };
 
-
+      console.log(allArticles, "del estado")
+      
 
     const data = {
         index: [
@@ -104,25 +145,32 @@ const Home = () => {
         { title: "Volumen. 1. Num. 2", cover: cover, monthPlublished: "Abril", pag: "64-130" },
     ])
 
-
+//useEffect para buscar articulos
     useEffect(() => {
+        let timerId;
+    
         setDataArt((prevMagazine) => {
-            const filteredMagazine = !search_
+          const filteredMagazine = !search_
             ? data_list
-            : prevMagazine.filter((articule) =>
+            : data_list.filter((articule) =>
                 articule.title.toLowerCase().includes(search_.toLowerCase()) ||
                 articule.doi.toLowerCase().includes(search_.toLowerCase()) ||
-                articule.authors.toLowerCase().includes(search_.toLowerCase())       
-                );
-            return filteredMagazine;
+                articule.authors.toLowerCase().includes(search_.toLowerCase())
+              );
+          return filteredMagazine;
         });
-
+    
         if (search_) {
-            setTimeout(() => {
-              document.getElementById(`articles_456s`)?.scrollIntoView({ behavior: "smooth" });
-            }, 0);
-          }
-    }, [search_]);
+          clearTimeout(timerId);
+          timerId = setTimeout(() => {
+            document.getElementById('articles_456s')?.scrollIntoView({ behavior: 'smooth' });
+          }, 500); // Ajusta el tiempo de espera (en milisegundos) antes de activar el scroll suave
+        }
+    
+        return () => {
+          clearTimeout(timerId); // Limpiar el temporizador al desmontar el componente
+        };
+      }, [search_]);
 
     return (
         <div className="Home_binn">
@@ -267,13 +315,15 @@ const Home = () => {
                                             </div>
                                         
                                             <div className="preVol">
-                                                {preVol.map((vol, index) => {
+                                                {allArticles.map((vol, index) => {
                                                     return (
                                                         <div className="cardVol" key={index}>
-                                                            <img src={vol.cover} />
-                                                            <p className="p">{vol.monthPlublished}</p>
-                                                            <p className="title">{vol.title}</p>
-                                                            <p className="p">Páginas: {vol.pag}</p>
+                                                            <div className="cnt_image">
+                                                                <img src={vol.image} className="i_mage_"/>
+                                                            </div>
+                                                            <p className="p">{vol.month}{" "}{vol.year}</p>
+                                                            <p className="title">{vol.name}</p>
+                                                            {/* <p className="p">Páginas: {vol.pag}</p> */}
                                                         </div>
                                                     )
                                                 })}

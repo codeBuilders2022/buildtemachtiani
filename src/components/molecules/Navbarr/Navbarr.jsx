@@ -92,11 +92,10 @@ const Navbarr = () => {
               </NavLink>
             </li>
             {!hiddenInput &&
-              <InputSearch placeholder={"Buscar... ejemplo: Autor, titulo"} id={"search199"} onChange={(e) => setSearch_(e.target.value)}/>
+                <InputSearch placeholder={"Buscar... ejemplo: Autor, titulo, doi"} id={"search199"} onChange={(e) => setSearch_(e.target.value)}/>
             }
             {isLoggedIn ? (
               <div className='profile_a'>
-                <button></button>
                 <Button tooltip='Mi perfil' tooltipOptions={{position: 'bottom'}} className='cnt_profile' onClick={() => navigate(`/user/dashboard/${idUserLocal}`)} >
                   {username}
                 </Button>
