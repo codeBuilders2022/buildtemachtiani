@@ -60,7 +60,7 @@ const Articles = () => {
             <div className="authors">
               <h3>{dataArt?.authors}</h3>
               <div className="notes" onClick={() => setNotesActive(true)}>Notas del autor</div>
-              <Dialog header="Header" visible={notesActive} style={{ width: '50vw' }} onHide={() => setNotesActive(false)}>
+              <Dialog header="Notas del autor" visible={notesActive} style={{ width: '50vw' }} onHide={() => setNotesActive(false)}>
                 <div dangerouslySetInnerHTML={{ __html: dataArt?.notes }}></div>
               </Dialog>
             </div>
