@@ -405,6 +405,19 @@
                         cursor: pointer;
                         transform: scale(1);
 
+                        .cnt_image{
+                            width: 150px;
+                            height: 174px;
+                            border-radius: 10px;
+
+                            .i_mage_{
+                                width: 100%;
+                                height: 100%;
+                                border-radius: 10px;
+                                object-fit: cover;
+                            }
+                        }
+
                         @media (max-width: 768px) {
                             width: 300px;
                             align-items: center;
