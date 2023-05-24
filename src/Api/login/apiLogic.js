@@ -17,7 +17,6 @@ export const loginConfir = async (data,setName,navigate)=>
             const IdCrip = Encrypt(res.data.user.id)
             if(res.data.user.confirmed === true && process.env.REACT_APP_ACCOUNTTYPE === typeAcc){
                 setName(res.data)
-                console.log("res.data",res.data.user.id)
                 localStorage.setItem("token",res.data.jwt)
                 
                 localStorage.setItem("userWeb", res.data.user.username)

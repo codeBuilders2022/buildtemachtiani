@@ -39,6 +39,7 @@ const Home = () => {
 
 
     const [allArticles, setAllArticles] = useState([])
+    const [currentJornal, setCurrentJornal] = useState([])
     const getDatas = async () => {
         try {
             // Hacemos una llamada concurrente a la API utilizando Promise.all()
@@ -69,19 +70,36 @@ const Home = () => {
             setData_list(issue)
           const [resCommittees, resArticles] = await Promise.all([
             getAxiosHomeArticles("/api/current-issues"),
-            getAxiosHomeArticles("/api/numbers?populate=img")
+            getAxiosHomeArticles("/api/numbers?populate=*")
           ]);
 
+
           //procesamiento de los datos de resArticles
-          const allArticles_ = resArticles.data.map(({id, attributes: { dataNumber: { name }, img: { data: { attributes: { url }}}, publishedAt}}) => ({
+          const allArticles_ = resArticles.data.map(({id, attributes: { dataNumber: { name, resume }, img: { data: { attributes: { url }}}, pdf: { data: { attributes: { url: urlPdf }}}, publishedAt}}) => ({
             id,
             name,
+            resume,
+            url: process.env.REACT_APP_API_URL + urlPdf,
             image: process.env.REACT_APP_API_URL + url,
             month: months[Number(publishedAt.substring(5, 7)) -1],
             year: Number(publishedAt.substring(0, 4))
           }))
 
-          setAllArticles(allArticles_)
+
+          let firstID;
+          var indexx = 0;
+          
+          firstID = allArticles_[0].id
+          allArticles_.map((id, idx) => {
+            if(id.id > firstID){
+                firstID = id.id
+                indexx = idx
+            }
+          })
+
+          const newArticles = allArticles_.filter((idx, number) => number !== indexx )
+          setCurrentJornal([allArticles_[indexx]])
+          setAllArticles(newArticles)
           
       
           // Procesamiento de los datos de los comités
@@ -99,6 +117,8 @@ const Home = () => {
           IncorrectModal("¡Algo salió mal, inténtalo más tarde!", true);
         }
       };
+
+      
 
     const data = {
         index: [
@@ -128,9 +148,9 @@ const Home = () => {
     //     // { title: "Volumen. 1. Num. 1", cover: cover, monthPlublished: "Enero", pag: "1-63" },
     // ])
     const [special, setSpecial] = useState([
-        { title: "Volumen. 1. Num. 1", cover: cover, monthPlublished: "Abril", pag: "131-160" },
-        { title: "Volumen. 1. Num. 3", cover: cover, monthPlublished: "Julio", pag: "160-222" },
-        { title: "Volumen. 1. Num. 2", cover: cover, monthPlublished: "Abril", pag: "64-130" },
+        // { title: "Volumen. 1. Num. 1", cover: cover, monthPlublished: "Abril", pag: "131-160" },
+        // { title: "Volumen. 1. Num. 3", cover: cover, monthPlublished: "Julio", pag: "160-222" },
+        // { title: "Volumen. 1. Num. 2", cover: cover, monthPlublished: "Abril", pag: "64-130" },
     ])
 
 //useEffect para buscar articulos
@@ -159,6 +179,7 @@ useEffect(() => {
       clearTimeout(timerId); // Limpiar el temporizador al desmontar el componente
     };
   }, [search_]);
+
     return (
         <div className="Home_binn">
             <div className="cnt_imag">
@@ -168,31 +189,19 @@ useEffect(() => {
                 <div className='container'>
                     {/* <div className="dark:bg-gray-500 bg-slate-100 flex w-full"> */}
                     <div className='cover'>
-                        <div className="cover_left">
-                            <img src={cover} />
-                            <p>ISSN: -</p>
-                            <p>e-ISSN: -</p>
-                        </div>
-                        <div className='data'>
-                            <p>Duis condimentum elementum tellus.
-                                Lorem ipsum dolor sit amet,
-                                consectetur adipiscing elit. Quisque
-                                metus purus, condimentum vel commodo eget,
-                                porttitor nec urna. Curabitur feugiat
-                                sollicitudin tortor, eget mattis nibh.
-                                Pellentesque habitant morbi tristique
-                                senectus et netus et malesuada fames ac
-                                turpis egestas. Quisque et fermentum purus.
-                                Aliquam dignissim orci enim, in iaculis
-                                risus efficitur dignissim. Nam aliquet
-                                in mauris quis euismod. Pellentesque et
-                                dui faucibus, cursus leo ac, lobortis eros.
-                                Curabitur venenatis faucibus tincidunt.
-                                Cras molestie malesuada metus at facilisis.
-                                Integer eget est velit. Vivamus ac turpis
-                                accumsan, facilisis tortor et, posuere nunc.</p>
-                            <a className='download' href={journal} style={{ background: currentColor }} download>Descargar</a>
-                        </div>
+                        {currentJornal?.map((_, idx) => (
+                            <>
+                                <div className="col_left">
+                                    <div className="cnt_img__">
+                                        <img src={_.image} alt="" className="i_mage"/>
+                                    </div>
+                                </div>
+                                <div className="cnt_rigth">
+                                    <div className="current_reume" dangerouslySetInnerHTML={{__html: _.resume}}></div>
+                                    <a className='download' href={_.url}  style={{ background: currentColor }} download>Descargar</a>
+                                </div>
+                            </>
+                        ))}
                     </div>
                     <div className='metrics'>
                         <div className='left'>
@@ -350,20 +359,26 @@ useEffect(() => {
                                                 </div>
                                             </div>
                                             <div className="preVol">
-                                                {special.map((vol, index) => {
-                                                    return (
-                                                        <div className="cardVol" key={index}>
-                                                            <img src={vol.cover} />
-                                                            <p className="p">{vol.monthPlublished}</p>
-                                                            <p className="title">{vol.title}</p>
-                                                            <p className="p">Páginas: {vol.pag}</p>
-                                                        </div>
-                                                    )
-                                                })}
+                                                {special.length < 1 ? (
+                                                    <div style={{width: "100%", display: "flex", justifyContent: "center"}}>Aún no hay números especiales que mostrar</div>
+                                                ):(
+                                                    special.map((vol, index) => {
+                                                        return (
+                                                            <div className="cardVol" key={index}>
+                                                                <img src={vol.cover} />
+                                                                <p className="p">{vol.monthPlublished}</p>
+                                                                <p className="title">{vol.title}</p>
+                                                                <p className="p">Páginas: {vol.pag}</p>
+                                                            </div>
+                                                        )
+                                                    })
+                                                )}
                                             </div>
-                                            <div className="seeArticles">
-                                                <button style={{ background: currentColor }}>Ver más</button>
-                                            </div>
+                                            {special.length > 0 &&
+                                                <div className="seeArticles">
+                                                    <button style={{ background: currentColor }}>Ver más</button>
+                                                </div>
+                                            }
                                         </div>
                                     </>
                                 }

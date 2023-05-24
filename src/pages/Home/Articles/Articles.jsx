@@ -39,7 +39,6 @@ const Articles = () => {
       data['month'] = month[0]
       data['day'] = Number(data.publishedAt.substring(8, 10))
       setDataArt(data)
-      console.log(`${dirAPI}/${data.pdf.data[0].attributes.url}`, data.pdf.data[0].attributes)
     } catch (error) {
       IncorrectModal("¡Algo salió mal, intentalo más tarde!", true);
     }
