@@ -36,7 +36,7 @@ const Navbarr = () => {
   
   useEffect(() => {
     const token = localStorage.getItem('token');
-    const user = localStorage.getItem("username")
+    const user = localStorage.getItem("userWeb")
     if(user){
       let firstLetter = user.charAt(0).toUpperCase();
       setUsername(firstLetter)
@@ -69,7 +69,7 @@ const Navbarr = () => {
 
   const handleLogOut = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem("username")
+    localStorage.removeItem("userWeb")
     setIsLoggedIn(false);
     window.location.replace('/');
   }
