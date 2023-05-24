@@ -22,6 +22,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { IncorrectModal } from "../../components/molecules/modals/Modals";
 import { getAxiosHomeArticles } from "../../Api/Home/home";
+import {Encrypt} from "../../utilities/Hooks"
 
 
 const Home = () => {
@@ -75,6 +76,32 @@ const Home = () => {
     const [allArticles, setAllArticles] = useState([])
     const getDatas = async () => {
         try {
+            // Hacemos una llamada concurrente a la API utilizando Promise.all()
+            const [resarticless] = await Promise.all([
+                getAxiosHomeArticles("/api/current-issues")
+            ]);
+            // Mapeamos los datos obtenidos de los comités y extraemos los atributos relevantes
+            const articlesData = resarticless.data.map(({ id, attributes: { publishedAt, title, authors, doi, issue, abstract, info } }) => ({
+                id,
+                title,
+                authors,
+                doi,
+                issue,
+                abstract,
+                info,
+                publishedAt,
+            }));
+            // Asignamos los datos de los comités a los estados correspondientes en el componente
+            const issue = []
+            articlesData.map((e, index) => {
+                e['year'] = Number(e.publishedAt.substring(0, 4))
+                const month = months.filter((m, index) => index + 1 == Number(e.publishedAt.substring(5, 7)))
+                e['month'] = month[0]
+                e['day'] = Number(e.publishedAt.substring(8, 10))
+                issue.push(e)
+            })
+            setDataArt(issue)
+            setData_list(issue)
           const [resCommittees, resArticles] = await Promise.all([
             getAxiosHomeArticles("/api/current-issues"),
             getAxiosHomeArticles("/api/numbers?populate=img")
@@ -161,17 +188,11 @@ const Home = () => {
         });
     
         if (search_) {
-          clearTimeout(timerId);
-          timerId = setTimeout(() => {
-            document.getElementById('articles_456s')?.scrollIntoView({ behavior: 'smooth' });
-          }, 500); // Ajusta el tiempo de espera (en milisegundos) antes de activar el scroll suave
+            setTimeout(() => {
+                document.getElementById(`articles_456s`)?.scrollIntoView({ behavior: "smooth" });
+            }, 0);
         }
-    
-        return () => {
-          clearTimeout(timerId); // Limpiar el temporizador al desmontar el componente
-        };
-      }, [search_]);
-
+    }, [search_]);
     return (
         <div className="Home_binn">
             <div className="cnt_imag">
@@ -183,8 +204,8 @@ const Home = () => {
                     <div className='cover'>
                         <div className="cover_left">
                             <img src={cover} />
-                            <p>ISSN: 0500-9871</p>
-                            <p>e-ISSN: 5185-2132</p>
+                            <p>ISSN: -</p>
+                            <p>e-ISSN: -</p>
                         </div>
                         <div className='data'>
                             <p>Duis condimentum elementum tellus.
@@ -272,7 +293,7 @@ const Home = () => {
                                             index < 4 &&
 
                                             <div className='article' key={index} >
-                                                <button onClick={() => { setIdArticle(index + 1), navigate(`/article/${article.id}`) }}>
+                                                <button onClick={() => { setIdArticle(Encrypt(article.id)), navigate(`/article/${Encrypt(article.id)}`) }}>
                                                     <p className={`hover:${currentColor}`}>{article.title}</p>
                                                 </button>
                                                 <span className='authors'>{article.authors}</span>
@@ -285,7 +306,7 @@ const Home = () => {
                                         setIdArticle(index)
                                         return (
                                             <div className='article' key={index} >
-                                                <button onClick={() => { setIdArticle(index + 1), navigate(`/article/${article.id}`) }}>
+                                                <button onClick={() => { setIdArticle(article.id), navigate(`/article/${article.id}`) }}>
                                                     <p className={`hover:${currentColor}`}>{article.title}</p>
                                                 </button>
                                                 <span className='authors'>{article.authors}</span>
@@ -313,7 +334,7 @@ const Home = () => {
                                                 </svg>
                                                 <h1>Números anteriores:</h1>
                                             </div>
-                                        
+
                                             <div className="preVol">
                                                 {allArticles.map((vol, index) => {
                                                     return (
