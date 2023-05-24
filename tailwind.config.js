@@ -20,6 +20,9 @@ module.exports = {
         "half-transparent-white": "rgba(255, 255, 255, 0.7)",
 
       },
+      color:{
+        "text-red": "#87000C"
+      },
       borderWidth: {
         1: "1px",
       },
