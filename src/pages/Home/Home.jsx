@@ -161,10 +161,10 @@ const Home = () => {
         { title: "SNIP 2022", data: 0.67 }
     ]
     const [preVol, setPreVol] = useState([
-        { title: "Volumen. 2. Num. 1", cover: cover, monthPlublished: "Octubre", pag: "222-289" },
-        { title: "Volumen. 1. Num. 3", cover: cover, monthPlublished: "Julio", pag: "160-222" },
-        { title: "Volumen. 1. Num. 2", cover: cover, monthPlublished: "Abril", pag: "64-130" },
-        { title: "Volumen. 1. Num. 1", cover: cover, monthPlublished: "Enero", pag: "1-63" },
+        // { title: "Volumen. 2. Num. 1", cover: cover, monthPlublished: "Octubre", pag: "222-289" },
+        // { title: "Volumen. 1. Num. 3", cover: cover, monthPlublished: "Julio", pag: "160-222" },
+        // { title: "Volumen. 1. Num. 2", cover: cover, monthPlublished: "Abril", pag: "64-130" },
+        // { title: "Volumen. 1. Num. 1", cover: cover, monthPlublished: "Enero", pag: "1-63" },
     ])
     const [special, setSpecial] = useState([
         { title: "Volumen. 1. Num. 1", cover: cover, monthPlublished: "Abril", pag: "131-160" },
@@ -332,35 +332,41 @@ const Home = () => {
                                                     <path d="M13 7a2 2 0 0 1 2 2v12l-5 -3l-5 3v-12a2 2 0 0 1 2 -2h6z" />
                                                     <path d="M9.265 4a2 2 0 0 1 1.735 -1h6a2 2 0 0 1 2 2v12l-1 -.6" />
                                                 </svg>
-                                                <h1>Números anteriores:</h1>
+                                                <h1 style={{color: currentColor}} >Números anteriores:</h1>
                                             </div>
 
                                             <div className="preVol">
-                                                {allArticles.map((vol, index) => {
-                                                    return (
-                                                        <div className="cardVol" key={index}>
-                                                            <div className="cnt_image">
-                                                                <img src={vol.image} className="i_mage_"/>
+                                                {allArticles.length < 1 ? (
+                                                    <div style={{width: "100%", display: "flex", justifyContent: "center"}}>Aún no hay números que mostrar</div>
+                                                ):(
+                                                    allArticles.map((vol, index) => {
+                                                        return (
+                                                            <div className="cardVol" key={index}>
+                                                                <div className="cnt_image">
+                                                                    <img src={vol.image} className="i_mage_"/>
+                                                                </div>
+                                                                <p className="dark:text-white p">{vol.month}{" "}{vol.year}</p>
+                                                                <p className="dark:text-red-800 title">{vol.name}</p>
+                                                                {/* <p className="p">Páginas: {vol.pag}</p> */}
                                                             </div>
-                                                            <p className="p">{vol.month}{" "}{vol.year}</p>
-                                                            <p className="title">{vol.name}</p>
-                                                            {/* <p className="p">Páginas: {vol.pag}</p> */}
-                                                        </div>
-                                                    )
-                                                })}
+                                                        )
+                                                    })
+                                                )}
                                             </div>
-                                            <div className="seeArticles">
-                                                <button style={{ background: currentColor }}>Ver más</button>
-                                            </div>
+                                            {allArticles.length > 0 &&
+                                                <div className="seeArticles">
+                                                    <button style={{ background: currentColor }}>Ver más</button>
+                                                </div>
+                                            }
                                         </div>
                                         <div>
                                             <div className="containerNumbers">
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-bookmark" width="40" height="40" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#706a81" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" color={currentColor} />
                                                     <path d="M9 4h6a2 2 0 0 1 2 2v14l-5 -3l-5 3v-14a2 2 0 0 1 2 -2" />
                                                 </svg>
                                                 <div className="titleNumbers">
-                                                    <h1>Números especiales:</h1>
+                                                    <h1 style={{color: currentColor}}>Números especiales:</h1>
                                                     <Tooltip target=".alert" />
                                                     <svg className="alert icon icon-tabler icon-tabler-alert-circle"
                                                         data-pr-tooltip="Estos números están en lengua Nahualt"

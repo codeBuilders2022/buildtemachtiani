@@ -20,7 +20,7 @@ export const loginConfir = async (data,setName,navigate)=>
                 console.log("res.data",res.data.user.id)
                 localStorage.setItem("token",res.data.jwt)
                 
-                localStorage.setItem("username", res.data.user.username)
+                localStorage.setItem("userWeb", res.data.user.username)
                 localStorage.setItem("jeyaiodl", IdCrip)
                 CorrectModal("Credenciales correctas")
                 let idEncrypt = EncryptNB(res.data.user.id) 
