@@ -37,41 +37,6 @@ const Home = () => {
         getDatas()
     }, []);
 
-    // const getDatas = async () => {
-    //     try {
-    //         // Hacemos una llamada concurrente a la API utilizando Promise.all()
-    //         const [resCommittees] = await Promise.all([
-    //             getAxiosHomeArticles("/api/current-issues")
-    //         ]);
-
-    //         // const [resArticle] = await Promise.all([getAxiosHomeArticles("/api/articles")])
-    //         // Mapeamos los datos obtenidos de los comités y extraemos los atributos relevantes
-    //         const committeeData = resCommittees.data.map(({ id, attributes: { publishedAt, title, authors, doi, issue, abstract, info } }) => ({
-    //             id,
-    //             title,
-    //             authors,
-    //             doi,
-    //             issue,
-    //             abstract,
-    //             info,
-    //             publishedAt,
-    //         }));
-    //         // Asignamos los datos de los comités a los estados correspondientes en el componente
-    //         const issue = []
-    //         committeeData.map((e, index) => {
-    //             e['year'] = Number(e.publishedAt.substring(0, 4))
-    //             const month = months.filter((m, index) => index + 1 == Number(e.publishedAt.substring(5, 7)))
-    //             e['month'] = month[0]
-    //             e['day'] = Number(e.publishedAt.substring(8, 10))
-    //             issue.push(e)
-    //         })
-    //         setDataArt(issue)
-    //         setData_list(issue)
-    //     } catch (error) {
-    //         IncorrectModal("¡Algo salió mal, intentalo más tarde!", true);
-    //     }
-    // };
-
 
     const [allArticles, setAllArticles] = useState([])
     const getDatas = async () => {
@@ -107,7 +72,6 @@ const Home = () => {
             getAxiosHomeArticles("/api/numbers?populate=img")
           ]);
 
-          console.log(resArticles, "resArticle")
           //procesamiento de los datos de resArticles
           const allArticles_ = resArticles.data.map(({id, attributes: { dataNumber: { name }, img: { data: { attributes: { url }}}, publishedAt}}) => ({
             id,
@@ -136,9 +100,6 @@ const Home = () => {
         }
       };
 
-      console.log(allArticles, "del estado")
-      
-
     const data = {
         index: [
             "Journal Citation Reports and Science Citation Index Expanded",
@@ -155,17 +116,17 @@ const Home = () => {
     }
 
     const dataMethric = [
-        { title: "Factor de impacto 2022", data: null },
-        { title: "Citescore 2022", data: null },
-        { title: "SJR 2022", data: null },
-        { title: "SNIP 2022", data: null }
+        // { title: "Factor de impacto 2022", data: 1.22 },
+        // { title: "Citescore 2022", data: 1.3 },
+        // { title: "SJR 2022", data: 0.36 },
+        // { title: "SNIP 2022", data: 0.67 }
     ]
-    const [preVol, setPreVol] = useState([
-        // { title: "Volumen. 2. Num. 1", cover: cover, monthPlublished: "Octubre", pag: "222-289" },
-        // { title: "Volumen. 1. Num. 3", cover: cover, monthPlublished: "Julio", pag: "160-222" },
-        // { title: "Volumen. 1. Num. 2", cover: cover, monthPlublished: "Abril", pag: "64-130" },
-        // { title: "Volumen. 1. Num. 1", cover: cover, monthPlublished: "Enero", pag: "1-63" },
-    ])
+    // const [preVol, setPreVol] = useState([
+    //     // { title: "Volumen. 2. Num. 1", cover: cover, monthPlublished: "Octubre", pag: "222-289" },
+    //     // { title: "Volumen. 1. Num. 3", cover: cover, monthPlublished: "Julio", pag: "160-222" },
+    //     // { title: "Volumen. 1. Num. 2", cover: cover, monthPlublished: "Abril", pag: "64-130" },
+    //     // { title: "Volumen. 1. Num. 1", cover: cover, monthPlublished: "Enero", pag: "1-63" },
+    // ])
     const [special, setSpecial] = useState([
         { title: "Volumen. 1. Num. 1", cover: cover, monthPlublished: "Abril", pag: "131-160" },
         { title: "Volumen. 1. Num. 3", cover: cover, monthPlublished: "Julio", pag: "160-222" },
@@ -173,26 +134,31 @@ const Home = () => {
     ])
 
 //useEffect para buscar articulos
-    useEffect(() => {
-        let timerId;
-    
-        setDataArt((prevMagazine) => {
-          const filteredMagazine = !search_
-            ? data_list
-            : data_list.filter((articule) =>
-                articule.title.toLowerCase().includes(search_.toLowerCase()) ||
-                articule.doi.toLowerCase().includes(search_.toLowerCase()) ||
-                articule.authors.toLowerCase().includes(search_.toLowerCase())
-              );
-          return filteredMagazine;
-        });
-    
-        if (search_) {
-            setTimeout(() => {
-                document.getElementById(`articles_456s`)?.scrollIntoView({ behavior: "smooth" });
-            }, 0);
-        }
-    }, [search_]);
+useEffect(() => {
+    let timerId;
+
+    setDataArt((prevMagazine) => {
+      const filteredMagazine = !search_
+        ? data_list
+        : data_list.filter((articule) =>
+            articule.title.toLowerCase().includes(search_.toLowerCase()) ||
+            articule.doi.toLowerCase().includes(search_.toLowerCase()) ||
+            articule.authors.toLowerCase().includes(search_.toLowerCase())
+          );
+      return filteredMagazine;
+    });
+
+    if (search_) {
+      clearTimeout(timerId);
+      timerId = setTimeout(() => {
+        document.getElementById('articles_456s')?.scrollIntoView({ behavior: 'smooth' });
+      }, 500); // Ajusta el tiempo de espera (en milisegundos) antes de activar el scroll suave
+    }
+
+    return () => {
+      clearTimeout(timerId); // Limpiar el temporizador al desmontar el componente
+    };
+  }, [search_]);
     return (
         <div className="Home_binn">
             <div className="cnt_imag">
@@ -230,9 +196,9 @@ const Home = () => {
                     </div>
                     <div className='metrics'>
                         <div className='left'>
-                            <p className='title'>Indexada en:</p>
+                            {/* <p className='title'>Indexada en:</p> */}
                             <div className="in">
-                                {data.index.map((element, index) => {
+                                {/* {data.index.map((element, index) => {
                                     return (
                                         <div className='index' key={index}>
                                             <p>{element}</p>
@@ -241,9 +207,8 @@ const Home = () => {
                                             )}
                                         </div>
                                     )
-                                })}
+                                })} */}
                             </div>
-                            {/* --------------------------------- redes sociales ------------------------- */}
                             {/* <div className="icons">
                                 <p style={{ marginRight: '10px' }}>Síguenos: </p>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-facebook" width="40" height="40" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#9e9e9e" fill="none" strokeLinecap="round" strokeLinejoin="round">
@@ -257,7 +222,7 @@ const Home = () => {
                             </div> */}
                         </div>
                         <div className='right'>
-                            {dataMethric.map((e, index) => {
+                            {/* {dataMethric.map((e, index) => {
                                 return (
                                     <>
 
@@ -268,10 +233,12 @@ const Home = () => {
                                         </div>
                                     </>
                                 )
-                            })}
-                            <NavLink to={"/metrics"}>
-                                <button>Ver más métricas</button>
-                            </NavLink>
+                            })} */}
+                            {dataMethric.length > 1 &&
+                                <NavLink to={"/metrics"}>
+                                    <button>Ver más métricas</button>
+                                </NavLink>
+                            }
                         </div>
                     </div>
                     {/* </div> */}
