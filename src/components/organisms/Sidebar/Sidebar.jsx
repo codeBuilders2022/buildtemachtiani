@@ -52,7 +52,8 @@ const Sidebar = () => {
         // // Mapeamos los datos obtenidos de los comités y extraemos los atributos relevantes
         const committeeData = resCommittees.data.map(({ id, attributes: { committee, email, fullname, profile: { data: { attributes: { formats } } } } }) => {
           const url = formats?.large?.url || formats?.medium?.url || formats?.small?.url || formats?.thumbnail?.url || resCommittees?.data[0]?.attributes?.profile?.data?.attributes?.url;
-          return { id, committee, email, fullname, image: process.env.REACT_APP_API_URL + url };
+          const modifiedEmail = email.replace(/^(.{3}).*?(@.*)$/, "$1...$2");
+          return { id, committee, email: modifiedEmail, fullname, image: process.env.REACT_APP_API_URL + url };
         });
         // // Asignamos los datos de los comités a los estados correspondientes en el componente
         setCommitteeDtas(committeeData.slice(0, 3));

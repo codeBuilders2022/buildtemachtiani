@@ -37,41 +37,6 @@ const Home = () => {
         getDatas()
     }, []);
 
-    // const getDatas = async () => {
-    //     try {
-    //         // Hacemos una llamada concurrente a la API utilizando Promise.all()
-    //         const [resCommittees] = await Promise.all([
-    //             getAxiosHomeArticles("/api/current-issues")
-    //         ]);
-
-    //         // const [resArticle] = await Promise.all([getAxiosHomeArticles("/api/articles")])
-    //         // Mapeamos los datos obtenidos de los comités y extraemos los atributos relevantes
-    //         const committeeData = resCommittees.data.map(({ id, attributes: { publishedAt, title, authors, doi, issue, abstract, info } }) => ({
-    //             id,
-    //             title,
-    //             authors,
-    //             doi,
-    //             issue,
-    //             abstract,
-    //             info,
-    //             publishedAt,
-    //         }));
-    //         // Asignamos los datos de los comités a los estados correspondientes en el componente
-    //         const issue = []
-    //         committeeData.map((e, index) => {
-    //             e['year'] = Number(e.publishedAt.substring(0, 4))
-    //             const month = months.filter((m, index) => index + 1 == Number(e.publishedAt.substring(5, 7)))
-    //             e['month'] = month[0]
-    //             e['day'] = Number(e.publishedAt.substring(8, 10))
-    //             issue.push(e)
-    //         })
-    //         setDataArt(issue)
-    //         setData_list(issue)
-    //     } catch (error) {
-    //         IncorrectModal("¡Algo salió mal, intentalo más tarde!", true);
-    //     }
-    // };
-
 
     const [allArticles, setAllArticles] = useState([])
     const getDatas = async () => {
@@ -107,7 +72,6 @@ const Home = () => {
             getAxiosHomeArticles("/api/numbers?populate=img")
           ]);
 
-          console.log(resArticles, "resArticle")
           //procesamiento de los datos de resArticles
           const allArticles_ = resArticles.data.map(({id, attributes: { dataNumber: { name }, img: { data: { attributes: { url }}}, publishedAt}}) => ({
             id,
@@ -136,9 +100,6 @@ const Home = () => {
         }
       };
 
-      console.log(allArticles, "del estado")
-      
-
     const data = {
         index: [
             "Journal Citation Reports and Science Citation Index Expanded",
@@ -155,17 +116,17 @@ const Home = () => {
     }
 
     const dataMethric = [
-        { title: "Factor de impacto 2022", data: 1.22 },
-        { title: "Citescore 2022", data: 1.3 },
-        { title: "SJR 2022", data: 0.36 },
-        { title: "SNIP 2022", data: 0.67 }
+        // { title: "Factor de impacto 2022", data: 1.22 },
+        // { title: "Citescore 2022", data: 1.3 },
+        // { title: "SJR 2022", data: 0.36 },
+        // { title: "SNIP 2022", data: 0.67 }
     ]
-    const [preVol, setPreVol] = useState([
-        // { title: "Volumen. 2. Num. 1", cover: cover, monthPlublished: "Octubre", pag: "222-289" },
-        // { title: "Volumen. 1. Num. 3", cover: cover, monthPlublished: "Julio", pag: "160-222" },
-        // { title: "Volumen. 1. Num. 2", cover: cover, monthPlublished: "Abril", pag: "64-130" },
-        // { title: "Volumen. 1. Num. 1", cover: cover, monthPlublished: "Enero", pag: "1-63" },
-    ])
+    // const [preVol, setPreVol] = useState([
+    //     // { title: "Volumen. 2. Num. 1", cover: cover, monthPlublished: "Octubre", pag: "222-289" },
+    //     // { title: "Volumen. 1. Num. 3", cover: cover, monthPlublished: "Julio", pag: "160-222" },
+    //     // { title: "Volumen. 1. Num. 2", cover: cover, monthPlublished: "Abril", pag: "64-130" },
+    //     // { title: "Volumen. 1. Num. 1", cover: cover, monthPlublished: "Enero", pag: "1-63" },
+    // ])
     const [special, setSpecial] = useState([
         { title: "Volumen. 1. Num. 1", cover: cover, monthPlublished: "Abril", pag: "131-160" },
         { title: "Volumen. 1. Num. 3", cover: cover, monthPlublished: "Julio", pag: "160-222" },
@@ -173,26 +134,31 @@ const Home = () => {
     ])
 
 //useEffect para buscar articulos
-    useEffect(() => {
-        let timerId;
-    
-        setDataArt((prevMagazine) => {
-          const filteredMagazine = !search_
-            ? data_list
-            : data_list.filter((articule) =>
-                articule.title.toLowerCase().includes(search_.toLowerCase()) ||
-                articule.doi.toLowerCase().includes(search_.toLowerCase()) ||
-                articule.authors.toLowerCase().includes(search_.toLowerCase())
-              );
-          return filteredMagazine;
-        });
-    
-        if (search_) {
-            setTimeout(() => {
-                document.getElementById(`articles_456s`)?.scrollIntoView({ behavior: "smooth" });
-            }, 0);
-        }
-    }, [search_]);
+useEffect(() => {
+    let timerId;
+
+    setDataArt((prevMagazine) => {
+      const filteredMagazine = !search_
+        ? data_list
+        : data_list.filter((articule) =>
+            articule.title.toLowerCase().includes(search_.toLowerCase()) ||
+            articule.doi.toLowerCase().includes(search_.toLowerCase()) ||
+            articule.authors.toLowerCase().includes(search_.toLowerCase())
+          );
+      return filteredMagazine;
+    });
+
+    if (search_) {
+      clearTimeout(timerId);
+      timerId = setTimeout(() => {
+        document.getElementById('articles_456s')?.scrollIntoView({ behavior: 'smooth' });
+      }, 500); // Ajusta el tiempo de espera (en milisegundos) antes de activar el scroll suave
+    }
+
+    return () => {
+      clearTimeout(timerId); // Limpiar el temporizador al desmontar el componente
+    };
+  }, [search_]);
     return (
         <div className="Home_binn">
             <div className="cnt_imag">
@@ -230,9 +196,9 @@ const Home = () => {
                     </div>
                     <div className='metrics'>
                         <div className='left'>
-                            <p className='title'>Indexada en:</p>
+                            {/* <p className='title'>Indexada en:</p> */}
                             <div className="in">
-                                {data.index.map((element, index) => {
+                                {/* {data.index.map((element, index) => {
                                     return (
                                         <div className='index' key={index}>
                                             <p>{element}</p>
@@ -241,9 +207,9 @@ const Home = () => {
                                             )}
                                         </div>
                                     )
-                                })}
+                                })} */}
                             </div>
-                            <div className="icons">
+                            {/* <div className="icons">
                                 <p style={{ marginRight: '10px' }}>Síguenos: </p>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-facebook" width="40" height="40" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#9e9e9e" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -253,10 +219,10 @@ const Home = () => {
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                     <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
                                 </svg>
-                            </div>
+                            </div> */}
                         </div>
                         <div className='right'>
-                            {dataMethric.map((e, index) => {
+                            {/* {dataMethric.map((e, index) => {
                                 return (
                                     <>
 
@@ -267,10 +233,12 @@ const Home = () => {
                                         </div>
                                     </>
                                 )
-                            })}
-                            <NavLink to={"/metrics"}>
-                                <button>Ver más métricas</button>
-                            </NavLink>
+                            })} */}
+                            {dataMethric.length > 1 &&
+                                <NavLink to={"/metrics"}>
+                                    <button>Ver más métricas</button>
+                                </NavLink>
+                            }
                         </div>
                     </div>
                     {/* </div> */}
