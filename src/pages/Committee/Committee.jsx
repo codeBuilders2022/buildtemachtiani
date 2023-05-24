@@ -27,15 +27,12 @@ const Committee = () => {
             const [resCommittees] = await Promise.all([
                 getAxiosData("/api/committees?populate=profile")
             ]);
+
             // Mapeamos los datos obtenidos de los comités y extraemos los atributos relevantes
-            const committeeData = resCommittees.data.map(({ id, attributes: { committee, country, email, fullname, profile: { data: { attributes: { formats: { large: { url } } } } } } }) => ({
-                id,
-                image: process.env.REACT_APP_API_URL + url, // Construimos la URL de la imagen del perfil concatenando la URL de la API y la URL de la imagen
-                committee,
-                country,
-                email,
-                fullname,
-            }));
+            const committeeData = resCommittees.data.map(({ id, attributes: { committee, country, email, fullname, profile: { data: { attributes: { formats } } } } }) => {
+                const url = formats?.large?.url || formats?.medium?.url || formats?.small?.url || formats?.thumbnail?.url || resCommittees?.data[0]?.attributes?.profile?.data?.attributes?.url;
+                return { id, committee, country, email, fullname, image: process.env.REACT_APP_API_URL + url};
+              });
             // Asignamos los datos de los comités a los estados correspondientes en el componente
             committeeData.map((e) => {
                 if (e.committee == 'Editorial') {
