@@ -229,7 +229,7 @@ useEffect(() => {
                                         <div className='cardGraph'
                                             key={index}>
                                             <p>{e.title}:</p>
-                                            <p className="data">{e.data}</p>
+                                            <p className="data">{e.data !== null ? e.data : "-"}</p>
                                         </div>
                                     </>
                                 )
