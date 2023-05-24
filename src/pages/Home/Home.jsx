@@ -73,7 +73,6 @@ const Home = () => {
             getAxiosHomeArticles("/api/numbers?populate=*")
           ]);
 
-          console.log(resArticles, "REs")
 
           //procesamiento de los datos de resArticles
           const allArticles_ = resArticles.data.map(({id, attributes: { dataNumber: { name, resume }, img: { data: { attributes: { url }}}, pdf: { data: { attributes: { url: urlPdf }}}, publishedAt}}) => ({
@@ -86,7 +85,6 @@ const Home = () => {
             year: Number(publishedAt.substring(0, 4))
           }))
 
-          console.log(allArticles_, "alee")
 
           let firstID;
           var indexx = 0;
@@ -182,7 +180,6 @@ useEffect(() => {
     };
   }, [search_]);
 
-  console.log(currentJornal)
     return (
         <div className="Home_binn">
             <div className="cnt_imag">

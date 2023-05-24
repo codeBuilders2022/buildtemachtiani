@@ -156,28 +156,6 @@ const CreateArticle = () => {
         }
 
     }
-    // function handleInput(event) {
-    //     const nuevoTexto = event;
-    //     let words=""
-    //     if(event!=null)
-    //     {
-    //          words = nuevoTexto.split(/\s+/);
-    //     }
-    //     else
-    //     {
-    //         setTextAreaResume("");
-    //     }
-    //     const count = words.length > 1 ? words.length - 1 : 0; // cuenta las palabras y elimina los espacios adicionales
-    //     if (count <= 500) {
-
-    //         setTextAreaResume(nuevoTexto);
-    //         setTextAreaConterword(count)
-    //     } else {
-    //         console.log("entro al else")
-
-    //     }
-    //     console.log("conunt",count)
-    // }
     const [habilitado, setHabilitado] = useState(true);
     const contarPalabrasEditor = (event) => {
         const textoIngresado = event.htmlValue;
@@ -240,27 +218,19 @@ const CreateArticle = () => {
     const idiomOprions = [
         { name: "Español", value: "Español" },
         { name: "Ingles", value: "Ingles" },
-        { name: "Nauatl", value: "Nauatl" },
+        { name: "Náhuatl", value: "Náhuatl" },
     ]
 
 
     useEffect(() => {
-        axiosData();
+        axiosCountries();
     }, []);
 
-    const axiosData = async () => {
+    
+    const axiosCountries = async () => {
         try {
-            const response = await getAxiosCountrys("/api/countries");
-            const data = response.data;
-
-            const newData = data.map(({ id, attributes: { value } }) => ({
-                id,
-                value,
-            }));
-
-            newData.sort((a, b) => a.value.localeCompare(b.value, undefined, { sensitivity: 'base' }))
-
-            setData(newData);
+            const response = await getAxiosCountrys();         
+            setData(response);
         } catch (error) {
             IncorrectModal("¡Algo salió mal, intentalo más tarde!", true)
         }

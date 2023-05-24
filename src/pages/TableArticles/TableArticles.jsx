@@ -19,7 +19,6 @@ const TableArticles = () => {
     const {idUser} = useParams()
 
     const actionTemplate = ({id}) => {
-        console.log("id",id)
         return (
             <NavLink to={`/user/my-article/${id}/${idUser}`}>
                 <div className="actionTemplate">
