@@ -3,7 +3,8 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import correct from './img/iconos-02.png'
 import incorrect from './img/iconos-03.png'
 import question from './img/iconos-01.png'
-import almiracion from './img/almiracion.png'
+import Almiracion from './img/almiracion.png'
+// import { second } from "./img/almiracion.png"
 import "./Modals.scss"
 
 export const CorrectModal = (description, timer = 3000)=>
@@ -71,7 +72,7 @@ export const RegistroModal = (description, message, timer = 4500)=>{
 export const InfoModal = (description, message)=>{
   return Swal.fire({
       html: `<div style="display:flex;flex-direction:column;align-items:center; gap:20px;">
-                  <img style="width:150px" src=${almiracion}/>
+                  <img style="width:150px" src=${Almiracion}>
                   <div style="display:flex; flex-direction:column; gap:5px;">
                       <span style="font-size:16px;font-weight:bold;color:black;">
                           ${description}
