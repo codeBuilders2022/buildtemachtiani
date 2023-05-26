@@ -160,6 +160,9 @@ const CreateArticle = () => {
     const [habilitado, setHabilitado] = useState(true);
     const contarPalabrasEditor = (event) => {
         const textoIngresado = event.htmlValue;
+        const textoEnter = event.textValue;
+        const contadorSaltosLinea = (textoEnter.split(/\n+/).length - 2);
+        console.log("contadorSaltosLinea",contadorSaltosLinea);
         let palabras = "";
         if (textoIngresado != null) {
             palabras = textoIngresado.trim().split(/\s+/);
@@ -167,7 +170,7 @@ const CreateArticle = () => {
         else {
             setTextAreaResume("");
         }
-        const cantidadPalabras = palabras.length;
+        const cantidadPalabras = palabras.length+contadorSaltosLinea;
 
         if (cantidadPalabras > 500) {
             const textoRecortado = palabras.slice(0, 500).join(" ");
@@ -175,38 +178,46 @@ const CreateArticle = () => {
             setHabilitado(false)
         } else {
             setHabilitado(true)
+            
             setTextAreaConterword(cantidadPalabras)
             setTextAreaResume(textoIngresado);
+
         }
 
     };
+   
+
     const onEditorKeyPress = (event) => {
         if (!habilitado) {
             event.preventDefault();
         }
     };
+
     const onEditorPaste = (event) => {
         event.preventDefault();
         const textoPegado = (event.clipboardData || window.clipboardData).getData("text");
-        const textoIngresado = event.htmlValue || "";
-      
+        const textoIngresado = textAreaResume || "";
+
         const palabrasPegadas = textoPegado.trim().split(/\s+/);
         const palabrasActuales = textoIngresado.trim().split(/\s+/).length;
         const palabrasTotales = palabrasActuales + palabrasPegadas.length;
         const palabrasRestantes = 500 - palabrasTotales;
-      
+
         if (palabrasTotales > 500) {
-          return;
+            return;
         } else if (palabrasRestantes < 0) {
-          const textoRecortado = palabrasPegadas.slice(0, Math.abs(palabrasRestantes)).join(" ");
-          const nuevoTexto = textoIngresado + " " + textoRecortado;
-          setTextAreaResume(nuevoTexto);
-          setTextAreaConterword(500);
+            const textoRecortado = palabrasPegadas.slice(0, Math.abs(palabrasRestantes)).join(" ");
+            const nuevoTexto = textoIngresado + " " + textoRecortado;
+            event.htmlValue = nuevoTexto; // Actualizar el valor del evento
+            setTextAreaConterword(500);
         } else {
-          const nuevoTexto = textoIngresado + " " + textoPegado;
-          setTextAreaResume(nuevoTexto);
-          setTextAreaConterword(palabrasTotales);
+            const nuevoTexto = textoIngresado + " " + textoPegado;
+            event.htmlValue = nuevoTexto; // Actualizar el valor del evento
+            setTextAreaConterword(palabrasTotales);
         }
+
+        // Actualizar el valor del editor
+        setTextAreaResume(event.htmlValue);
     };
 
 
@@ -233,10 +244,10 @@ const CreateArticle = () => {
         axiosCountries();
     }, []);
 
-    
+
     const axiosCountries = async () => {
         try {
-            const response = await getAxiosCountrys();         
+            const response = await getAxiosCountrys();
             setData(response);
         } catch (error) {
             IncorrectModal("¡Algo salió mal, intentalo más tarde!", true)
