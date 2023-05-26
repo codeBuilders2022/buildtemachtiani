@@ -85,21 +85,25 @@ const Home = () => {
             year: Number(publishedAt.substring(0, 4))
           }))
 
+          if(allArticles_.length > 0){
+            console.log("Entre aqui")
+              var firstID;
+              var indexx = 0;
+              
+              firstID = allArticles_[0].id
+              allArticles_.map((id, idx) => {
+                if(id.id > firstID){
+                    firstID = id.id
+                    indexx = idx
+                }
+              })
 
-          let firstID;
-          var indexx = 0;
-          
-          firstID = allArticles_[0].id
-          allArticles_.map((id, idx) => {
-            if(id.id > firstID){
-                firstID = id.id
-                indexx = idx
-            }
-          })
+              const newArticles = allArticles_.filter((idx, number) => number !== indexx )
+              setCurrentJornal([allArticles_[indexx]])
+              setAllArticles(newArticles)
+          }
 
-          const newArticles = allArticles_.filter((idx, number) => number !== indexx )
-          setCurrentJornal([allArticles_[indexx]])
-          setAllArticles(newArticles)
+
           
       
           // Procesamiento de los datos de los comités
@@ -114,6 +118,7 @@ const Home = () => {
           setDataArt(committeeData);
           setData_list(committeeData);
         } catch (error) {
+            console.log(error)
           IncorrectModal("¡Algo salió mal, inténtalo más tarde!", true);
         }
       };
@@ -190,7 +195,7 @@ useEffect(() => {
                     {/* <div className="dark:bg-gray-500 bg-slate-100 flex w-full"> */}
                     <div className='cover'>
                         {currentJornal?.map((_, idx) => (
-                            <>
+                            <div key={idx}>
                                 <div className="col_left">
                                     <div className="cnt_img__">
                                         <img src={_.image} alt="" className="i_mage"/>
@@ -200,7 +205,7 @@ useEffect(() => {
                                     <div className="current_reume" dangerouslySetInnerHTML={{__html: _.resume}}></div>
                                     <a className='download' href={_.url}  style={{ background: currentColor }} download>Descargar</a>
                                 </div>
-                            </>
+                            </div>
                         ))}
                     </div>
                     <div className='metrics'>
@@ -292,6 +297,10 @@ useEffect(() => {
 
                                         )
                                     })
+                                }
+
+                                {dataArt.length < 1 &&
+                                     <div style={{width: "100%", display: "flex", justifyContent: "center"}}>Aún no hay artículos que mostrar</div>
                                 }
                                 {
                                     dataArt.length > 4 &&
