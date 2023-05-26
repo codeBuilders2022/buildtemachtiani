@@ -50,9 +50,10 @@ const CreateArticle = () => {
                 [`nameStaking${newCont}`]: { value: null, validationType: "empty" },
                 [`lastName${newCont}`]: { value: null, validationType: "empty" },
                 [`Orcid${newCont}`]: { value: null, validationType: "empty" },
-                [`Titulo${newCont}`]: { value: null, validationType: "empty" },
+                [`level${newCont}`]: { value: null, validationType: "empty" },
                 [`Email${newCont}`]: { value: null, validationType: "empty" },
                 [`pais${newCont}`]: { value: null, validationType: "empty" },
+                [`Institución${newCont}`]: { value: null, validationType: "empty" },
             })
             setinputListstaking(inputListstakingCopy);
             setCounterStaking(newCont)
@@ -218,7 +219,13 @@ const CreateArticle = () => {
     const idiomOprions = [
         { name: "Español", value: "Español" },
         { name: "Ingles", value: "Ingles" },
-        { name: "Náhuatl", value: "Náhuatl" },
+        { name: "Lengua originaria", value: "Lengua originaria" },
+    ]
+
+    const dataLevel = [
+        { id: 1, value: "Licenciatura ", code: "Licenciatura " },
+        { id: 2, value: "Maestría", code: "mastria" },
+        { id: 3, value: "Doctorado", code: "doctorado" }, ,
     ]
 
 
@@ -260,15 +267,21 @@ const CreateArticle = () => {
                                             <div className="staking-parent">
                                                 <div className="statk_in">
                                                     <Input title={"Nombre"} placeholder={"Nombre"} className={"inputArticleName"} id={`nameStaking${key}`} onChange={(e) => { UpdateValueStaking(e, `nameStaking${key}`, key, inputListstaking, setinputListstaking) }}></Input>
-                                                    <Input title={"Apellido"} placeholder={"Apellido"} className={"inputArticleName"} id={`lastName${key}`} onChange={(e) => { UpdateValueStaking(e, `lastName${key}`, key, inputListstaking, setinputListstaking) }}></Input>
+                                                    <Input title={"Apellidos"} placeholder={"Apellidos"} className={"inputArticleName"} id={`lastName${key}`} onChange={(e) => { UpdateValueStaking(e, `lastName${key}`, key, inputListstaking, setinputListstaking) }}></Input>
                                                 </div>
                                                 <div className="statk_in">
                                                     <Input title={"Orcid"} placeholder={"Orcid"} className={"inputArticleName"} id={`Orcid${key}`} onChange={(e) => { UpdateValueStaking(e, `Orcid${key}`, key, inputListstaking, setinputListstaking) }}></Input>
-                                                    <Input title={"Titulo"} placeholder={"Titulo"} className={"inputArticleName"} id={`Titulo${key}`} onChange={(e) => { UpdateValueStaking(e, `Titulo${key}`, key, inputListstaking, setinputListstaking) }}></Input>
+                                                    {/* <Input title={"Titulo"} placeholder={"Titulo"} className={"inputArticleName"} id={`Titulo${key}`} onChange={(e) => { UpdateValueStaking(e, `Titulo${key}`, key, inputListstaking, setinputListstaking) }}></Input> */}
+                                                    <Select title={"Nivel académico"} value={item[`level${key}`].value} options={dataLevel} placeholder={"Nivel académico"} className={"selectSize"} id={`level${key}`} onChange={(e) => { UpdateValueStaking(e, `level${key}`, key, inputListstaking, setinputListstaking) }}></Select>
+
                                                 </div>
                                                 <div className="statk_in">
                                                     <Input title={"Email"} placeholder={"Email"} className={"inputArticleName"} id={`Email${key}`} onChange={(e) => { UpdateValueStaking(e, `Email${key}`, key, inputListstaking, setinputListstaking) }}></Input>
                                                     <Select title={"País"} value={item[`pais${key}`].value} options={data} placeholder={"País"} className={"selectSize"} id={`pais${key}`} onChange={(e) => { UpdateValueStaking(e, `pais${key}`, key, inputListstaking, setinputListstaking) }}></Select>
+                                                </div>
+                                                <div className="statk_in">
+                                                    <Input title={"Institución"} placeholder={"Institución"} className={"inputArticleName"} id={`Institución${key}`} onChange={(e) => { UpdateValueStaking(e, `Institución${key}`, key, inputListstaking, setinputListstaking) }}></Input>
+                                                    {/* <Select title={"País"} value={item[`pais${key}`].value} options={data} placeholder={"País"} className={"selectSize"} id={`pais${key}`} onChange={(e) => { UpdateValueStaking(e, `pais${key}`, key, inputListstaking, setinputListstaking) }}></Select> */}
                                                 </div>
                                                 <div className="Line_line"></div>
                                             </div>

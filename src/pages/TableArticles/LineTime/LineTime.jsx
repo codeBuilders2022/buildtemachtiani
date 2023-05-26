@@ -6,13 +6,16 @@ import StepsLine from "../../../components/organisms/StepsLine/StepsLine";
 import Back from "../../../components/atoms/Back/Back";
 import { useParams } from "react-router-dom";
 import { getDataLine } from "./api";
+import { ZAxis } from "recharts";
 
 const LineTime = () => {
   const [data,setData]=useState()
+  const [institucion,setInstitucion] = useState()
+  const [institucionArray,setInstitucionArray] = useState()
   const {id,idUser} = useParams()
   useEffect(()=>
   {
-    getDataLine(id,setData)
+    getDataLine(id,setData,setInstitucion)
   },[])
   useEffect(()=>
   {
@@ -29,7 +32,37 @@ const LineTime = () => {
     }
   },[data])
   const [names,setNames] = useState([])
-  
+
+
+  //filtrado de institucion
+  useEffect(()=>{
+    let institucionArray = []
+    let arrayFilter = []
+    var palabrasUnicas = [];
+    if(data?.stakingInputData)
+    {
+      institucionArray.push(institucion)
+      data.stakingInputData.map((item,key)=>
+      {
+        institucionArray.push(item[`Institución${key}`].value)
+        
+      })
+      
+      
+
+        // Recorremos el array original
+        for (var i = 0; i < institucionArray.length; i++) {
+          // Verificamos si la palabra actual no existe en el nuevo array
+          if (palabrasUnicas.indexOf(institucionArray[i]) === -1) {
+            // Agregamos la palabra al nuevo array
+            palabrasUnicas.push(institucionArray[i]);
+          }
+        }
+        setInstitucionArray(palabrasUnicas)
+      
+    }
+
+  },[institucion])
   return (
     <div className="dark:bg-gray-600 bg-white dark:text-white LineTime">
     <Back className={"_back_"} url={`/user/dashboard/${idUser}`}/>
@@ -44,6 +77,7 @@ const LineTime = () => {
           {data?.name}
         </h1>
         <h2><span style={{fontSize:"18px",fontWeight:"bold"}}>Autor(es):</span> <span style={{fontSize:"18px"}}>{names?data?.autor+", ":data?.autor} {names?names.map((item,key)=>{return(<>{key == names.length-1 ?item:item+", "}</>)}):""}</span></h2>
+        <h2><span style={{fontSize:"18px",fontWeight:"bold"}}>Institución:</span> <span style={{fontSize:"18px"}}> {institucionArray?institucionArray.map((item,key)=>{return(<>{key == institucionArray.length-1 ?item:item+", "}</>)}):""}</span></h2>
         <div className="block_descrip">
           <h2>Resumen</h2>
           
