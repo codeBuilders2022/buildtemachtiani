@@ -141,16 +141,15 @@ const Log = () => {
   ];
 
   const academic = [
-    { id: 1, value: "Maestria", code: "maestria" },
-    { id: 2, value: "Doctorado", code: "dosctorado" }
+    { id: 1, value: "Licenciatura ", code: "Licenciatura " },
+    { id: 2, value: "Maestría", code: "mastria" },
+    { id: 3, value: "Doctorado", code: "doctorado" }, 
   ]
 
   const ocupation = [
-    { id: 1, value: "Académico", code: "academico" },
-    { id: 2, value: "Investigador", code: "investigador" },
+    { id: 2, value: "Investigador(a)", code: "investigador" },
+    { id: 2, value: "Estudiante", code: "estudiante" },
   ]
-
-  
 
   useEffect(() => {
     axiosCountries();

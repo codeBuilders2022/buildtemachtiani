@@ -22,7 +22,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { IncorrectModal } from "../../components/molecules/modals/Modals";
 import { getAxiosHomeArticles } from "../../Api/Home/home";
-import {Encrypt} from "../../utilities/Hooks"
+import {Decrypt, Encrypt} from "../../utilities/Hooks"
 
 
 const Home = () => {
