@@ -1,9 +1,9 @@
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
-import correct from './img/iconos-02.png'
-import incorrect from './img/iconos-03.png'
-import question from './img/iconos-01.png'
-import Almiracion from './img/almiracion.png'
+import correct from '../../../assets/images/iconos-02.png'
+import incorrect from '../../../assets/images/iconos-03.png'
+import question from '../../../assets/images/iconos-01.png'
+import Almiracion from '../../../assets/images/almiracion.png'
 // import { second } from "./img/almiracion.png"
 import "./Modals.scss"
 
