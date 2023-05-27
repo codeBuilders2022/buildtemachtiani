@@ -60,7 +60,9 @@ const navigate = useNavigate()
                         <div className="rememberPassword">Olvidé mi contraseña</div>
                     </NavLink>
                     {loading ? (
-                        <AnimationLoading />
+                        <div style={{width: "100%", display: "flex", justifyContent: "center"}}>
+                            <AnimationLoading />
+                        </div>
                     ):(     
                         <Button className={"btn_primary"} title="Iniciar sesión" onClick={()=>{validationFunction()}}></Button>
                     )}
