@@ -56,7 +56,7 @@ const Articles = () => {
 
   return (
     <div className="Articless dark:bg-gray-600 dark:text-white m-2 md:m-10 md:mt-32 mt-24 p-2 md:p-10 bg-white rounded-3xl flex">
-      <Back className={"_back_"} url={"/"} />
+      <Back className={"_back_l"} url={"/"} />
       <div style={{ width: '100%' }}>
         <div className="type">
           <p>{dataArt?.type}</p>

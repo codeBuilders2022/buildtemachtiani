@@ -4,6 +4,10 @@
   margin: 100px auto !important;
   display: flex;
 
+  @media (max-width: 768px) {
+    padding-top: 40px !important;
+  }
+
   @media screen and (max-width:1385px) {
     margin-top:156px!important ;
   }
@@ -145,6 +149,11 @@
     left: 40px;
     top: 100px;
 
+    @media (max-width:768px) {
+      left: 13px;
+      top: 80px;
+    }
+
     @media (max-width: 1440px) {
       min-width: 50px;
     }
@@ -160,6 +169,11 @@
     }
   }
 }
+
+// ._back_l{
+//   left: 13px;
+//   top: 80px;
+// }
 
 .date {
   font-weight: 700;
