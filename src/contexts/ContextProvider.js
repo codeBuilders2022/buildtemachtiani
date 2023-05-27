@@ -12,8 +12,8 @@ export const ContextProvider = ({ children }) => {
   const [openNavbar, setOpenNavbar] = useState(false)
   const [openNavbar1, setOpenNavbar1] = useState(false)
   const id = String(window.location.pathname)
-  const [search_, setSearch_] = useState(id)
-  const [idArticle, setIdArticle] = useState('');
+  const [search_, setSearch_] = useState("")
+  const [idArticle, setIdArticle] = useState(id);
   const url = "/article/"
 
   useEffect(() => {
