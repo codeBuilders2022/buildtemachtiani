@@ -51,11 +51,11 @@ const Committee = () => {
     };
     return (
         <div className="Committee">
-            <ExteriorCard>
+            <ExteriorCard className={"md:mt-40"}>
                 <Back className={"_back_"} url={"/"} />
                 <div className="container">
                     <Header title={"COMITÉ"} />
-                    <div className="type">
+                    <div className="type md:mb-4">
                         <button className={!active && "active"} onClick={() => { setActive(false) }}>Editorial</button>
                         <button className={active && "active"} onClick={() => { setActive(true) }}>Científico</button>
                     </div>

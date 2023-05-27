@@ -11,9 +11,11 @@ import { ColorValidation, SubmitValidation, UpdateValue, ValidationPassword } fr
 import { CorrectModal, IncorrectModal, RegistroModal } from "../../components/molecules/modals/Modals";
 import { getAxiosCountrys, postAxiosRegister, userAxiosPost } from "../../Api/Register/Register";
 import { Encrypt } from "../../utilities/Hooks";
+import AnimationLoading from "../../components/atoms/AnimationLoading/AnimationLoading";
 
 const Log = () => {
 
+  const [loading, setLoading] = useState(false)
   const [inputList, setInputList] = useState({
     names: { value: null, validationType: "empty" },
     lastName: { value: null, validationType: "empty" },
@@ -51,6 +53,7 @@ const Log = () => {
     const objetData = { "data": {} };
     const keysToTransform = ["country", "gender", "ocupation", "academic_level"];
     if (validate) {
+      setLoading(true)
       try {
         const saveUser = {
           username: inputList.user.value,
@@ -72,14 +75,17 @@ const Log = () => {
               setCompletedRegister(true)
             }, 5000)
           } else {
+            setLoading(false)
             IncorrectModal("¡Algo salió mal, intentalo más tarde!", true)
           }
         }
 
         if (response.status === 400) {
+          setLoading(false)
           IncorrectModal(`Se envio una correo de confimacion a la siguiente direccion: ${inputList.email.value}`)
         }
       } catch (error) {
+        setLoading(false)
         IncorrectModal("El correo electrónico o el nombre de usuario ya están en uso", true);
       }
     }
@@ -220,8 +226,14 @@ const axiosCountries = async () => {
               </div>
             </div>
             <div className="cnt_btn th_">
-              <Button title={"Regresar"} className={"btn_cancel"} onClick={() => handleReturnTwo()} />
-              <Button title={"Crear cuenta"} className={"btn_primary"} onClick={() => handleSubmit()} />
+              {loading ? (
+                <AnimationLoading />
+              ):(
+                <>
+                  <Button title={"Regresar"} className={"btn_cancel"} onClick={() => handleReturnTwo()} />
+                  <Button title={"Crear cuenta"} className={"btn_primary"} onClick={() => handleSubmit()} />
+                </>
+              )}
             </div>
             {!steps.step_three && <div className="dark:bg-half-transparent-black layer_blur"></div>}
           </div>

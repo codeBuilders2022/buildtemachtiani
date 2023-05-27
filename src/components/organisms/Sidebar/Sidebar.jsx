@@ -33,12 +33,19 @@ const Sidebar = () => {
     //Obtenemos los datos de la API
     const getDatas = async () => {
         try {
-            const [resCommittees] = await Promise.all([getAxiosData("/api/events")]);
-            const commiteData = resCommittees.data.map(({id, attributes: { events, date, siteurl}}) => {
-                return {id, events, date, siteurl}
+            const [resCommittees] = await Promise.all([getAxiosData("/api/events?populate=file")]);
+            const commiteData = resCommittees.data.map(({id, attributes: { events, date, siteurl, file: { data} }}) => {
+                let urlFile = null
+                if(data?.attributes && data?.attributes.url){
+                    urlFile = data.attributes.url
+                    urlFile = process.env.REACT_APP_API_URL + urlFile
+                }
+                return {id, events, date, siteurl, image: urlFile}
             })
+
             setEvents(commiteData)
         } catch (error) {
+            console.log(error)
             IncorrectModal("¡Algo salió mal, intentalo más tarde!", true);
         }
     }
@@ -69,6 +76,8 @@ const Sidebar = () => {
         };
     };
 
+    console.log(events)
+
     return (
         <aside className="dark:text-white Sidebar">
             <div className="posted">
@@ -95,7 +104,11 @@ const Sidebar = () => {
                                 return (
                                     <div className="event" key={index}>
                                         <p className="date">{e.date}</p>
-                                        <a href={e.siteurl} target="_blank" rel="noreferrer"  className="titleEvent">{e.events}</a>
+                                        {e.image === null ? (
+                                            <a href={e.siteurl} target="_blank" rel="noreferrer"  className="titleEvent">{e.events}</a>
+                                        ):(        
+                                            <a href={e.image} target="_blank" rel="noreferrer"  className="titleEvent" download>{e.events}</a>
+                                        )}
                                     </div>
                                 )
                             })

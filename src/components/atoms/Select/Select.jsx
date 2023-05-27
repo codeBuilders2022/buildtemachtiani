@@ -6,7 +6,7 @@ import "./Select.scss";
 const Select = ({ title, placeholder, options, value, setValue, id, onChange, optionLabel = "value",className}) => {
 
   const defaultOptions = [
-    { value: "", code: "" },
+    { value: ""},
   ];
 
   return (
@@ -16,11 +16,11 @@ const Select = ({ title, placeholder, options, value, setValue, id, onChange, op
         id={id}
         value={value}
         onChange={onChange}
-        // onChange={(e) => setValue(e.value)}
         options={options ? options : defaultOptions}
         optionLabel={optionLabel}
         placeholder={placeholder ? placeholder : "Seleccione una opción"}
         className="select_drop"
+        filter
       />
     </div>
   );

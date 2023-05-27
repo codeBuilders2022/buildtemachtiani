@@ -68,7 +68,9 @@ const Navbarr = () => {
   ];
 
   const handleLogOut = () => {
+    localStorage.removeItem("jeyaiodl")
     localStorage.removeItem('token');
+    localStorage.removeItem("ref")
     localStorage.removeItem("userWeb")
     setIsLoggedIn(false);
     window.location.replace('/');
@@ -92,7 +94,7 @@ const Navbarr = () => {
               </NavLink>
             </li>
             {!hiddenInput &&
-                <InputSearch placeholder={"Buscar... ejemplo: Autor, titulo, doi"} id={"search199"} onChange={(e) => setSearch_(e.target.value)}/>
+                <InputSearch placeholder={"Buscar... ejemplo: Autor, titulo, doi"} className={"searchNavbar"} id={"search199"} onChange={(e) => setSearch_(e.target.value)}/>
             }
             {isLoggedIn ? (
               <div className='profile_a'>
