@@ -68,7 +68,9 @@ const Navbarr = () => {
   ];
 
   const handleLogOut = () => {
+
     localStorage.removeItem('token');
+    localStorage.removeItem("ref")
     localStorage.removeItem("userWeb")
     setIsLoggedIn(false);
     window.location.replace('/');
