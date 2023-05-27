@@ -65,6 +65,7 @@ const Sidebar = () => {
         // // Asignamos los datos de los comités a los estados correspondientes en el componente
         setCommitteeDtas(committeeData.slice(0, 3));
       } catch (error) {
+        console.log(error)
         IncorrectModal("¡Algo salió mal, intentalo más tarde!", true);
       }
     };
@@ -75,9 +76,7 @@ const Sidebar = () => {
             fontWeight: isActive ? "bold" : null
         };
     };
-
-    console.log(events)
-
+    
     return (
         <aside className="dark:text-white Sidebar">
             <div className="posted">
