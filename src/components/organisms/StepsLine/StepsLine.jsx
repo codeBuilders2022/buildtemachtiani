@@ -5,7 +5,6 @@ import "./StepsLine.scss"
 
 const StepsLine = ({estatus = 0}) => {
 
-  console.log(estatus, "status")
   const [labelStatus, setLabelStatus] = useState("---------")
   const [statusValue, setStatusValue] = useState(estatus)
   //Status ---> 
@@ -36,7 +35,6 @@ const StepsLine = ({estatus = 0}) => {
         { id: 5, label: 'Publicado' }
     ];  
 
-    console.log(statusValue, "status despues del useEffect")
 
   return (
     <div className='Steps_'>
