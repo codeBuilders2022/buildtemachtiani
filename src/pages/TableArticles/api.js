@@ -22,12 +22,18 @@ export const getDataArticles = async (id,setData) => {
               : item.attributes.dataArticle.estatus == 1
               ? "Evaluando"
               : item.attributes.dataArticle.estatus == 2
-              ? "Revisión"
+              ? "Dictaminado"
               : item.attributes.dataArticle.estatus == 3
-              ? "Notificación"
+              ? "Rechazado"
               : item.attributes.dataArticle.estatus == 4
+              ? "Aceptado con correcciones menores"
+              : item.attributes.dataArticle.estatus == 5
+              ? "Aceptado con correcciones mayores"
+              : item.attributes.dataArticle.estatus == 6
+              ? "Aceptado"
+              : item.attributes.dataArticle.estatus == 7
               ? "Publicado"
-              : "",
+              : ""
         });
       });
       setData(newData);

@@ -162,7 +162,6 @@ const CreateArticle = () => {
         const textoIngresado = event.htmlValue;
         const textoEnter = event.textValue;
         const contadorSaltosLinea = (textoEnter.split(/\n+/).length - 2);
-        console.log("contadorSaltosLinea",contadorSaltosLinea);
         let palabras = "";
         if (textoIngresado != null) {
             palabras = textoIngresado.trim().split(/\s+/);

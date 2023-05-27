@@ -8,12 +8,13 @@ import { useStateContext } from "../../contexts/ContextProvider";
 import Back from "../../components/atoms/Back/Back";
 import { loginConfir } from "../../Api/login/apiLogic";
 import { Encrypt } from "../../utilities/Hooks";
+import AnimationLoading from "../../components/atoms/AnimationLoading/AnimationLoading";
 
 
 const Login = () => {
 const navigate = useNavigate()
 
-
+    const [loading, setLoading] = useState(false)
     const [inputList,setInputList] = useState({
         "identifier":{value:null, validationType:"empty"},
         "password":{value:null, validationType:"empty"},
@@ -35,7 +36,7 @@ const navigate = useNavigate()
         if(SubmitValidation(inputList,setInputList))
         {
             // ----------------------------------------------------------------------------poner ruta de auth cuado ya este
-
+            setLoading(true)
             const data = {
                 "identifier":inputList.identifier.value,
                 "password":inputList.password.value
@@ -58,7 +59,11 @@ const navigate = useNavigate()
                     <NavLink to={"/recover-account"}>
                         <div className="rememberPassword">Olvidé mi contraseña</div>
                     </NavLink>
-                    <Button className={"btn_primary"} title="Iniciar sesión" onClick={()=>{validationFunction()}}></Button>
+                    {loading ? (
+                        <AnimationLoading />
+                    ):(     
+                        <Button className={"btn_primary"} title="Iniciar sesión" onClick={()=>{validationFunction()}}></Button>
+                    )}
                     <NavLink to={"/log"}>
                         <div className="register">Aun no tengo una cuenta</div>
                     </NavLink>
