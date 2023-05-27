@@ -1,171 +1,181 @@
 .Articless {
-    max-width: 1200px !important;
-    width: 100% !important;
-    margin: 100px auto !important;
+  max-width: 1200px !important;
+  width: 100% !important;
+  margin: 100px auto !important;
+  display: flex;
+
+  @media screen and (max-width:1385px) {
+    margin-top:156px!important ;
+  }
+  .info {
     display: flex;
+    flex-direction: column;
+    gap: 5px;
 
-    .info {
-        display: flex;
+    h3 {
+      font-size: 16px !important;
+      font-weight: 400 !important;
+      text-transform: none !important;
+    }
+
+    h2 {
+      font-size: 22px !important;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .authors {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      @media screen and (max-width:768px) {
         flex-direction: column;
-        gap: 5px;
-
-        h3 {
-            font-size: 16px !important;
-            font-weight: 400 !important;
-            text-transform: none !important;
-        }
-
-        h2 {
-            font-size: 22px !important;
-            font-weight: 600;
-            margin: 0;
-
-        }
-
-        .authors {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
+        align-items: flex-start;
+      }
     }
+  }
 
-    .date {
-        font-weight: 600;
-        margin-top: 5px;
-    }
-
-    .notes {
-        font-weight: 600;
-        color: rgb(135, 0, 12);
-        cursor: pointer;
-
-        &:hover {
-            text-decoration: underline;
-        }
-    }
-
-    .doi {
-        color: rgb(135, 0, 12);
-        font-style: italic;
-        margin-top: 10px !important;
-    }
-
-    .historial {
-        display: flex;
-        gap: 20px;
-        flex-wrap: wrap;
-        align-items: center;
-    }
-
-    .containerNotes {
-        display: flex;
-        text-align: justify;
-        padding: 10px;
-        border-radius: 5px;
-        position: absolute;
-        top: 0;
-        right: 0;
-        z-index: 9;
-        background: rgba(128, 128, 128, 0.445);
-    }
-
-    .type {
-        width: 200px;
-        background-color: rgb(206, 220, 255);
-        display: grid;
-        place-items: center;
-        padding: 10px;
-        margin-bottom: 20px;
-
-    }
-
-    .institute {
-        margin: 10px 0;
-    }
-
-    .Articles_ {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 40px;
-
-        p {
-            font-size: 16px;
-            text-align: justify;
-        }
-
-        .secct1_s {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-
-            .title_secct_ {
-                font-size: 18px;
-            }
-        }
-
-
-        .secct2_s {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-
-            .title_secct2 {
-                font-size: 26px;
-            }
-        }
-
-        .secct3_s {
-            width: 100%;
-            display: flex;
-            justify-content: flex-end;
-
-            .cnt_pdf {
-
-                .img_pdf {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-            }
-        }
-    }
-
-    .Back {
-        @media (max-width: 1440px) {
-            min-width: 50px;
-        }
-
-        .img_back {
-            @media (max-width: 1440px) {
-                margin-left: 0px;
-            }
-
-            @media (min-width: 1440px) {
-                margin-left: -150px;
-            }
-        }
-    }
-}
-
-.date {
-    font-weight: 700;
+  .date {
+    font-weight: 600;
     margin-top: 5px;
-}
+  }
 
-.containerHis {
+  .notes {
+    font-weight: 600;
+    color: rgb(135, 0, 12);
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .doi {
+    color: rgb(135, 0, 12);
+    font-style: italic;
+    margin-top: 10px !important;
+  }
+
+  .historial {
     display: flex;
-    justify-content: space-between;
     gap: 20px;
     flex-wrap: wrap;
     align-items: center;
+  }
 
+  .containerNotes {
+    display: flex;
+    text-align: justify;
+    padding: 10px;
+    border-radius: 5px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 9;
+    background: rgba(128, 128, 128, 0.445);
+  }
 
-    .time {
-        @media (min-width: 1440px) {
-            margin-right: 100px;
-        }
+  .type {
+    width: 200px;
+    background-color: rgb(206, 220, 255);
+    display: grid;
+    place-items: center;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+
+  .institute {
+    margin: 10px 0;
+  }
+
+  .Articles_ {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px;
+    @media screen and (max-width:400px) {
+        padding: 20px;
     }
+
+    p {
+      font-size: 16px;
+      text-align: justify;
+    }
+
+    .secct1_s {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .title_secct_ {
+        font-size: 18px;
+      }
+    }
+
+    .secct2_s {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .title_secct2 {
+        font-size: 26px;
+      }
+    }
+
+    .secct3_s {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+
+      .cnt_pdf {
+        .img_pdf {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+
+  .Back {
+    position: absolute;
+    left: 40px;
+    top: 100px;
+
+    @media (max-width: 1440px) {
+      min-width: 50px;
+    }
+
+    .img_back {
+      @media (max-width: 1440px) {
+        margin-left: 0px;
+      }
+
+      @media (min-width: 1440px) {
+        // margin-left: -150px;
+      }
+    }
+  }
+}
+
+.date {
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+.containerHis {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+
+  .time {
+    @media (min-width: 1440px) {
+      margin-right: 100px;
+    }
+  }
 }
