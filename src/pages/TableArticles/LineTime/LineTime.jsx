@@ -6,7 +6,6 @@ import StepsLine from "../../../components/organisms/StepsLine/StepsLine";
 import Back from "../../../components/atoms/Back/Back";
 import { useParams } from "react-router-dom";
 import { getDataLine } from "./api";
-import { ZAxis } from "recharts";
 
 const LineTime = () => {
   const [data,setData]=useState()
