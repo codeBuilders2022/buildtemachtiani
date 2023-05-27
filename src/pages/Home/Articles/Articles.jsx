@@ -46,7 +46,6 @@ const Articles = () => {
       data['Day'] = Number(data.dateSend.substring(8, 10))
       data['deltaDay'] = Number(data.publishedAt.substring(8, 10)) - Number(data.dateSend.substring(8, 10))
       setDataArt(data)
-      console.log(data, "holaaaa")
     } catch (error) {
       IncorrectModal("¡Algo salió mal, intentalo más tarde!", true);
     }

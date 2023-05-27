@@ -85,22 +85,20 @@ const Home = () => {
             year: Number(publishedAt.substring(0, 4))
           }))
 
-          if(allArticles_.length > 0){
-            console.log("Entre aqui")
-              var firstID;
-              var indexx = 0;
-              
-              firstID = allArticles_[0].id
-              allArticles_.map((id, idx) => {
-                if(id.id > firstID){
-                    firstID = id.id
-                    indexx = idx
-                }
-              })
-
-              const newArticles = allArticles_.filter((idx, number) => number !== indexx )
-              setCurrentJornal([allArticles_[indexx]])
-              setAllArticles(newArticles)
+          if (allArticles_.length > 0) {
+            const firstID = allArticles_[0].id;
+            let indexx = 0;
+          
+            allArticles_.forEach((article, idx) => {
+              if (article.id > firstID) {
+                firstID = article.id;
+                indexx = idx;
+              }
+            });
+          
+            const newArticles = allArticles_.filter((_, number) => number !== indexx);
+            setCurrentJornal([allArticles_[indexx]]);
+            setAllArticles(newArticles);
           }
 
 
