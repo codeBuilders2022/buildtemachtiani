@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import "./InputSearch.scss";
 
 import { Skeleton } from "primereact/skeleton";
 
 // assets
-import Lupa from "../../../assets/images/magnifier.png";
+import Lupa from '../../../assets/images/magnifier.png'
 
 const InputSearch = ({
   placeholder,
@@ -23,7 +23,6 @@ const InputSearch = ({
     <>
       <div className={`InputSearch ${className}`}>
         <input
-          className={"bg-input-color-lig dark:bg-input-color-dark"}
           id={id}
           value={value}
           disabled={disabled}
@@ -36,8 +35,8 @@ const InputSearch = ({
           // autoComplete={autoComplete}
         />
 
-        <div className="absolute w-6 h-6 flex justify-center items-center cursor-pointer right-3 top-[calc(50% - 8px)]">
-          <img src={Lupa} className="w-full h-full object-cover"/>
+        <div className="cnt_lup">
+          <img src={Lupa} className="img_lup"/>
         </div>
       </div>
     </>

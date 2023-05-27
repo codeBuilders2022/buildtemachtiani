@@ -1,27 +1,28 @@
 .InputSearch {
     position: relative;
-    height: 40px;
-    width: 350px;
+    height: 48px;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 20px;
     background: #fff;
 
     input {
         height: 100%;
         width: 100%;
         border: none;
+        font-size: 13px;
         outline: none;
         color: #000;
-        border-radius: 10px;
+        border-radius: 20px;
         padding: 0 15px;
         border: 1px solid rgb(177, 173, 173);
         transition: border-color 0.2s;
 
         &::placeholder {
             font-family: "Roboto", sans-serif;
-            font-size: 11px;
+            font-size: 13px;
             color: #777;
             text-decoration: none solid rgb(0, 0, 0);
         }
@@ -32,13 +33,22 @@
 
     }
 
-    .search {
+    .cnt_lup {
+        width: 30px;
+        height: 30px;
         position: absolute;
         display: flex;
         justify-content: center;
         align-items: center;
-        right: 0;
-        top: calc(111px - 86.75px);
+        right: 10px;
+        top: calc(50% - 15px);
+        cursor: pointer;
+
+        .img_lup{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     }
 
 
