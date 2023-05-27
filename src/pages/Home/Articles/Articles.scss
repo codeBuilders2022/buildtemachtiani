@@ -21,13 +21,15 @@
             margin: 0;
 
         }
-        .authors{
+
+        .authors {
             display: flex;
             gap: 30px;
             align-items: center;
         }
     }
-    .date{
+
+    .date {
         font-weight: 600;
         margin-top: 5px;
     }
@@ -46,6 +48,13 @@
         color: rgb(135, 0, 12);
         font-style: italic;
         margin-top: 10px !important;
+    }
+
+    .historial {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        align-items: center;
     }
 
     .containerNotes {
@@ -69,6 +78,9 @@
         margin-bottom: 20px;
 
     }
+    .institute{
+        margin: 10px 0;
+    }
 
     .Articles_ {
         width: 100%;
@@ -88,7 +100,7 @@
             gap: 20px;
 
             .title_secct_ {
-                font-size: 26px;
+                font-size: 18px;
             }
         }
 
@@ -117,6 +129,26 @@
                     object-fit: cover;
                 }
             }
+        }
+    }
+}
+
+.date {
+    font-weight: 700;
+    margin-top: 5px;
+}
+
+.containerHis {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+
+
+    .time{
+        @media (min-width: 1440px) {
+            margin-right: 100px;
         }
     }
 }

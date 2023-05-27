@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 const Articles = () => {
   const { idArticle } = useStateContext()
   const [notesActive, setNotesActive] = useState(false)
+  const [historial, setHistorial] = useState(false)
   const dirAPI = process.env.REACT_APP_API_URL
   const id = Decrypt(idArticle)
   const [dataArt, setDataArt] = useState()
@@ -37,8 +38,15 @@ const Articles = () => {
       data['year'] = Number(data.publishedAt.substring(0, 4))
       const month = months.filter((m, index) => index + 1 == Number(data.publishedAt.substring(5, 7)))
       data['month'] = month[0]
+      data['monthN'] = data.publishedAt.substring(5, 7)
       data['day'] = Number(data.publishedAt.substring(8, 10))
+      data['deltaYear'] = Number(data.publishedAt.substring(0, 4)) - Number(data.dateSend.substring(0, 4))
+      data['deltaMonth'] = Number(data.publishedAt.substring(5, 7)) - Number(data.dateSend.substring(5, 7))
+      data['Month'] = Number(data.dateSend.substring(5, 7))
+      data['Day'] = Number(data.dateSend.substring(8, 10))
+      data['deltaDay'] = Number(data.publishedAt.substring(8, 10)) - Number(data.dateSend.substring(8, 10))
       setDataArt(data)
+      console.log(data, "holaaaa")
     } catch (error) {
       IncorrectModal("¡Algo salió mal, intentalo más tarde!", true);
     }
@@ -63,10 +71,35 @@ const Articles = () => {
                 <div dangerouslySetInnerHTML={{ __html: dataArt?.notes }}></div>
               </Dialog>
             </div>
+          <p className="institute">{dataArt?.institute}</p>
           </div>
         </div>
         <Link className="doi" to={`/article/${idArticle}`}>{dataArt?.doi}</Link>
-        <p className="date">Publicado: <span className="font-normal">{dataArt?.day} de {dataArt?.month} de {dataArt?.year}</span></p>
+        <div className="historial">
+          <p className="date">Publicado: <span className="font-normal">{dataArt?.day} de {dataArt?.month} de {dataArt?.year}</span></p>
+          <div className="notes" onClick={() => setHistorial(true)}>Historial del artículo</div>
+          <Dialog header="Historial del artículo" visible={historial} style={{ width: '50vw' }} onHide={() => setHistorial(false)}>
+            <div className="containerHis">
+              <div className="dateHistorial">
+                <p className="date">Recibido: <span className="font-normal">{dataArt?.dateSend}</span></p>
+                <p className="date">Aceptado:  <span className="font-normal">{dataArt?.dateAccept}</span></p>
+                <p className="date">Publicado: <span className="font-normal">{dataArt?.year}-{dataArt?.monthN}-{dataArt?.day}</span></p>
+              </div>
+              {dataArt?.deltaMonth >= 0 && dataArt?.deltaDay >= 0 &&
+                <p className="time">El tiempo de publicación fue de {dataArt?.deltaYear} año(s), {dataArt?.deltaMonth} mes(es) y {dataArt?.deltaDay} día(s)</p>
+              }
+              {dataArt?.deltaMonth < 0 && dataArt?.deltaDay >= 0 &&
+                <p className="time">El tiempo de publicación fue de {dataArt?.deltaYear - 1} año(s), {Number(dataArt?.monthN) + (12 - dataArt?.Month)} mes(es) y {dataArt?.deltaDay} día(s)</p>
+              }
+              {dataArt?.deltaMonth > 0 && dataArt?.deltaDay < 0 &&
+                <p className="time">El tiempo de publicación fue de {dataArt?.deltaYear} año(s), {dataArt?.deltaMonth - 1} meses y {dataArt?.deltaDay * -1} día(s)</p>
+              }
+              {dataArt?.deltaMonth < 0 && dataArt?.deltaDay < 0 &&
+                <p className="time">El tiempo de publicación fue de {dataArt?.deltaYear - 1} año(s), {Number(dataArt?.monthN) + (12 - dataArt?.Month)-1} mes(es) y {dataArt?.day + (30 - dataArt?.Day)} día(s)</p>
+              }
+            </div>
+          </Dialog>
+        </div>
         <Divider />
         <div className=" bg-slate-100 dark:bg-gray-500 rounded-2xl mb-10 Articles_">
           <div className="secct1_s">
