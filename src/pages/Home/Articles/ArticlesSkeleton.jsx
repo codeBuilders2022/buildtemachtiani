@@ -18,22 +18,22 @@ const ArticlesSkeleton = () => {
               <Skeleton width="200px" height="30px"/>
               <div style={{width: "100%", display: "flex", flexDirection: "column", gap: 8}}>
                 {[...Array(20)].map((_, idx) => (
-                    <Skeleton width="100%" height="15px"/>
+                    <Skeleton width="100%" height="15px" key={idx}/>
                 ))}
               </div>
               <div style={{width: "100%", display: "flex", flexDirection: "column", gap: 8}}>
                 {[...Array(15)].map((_, idx) => (
-                    <Skeleton width="100%" height="15px"/>
+                    <Skeleton width="100%" height="15px" key={idx}/>
                 ))}
               </div>
               <div style={{width: "100%", display: "flex", flexDirection: "column", gap: 8}}>
                 {[...Array(15)].map((_, idx) => (
-                    <Skeleton width="100%" height="15px"/>
+                    <Skeleton width="100%" height="15px" key={idx}/>
                 ))}
               </div>
               <div style={{width: "100%", display: "flex", flexDirection: "column", gap: 8}}>
                 {[...Array(15)].map((_, idx) => (
-                    <Skeleton width="100%" height="15px"/>
+                    <Skeleton width="100%" height="15px" key={idx}/>
                 ))}
               </div>
             </div>

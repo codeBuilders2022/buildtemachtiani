@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 
 const StateContext = createContext();
 
@@ -11,8 +11,14 @@ export const ContextProvider = ({ children }) => {
   const [activeMenuRevistas, setActiveMenuRevistas] = useState(false);
   const [openNavbar, setOpenNavbar] = useState(false)
   const [openNavbar1, setOpenNavbar1] = useState(false)
-  const [idArticle, setIdArticle] = useState(1);
-  const [search_, setSearch_] = useState("")
+  const id = String(window.location.pathname)
+  const [search_, setSearch_] = useState(id)
+  const [idArticle, setIdArticle] = useState('');
+  const url = "/article/"
+
+  useEffect(() => {
+    setIdArticle(id.substring(9))
+  }, [])
 
   const setMode = (e) => {
     setCurrentMode(e.target.value);
@@ -48,9 +54,9 @@ export const ContextProvider = ({ children }) => {
         setCurrentMode,
         activeMenuRevistas,
         setActiveMenuRevistas,
-        openNavbar, 
+        openNavbar,
         setOpenNavbar,
-        openNavbar1, 
+        openNavbar1,
         setOpenNavbar1,
         search_,
         setSearch_,

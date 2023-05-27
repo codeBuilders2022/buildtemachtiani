@@ -13,14 +13,15 @@ import { getAxiosHomeArticles } from "../../../Api/Home/home";
 import { useState } from "react";
 import { IncorrectModal } from "../../../components/molecules/modals/Modals";
 import { Decrypt } from "../../../utilities/Hooks";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import Back from "../../../components/atoms/Back/Back";
 
 const Articles = () => {
-  const { idArticle } = useStateContext()
+  const { idArticle, setIdArticle } = useStateContext()
   const [notesActive, setNotesActive] = useState(false)
   const [historial, setHistorial] = useState(false)
   const dirAPI = process.env.REACT_APP_API_URL
-  const id = Decrypt(idArticle)
+  const id = idArticle
   const [dataArt, setDataArt] = useState()
   const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
   useEffect(() => {
@@ -32,7 +33,7 @@ const Articles = () => {
     try {
       // Hacemos una llamada concurrente a la API utilizando Promise.all()
       const [resCommittees] = await Promise.all([
-        getAxiosHomeArticles(`/api/current-issues/${id}?populate=*`)
+        getAxiosHomeArticles(`/api/current-issues/${idArticle}?populate=*`)
       ]);
       const data = resCommittees.data.attributes
       data['year'] = Number(data.publishedAt.substring(0, 4))
@@ -55,7 +56,7 @@ const Articles = () => {
 
   return (
     <div className="Articless dark:bg-gray-600 dark:text-white m-2 md:m-10 md:mt-32 mt-24 p-2 md:p-10 bg-white rounded-3xl flex">
-      {/* <Grid> */}
+      <Back className={"_back_"} url={"/"} />
       <div style={{ width: '100%' }}>
         <div className="type">
           <p>{dataArt?.type}</p>
@@ -70,7 +71,7 @@ const Articles = () => {
                 <div dangerouslySetInnerHTML={{ __html: dataArt?.notes }}></div>
               </Dialog>
             </div>
-          <p className="institute">{dataArt?.institute}</p>
+            <p className="institute">{dataArt?.institute}</p>
           </div>
         </div>
         <Link className="doi" to={`/article/${idArticle}`}>{dataArt?.doi}</Link>
@@ -94,7 +95,7 @@ const Articles = () => {
                 <p className="time">El tiempo de publicación fue de {dataArt?.deltaYear} año(s), {dataArt?.deltaMonth - 1} meses y {dataArt?.deltaDay * -1} día(s)</p>
               }
               {dataArt?.deltaMonth < 0 && dataArt?.deltaDay < 0 &&
-                <p className="time">El tiempo de publicación fue de {dataArt?.deltaYear - 1} año(s), {Number(dataArt?.monthN) + (12 - dataArt?.Month)-1} mes(es) y {dataArt?.day + (30 - dataArt?.Day)} día(s)</p>
+                <p className="time">El tiempo de publicación fue de {dataArt?.deltaYear - 1} año(s), {Number(dataArt?.monthN) + (12 - dataArt?.Month) - 1} mes(es) y {dataArt?.day + (30 - dataArt?.Day)} día(s)</p>
               }
             </div>
           </Dialog>

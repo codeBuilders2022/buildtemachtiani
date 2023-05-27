@@ -273,7 +273,7 @@ useEffect(() => {
                                             index < 4 &&
 
                                             <div className='article' key={index} >
-                                                <button onClick={() => { setIdArticle(Encrypt(article.id)), navigate(`/article/${Encrypt(article.id)}`) }}>
+                                                <button onClick={() => { setIdArticle(article.id), navigate(`/article/${article.id}`) }}>
                                                     <p className={`hover:${currentColor}`}>{article.title}</p>
                                                 </button>
                                                 <span className='authors'>{article.authors}</span>
