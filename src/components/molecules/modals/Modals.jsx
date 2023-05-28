@@ -46,7 +46,7 @@ export const IncorrectModal = (description, btn_close = false, timer = 3000)=>
 export const RegistroModal = (description, message, timer = 4500)=>{
   return Swal.fire({
       html: `<div style="display:flex;flex-direction:column;align-items:center; gap:20px;">
-                  <img style="width:150px" src=${correct}/>
+                  <img style="width:150px" src=${correct}>
                   <div style="display:flex; flex-direction:column; gap:5px;">
                       <span style="font-size:16px;font-weight:bold;color:black;">
                           ${description}
