@@ -11,11 +11,13 @@ import { json, useNavigate, useParams } from "react-router-dom";
 import { uploadArticle } from "./api";
 import { Editor } from 'primereact/editor';
 import { getAxiosCountrys } from "../../../Api/Register/Register";
+import AnimationLoading from "../../../components/atoms/AnimationLoading/AnimationLoading";
 
 const CreateArticle = () => {
     const [word, setWord] = useState(null)
     const [data, setData] = useState([]);
     const [textAreaConter, setTextAreaConter] = useState("")
+    const [loading, setLoading] = useState(false)
     const { idUser } = useParams()
     const [textAreaConterword, setTextAreaConterword] = useState(0)
     const navigate = useNavigate()
@@ -141,11 +143,17 @@ const CreateArticle = () => {
         setInputList(inputListCopy)
     }, [word])
 
-    const submit = () => {
+    const submit = async () => {
         if (SubmitValidation(inputList, setInputList)) {
             if (SubmitValidationStaking(inputListstaking, setinputListstaking)) {
-                uploadArticle(inputList, inputListstaking, navigate, idUser)
-                // navigate("/")
+                setLoading(true)
+                const res = await uploadArticle(inputList, inputListstaking, navigate, idUser)
+                if(res.status === 200){
+                    CorrectModal("Artículo enviado correctamente")
+                    setTimeout(() => {
+                        navigate(`/user/dashboard/${res.userId}`)
+                    }, 3500)
+                }
             }
             else {
                 IncorrectModal("¡Ingrese todos los campos requeridos!")
@@ -258,7 +266,14 @@ const CreateArticle = () => {
             <div className="CreateArticle">
                 <ExteriorCard>
                     <Back className={"_back_"} url={`/user/dashboard/${idUser}`} />
-                    <Header title={"Nuevo articulo"} button="Enviar articulo" onClick={() => submit()} />
+                    {loading ? (
+                        <div style={{width: "100%", height: 72, marginBottom: "2.5rem",  display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+                            <h1 style={{fontSize: "1.5rem"}}>Nuevo artículo</h1>
+                            <AnimationLoading />
+                        </div>
+                    ):(
+                        <Header title={"Nuevo artículo"} button="Enviar articulo" onClick={() => submit()} />
+                    )}
                     <InteriorCard className={"cardInteriorCreateArticle"}>
                         <div className="grid-patern-CreateArticle">
                             <div style={{ marginBottom: 25 }}>

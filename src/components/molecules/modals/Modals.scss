@@ -1,11 +1,11 @@
 .my-swal_error {
-  max-width: 400px;
+  max-width: 400px !important;
 }
 
 .my-swal-confirm-button {
-    width: 150px;
+    width: 150px !important;
     border-radius: 20px !important;
-  background-color: #5d869e !important;
-  border: 2px solid #4b5563 !important;
-  color: white !important;
+    background-color: #5d869e !important;
+    border: 2px solid #4b5563 !important;
+    color: white !important;
 }
