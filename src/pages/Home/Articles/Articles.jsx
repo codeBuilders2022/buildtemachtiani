@@ -20,8 +20,7 @@ const Articles = () => {
   const { idArticle, setIdArticle } = useStateContext()
   const [notesActive, setNotesActive] = useState(false)
   const [historial, setHistorial] = useState(false)
-  const dirAPI = process.env.REACT_APP_API_URL
-  const id = idArticle
+  const { id } = useParams()
   const [dataArt, setDataArt] = useState()
   const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
   useEffect(() => {
@@ -30,6 +29,7 @@ const Articles = () => {
 
 
   const getDatas = async () => {
+    const idArticle = Decrypt(id)
     try {
       // Hacemos una llamada concurrente a la API utilizando Promise.all()
       const [resCommittees] = await Promise.all([

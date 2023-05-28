@@ -27,6 +27,8 @@ import {Decrypt, Encrypt} from "../../utilities/Hooks"
 
 const Home = () => {
     const navigate = useNavigate()
+    const [allArticles, setAllArticles] = useState([])
+    const [currentJornal, setCurrentJornal] = useState([])
     const { setIdArticle } = useStateContext()
     const [articles, setArticles] = useState(false)
     const { currentColor, currentMode, search_ } = useStateContext();
@@ -38,25 +40,29 @@ const Home = () => {
     }, []);
 
 
-    const [allArticles, setAllArticles] = useState([])
-    const [currentJornal, setCurrentJornal] = useState([])
+   
     const getDatas = async () => {
         try {
             // Hacemos una llamada concurrente a la API utilizando Promise.all()
-            const [resarticless] = await Promise.all([
-                getAxiosHomeArticles("/api/current-issues")
-            ]);
+            const [resarticless, resNumber] = await Promise.all([
+                getAxiosHomeArticles("/api/current-issues"),
+                getAxiosHomeArticles("/api/numbers?populate=*")
+              ]);
             // Mapeamos los datos obtenidos de los comités y extraemos los atributos relevantes
-            const articlesData = resarticless.data.map(({ id, attributes: { publishedAt, title, authors, doi, issue, abstract, info } }) => ({
-                id,
-                title,
-                authors,
-                doi,
-                issue,
-                abstract,
-                info,
-                publishedAt,
-            }));
+            const articlesData = resarticless.data.map(({ id, attributes: { publishedAt, title, authors, doi, issue, abstract, info } }) => {
+                const encryptedId = Encrypt(id);
+              
+                return {
+                  id: encryptedId,
+                  title,
+                  authors,
+                  doi,
+                  issue,
+                  abstract,
+                  info,
+                  publishedAt,
+                };
+              });
             // Asignamos los datos de los comités a los estados correspondientes en el componente
             const issue = []
             articlesData.map((e, index) => {
@@ -68,14 +74,13 @@ const Home = () => {
             })
             setDataArt(issue)
             setData_list(issue)
-          const [resCommittees, resArticles] = await Promise.all([
-            getAxiosHomeArticles("/api/current-issues"),
-            getAxiosHomeArticles("/api/numbers?populate=*")
-          ]);
 
 
-          //procesamiento de los datos de resArticles
-          const allArticles_ = resArticles.data.map(({id, attributes: { dataNumber: { name, resume }, img: { data: { attributes: { url }}}, pdf: { data: { attributes: { url: urlPdf }}}, publishedAt}}) => ({
+            console.log(resNumber)
+
+
+          //procesamiento de los datos de resNumber
+          const allArticles_ = resNumber.data.map(({id, attributes: { dataNumber: { name, resume }, img: { data: { attributes: { url }}}, pdf: { data: { attributes: { url: urlPdf }}}, publishedAt}}) => ({
             id,
             name,
             resume,
@@ -86,7 +91,7 @@ const Home = () => {
           }))
 
           if (allArticles_.length > 0) {
-            const firstID = allArticles_[0].id;
+            let firstID = allArticles_[0].id;
             let indexx = 0;
           
             allArticles_.forEach((article, idx) => {
@@ -100,21 +105,6 @@ const Home = () => {
             setCurrentJornal([allArticles_[indexx]]);
             setAllArticles(newArticles);
           }
-
-
-          
-      
-          // Procesamiento de los datos de los comités
-          const committeeData = resCommittees.data.map(({ id, attributes }) => ({
-            id,
-            ...attributes,
-            year: Number(attributes.publishedAt.substring(0, 4)),
-            month: months[Number(attributes.publishedAt.substring(5, 7)) - 1],
-            day: Number(attributes.publishedAt.substring(8, 10))
-          }));
-      
-          setDataArt(committeeData);
-          setData_list(committeeData);
         } catch (error) {
             console.log(error)
           IncorrectModal("¡Algo salió mal, inténtalo más tarde!", true);
@@ -182,6 +172,7 @@ useEffect(() => {
       clearTimeout(timerId); // Limpiar el temporizador al desmontar el componente
     };
   }, [search_]);
+
 
     return (
         <div className="Home_binn">

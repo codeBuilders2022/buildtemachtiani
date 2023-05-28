@@ -7,7 +7,7 @@
     align-items: center;
     justify-content: center;
     // background: #202A38;
-    padding: 100px 0 10px 10px;
+    padding: 100px 15px 15px 15px;
     position: relative;
     .back
     {
@@ -15,6 +15,11 @@
         position: absolute;
         top: 80px;
         left: 0;
+
+        @media (max-width: 768px) {
+            margin: 0 !important;
+            left: 20px;
+        }
     }
     .inputs-container
     {
