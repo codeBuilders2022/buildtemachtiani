@@ -9,6 +9,7 @@ import Back from "../../components/atoms/Back/Back";
 import { loginConfir } from "../../Api/login/apiLogic";
 import { Encrypt } from "../../utilities/Hooks";
 import AnimationLoading from "../../components/atoms/AnimationLoading/AnimationLoading";
+import { CorrectModal, IncorrectModal, InfoModal } from "../../components/molecules/modals/Modals";
 
 
 const Login = () => {
@@ -31,21 +32,41 @@ const navigate = useNavigate()
         }
     },[inputList])
 
-    const validationFunction =()=>
-    {
-        if(SubmitValidation(inputList,setInputList))
-        {
-            // ----------------------------------------------------------------------------poner ruta de auth cuado ya este
-            setLoading(true)
-            const data = {
-                "identifier":inputList.identifier.value,
-                "password":inputList.password.value
-            }
-            let res;
-            loginConfir(data,navigate)
-           
+    const validationFunction = async () => {
+        if (!SubmitValidation(inputList, setInputList)) {
+          return;
         }
-    }
+      
+        setLoading(true);
+        const data = {
+          identifier: inputList.identifier.value,
+          password: inputList.password.value
+        };
+      
+        try {
+          const resp = await loginConfir(data, navigate);
+          if (resp.status === 200) {
+            CorrectModal("Credenciales correctas");
+            setTimeout(() => {
+              window.location.replace(`/user/dashboard/${resp.dtasEncrypt}`);
+            }, 3500);
+          } else if (resp.response.data.error.name === "ApplicationError") {
+            
+            InfoModal(
+              "Para iniciar sesión, necesitamos que confirmes tu cuenta.",
+              " Por favor, sigue las instrucciones en tu correo electrónico para completar el proceso de autenticación. Si necesitas ayuda, contáctanos. ¡Gracias!"
+            );
+            setLoading(false)
+          } else if (resp.response.data.error.name === "ValidationError") {
+            IncorrectModal("Credenciales incorrectas");
+            setLoading(false)
+          }
+        } catch (error) {
+            console.log(error)
+          // Manejar cualquier error de la llamada a loginConfir
+        }
+      };
+      
 
     return (
         <>

@@ -21,6 +21,11 @@
       position: absolute;
       top: 30px;
       left: 30px;
+
+      @media (max-width: 768px) {
+        top: 0px;
+        left: 15px;
+      }
     }
 
     .container {
