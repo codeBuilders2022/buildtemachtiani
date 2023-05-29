@@ -75,10 +75,6 @@ const Home = () => {
             setDataArt(issue)
             setData_list(issue)
 
-
-            console.log(resNumber)
-
-
           //procesamiento de los datos de resNumber
           const allArticles_ = resNumber.data.map(({id, attributes: { dataNumber: { name, resume }, img: { data: { attributes: { url }}}, pdf: { data: { attributes: { url: urlPdf }}}, publishedAt}}) => ({
             id,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useStateContext } from "../../../contexts/ContextProvider";
 import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { Button } from "primereact/button";
@@ -15,8 +15,11 @@ import ArrowDonw from '../../../assets/images/down_.png'
 const Navbarr = () => {
   const { openNavbar, setOpenNavbar, currentColor, currentMode, setSearch_ } = useStateContext();
   const header_location = useLocation()
+  const storedUserDatas = localStorage.getItem('userDatasW');
+  const [userDatas, setUserDatas] = useState([JSON.parse(storedUserDatas)])
+  const profileRef = useRef();
   const [hasnNot, setHasnNot] = useState(false)
-  const [openModal, setOpenModal] = useState(false)
+  const [showMyProfile, setShowMyProfile] = useState(false)
   const hiddenInput = header_location.pathname.startsWith("/user")
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado de inicio de sesión
   const navigate = useNavigate()
@@ -68,13 +71,36 @@ const Navbarr = () => {
   ];
 
   const handleLogOut = () => {
-    localStorage.removeItem("jeyaiodl")
-    localStorage.removeItem('token');
-    localStorage.removeItem("ref")
-    localStorage.removeItem("userWeb")
+    const itemsToRemove = ["jeyaiodl", "token", "ref", "userWeb", "userDatasW"]
+    itemsToRemove.forEach((item) => {
+      localStorage.removeItem(item);
+    });
     setIsLoggedIn(false);
     window.location.replace('/');
   }
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        profileRef.current &&
+        !profileRef.current.contains(event.target) &&
+        event.target.className !== 'Arrow_donw' &&
+        event.target.className !== 'rotate_'
+      ) {
+        setShowMyProfile(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleProfileClick = () => {
+    setShowMyProfile((prevShowMyProfile) => !prevShowMyProfile);
+  };
  
   return (
     <nav className='bg-bg-gray-primary dark:bg-bg-dark-secondary Navbarr_' id='nav_header1'>
@@ -97,19 +123,33 @@ const Navbarr = () => {
                 <InputSearch placeholder={"Buscar... ejemplo: Autor, titulo, doi"} className={"searchNavbar"} id={"search199"} onChange={(e) => setSearch_(e.target.value)}/>
             }
             {isLoggedIn ? (
-              <div className='profile_a'>
-                <Button tooltip='Mi perfil' tooltipOptions={{position: 'bottom'}} className='cnt_profile' onClick={() => navigate(`/user/dashboard/${idUserLocal}`)} >
+              <section className='profile_a'>
+                <Button tooltip='Mis artículos' tooltipOptions={{position: 'bottom'}} className='cnt_profile' onClick={() => navigate(`/user/dashboard/${idUserLocal}`)} >
                   {username}
                 </Button>
-                <button onClick={() => setOpenModal(!openModal)}>
-                  <img src={ArrowDonw} alt="" className={`Arrow_donw ${openModal && "rotate_"}`}/>
+                <button onClick={handleProfileClick}>
+                  <img src={ArrowDonw} alt="" className={`Arrow_donw ${showMyProfile && "rotate_"}`}/>
                 </button>
-                {openModal && 
-                  <div className="modal_">
-                    <button className="log_out" onClick={() => handleLogOut()}>Cerrar sesión</button>
+                {showMyProfile && 
+                  <div className="modal_ dark:bg-gray-600 bg-slate-400" ref={profileRef}>
+                    {userDatas.map((_, idx) => (
+                      <section className="card_inside dark:bg-gray-700 bg-slate-300" key={idx}>
+                        <div className='first_secc'>
+                          <section className="cnt_letter border-solid border-2 dark:border-white border-black dark:text-white text-black">
+                            {_.letter}
+                          </section>
+                          <section className="cnt_dtas">
+                            <p className='_naeme dark:text-black'>{_.name}</p>
+                            <p className='email_l dark:text-white text-black'>{_.email}</p>
+                          </section>
+                        </div>
+                          <button onClick={() => handleLogOut()} className='class_buttm' style={{background: currentColor}}>Cerra sesión</button>
+                        </section>
+                    ))}
+                    {/* <button className="log_out" >Cerrar sesión</button> */}
                   </div>
                 }
-              </div>
+              </section>
       
               ) : (
                 <div className="flex gap-5">
