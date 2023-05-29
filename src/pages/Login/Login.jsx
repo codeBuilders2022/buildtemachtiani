@@ -10,6 +10,7 @@ import { loginConfir } from "../../Api/login/apiLogic";
 import { Encrypt } from "../../utilities/Hooks";
 import AnimationLoading from "../../components/atoms/AnimationLoading/AnimationLoading";
 import { CorrectModal, IncorrectModal, InfoModal } from "../../components/molecules/modals/Modals";
+import { getAxiosData } from "../../Api/Committee/Committee";
 
 
 const Login = () => {
@@ -46,7 +47,16 @@ const navigate = useNavigate()
         try {
           const resp = await loginConfir(data, navigate);
           if (resp.status === 200) {
+            const id = resp.id
+            const myDtas = await getAxiosData(`/api/users/${id}?populate=register`)
+            const register = myDtas.register;
+            const arrayDtas = {
+              name: register.names + " " + register.lastName,
+              email: register.email,
+              letter: register.names.charAt(0)
+            }
             CorrectModal("Credenciales correctas");
+            localStorage.setItem("userDatasW", JSON.stringify(arrayDtas))
             setTimeout(() => {
               window.location.replace(`/user/dashboard/${resp.dtasEncrypt}`);
             }, 3500);

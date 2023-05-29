@@ -19,7 +19,7 @@ export const loginConfir = async (data, setName, navigate) => {
           localStorage.setItem("jeyaiodl", IdCrip);
           let idEncrypt = EncryptNB(res.data.user.id);
           localStorage.setItem("ref", idEncrypt);
-          return { status: 200, dtasEncrypt: idEncrypt };
+          return { status: 200, dtasEncrypt: idEncrypt, id: res.data.user.id };
         } 
       } catch (error) { return error }
     }
