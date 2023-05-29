@@ -157,7 +157,7 @@ const MagazinePolicies = () => {
             </div>
             <div className="secct1_" id="1">
               <h1 className="title_secct1">Enfoque y alcance</h1>
-              <p>
+              {/* <p>
                 La Revista Internacional de Ciencias de la Educación Temachtiani,
                 fue fundada en 1939, es la más antigua de su género y una de las más
                 reconocidas en América Latina por su calidad académica. A través de
@@ -165,7 +165,7 @@ const MagazinePolicies = () => {
                 los cambios ocurridos en el desarrollo teórico y empírico de la
                 sociología a lo largo de sus ocho décadas, como los problemas
                 sociales más sobresalientes de cada época.
-              </p>
+              </p> */}
               <p>
                 Con el propósito fundamental de difundir el conocimiento y promover
                 el debate académico, la revista ha tenido diferentes etapas.
