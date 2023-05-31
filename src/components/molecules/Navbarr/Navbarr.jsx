@@ -62,7 +62,7 @@ const Navbarr = () => {
     { id: 1, text: "Inicio", url: "/" },
     { id: 8, text: "Mi perfil", url: `/user/dashboard/${idUserLocal}` },
     { id: 2, text: "Inicia sesión", url: "/login" },
-    { id: 3, text: "Únete", url: "/log" },
+    { id: 3, text: "Registrarse", url: "/log" },
     { id: 4, text: "Guia para autores", url: "/guide-authors" },
     { id: 5, text: "Acerca de", url: "/about" },
     { id: 6, text: "Misión y Visión", url: "/mission-vision" },
@@ -168,7 +168,7 @@ const Navbarr = () => {
                     className="navlinks_s dark:text-white"
                     // style={activeLinks}
                   >
-                    <span>Únete</span>
+                    <span>Registrarse</span>
                   </NavLink>
                 </li>
               </div>)}
@@ -211,7 +211,7 @@ const Navbarr = () => {
               <nav className="mt-6">
                 <ul className="my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
                 {routes.map((route, idx) => {
-                    if (route.text === "Inicia sesión" || route.text === "Únete") {
+                    if (route.text === "Inicia sesión" || route.text === "Registrarse") {
                       if (isLoggedIn) {
                         return null;
                       } else {

@@ -337,7 +337,7 @@ useEffect(() => {
                                                     <path d="M9 4h6a2 2 0 0 1 2 2v14l-5 -3l-5 3v-14a2 2 0 0 1 2 -2" />
                                                 </svg>
                                                 <div className="titleNumbers">
-                                                    <h1 style={{color: currentColor}}>Números especiales:</h1>
+                                                    <h1 style={{color: currentColor}}>Lenguas originarias :</h1>
                                                     <Tooltip target=".alert" />
                                                     <svg className="alert icon icon-tabler icon-tabler-alert-circle"
                                                         data-pr-tooltip="Estos números están en lengua Nahualt"
