@@ -97,11 +97,7 @@ export const Convocatoria = () => (
 export const Evaluacion = () => (
   <p className="text-justify pt-10 text-lg">
     Los trabajos serán evaluados por el Comité Editorial y se comunicará a los
-    autores oportunamente de su recepción y del estatus de su manuscrito. Se
-    deberán enviar al correo electrónico{" "}
-    <span className="dark:text-sky-200 text-sky-900">
-      <a href="mailto:ricedut@gmail.com">educiencia@revistatemachtiani.net</a>
-    </span>
+    autores oportunamente de su recepción y del estatus de su manuscrito.
   </p>
 );
 
@@ -203,9 +199,7 @@ export const InstruccionesAutores = () => (
           Normas para el envío de artículos
         </h1>
         <p className="text-justify text-lg">
-          El envío será vía correo electrónico al email:
-          educiencia@revistatemachtiani.net. Todo manuscrito que se envíe a la
-          Revista Internacional de Investigación y Formación Educativa para ser
+          Todo manuscrito que se envíe a la RICET para ser
           evaluado debe adherirse estrictamente al Manual de Estilo de
           Publicaciones APA tercera edición en español y a los lineamientos que
           el comité editorial considera indispensables y que a continuación
