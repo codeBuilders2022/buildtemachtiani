@@ -285,7 +285,7 @@ useEffect(() => {
                                 }
 
                                 {dataArt.length < 1 &&
-                                     <div style={{width: "100%", display: "flex", justifyContent: "center"}}>Aún no hay artículos que mostrar</div>
+                                     <div style={{width: "100%", display: "flex", justifyContent: "center"}}>Artículos en proceso</div>
                                 }
                                 {
                                     dataArt.length > 4 &&
