@@ -259,7 +259,7 @@ const MagazinePolicies = () => {
             <div className="secct4_" id="4">
               <h1 className="title_secct4">Frecuencia de publicación</h1>
               <p>
-                Desde marzo de 2017, se edita trimestralmente la Revista
+                Se edita trimestralmente la Revista
                 Internacional de Ciencias de la Educación Temachtiani.
               </p>
             </div>

@@ -6,6 +6,10 @@ import "./App.scss";
 // Skeletons
 import ArticlesSkeleton from "../../../pages/Home/Articles/ArticlesSkeleton";
 import HomeSkeleton from "../../../pages/Home/HomeSkeleton";
+import InstruccionesSkeletons from "../../../pages/Instrucciones/InstruccionesSkeletons";
+import AboutSkeletons from "../../../pages/About/AboutSkeletons";
+import MisionSkeleton from "../../../pages/Mision/MisionSkeleton";
+import MagazinePoliciesSkeleton from "../../../pages/MagazinePolicies/MagazinePoliciesSkeleton";
 
 //Lazy
 const Metrics = lazy(() => import("../../../pages/Metrics/Metrics"));
@@ -39,7 +43,7 @@ const App = () => {
         exact
         path="/guide-authors"
         element={
-          <Suspense fallback={<></>}>
+          <Suspense fallback={<InstruccionesSkeletons />}>
             <Instrucciones />
           </Suspense>
         }
@@ -48,7 +52,7 @@ const App = () => {
         exact
         path="/about"
         element={
-          <Suspense fallback={<></>}>
+          <Suspense fallback={<AboutSkeletons />}>
             <About />
           </Suspense>
         }
@@ -57,7 +61,7 @@ const App = () => {
         exact
         path="/mission-vision"
         element={
-          <Suspense fallback={<></>}>
+          <Suspense fallback={<MisionSkeleton />}>
             <Mision />
           </Suspense>
         }
@@ -75,7 +79,7 @@ const App = () => {
         exact
         path="/magazine-policies"
         element={
-          <Suspense fallback={<></>}>
+          <Suspense fallback={<MagazinePoliciesSkeleton />}>
             <MagazinePolicies />
           </Suspense>
         }
