@@ -30,7 +30,9 @@ const CreateArticle = () => {
         country: { value: null, validationType: "empty" },
         claveWord: { value: null, validationType: "empty" },
         interesConflict: { value: null, interesConflict: "empty" },
-        reference: { value: null, interesConflict: "empty" },
+        reference: { value: null, validationType: "empty" },
+        correspondenceEmail: { value: null, validationType: "empty" },
+        correspondenceAutor: { value: null, validationType: "empty" },
     })
 
 
@@ -149,6 +151,7 @@ const CreateArticle = () => {
                 setLoading(true)
                 const res = await uploadArticle(inputList, inputListstaking, navigate, idUser)
                 if(res.status === 200){
+                    console.log("SubmitValidation(inputList, setInputList)",SubmitValidation(inputList, setInputList))
                     CorrectModal("Artículo enviado correctamente")
                     setTimeout(() => {
                         navigate(`/user/dashboard/${res.userId}`)
@@ -285,6 +288,8 @@ const CreateArticle = () => {
                             <Select title={"Idioma"} options={idiomOprions} value={inputList.idiom.value} placeholder={"Seleccione el idioma del artículo"} className={"selectSize"} id="idiom" onChange={(e) => { UpdateValue(e, "idiom", inputList, setInputList) }}></Select>
                             <Select title={"País"} options={data} value={inputList.country.value} placeholder={"Seleccione un país"} className={"selectSize"} id="country" onChange={(e) => { UpdateValue(e, "country", inputList, setInputList) }}></Select>
                             <Input title={"Palabra clave"} placeholder={"Palabra clave"} className={"inputArticleName"} id="claveWord" onChange={(e) => { UpdateValue(e, "claveWord", inputList, setInputList) }}></Input>
+                            <Input title={"Correo de correspondencia"} placeholder={"Correo de correspondencia"} className={"inputArticleName"} id="correspondenceEmail" onChange={(e) => { UpdateValue(e, "correspondenceEmail", inputList, setInputList) }}></Input>
+                            <Input title={"Autor de correspondencia"} placeholder={"Autor de correspondencia"} className={"inputArticleName"} id="correspondenceAutor" onChange={(e) => { UpdateValue(e, "correspondenceAutor", inputList, setInputList) }}></Input>
                             {
                                 inputListstaking.map((item, key) => {
                                     return (
