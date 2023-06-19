@@ -20,6 +20,8 @@ export const uploadArticle = async(inputList,inputListstaking,navigate,idUser)=>
                 "interesConflict":inputList.interesConflict.value,
                 "reference":inputList.reference.value,
                 "claveWord":inputList.claveWord.value,
+                "correspondenceEmail":inputList.correspondenceEmail.value,
+                "correspondenceAutor":inputList.correspondenceAutor.value,
                 "idUser": ID,
                 "stakingInputData":inputListstaking
             },
