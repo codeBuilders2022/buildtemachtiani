@@ -22,6 +22,10 @@ export const uploadArticle = async(inputList,inputListstaking,navigate,idUser)=>
                 "claveWord":inputList.claveWord.value,
                 "correspondenceEmail":inputList.correspondenceEmail.value,
                 "correspondenceAutor":inputList.correspondenceAutor.value,
+                "autorNotes":inputList.Notes.value,
+                "institucion":inputList.institucion.value,
+                "articletype":inputList.articletype.value,
+                "statusText":"pendiente",
                 "idUser": ID,
                 "stakingInputData":inputListstaking
             },
