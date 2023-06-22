@@ -14,6 +14,11 @@
     justify-content: center;
     text-align: justify;
 
+    @media (max-width: 480px) {
+        width: 95%; 
+        
+    }
+
     .btn-close{
         position: absolute;
         top: 0;
