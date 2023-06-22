@@ -39,12 +39,12 @@
             }
         }
 
-        .cnt_bank_{
+        .cnt_bank_ {
 
             .imgBank {
                 display: flex;
                 position: relative;
-    
+
                 .eye {
                     position: absolute;
                     top: 0;
@@ -56,16 +56,16 @@
                     background-color: #73639a85;
                     border-radius: 5px;
 
-                    label{
+                    label {
                         font-size: 12px;
                         text-align: center;
                         font-style: italic;
                         color: #fff;
                     }
-    
+
                     &:hover {
                         background-color: #73639aa2;
-    
+
                         // svg {
                         // label{
                         //     width: 80px;
@@ -111,23 +111,29 @@
                 display: flex;
                 gap: 20px;
 
-                label{
+                label {
                     font-size: 12px;
                     text-align: center;
                     font-style: italic;
                 }
 
                 .cardTeam {
-                    display: grid;
-                    grid-template-columns: 30% 60%;
-                    gap: 10px;
+                    display: flex;
+                    align-items: center;
+                    gap: 20px;
+                    flex-wrap: wrap;
 
-                    .cnt_imagen_{
+                    .cnt_imagen_ {
                         width: 80px;
                         height: 80px;
                         border-radius: 5px;
 
-                        .Imag_g{
+                        img {
+                            min-width: 80px;
+                            min-height: 80px;
+                        }
+
+                        .Imag_g {
                             width: 100%;
                             height: 100%;
                             border-radius: 5px;
@@ -197,7 +203,7 @@
             padding: 10px;
             gap: 20px;
 
-            .nextText{
+            .nextText {
                 text-align: center;
                 font-size: 12px;
                 font-style: italic;
@@ -223,10 +229,26 @@
         }
     }
 
+    .dataRead {
+
+        img {
+            @media (max-width: 768px) {
+                height: 300px;
+            }
+            @media (max-width: 480px) {
+                height: 250px;
+            }
+            border: 0;
+            width: 100%;
+            height: 200px;
+        }
+
+    }
+
     // .cnt_bank_{
     //     position: relative;
     //     pointer-events: none;
 
-       
+
     // }
 }

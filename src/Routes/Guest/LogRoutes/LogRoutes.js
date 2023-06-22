@@ -7,6 +7,7 @@ import VerificationCodeSkeleton from "../../../pages/VerificationCode/Verificati
 import NewPasswordSkeleton from "../../../pages/NewPassword/NewPasswordSkeleton";
 import CommitteeSkeleton from "../../../pages/Committee/CommitteeSkeleton";
 import Page404 from "../../../pages/Page404/Page404";
+import Statistics from "../../../pages/Statistics/Statistics";
 
 const NewPassword = lazy(() =>
   import("../../../pages/NewPassword/NewPassword")
@@ -69,6 +70,14 @@ const LogRoutes = () => {
             element={
               <Suspense fallback={<CommitteeSkeleton/>}>
               <Committee/>
+              </Suspense>
+            }
+          />
+          <Route
+            path="/statistics"
+            element={
+              <Suspense fallback={<></>}>
+              <Statistics/>
               </Suspense>
             }
           />
