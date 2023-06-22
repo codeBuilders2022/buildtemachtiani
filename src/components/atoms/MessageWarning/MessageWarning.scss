@@ -1,0 +1,30 @@
+.MessageWarning{
+    position: fixed;
+    top: 85px;
+    right: 5px;
+    width: 450px;
+    height: 130px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    color: #fff;
+
+    padding: 20px 30px 20px 20px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    text-align: justify;
+
+    @media (max-width: 480px) {
+        width: 95%; 
+    height: 155px;
+    }
+
+    .btn-close{
+        position: absolute;
+        top: 0;
+        right: 13px;
+        background: transparent;
+        outline: none;
+        border: none;
+    }
+}

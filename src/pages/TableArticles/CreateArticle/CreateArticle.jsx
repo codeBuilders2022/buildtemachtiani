@@ -30,7 +30,12 @@ const CreateArticle = () => {
         country: { value: null, validationType: "empty" },
         claveWord: { value: null, validationType: "empty" },
         interesConflict: { value: null, interesConflict: "empty" },
-        reference: { value: null, interesConflict: "empty" },
+        reference: { value: null, validationType: "empty" },
+        correspondenceEmail: { value: null, validationType: "empty" },
+        correspondenceAutor: { value: null, validationType: "empty" },
+        Notes: { value: null, validationType: "empty" },
+        institucion: { value: null, validationType: "empty" },
+        articletype: { value: null, validationType: "empty" },
     })
 
 
@@ -82,10 +87,12 @@ const CreateArticle = () => {
     const [textAreaResume, setTextAreaResume] = useState(null)
     const [textAreaInteresConflict, setTextAreaInteresConflict] = useState(null)
     const [textAreaReference, setTextAreaReference] = useState(null)
+    const [textAreaNotes, setTextAreaNotes] = useState(null)
     const [isWrited, setIsWrited] = useState({
         textAreaResumeW: false,
         textAreaInteresConflictW: false,
         textAreaReferenceW: false,
+        textAreaNotesW: false,
     })
 
     useEffect(() => {
@@ -102,6 +109,11 @@ const CreateArticle = () => {
         if (textAreaReference) {
             let isWritedCopy = { ...isWrited };
             isWritedCopy.textAreaReferenceW = true;
+            setIsWrited(isWritedCopy)
+        }
+        if (textAreaNotes) {
+            let isWritedCopy = { ...isWrited };
+            isWritedCopy.textAreaNotesW = true;
             setIsWrited(isWritedCopy)
         }
 
@@ -122,6 +134,11 @@ const CreateArticle = () => {
             inputListCopy.reference.value = ""
             setInputList(inputListCopy)
         }
+        if (isWrited.textAreaNotesW == true && textAreaNotes == null) {
+            let inputListCopy = { ...inputList }
+            inputListCopy.Notes.value = ""
+            setInputList(inputListCopy)
+        }
 
         for (const propertyName in inputList) {
             if (document.getElementById(propertyName)) {
@@ -134,21 +151,24 @@ const CreateArticle = () => {
         inputListCopy.resume.value = textAreaResume;
         inputListCopy.interesConflict.value = textAreaInteresConflict;
         inputListCopy.reference.value = textAreaReference;
+        inputListCopy.Notes.value = textAreaNotes;
         setInputList(inputListCopy)
-    }, [textAreaResume, textAreaInteresConflict, textAreaReference])
+    }, [textAreaResume, textAreaInteresConflict, textAreaReference,textAreaNotes])
 
     useEffect(() => {
         let inputListCopy = { ...inputList }
         inputListCopy.word.value = word;
         setInputList(inputListCopy)
     }, [word])
-
+    console.log(" inputListCopy.Notes.value", inputList.Notes.value)
+    console.log("inputListCopy.reference.value", inputList.reference.value)
     const submit = async () => {
         if (SubmitValidation(inputList, setInputList)) {
             if (SubmitValidationStaking(inputListstaking, setinputListstaking)) {
                 setLoading(true)
                 const res = await uploadArticle(inputList, inputListstaking, navigate, idUser)
                 if(res.status === 200){
+                    console.log("SubmitValidation(inputList, setInputList)",SubmitValidation(inputList, setInputList))
                     CorrectModal("Artículo enviado correctamente")
                     setTimeout(() => {
                         navigate(`/user/dashboard/${res.userId}`)
@@ -261,6 +281,12 @@ const CreateArticle = () => {
         }
     };
 
+    const options = [
+        {name:"Carta al editor",value:"Carta al editor"},
+        {name:"Artículo de revisión",value:"Artículo de revisión"},
+        {name:"Artículo original",value:"Artículo original"},
+    ]
+
     return (
         <>
             <div className="CreateArticle">
@@ -285,6 +311,10 @@ const CreateArticle = () => {
                             <Select title={"Idioma"} options={idiomOprions} value={inputList.idiom.value} placeholder={"Seleccione el idioma del artículo"} className={"selectSize"} id="idiom" onChange={(e) => { UpdateValue(e, "idiom", inputList, setInputList) }}></Select>
                             <Select title={"País"} options={data} value={inputList.country.value} placeholder={"Seleccione un país"} className={"selectSize"} id="country" onChange={(e) => { UpdateValue(e, "country", inputList, setInputList) }}></Select>
                             <Input title={"Palabra clave"} placeholder={"Palabra clave"} className={"inputArticleName"} id="claveWord" onChange={(e) => { UpdateValue(e, "claveWord", inputList, setInputList) }}></Input>
+                            <Input title={"Correo de correspondencia"} placeholder={"Correo de correspondencia"} className={"inputArticleName"} id="correspondenceEmail" onChange={(e) => { UpdateValue(e, "correspondenceEmail", inputList, setInputList) }}></Input>
+                            <Input title={"Autor de correspondencia"} placeholder={"Autor de correspondencia"} className={"inputArticleName"} id="correspondenceAutor" onChange={(e) => { UpdateValue(e, "correspondenceAutor", inputList, setInputList) }}></Input>
+                            <Input title={"Institución"} placeholder={"Institución"} className={"inputArticleName"} id="institucion" onChange={(e) => { UpdateValue(e, "institucion", inputList, setInputList) }}></Input>
+                            <Select title={"Tipo de articulo"} options={options} placeholder={"Tipo de articulo"} value={inputList.articletype.value} className={"inputArticleName"} id="articletype" onChange={(e) => { UpdateValue(e, "articletype", inputList, setInputList) }}></Select>
                             {
                                 inputListstaking.map((item, key) => {
                                     return (
@@ -338,6 +368,13 @@ const CreateArticle = () => {
                                     <div>Referencias</div>
                                 </div>
                                 <Editor value={textAreaReference} className="editor" id="reference" onTextChange={(e) => { setTextAreaReference(e.htmlValue) }} style={{ height: '150px' }} />
+
+                            </div>
+                            <div className="textArea-createArticle">
+                                <div className="minititle" >
+                                    <div>Notas del autor</div>
+                                </div>
+                                <Editor value={textAreaNotes} className="editor" id="Notes" onTextChange={(e) => { setTextAreaNotes(e.htmlValue) }} style={{ height: '150px' }} />
 
                             </div>
                         </div>
