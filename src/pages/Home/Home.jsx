@@ -22,8 +22,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { IncorrectModal } from "../../components/molecules/modals/Modals";
 import { getAxiosHomeArticles } from "../../Api/Home/home";
-import {Decrypt, Encrypt} from "../../utilities/Hooks"
-
+import { Decrypt, Encrypt } from "../../utilities/Hooks"
+import { postAxiosCountriesView } from "../../Api/Metrics/Metrics";
 
 const Home = () => {
     const navigate = useNavigate()
@@ -40,29 +40,29 @@ const Home = () => {
     }, []);
 
 
-   
+
     const getDatas = async () => {
         try {
             // Hacemos una llamada concurrente a la API utilizando Promise.all()
             const [resarticless, resNumber] = await Promise.all([
                 getAxiosHomeArticles("/api/current-issues"),
                 getAxiosHomeArticles("/api/numbers?populate=*")
-              ]);
+            ]);
             // Mapeamos los datos obtenidos de los comités y extraemos los atributos relevantes
             const articlesData = resarticless.data.map(({ id, attributes: { publishedAt, title, authors, doi, issue, abstract, info } }) => {
                 const encryptedId = Encrypt(id);
-              
+
                 return {
-                  id: encryptedId,
-                  title,
-                  authors,
-                  doi,
-                  issue,
-                  abstract,
-                  info,
-                  publishedAt,
+                    id: encryptedId,
+                    title,
+                    authors,
+                    doi,
+                    issue,
+                    abstract,
+                    info,
+                    publishedAt,
                 };
-              });
+            });
             // Asignamos los datos de los comités a los estados correspondientes en el componente
             const issue = []
             articlesData.map((e, index) => {
@@ -75,39 +75,39 @@ const Home = () => {
             setDataArt(issue)
             setData_list(issue)
 
-          //procesamiento de los datos de resNumber
-          const allArticles_ = resNumber.data.map(({id, attributes: { dataNumber: { name, resume }, img: { data: { attributes: { url }}}, pdf: { data: { attributes: { url: urlPdf }}}, publishedAt}}) => ({
-            id,
-            name,
-            resume,
-            url: process.env.REACT_APP_API_URL + urlPdf,
-            image: process.env.REACT_APP_API_URL + url,
-            month: months[Number(publishedAt.substring(5, 7)) -1],
-            year: Number(publishedAt.substring(0, 4))
-          }))
+            //procesamiento de los datos de resNumber
+            const allArticles_ = resNumber.data.map(({ id, attributes: { dataNumber: { name, resume }, img: { data: { attributes: { url } } }, pdf: { data: { attributes: { url: urlPdf } } }, publishedAt } }) => ({
+                id,
+                name,
+                resume,
+                url: process.env.REACT_APP_API_URL + urlPdf,
+                image: process.env.REACT_APP_API_URL + url,
+                month: months[Number(publishedAt.substring(5, 7)) - 1],
+                year: Number(publishedAt.substring(0, 4))
+            }))
 
-          if (allArticles_.length > 0) {
-            let firstID = allArticles_[0].id;
-            let indexx = 0;
-          
-            allArticles_.forEach((article, idx) => {
-              if (article.id > firstID) {
-                firstID = article.id;
-                indexx = idx;
-              }
-            });
-          
-            const newArticles = allArticles_.filter((_, number) => number !== indexx);
-            setCurrentJornal([allArticles_[indexx]]);
-            setAllArticles(newArticles);
-          }
+            if (allArticles_.length > 0) {
+                let firstID = allArticles_[0].id;
+                let indexx = 0;
+
+                allArticles_.forEach((article, idx) => {
+                    if (article.id > firstID) {
+                        firstID = article.id;
+                        indexx = idx;
+                    }
+                });
+
+                const newArticles = allArticles_.filter((_, number) => number !== indexx);
+                setCurrentJornal([allArticles_[indexx]]);
+                setAllArticles(newArticles);
+            }
         } catch (error) {
             console.log(error)
-          IncorrectModal("¡Algo salió mal, inténtalo más tarde!", true);
+            IncorrectModal("¡Algo salió mal, inténtalo más tarde!", true);
         }
-      };
+    };
 
-      
+
 
     const data = {
         index: [
@@ -123,6 +123,30 @@ const Home = () => {
         ]
         ,
     }
+
+
+    
+    // //metrics
+    // useEffect(() => {
+    //     const formData = new FormData();
+    //     const fetchCountry = async () => {
+    //         try {
+    //             const response = await fetch('https://ipapi.co/json/');
+    //             const data = await response.json();
+    //             const countrySave = {
+    //                 "value": data.country_name
+    //             }
+    //             console.log(countrySave)
+    //             formData.append("data", JSON.stringify(countrySave));
+    //             const res = await postAxiosCountriesView("/api/countries", formData)
+    //         } catch (error) {
+    //             console.error('Error fetching country:', error);
+    //         }
+
+    //     };
+    //     fetchCountry();
+    // }, []);
+
 
     const dataMethric = [
         // { title: "Factor de impacto 2022", data: 1.22 },
@@ -142,32 +166,32 @@ const Home = () => {
         // { title: "Volumen. 1. Num. 2", cover: cover, monthPlublished: "Abril", pag: "64-130" },
     ])
 
-//useEffect para buscar articulos
-useEffect(() => {
-    let timerId;
+    //useEffect para buscar articulos
+    useEffect(() => {
+        let timerId;
 
-    setDataArt((prevMagazine) => {
-      const filteredMagazine = !search_
-        ? data_list
-        : data_list.filter((articule) =>
-            articule.title.toLowerCase().includes(search_.toLowerCase()) ||
-            articule.doi.toLowerCase().includes(search_.toLowerCase()) ||
-            articule.authors.toLowerCase().includes(search_.toLowerCase())
-          );
-      return filteredMagazine;
-    });
+        setDataArt((prevMagazine) => {
+            const filteredMagazine = !search_
+                ? data_list
+                : data_list.filter((articule) =>
+                    articule.title.toLowerCase().includes(search_.toLowerCase()) ||
+                    articule.doi.toLowerCase().includes(search_.toLowerCase()) ||
+                    articule.authors.toLowerCase().includes(search_.toLowerCase())
+                );
+            return filteredMagazine;
+        });
 
-    if (search_) {
-      clearTimeout(timerId);
-      timerId = setTimeout(() => {
-        document.getElementById('articles_456s')?.scrollIntoView({ behavior: 'smooth' });
-      }, 500); // Ajusta el tiempo de espera (en milisegundos) antes de activar el scroll suave
-    }
+        if (search_) {
+            clearTimeout(timerId);
+            timerId = setTimeout(() => {
+                document.getElementById('articles_456s')?.scrollIntoView({ behavior: 'smooth' });
+            }, 500); // Ajusta el tiempo de espera (en milisegundos) antes de activar el scroll suave
+        }
 
-    return () => {
-      clearTimeout(timerId); // Limpiar el temporizador al desmontar el componente
-    };
-  }, [search_]);
+        return () => {
+            clearTimeout(timerId); // Limpiar el temporizador al desmontar el componente
+        };
+    }, [search_]);
 
 
     return (
@@ -183,12 +207,12 @@ useEffect(() => {
                             <div key={idx}>
                                 <div className="col_left">
                                     <div className="cnt_img__">
-                                        <img src={_.image} alt="" className="i_mage"/>
+                                        <img src={_.image} alt="" className="i_mage" />
                                     </div>
                                 </div>
                                 <div className="cnt_rigth">
-                                    <div className="current_reume" dangerouslySetInnerHTML={{__html: _.resume}}></div>
-                                    <a className='download' href={_.url}  style={{ background: currentColor }} download>Descargar</a>
+                                    <div className="current_reume" dangerouslySetInnerHTML={{ __html: _.resume }}></div>
+                                    <a className='download' href={_.url} style={{ background: currentColor }} download>Descargar</a>
                                 </div>
                             </div>
                         ))}
@@ -285,7 +309,7 @@ useEffect(() => {
                                 }
 
                                 {dataArt.length < 1 &&
-                                     <div style={{width: "100%", display: "flex", justifyContent: "center"}}>Artículos en proceso</div>
+                                    <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>Artículos en proceso</div>
                                 }
                                 {
                                     dataArt.length > 4 &&
@@ -303,18 +327,18 @@ useEffect(() => {
                                                     <path d="M13 7a2 2 0 0 1 2 2v12l-5 -3l-5 3v-12a2 2 0 0 1 2 -2h6z" />
                                                     <path d="M9.265 4a2 2 0 0 1 1.735 -1h6a2 2 0 0 1 2 2v12l-1 -.6" />
                                                 </svg>
-                                                <h1 style={{color: currentColor}} >Números anteriores:</h1>
+                                                <h1 style={{ color: currentColor }} >Números anteriores:</h1>
                                             </div>
 
                                             <div className="preVol">
                                                 {allArticles.length < 1 ? (
-                                                    <div style={{width: "100%", display: "flex", justifyContent: "center"}}>Aún no hay números que mostrar</div>
-                                                ):(
+                                                    <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>Aún no hay números que mostrar</div>
+                                                ) : (
                                                     allArticles.map((vol, index) => {
                                                         return (
                                                             <div className="cardVol" key={index}>
                                                                 <div className="cnt_image">
-                                                                    <img src={vol.image} className="i_mage_"/>
+                                                                    <img src={vol.image} className="i_mage_" />
                                                                 </div>
                                                                 <p className="dark:text-white p">{vol.month}{" "}{vol.year}</p>
                                                                 <p className="dark:text-red-800 title">{vol.name}</p>
@@ -337,7 +361,7 @@ useEffect(() => {
                                                     <path d="M9 4h6a2 2 0 0 1 2 2v14l-5 -3l-5 3v-14a2 2 0 0 1 2 -2" />
                                                 </svg>
                                                 <div className="titleNumbers">
-                                                    <h1 style={{color: currentColor}}>Lenguas originarias :</h1>
+                                                    <h1 style={{ color: currentColor }}>Lenguas originarias :</h1>
                                                     <Tooltip target=".alert" />
                                                     <svg className="alert icon icon-tabler icon-tabler-alert-circle"
                                                         data-pr-tooltip="Estos números están en lengua Nahualt"
@@ -354,8 +378,8 @@ useEffect(() => {
                                             </div>
                                             <div className="preVol">
                                                 {special.length < 1 ? (
-                                                    <div style={{width: "100%", display: "flex", justifyContent: "center"}}>Aún no hay números especiales que mostrar</div>
-                                                ):(
+                                                    <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>Aún no hay números especiales que mostrar</div>
+                                                ) : (
                                                     special.map((vol, index) => {
                                                         return (
                                                             <div className="cardVol" key={index}>

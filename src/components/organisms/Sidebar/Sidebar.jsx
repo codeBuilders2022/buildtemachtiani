@@ -27,20 +27,20 @@ const Sidebar = () => {
         { id: 5, title: "Politicas de la revista", url: "/magazine-policies" },
     ]
 
-    
 
-    useEffect(() => { getDatas()}, [])
+
+    useEffect(() => { getDatas() }, [])
     //Obtenemos los datos de la API
     const getDatas = async () => {
         try {
             const [resCommittees] = await Promise.all([getAxiosData("/api/events?populate=file")]);
-            const commiteData = resCommittees.data.map(({id, attributes: { events, date, siteurl, file: { data} }}) => {
+            const commiteData = resCommittees.data.map(({ id, attributes: { events, date, siteurl, file: { data } } }) => {
                 let urlFile = null
-                if(data?.attributes && data?.attributes.url){
+                if (data?.attributes && data?.attributes.url) {
                     urlFile = data.attributes.url
                     urlFile = process.env.REACT_APP_API_URL + urlFile
                 }
-                return {id, events, date, siteurl, image: urlFile}
+                return { id, events, date, siteurl, image: urlFile }
             })
 
             setEvents(commiteData)
@@ -50,24 +50,24 @@ const Sidebar = () => {
         }
     }
 
-    useEffect(() => { getDatasCommittee() },[]);
+    useEffect(() => { getDatasCommittee() }, []);
 
     const getDatasCommittee = async () => {
-      try {
-        // Hacemos una llamada concurrente a la API utilizando Promise.all()
-        const [resCommittees] = await Promise.all([ getAxiosData("/api/committees?populate=profile") ]);
-        // // Mapeamos los datos obtenidos de los comités y extraemos los atributos relevantes
-        const committeeData = resCommittees.data.map(({ id, attributes: { committee, email, fullname, profile: { data: { attributes: { formats } } } } }) => {
-          const url = formats?.large?.url || formats?.medium?.url || formats?.small?.url || formats?.thumbnail?.url || resCommittees?.data[0]?.attributes?.profile?.data?.attributes?.url;
-          const modifiedEmail = email.replace(/^(.{3}).*?(@.*)$/, "$1...$2");
-          return { id, committee, email: modifiedEmail, fullname, image: process.env.REACT_APP_API_URL + url };
-        });
-        // // Asignamos los datos de los comités a los estados correspondientes en el componente
-        setCommitteeDtas(committeeData.slice(0, 3));
-      } catch (error) {
-        console.log(error)
-        IncorrectModal("¡Algo salió mal, intentalo más tarde!", true);
-      }
+        try {
+            // Hacemos una llamada concurrente a la API utilizando Promise.all()
+            const [resCommittees] = await Promise.all([getAxiosData("/api/committees?populate=profile")]);
+            // // Mapeamos los datos obtenidos de los comités y extraemos los atributos relevantes
+            const committeeData = resCommittees.data.map(({ id, attributes: { committee, email, fullname, profile: { data: { attributes: { formats } } } } }) => {
+                const url = formats?.large?.url || formats?.medium?.url || formats?.small?.url || formats?.thumbnail?.url || resCommittees?.data[0]?.attributes?.profile?.data?.attributes?.url;
+                const modifiedEmail = email.replace(/^(.{3}).*?(@.*)$/, "$1...$2");
+                return { id, committee, email: modifiedEmail, fullname, image: process.env.REACT_APP_API_URL + url };
+            });
+            // // Asignamos los datos de los comités a los estados correspondientes en el componente
+            setCommitteeDtas(committeeData.slice(0, 3));
+        } catch (error) {
+            console.log(error)
+            IncorrectModal("¡Algo salió mal, intentalo más tarde!", true);
+        }
     };
 
     const activeLinks = ({ isActive }) => {
@@ -76,7 +76,7 @@ const Sidebar = () => {
             fontWeight: isActive ? "bold" : null
         };
     };
-    
+
     return (
         <aside className="dark:text-white Sidebar">
             <div className="posted">
@@ -98,15 +98,15 @@ const Sidebar = () => {
                     <div className="events">
                         {events.length === 0 ? (
                             <label className="nextText">Aún no hay eventos próximos.</label>
-                        ):(
+                        ) : (
                             events.map((e, index) => {
                                 return (
                                     <div className="event" key={index}>
                                         <p className="date">{e.date}</p>
                                         {e.image === null ? (
-                                            <a href={e.siteurl} target="_blank" rel="noreferrer"  className="titleEvent">{e.events}</a>
-                                        ):(        
-                                            <a href={e.image} target="_blank" rel="noreferrer"  className="titleEvent" download>{e.events}</a>
+                                            <a href={e.siteurl} target="_blank" rel="noreferrer" className="titleEvent">{e.events}</a>
+                                        ) : (
+                                            <a href={e.image} target="_blank" rel="noreferrer" className="titleEvent" download>{e.events}</a>
                                         )}
                                     </div>
                                 )
@@ -142,13 +142,13 @@ const Sidebar = () => {
                     <div className="team">
                         {committeeDtas.length === 0 ? (
                             <label>Aún no hay comité</label>
-                        ):(
+                        ) : (
                             committeeDtas.map((position, index) => {
                                 return (
                                     <div className="cardTeam" key={index}>
                                         <div className="cnt_imagen_">
-                                            <img src={position.image} className="Imag_g"/>
-    
+                                            <img src={position.image} className="Imag_g" />
+
                                         </div>
                                         <div className="info">
                                             <p>{position.fullname}</p>
@@ -161,14 +161,28 @@ const Sidebar = () => {
                         )}
                         <div className="seeComite">
                             <Link to="/committee">
-                                {committeeDtas.length === 0 ?(
+                                {committeeDtas.length === 0 ? (
                                     null
-                                ):(
+                                ) : (
                                     <button>Ver más...</button>
                                 )}
                             </Link>
                         </div>
                     </div>
+                </div>
+                <div className="dataRead">
+                    <div className="title">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#706a81" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+                            <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+                            <path d="M3 6l0 13" />
+                            <path d="M12 6l0 13" />
+                            <path d="M21 6l0 13" />
+                        </svg>
+                        <strong>Datos de lectores</strong>
+                    </div>
+                    <a href="https://www.revolvermaps.com/livestats/5ba5baxjzkm/" target="_blank"><img src="//rf.revolvermaps.com/h/m/a/0/ff0000/128/0/5ba5baxjzkm.png" alt="Map" /></a>
                 </div>
             </div>
         </aside>

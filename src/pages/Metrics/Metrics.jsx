@@ -3,12 +3,25 @@ import './Metrics.scss'
 // import MetricsDataLine from '../../DataTest/MetricsLineChart.json'
 import CategoryMetric from "../../components/atoms/CategoryMetric/CategoryMetric"
 import LineChartMetric from "../../components/molecules/LineChart/LineChart"
-import Chart from "../../components/molecules/Chart/Chart"
-
+import Chartt from "../../components/molecules/Chart/Chart"
 import { useStateContext } from "../../contexts/ContextProvider";
+import { getAxiosContriesView } from "../../Api/Metrics/Metrics"
 
 const Metrics = () => {
     const { currentColor } = useStateContext();
+
+    //chart
+    const [countries, setCountries] = useState({})
+    const [chartData, setChartData] = useState({});
+    const [chartOptions, setChartOptions] = useState({});
+
+
+    const getContries = async () => {
+        const res = await getAxiosContriesView('/api/countries')
+        setCountries(res.data.data)
+    }
+
+   
 
     const MetricsDataLine = [
         { year: '2010', impact: 1.95 },
@@ -60,18 +73,18 @@ const Metrics = () => {
         { year: '2020', snip: 700 },
     ];
 
-    
 
-    const [size,setSize] =useState()
-    useEffect(()=>{
+
+    const [size, setSize] = useState()
+    useEffect(() => {
         setSize(window.screen.width)
 
-    },[])
-   
+    }, [])
+
     return (
         <>
             <div className="dark:bg-gray-600 dark:text-white m-2 md:m-10 md:mt-32 mt-24 p-2 md:p-10 bg-white rounded-3xl flex Metrics">
-                <div className="bg-slate-100 dark:bg-gray-500 cards-body "> 
+                <div className="bg-slate-100 dark:bg-gray-500 cards-body ">
                     <div className="title">Métricas</div>
                     <div className="categories">
                         <CategoryMetric id={"IMPACTO"} title={"FACTOR DE IMPACTO 2021"} metric={"7,05"} />
@@ -79,6 +92,15 @@ const Metrics = () => {
                         <CategoryMetric id={"SJR"} title={"SJR 2021"} metric={"0,407"} />
                         <CategoryMetric id={"SNIP"} title={"SNIP 2021"} metric={"0,758"} />
                         <CategoryMetric id={"LEIDO"} title={"LO MAS LEÍDO"} metric={"Más datos..."} />
+                    </div>
+                    <div className="title-metric-category">Desde donde nos ven</div>
+                    
+                    <div className="countries">
+                        <div className="inter">
+                            {/* <h2>Internacionalización</h2> */}
+                            <p>Esta medida muestra los países que cuentan con una mayor cantidad
+                                de personas que leen nuestra revista.</p>
+                        </div>
                     </div>
                     <div className="title-metric-category">Factor de impacto</div>
                     <div className="metric-descrition">
@@ -91,10 +113,10 @@ const Metrics = () => {
                                     <div className="metrics-table-font">AÑO</div>
                                     <hr />
                                     {
-                                        MetricsDataLine.map((item) => {
+                                        MetricsDataLine.map((item, index) => {
                                             return (
                                                 <>
-                                                    <div className="metrics-table-font">{item.year}</div>
+                                                    <div key={index} className="metrics-table-font">{item.year}</div>
                                                     <hr />
                                                 </>
                                             )
@@ -105,10 +127,10 @@ const Metrics = () => {
                                     <div className="metrics-table-font">IMPACTO</div>
                                     <hr />
                                     {
-                                        MetricsDataLine.map((item) => {
+                                        MetricsDataLine.map((item, index) => {
                                             return (
                                                 <>
-                                                    <div className="metrics-table-font">{item.impact}</div>
+                                                    <div key={index} className="metrics-table-font">{item.impact}</div>
                                                     <hr />
                                                 </>
                                             )
@@ -119,7 +141,7 @@ const Metrics = () => {
 
                         </div>
                         <div className="col-2 align-items">
-                            <LineChartMetric width={size<=574?280:size<=1400?500:800} keyData="impact" data={MetricsDataLine}></LineChartMetric>
+                            <LineChartMetric width={size <= 574 ? 280 : size <= 1400 ? 500 : 800} keyData="impact" data={MetricsDataLine}></LineChartMetric>
                         </div>
                     </div>
                     <div className="text-plane">
@@ -148,10 +170,10 @@ const Metrics = () => {
                                     <div className="metrics-table-font">AÑO</div>
                                     <hr />
                                     {
-                                        citiescoreDataLine.map((item) => {
+                                        citiescoreDataLine.map((item, index) => {
                                             return (
                                                 <>
-                                                    <div className="metrics-table-font">{item.year}</div>
+                                                    <div key={index} className="metrics-table-font">{item.year}</div>
                                                     <hr />
                                                 </>
                                             )
@@ -162,10 +184,10 @@ const Metrics = () => {
                                     <div className="metrics-table-font">CITESCORE</div>
                                     <hr />
                                     {
-                                        citiescoreDataLine.map((item) => {
+                                        citiescoreDataLine.map((item, index) => {
                                             return (
                                                 <>
-                                                    <div className="metrics-table-font">{item.citiescore}</div>
+                                                    <div key={index} className="metrics-table-font">{item.citiescore}</div>
                                                     <hr />
                                                 </>
                                             )
@@ -176,7 +198,7 @@ const Metrics = () => {
 
                         </div>
                         <div className="col-2 align-items">
-                            <LineChartMetric width={size<=574?280:size<=1400?500:800} keyData="citiescore" data={citiescoreDataLine}></LineChartMetric>
+                            <LineChartMetric width={size <= 574 ? 280 : size <= 1400 ? 500 : 800} keyData="citiescore" data={citiescoreDataLine}></LineChartMetric>
                         </div>
                     </div>
                     <div className="text-plane">
@@ -206,10 +228,10 @@ const Metrics = () => {
                                     <div className="metrics-table-font">AÑO</div>
                                     <hr />
                                     {
-                                        snipDataLine.map((item) => {
+                                        snipDataLine.map((item, index) => {
                                             return (
                                                 <>
-                                                    <div className="metrics-table-font">{item.year}</div>
+                                                    <div key={index} className="metrics-table-font">{item.year}</div>
                                                     <hr />
                                                 </>
                                             )
@@ -220,10 +242,10 @@ const Metrics = () => {
                                     <div className="metrics-table-font">SNIP</div>
                                     <hr />
                                     {
-                                        snipDataLine.map((item) => {
+                                        snipDataLine.map((item, index) => {
                                             return (
                                                 <>
-                                                    <div className="metrics-table-font">{item.snip}</div>
+                                                    <div key={index} className="metrics-table-font">{item.snip}</div>
                                                     <hr />
                                                 </>
                                             )
@@ -234,7 +256,7 @@ const Metrics = () => {
 
                         </div>
                         <div className="col-2 align-items">
-                            <Chart  width={size<=574?280:size<=1400?500:800} keyData="snip" data={snipDataLine}></Chart>
+                            <Chartt width={size <= 574 ? 280 : size <= 1400 ? 500 : 800} keyData="snip" data={snipDataLine}></Chartt>
                         </div>
                     </div>
                     <div className="text-plane">
@@ -254,10 +276,10 @@ const Metrics = () => {
                                     <div className="metrics-table-font">AÑO</div>
                                     <hr />
                                     {
-                                        sjrDataLine.map((item) => {
+                                        sjrDataLine.map((item, index) => {
                                             return (
                                                 <>
-                                                    <div className="metrics-table-font">{item.year}</div>
+                                                    <div key={index} className="metrics-table-font">{item.year}</div>
                                                     <hr />
                                                 </>
                                             )
@@ -268,10 +290,10 @@ const Metrics = () => {
                                     <div className="metrics-table-font">SJR</div>
                                     <hr />
                                     {
-                                        sjrDataLine.map((item) => {
+                                        sjrDataLine.map((item, index) => {
                                             return (
                                                 <>
-                                                    <div className="metrics-table-font">{item.sjr}</div>
+                                                    <div key={index} className="metrics-table-font">{item.sjr}</div>
                                                     <hr />
                                                 </>
                                             )
@@ -282,7 +304,7 @@ const Metrics = () => {
 
                         </div>
                         <div className="col-2 align-items">
-                            <Chart  width={size<=574?280:size<=1400?500:800} keyData="sjr" data={sjrDataLine}></Chart>
+                            <Chartt width={size <= 574 ? 280 : size <= 1400 ? 500 : 800} keyData="sjr" data={sjrDataLine}></Chartt>
                         </div>
                     </div>
                     <div className="text-plane">
