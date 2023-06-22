@@ -23,6 +23,7 @@ import { useEffect } from "react";
 import { IncorrectModal } from "../../components/molecules/modals/Modals";
 import { getAxiosHomeArticles } from "../../Api/Home/home";
 import {Decrypt, Encrypt} from "../../utilities/Hooks"
+import MessageWarning from "../../components/atoms/MessageWarning/MessageWarning";
 
 
 const Home = () => {
@@ -34,6 +35,7 @@ const Home = () => {
     const { currentColor, currentMode, search_ } = useStateContext();
     const [dataArt, setDataArt] = useState([])
     const [data_list, setData_list] = useState([])
+    const [viewMessage, setViewMessage] = useState(false)  
     const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
     useEffect(() => {
         getDatas()
@@ -168,6 +170,20 @@ useEffect(() => {
       clearTimeout(timerId); // Limpiar el temporizador al desmontar el componente
     };
   }, [search_]);
+
+  useEffect(() => {
+    const isMessageClosed = localStorage.getItem("mens-ge");
+  
+    if (isMessageClosed === null) {
+      setViewMessage(true);
+    }
+  }, []);
+  
+  const handleMessageClosed = () => {
+    localStorage.setItem("mens-ge", "true");
+    setViewMessage(false);
+  };
+    
 
 
     return (
@@ -384,6 +400,7 @@ useEffect(() => {
                     </div>
                 </div>
             </div>
+            { viewMessage && <MessageWarning handle={handleMessageClosed}/> }
         </div>
     )
 }
