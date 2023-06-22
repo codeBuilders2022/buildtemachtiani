@@ -30,6 +30,7 @@ const Navbarr = () => {
   const new_password = header_location.pathname.startsWith("/new-password")
   const [username, setUsername] = useState("")
   
+  
   useEffect(() => {
     if(log_ || login_ || recover_account || verification_code || new_password){
       return setHasnNot(true)
@@ -101,6 +102,10 @@ const Navbarr = () => {
   const handleProfileClick = () => {
     setShowMyProfile((prevShowMyProfile) => !prevShowMyProfile);
   };
+
+   
+
+   
  
   return (
     <nav className='bg-bg-gray-primary dark:bg-bg-dark-secondary Navbarr_' id='nav_header1'>
@@ -273,6 +278,7 @@ const Navbarr = () => {
             </div>
           </div>
         )}
+        
     </nav>
   )
 }
