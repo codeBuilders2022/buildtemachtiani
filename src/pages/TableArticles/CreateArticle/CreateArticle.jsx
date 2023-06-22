@@ -281,6 +281,12 @@ const CreateArticle = () => {
         }
     };
 
+    const options = [
+        {name:"Carta al editor",value:"Carta al editor"},
+        {name:"Artículo de revisión",value:"Artículo de revisión"},
+        {name:"Artículo original",value:"Artículo original"},
+    ]
+
     return (
         <>
             <div className="CreateArticle">
@@ -308,7 +314,7 @@ const CreateArticle = () => {
                             <Input title={"Correo de correspondencia"} placeholder={"Correo de correspondencia"} className={"inputArticleName"} id="correspondenceEmail" onChange={(e) => { UpdateValue(e, "correspondenceEmail", inputList, setInputList) }}></Input>
                             <Input title={"Autor de correspondencia"} placeholder={"Autor de correspondencia"} className={"inputArticleName"} id="correspondenceAutor" onChange={(e) => { UpdateValue(e, "correspondenceAutor", inputList, setInputList) }}></Input>
                             <Input title={"Institución"} placeholder={"Institución"} className={"inputArticleName"} id="institucion" onChange={(e) => { UpdateValue(e, "institucion", inputList, setInputList) }}></Input>
-                            <Input title={"Tipo de articulo"} placeholder={"Tipo de articulo"} className={"inputArticleName"} id="articletype" onChange={(e) => { UpdateValue(e, "articletype", inputList, setInputList) }}></Input>
+                            <Select title={"Tipo de articulo"} options={options} placeholder={"Tipo de articulo"} value={inputList.articletype.value} className={"inputArticleName"} id="articletype" onChange={(e) => { UpdateValue(e, "articletype", inputList, setInputList) }}></Select>
                             {
                                 inputListstaking.map((item, key) => {
                                     return (
