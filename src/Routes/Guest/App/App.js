@@ -10,8 +10,10 @@ import InstruccionesSkeletons from "../../../pages/Instrucciones/InstruccionesSk
 import AboutSkeletons from "../../../pages/About/AboutSkeletons";
 import MisionSkeleton from "../../../pages/Mision/MisionSkeleton";
 import MagazinePoliciesSkeleton from "../../../pages/MagazinePolicies/MagazinePoliciesSkeleton";
+import PreviousIssuesSkeleton from "../../../pages/Home/PreviousIssues/PreviousIssuesSkeleton";
 
 //Lazy
+const PreviousIssues = lazy(() => import("../../../pages/Home/PreviousIssues/PreviousIssues"));
 const Metrics = lazy(() => import("../../../pages/Metrics/Metrics"));
 const Articles = lazy(() => import("../../../pages/Home/Articles/Articles"));
 const Home = lazy(() => import("../../../pages/Home/Home"));
@@ -90,6 +92,16 @@ const App = () => {
         element={
           <Suspense fallback={<ArticlesSkeleton />}>
             <Articles />
+          </Suspense>
+        }
+      />
+      <Route
+        exact
+        path="/previous-issues/:id"
+        element={
+          <Suspense fallback={<PreviousIssuesSkeleton />}>
+            <PreviousIssues />
+            
           </Suspense>
         }
       />
