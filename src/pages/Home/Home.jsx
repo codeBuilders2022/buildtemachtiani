@@ -103,6 +103,7 @@ const Home = () => {
                 const newArticles = allArticles_.filter((_, number) => number !== indexx);
                 setCurrentJornal([allArticles_[indexx]]);
                 setAllArticles(newArticles);
+                
             }
         } catch (error) {
             console.log(error)
