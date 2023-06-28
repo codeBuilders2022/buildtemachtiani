@@ -15,9 +15,10 @@
 
   .cnt_logo {
     height: 72px;
+    width: 200px;
 
     @media (max-width: 980px) {
-      // width: 156px;
+      width: 156px;
       height: 50px;
     }
 
