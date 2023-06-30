@@ -1,0 +1,116 @@
+.PreviousIssues{
+    margin: 40px;
+    margin-top: 128px;
+    padding: 40px;
+    border-radius: 24px;
+
+    @media (max-width: 768px) {
+        margin: 8px;
+        margin-top: 110px;
+        padding: 15px;
+    }
+
+    .inside-previous{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+        
+       
+
+        .secct1-p{
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            grid-template-rows: 1fr;
+            grid-column-gap: 30px;
+            grid-row-gap: 0px; 
+            padding: 0 40px;
+            
+            @media (max-width: 768px) {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 10px 10px;
+                gap: 30px;
+
+            }
+
+            .cnt_image_p{
+                grid-area: 1 / 1 / 2 / 2;
+                width: 200px;
+                height: 250px;
+
+                @media (max-width: 768px) {
+                    width: 90%;
+                    height: 350px;
+                }
+                
+                .img_p{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            .description_p{
+                grid-area: 1 / 2 / 2 / 3;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                p{
+                    text-align: justify;
+                }
+
+                .down_load-l{
+                    width: 250px;
+                    height: 40px;
+                    font-size: 14px;
+                    color: #fff;
+                }
+            }
+
+        }
+
+        .list_article-p{
+            width: 93%;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+
+            @media (max-width: 768px) {
+                width: 100%;
+
+            }
+
+            .h1_article{
+                font-size: 30px;
+                font-weight: bold;
+                padding-left: 10px;
+            }
+
+            .block_p{
+                padding: 10px 30px;
+
+                .title_{
+                    font-size: 16px;
+
+                    &:hover{
+                        text-decoration: underline;
+                        color: #87000C;
+                        font-style: italic;
+                    }
+                }
+
+                .author_l{
+                    font-size: 12.6px;
+                    font-style: italic;
+                }
+
+                .date_l{
+                    font-size: 14px;
+                    opacity: .7;
+                }
+            }
+        }
+    }
+}
