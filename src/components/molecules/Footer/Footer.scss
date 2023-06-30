@@ -1,0 +1,40 @@
+.Footer_r{
+    margin: 40px;
+    // margin-top: 96px;
+    padding: 40px 0 0 0;
+    border-top: 2px solid;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px; 
+
+    @media (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .secct_1_m{
+        grid-area: 1 / 1 / 2 / 2;
+    }
+
+    .secc_bulders{
+        grid-area: 1 / 2 / 2 / 3;
+        padding-right: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-end;
+
+        @media (max-width: 768px) {
+            padding: unset;
+            align-items: flex-start;
+        }
+
+        .class_span{
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}

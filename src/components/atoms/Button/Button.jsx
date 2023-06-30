@@ -3,13 +3,13 @@ import React from "react";
 import "./Button.scss";
 import { Skeleton } from "primereact/skeleton";
 
-const Button = ({ title, onClick, className, skeleton, style }) => {
+const Button = ({ title, onClick, className, skeleton, style, type }) => {
   return (
     <>
       {
         !skeleton ?
           <>
-            <button className={`Button_ ${className}`} onClick={onClick} style={style}>
+            <button className={`Button_ ${className}`} onClick={onClick} style={style} type={type}>
               {title}
             </button>
           </> :
