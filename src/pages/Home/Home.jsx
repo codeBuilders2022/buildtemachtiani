@@ -306,7 +306,7 @@ const Home = () => {
                                                     <p className={`hover:${currentColor}`}>{article.title}</p>
                                                 </button>
                                                 <span className='authors'>{article.authors}</span>
-                                                <span className='date'>Disponible online desde el {article.day} de {article.month} de {article.year}</span>
+                                                <span className='date'>Disponible en línea desde el {article.day} de {article.month} de {article.year}</span>
                                             </div>
 
                                         )

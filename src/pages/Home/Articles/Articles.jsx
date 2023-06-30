@@ -23,8 +23,13 @@ const Articles = () => {
   const { id } = useParams()
   const [dataArt, setDataArt] = useState()
   const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+
   useEffect(() => {
     getDatas()
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Hace scroll al principio de la página
   }, []);
 
 
