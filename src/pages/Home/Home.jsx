@@ -75,8 +75,8 @@ const Home = () => {
                 e['day'] = Number(e.publishedAt.substring(8, 10))
                 issue.push(e)
             })
-            setDataArt(issue)
-            setData_list(issue)
+            // setDataArt(issue)
+            // setData_list(issue)
 
             //procesamiento de los datos de resNumber
             const allArticles_ = resNumber.data.map(({ id, attributes: { dataNumber: { name, resume }, img: { data: { attributes: { url } } }, pdf: { data: { attributes: { url: urlPdf } } }, publishedAt } }) => ({
@@ -101,8 +101,8 @@ const Home = () => {
                 });
 
                 const newArticles = allArticles_.filter((_, number) => number !== indexx);
-                setCurrentJornal([allArticles_[indexx]]);
-                setAllArticles(newArticles);
+                // setCurrentJornal([allArticles_[indexx]]);
+                // setAllArticles(newArticles);
                 
             }
         } catch (error) {
