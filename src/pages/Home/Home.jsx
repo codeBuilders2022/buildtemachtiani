@@ -75,8 +75,8 @@ const Home = () => {
                 e['day'] = Number(e.publishedAt.substring(8, 10))
                 issue.push(e)
             })
-            // setDataArt(issue)
-            // setData_list(issue)
+            setDataArt(issue)
+            setData_list(issue)
 
             //procesamiento de los datos de resNumber
             const allArticles_ = resNumber.data.map(({ id, attributes: { dataNumber: { name, resume }, img: { data: { attributes: { url } } }, pdf: { data: { attributes: { url: urlPdf } } }, publishedAt } }) => ({
@@ -305,7 +305,7 @@ const Home = () => {
                                                     <p className={`hover:${currentColor}`}>{article.title}</p>
                                                 </button>
                                                 <span className='authors'>{article.authors}</span>
-                                                <span className='date'>Disponible online desde el {article.day} de {article.month} de {article.year}</span>
+                                                <span className='date'>Disponible en línea desde el {article.day} de {article.month} de {article.year}</span>
                                             </div>
 
                                         )

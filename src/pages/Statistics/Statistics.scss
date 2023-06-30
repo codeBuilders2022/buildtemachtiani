@@ -18,6 +18,10 @@
         }
     }
 
+    strong {
+        margin-bottom: 10px;
+    }
+
     .StatisticsC {
         @media (max-width: 768px) {
             display: flex;
@@ -27,7 +31,7 @@
         width: 100%;
         display: grid;
         gap: 100px;
-        grid-template-columns: 45% 35%;
+        grid-template-columns: 56% 35%;
 
 
         .viewData {
@@ -41,6 +45,156 @@
             .p-chart {
                 height: 100%;
             }
+        }
+
+        .right {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+
+        }
+
+        .times {
+            display: flex;
+            flex-direction: column;
+
+            .cTimes {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+
+                .weeks {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    border-left: 1px solid rgb(107 114 128);
+                    padding-left: 10px;
+
+                    @media (max-width: 480px) {
+                        justify-content: center;
+                        width: 150px;
+                    }
+
+                    color: rgb(107 114 128);
+
+                    span {
+                        @media (max-width: 480px) {
+                            font-size: 24px;
+                        }
+
+                        margin: 0;
+                        font-size: 24px;
+                        font-weight: 700;
+
+                    }
+
+                    p {
+                        letter-spacing: 1.5px;
+                        color: rgb(59, 61, 65)
+                    }
+                }
+            }
+        }
+
+        .list {
+            display: flex;
+            flex-direction: column;
+
+            hr {
+                background-color: rgb(107, 114, 128);
+                height: 3px;
+                border-radius: 10px;
+            }
+
+            .bg-par {
+                background-color: rgb(187, 198, 211);
+            }
+
+            .elementList {
+                @media (max-width: 480px) {
+                    grid-template-columns: 5% 70% 18%;
+                }
+
+                display: grid;
+                grid-template-columns: 5% 80% 10%;
+                font-size: 14px;
+                gap: 10px;
+                align-items: center;
+                padding: 10px 0;
+                cursor: pointer;
+
+                &:hover {
+                    transform: scale(1.02);
+                    transition: transform 0.2s linear;
+                }
+
+                .titleDownload {
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;
+                    overflow: hidden;
+                }
+
+                span {
+                    text-align: justify;
+                }
+
+                p {
+                    text-align: center;
+                }
+            }
+
+        }
+
+        .downloadMain {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .statistics {
+            @media (max-width: 767px) {
+                gap: 40px 10px;
+                margin-top: 0px;
+            }
+
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            background-color: rgb(187 198 211);
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-top: 10px;
+
+            .metric {
+                @media (max-width: 480px) {
+                    justify-content: center;
+                    width: 150px;
+                }
+
+                display: flex;
+                flex-direction: column;
+                color: rgb(59, 61, 65);
+                align-items: center;
+
+                p {
+                    @media (max-width: 480px) {
+                        font-size: 40px;
+                    }
+
+                    margin: 0;
+                    font-size: 40px;
+                    font-weight: 700;
+
+                }
+
+                span {
+                    letter-spacing: 1.5px;
+                }
+            }
+
+
         }
     }
 }

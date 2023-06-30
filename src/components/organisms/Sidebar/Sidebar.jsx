@@ -172,15 +172,18 @@ const Sidebar = () => {
                 </div>
                 <div className="dataRead">
                     <div className="title">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#706a81" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-                            <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-                            <path d="M3 6l0 13" />
-                            <path d="M12 6l0 13" />
-                            <path d="M21 6l0 13" />
-                        </svg>
-                        <strong>Datos de lectores</strong>
+                        <div className='left'>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#706a81" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+                                <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+                                <path d="M3 6l0 13" />
+                                <path d="M12 6l0 13" />
+                                <path d="M21 6l0 13" />
+                            </svg>
+                            <strong>Datos de lectores</strong>
+                        </div>
+                        {/* <Link to='/statistics'>Ver estadísticas</Link> */}
                     </div>
                     <a href="https://www.revolvermaps.com/livestats/5ba5baxjzkm/" target="_blank"><img src="//rf.revolvermaps.com/h/m/a/0/ff0000/128/0/5ba5baxjzkm.png" alt="Map" /></a>
                 </div>
