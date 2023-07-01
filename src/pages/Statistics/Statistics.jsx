@@ -103,7 +103,6 @@ const Statistics = () => {
         const interval2 = setInterval(() => {
             setNumberArticles((prevContador) => {
                 const newContador = prevContador + 1;
-                console.log(data, 'data')
                 if (newContador === 33) {
                     clearInterval(interval2);
                 }
