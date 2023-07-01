@@ -59,6 +59,12 @@
 
                 display: flex;
                 gap: 20px;
+                
+                .inside_cover{
+                    display: flex;
+                    gap: 20px;
+
+                }
 
                 p {
                     font-size: 16px;
@@ -348,6 +354,14 @@
                             padding: 40px 12px 12px;
                         }
 
+                        .title_ar785{
+                            margin-bottom: 15px;
+
+                            @media (max-width: 768px) {
+                                margin-bottom: 5px;
+                            }
+                        }
+
                         .article {
                             display: flex;
                             flex-direction: column;
@@ -355,6 +369,11 @@
                             gap: 5px;
                             border-bottom: 1px solid rgb(140, 132, 160);
                             margin-bottom: 20px;
+                            padding-bottom: 15px;
+
+                            @media (max-width: 768px) {
+                                padding-bottom: 5px;
+                            }
 
                             button {
                                 text-align: left;
@@ -412,8 +431,8 @@
                         transform: scale(1);
 
                         .cnt_image {
-                            width: 150px;
-                            height: 174px;
+                            width: 195px;
+                            height: 220px;
                             border-radius: 10px;
 
                             .i_mage_ {

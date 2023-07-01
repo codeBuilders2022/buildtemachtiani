@@ -17,7 +17,7 @@ import Sidebar from "../../components/organisms/Sidebar/Sidebar"
 //react
 import { useStateContext } from "../../contexts/ContextProvider";
 import { useState } from "react"
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { IncorrectModal } from "../../components/molecules/modals/Modals";
@@ -75,12 +75,12 @@ const Home = () => {
                 e['day'] = Number(e.publishedAt.substring(8, 10))
                 issue.push(e)
             })
-            // setDataArt(issue)
-            // setData_list(issue)
+            setDataArt(issue)
+            setData_list(issue)
 
             //procesamiento de los datos de resNumber
             const allArticles_ = resNumber.data.map(({ id, attributes: { dataNumber: { name, resume }, img: { data: { attributes: { url } } }, pdf: { data: { attributes: { url: urlPdf } } }, publishedAt } }) => ({
-                id,
+                id: Encrypt(id),
                 name,
                 resume,
                 url: process.env.REACT_APP_API_URL + urlPdf,
@@ -101,8 +101,8 @@ const Home = () => {
                 });
 
                 const newArticles = allArticles_.filter((_, number) => number !== indexx);
-                // setCurrentJornal([allArticles_[indexx]]);
-                // setAllArticles(newArticles);
+                setCurrentJornal([allArticles_[indexx]]);
+                setAllArticles(newArticles);
                 
             }
         } catch (error) {
@@ -219,13 +219,14 @@ const Home = () => {
             </div>
             <div className="dark:bg-gray-600 dark:text-white bg-white Journal">
                 <div className='container'>
-                    {/* <div className="dark:bg-gray-500 bg-slate-100 flex w-full"> */}
                     <div className='cover'>
                         {currentJornal?.map((_, idx) => (
-                            <div key={idx}>
+                            <div key={idx} className="inside_cover">
                                 <div className="col_left">
                                     <div className="cnt_img__">
-                                        <img src={_.image} alt="" className="i_mage" />
+                                        <Link to={`/previous-issues/${_.id}`}>
+                                            <img src={_.image} alt="" className="i_mage" />
+                                        </Link>
                                     </div>
                                 </div>
                                 <div className="cnt_rigth">
@@ -284,18 +285,18 @@ const Home = () => {
                     </div>
                     {/* </div> */}
                     <div className='articles_container' id="articles_456s">
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-news" width="40" height="40" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#706a81" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1 -4 0v-13a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v12a3 3 0 0 0 3 3h11" />
-                                <line x1="8" y1="8" x2="12" y2="8" />
-                                <line x1="8" y1="12" x2="12" y2="12" />
-                                <line x1="8" y1="16" x2="12" y2="16" />
-                            </svg>
-                            <h1 style={{ color: currentColor }}>Artículos:</h1>
-                        </div>
                         <div className="articles">
                             <div className="bg-slate-100 dark:bg-gray-500 card_articule">
+                                <div style={{ display: 'flex', alignItems: 'center' }} className="title_ar785">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-news" width="40" height="40" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#706a81" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1 -4 0v-13a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v12a3 3 0 0 0 3 3h11" />
+                                        <line x1="8" y1="8" x2="12" y2="8" />
+                                        <line x1="8" y1="12" x2="12" y2="12" />
+                                        <line x1="8" y1="16" x2="12" y2="16" />
+                                    </svg>
+                                    <h1 style={{ color: currentColor }}>Artículos:</h1>
+                                </div>
                                 {!articles ?
                                     dataArt.map((article, index) => {
                                         return (
@@ -354,14 +355,18 @@ const Home = () => {
                                                 ) : (
                                                     allArticles.map((vol, index) => {
                                                         return (
-                                                            <div className="cardVol" key={index}>
-                                                                <div className="cnt_image">
-                                                                    <img src={vol.image} className="i_mage_" />
+
+                                                            <NavLink key={index} to={`/previous-issues/${vol.id}`}>
+                                                                <div className="cardVol" key={index}>
+                                                                    <div className="cnt_image">
+                                                                        <img src={vol.image} className="i_mage_" />
+                                                                    </div>
+                                                                    <p className="dark:text-white p">{vol.month}{" "}{vol.year}</p>
+                                                                    <p className="dark:text-red-800 title">{vol.name}</p>
+                                                                    {/* <p className="p">Páginas: {vol.pag}</p> */}
                                                                 </div>
-                                                                <p className="dark:text-white p">{vol.month}{" "}{vol.year}</p>
-                                                                <p className="dark:text-red-800 title">{vol.name}</p>
-                                                                {/* <p className="p">Páginas: {vol.pag}</p> */}
-                                                            </div>
+
+                                                            </NavLink>
                                                         )
                                                     })
                                                 )}
