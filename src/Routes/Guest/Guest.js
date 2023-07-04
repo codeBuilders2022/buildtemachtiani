@@ -13,6 +13,8 @@ import LogRoutes from "./LogRoutes/LogRoutes";
 import Navbarr from "../../components/molecules/Navbarr/Navbarr";
 import AuthRoutes from "./AuthRoutes/AuthRoutes";
 import Legals from "./Legals/Legals";
+import Cookies from "../../components/organisms/Cookies/Cookies";
+import { useState } from "react";
 
 const Guest = () => {
   const {
@@ -23,18 +25,30 @@ const Guest = () => {
     currentMode,
     setCurrentColor,
     setCurrentMode,
+    viewCookies, 
+    setViewCookies
   } = useStateContext();
 
 
   useEffect(() => {
     const currentThemeColor = localStorage.getItem("colorMode");
     const currentThemeMode = localStorage.getItem("themeMode");
-
+    
     if (currentThemeColor && currentThemeMode) {
       setCurrentColor(currentThemeColor);
       setCurrentMode(currentThemeMode);
     }
 
+  }, []);
+
+  useEffect(() => {
+    const isScrollEnabled = localStorage.getItem('cookies');
+
+    if (isScrollEnabled === 'true') {
+      document.body.style.overflow = 'auto';
+    } else {
+      document.body.style.overflow = 'hidden';
+    }
   }, []);
 
   return (
@@ -60,12 +74,15 @@ const Guest = () => {
             {/* <Navbar /> */}
             <Navbarr />
             <>
-              {themeSettings && <ThemeSettings />}
+              {themeSettings && <ThemeSettings />}    
 
               <App />
               <LogRoutes />
               <Legals />
               <AuthRoutes />
+              {!viewCookies &&
+                <Cookies />
+              }
             </>
             <Footer />
           </div>

@@ -33,7 +33,7 @@ const Home = () => {
     const [currentJornal, setCurrentJornal] = useState([])
     const { setIdArticle } = useStateContext()
     const [articles, setArticles] = useState(false)
-    const { currentColor, currentMode, search_ } = useStateContext();
+    const { currentColor, currentMode, search_, setViewPageCookies } = useStateContext();
     const [dataArt, setDataArt] = useState([])
     const [data_list, setData_list] = useState([])
     const [viewMessage, setViewMessage] = useState(false)
@@ -199,6 +199,7 @@ const Home = () => {
 
     useEffect(() => {
         const isMessageClosed = localStorage.getItem("mens-ge");
+        setViewPageCookies(false)
 
         if (isMessageClosed === null) {
             setViewMessage(true);
@@ -209,6 +210,7 @@ const Home = () => {
         localStorage.setItem("mens-ge", "true");
         setViewMessage(false);
     };
+
 
 
 

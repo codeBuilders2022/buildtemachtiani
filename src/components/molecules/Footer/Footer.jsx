@@ -20,7 +20,7 @@ const Footer = () => {
     {
       id: 2,
       text: "Avisos Legales",
-      url: "#"
+      url: "/legal-notices"
     },
     {
       id: 3,
