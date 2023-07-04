@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import LogRoutes from "./LogRoutes/LogRoutes";
 import Navbarr from "../../components/molecules/Navbarr/Navbarr";
 import AuthRoutes from "./AuthRoutes/AuthRoutes";
+import Legals from "./Legals/Legals";
 
 const Guest = () => {
   const {
@@ -63,6 +64,7 @@ const Guest = () => {
 
               <App />
               <LogRoutes />
+              <Legals />
               <AuthRoutes />
             </>
             <Footer />

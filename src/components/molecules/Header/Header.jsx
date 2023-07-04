@@ -13,7 +13,7 @@ const Header = ({ category, title, button, onClick, skeleton, url = '#', style }
             <div className={`mb-10 p-3 ${button ? "headerflex" : ""}`}>
               <div>
                 <h2 className="text-4xl lowercase first-letter:capitalize dark:text-gray-400">{category}</h2>
-                <h1 className="centerText text-2xl font-extrabold tracking-tight dark:text-white text-black">
+                <h1 className="text-2xl font-extrabold tracking-tight dark:text-white text-black">
                   {title}
                 </h1>   
               </div>
