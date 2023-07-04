@@ -371,7 +371,7 @@ const Home = () => {
                                                     })
                                                 )}
                                             </div>
-                                            {allArticles.length > 0 &&
+                                            {allArticles.length > 3 &&
                                                 <div className="seeArticles">
                                                     <button style={{ background: currentColor }}>Ver más</button>
                                                 </div>
@@ -400,7 +400,7 @@ const Home = () => {
                                                 </div>
                                             </div>
                                             <div className="preVol">
-                                                {special.length < 1 ? (
+                                                {special.length < 4 ? (
                                                     <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>Aún no hay números especiales que mostrar</div>
                                                 ) : (
                                                     special.map((vol, index) => {
