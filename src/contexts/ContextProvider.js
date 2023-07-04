@@ -10,6 +10,11 @@ export const ContextProvider = ({ children }) => {
   const [themeSettings, setThemeSettings] = useState(false);
   const [activeMenuRevistas, setActiveMenuRevistas] = useState(false);
   const [openNavbar, setOpenNavbar] = useState(false)
+
+
+  const [viewPageCookies, setViewPageCookies] = useState(false)
+  const [viewCookies, setViewCookies] = useState(localStorage.getItem("cookies"))
+
   const [openNavbar1, setOpenNavbar1] = useState(false)
   const id = String(window.location.pathname)
   const [search_, setSearch_] = useState("")
@@ -60,6 +65,10 @@ export const ContextProvider = ({ children }) => {
         setOpenNavbar1,
         search_,
         setSearch_,
+        viewPageCookies,
+        setViewPageCookies,
+        viewCookies, 
+        setViewCookies,
       }}
     >
       {children}

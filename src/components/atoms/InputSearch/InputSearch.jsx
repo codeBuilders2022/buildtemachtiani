@@ -18,10 +18,11 @@ const InputSearch = ({
   onBlur,
   onChange,
   onKeyDown,
+  idDiv
 }) => {
   return !skeleton ? (             
     <>
-      <div className={`InputSearch ${className}`}>
+      <div className={`InputSearch ${className}`} id={idDiv}>
         <input
           id={id}
           value={value}

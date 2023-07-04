@@ -52,7 +52,7 @@ const FAQ = () => {
     <Cards className='FAQ dark:bg-gray-600 bg-white'>
         <Back className={"_backlk_"} url={"/"}/>
         <Header category={"Preguntas"} title={"frecuentes"}/>
-        <div className='bg-slate-100 dark:bg-gray-500 inside_faq'>
+        <div className='bg-slate-100 dark:bg-gray-500 text-black dark:text-white inside_faq'>
             {faq?.map((_, idx) => {
                 const backgroundColor = isColor1 ? color1 : color2;
                 isColor1 = !isColor1;
