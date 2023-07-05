@@ -33,7 +33,8 @@ const navigate = useNavigate()
         }
     },[inputList])
 
-    const validationFunction = async () => {
+    const validationFunction = async (e) => {
+        e.preventDefault();
         if (!SubmitValidation(inputList, setInputList)) {
           return;
         }
@@ -82,25 +83,27 @@ const navigate = useNavigate()
         <>
             <div className="Login">
                 <Back className={"back"} url={"/"}></Back>
-                <LoginCard title={"Inicio de sesión"} subTitle="Ingresar aquí">
-                    <div className="inputs-container">
-                        <Input title="Usuario" placeholder={"Usuario"} id="identifier" onChange={(e)=>{UpdateValue(e,"identifier",inputList,setInputList)}}></Input>
-                        <InputPassword title={"Contraseña"} placeholder={"Contraseña"} id="password" onChange={(e)=>{UpdateValue(e,"password",inputList,setInputList)}}></InputPassword>
-                    </div>
-                    <NavLink to={"/recover-account"}>
-                        <div className="rememberPassword">Olvidé mi contraseña</div>
-                    </NavLink>
-                    {loading ? (
-                        <div style={{width: "100%", display: "flex", justifyContent: "center"}}>
-                            <AnimationLoading />
+                <form onSubmit={validationFunction} className="form_class">
+                    <LoginCard title={"Inicio de sesión"} subTitle="Ingresar aquí">
+                        <div className="inputs-container">
+                            <Input title="Usuario" placeholder={"Usuario"} id="identifier" onChange={(e)=>{UpdateValue(e,"identifier",inputList,setInputList)}}></Input>
+                            <InputPassword title={"Contraseña"} placeholder={"Contraseña"} id="password" onChange={(e)=>{UpdateValue(e,"password",inputList,setInputList)}}></InputPassword>
                         </div>
-                    ):(     
-                        <Button className={"btn_primary"} title="Iniciar sesión" onClick={()=>{validationFunction()}}></Button>
-                    )}
-                    <NavLink to={"/log"}>
-                        <div className="register">Aun no tengo una cuenta</div>
-                    </NavLink>
-                </LoginCard>
+                        <NavLink to={"/recover-account"}>
+                            <div className="rememberPassword">Olvidé mi contraseña</div>
+                        </NavLink>
+                        {loading ? (
+                            <div style={{width: "100%", display: "flex", justifyContent: "center"}}>
+                                <AnimationLoading />
+                            </div>
+                        ):(     
+                            <Button type={"submit"} className={"btn_primary"} title="Iniciar sesión"></Button>
+                        )}
+                        <NavLink to={"/log"}>
+                            <div className="register">Aun no tengo una cuenta</div>
+                        </NavLink>
+                    </LoginCard>
+                </form>
             </div>
         </>
     )

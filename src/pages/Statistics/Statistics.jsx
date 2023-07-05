@@ -130,54 +130,54 @@ const Statistics = () => {
         getDatas()
     }, []);
 
-    // useEffect(() => {
-    //     if (datas.data?.length) {
-    //         const interval = setInterval(() => {
-    //             setArticlesOriginals((prevContador) => {
-    //                 const newContador = prevContador + 1;
-    //                 if (newContador === originals) {
-    //                     clearInterval(interval);
-    //                 }
-    //                 return newContador;
-    //             });
-    //         }, Number((datas.data?.length * time) / (originals)));
-    //         const interval2 = setInterval(() => {
-    //             setNumberArticles((prevContador) => {
-    //                 const newContador = prevContador + 1;
-    //                 if (newContador === datas.data?.length) {
-    //                     clearInterval(interval2);
-    //                 }
-    //                 return newContador;
-    //             });
-    //         }, time);
-    //         const interval3 = setInterval(() => {
-    //             setDownloads((prevContador) => {
-    //                 const newContador = prevContador + 1;
-    //                 if (newContador === dataDownloads.length) {
-    //                     clearInterval(interval3);
-    //                 }
-    //                 return newContador;
-    //             });
-    //         }, Number((datas.data?.length * time) / (1)));
-    //         const interval4 = setInterval(() => {
-    //             setCites((prevContador) => {
-    //                 const newContador = prevContador + 1;
-    //                 if (newContador === 16) {
-    //                     clearInterval(interval4);
-    //                 }
-    //                 return newContador;
-    //             });
-    //         }, Number((datas.data?.length * time) / (1)));
+    useEffect(() => {
+        if (datas.data?.length) {
+            const interval = setInterval(() => {
+                setArticlesOriginals((prevContador) => {
+                    const newContador = prevContador + 1;
+                    if (newContador === originals) {
+                        clearInterval(interval);
+                    }
+                    return newContador;
+                });
+            }, Number((datas.data?.length * time) / (originals)));
+            const interval2 = setInterval(() => {
+                setNumberArticles((prevContador) => {
+                    const newContador = prevContador + 1;
+                    if (newContador === datas.data?.length) {
+                        clearInterval(interval2);
+                    }
+                    return newContador;
+                });
+            }, time);
+            const interval3 = setInterval(() => {
+                setDownloads((prevContador) => {
+                    const newContador = prevContador + 1;
+                    if (newContador === dataDownloads.length) {
+                        clearInterval(interval3);
+                    }
+                    return newContador;
+                });
+            }, Number((datas.data?.length * time) / (1)));
+            const interval4 = setInterval(() => {
+                setCites((prevContador) => {
+                    const newContador = prevContador + 1;
+                    if (newContador === 16) {
+                        clearInterval(interval4);
+                    }
+                    return newContador;
+                });
+            }, Number((datas.data?.length * time) / (1)));
 
-    //         return () => {
-    //             clearInterval(interval);
-    //             clearInterval(interval2);
-    //             clearInterval(interval3);
-    //             clearInterval(interval4);
-    //         };
+            return () => {
+                clearInterval(interval);
+                clearInterval(interval2);
+                clearInterval(interval3);
+                clearInterval(interval4);
+            };
 
-    //     }
-    // }, [datas]);
+        }
+    }, [datas]);
 
     useEffect(() => {
         window.scrollTo(0, 0); // Hace scroll al principio de la página

@@ -17,18 +17,19 @@ const Navbarr = () => {
   const header_location = useLocation()
   const storedUserDatas = localStorage.getItem('userDatasW');
   const [userDatas, setUserDatas] = useState([JSON.parse(storedUserDatas)])
+  const [username, setUsername] = useState("")
   const profileRef = useRef();
   const [hasnNot, setHasnNot] = useState(false)
   const [showMyProfile, setShowMyProfile] = useState(false)
-  const hiddenInput = header_location.pathname.startsWith("/user")
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado de inicio de sesión
   const navigate = useNavigate()
+  const hiddenInput = header_location.pathname.startsWith("/user")
   const log_ = header_location.pathname.startsWith("/log")
   const login_ = header_location.pathname.startsWith("/login")
   const recover_account = header_location.pathname.startsWith("/recover-account")
   const verification_code = header_location.pathname.startsWith("/verification-code")
   const new_password = header_location.pathname.startsWith("/new-password")
-  const [username, setUsername] = useState("")
+  const location_cookies = header_location.pathname.startsWith("/about-cookies")
   
   
   useEffect(() => {
@@ -49,6 +50,18 @@ const Navbarr = () => {
       setIsLoggedIn(true);
     }
   }, []);
+
+  useEffect(() => {
+    if(location_cookies){
+      document.getElementById("inpput-hl4").style.display = "none"
+      document.body.style.overflow = 'visible';
+    }
+    else{
+      document.getElementById("inpput-hl4").style.display = "flex"
+      document.body.style.overflow = 'hidden';
+    }
+  }, [location_cookies])
+  
   
   const {idUser} = useParams()
   const [idUserLocal,setIdUserLocal] = useState()
@@ -62,7 +75,7 @@ const Navbarr = () => {
   const routes = [
     { id: 1, text: "Inicio", url: "/" },
     { id: 8, text: "Mi perfil", url: `/user/dashboard/${idUserLocal}` },
-    { id: 2, text: "Inicia sesión", url: "/login" },
+    { id: 2, text: "Iniciar sesión", url: "/login" },
     { id: 3, text: "Registrarse", url: "/log" },
     { id: 4, text: "Guia para autores", url: "/guide-authors" },
     { id: 5, text: "Acerca de", url: "/about" },
@@ -125,7 +138,7 @@ const Navbarr = () => {
               </NavLink>
             </li>
             {!hiddenInput &&
-                <InputSearch placeholder={"Buscar... ejemplo: Autor, titulo, doi"} className={"searchNavbar"} id={"search199"} onChange={(e) => setSearch_(e.target.value)}/>
+                <InputSearch  idDiv={"inpput-hl4"} placeholder={"Buscar... ejemplo: Autor, titulo, doi"} className={"searchNavbar"} id={"search199"} onChange={(e) => setSearch_(e.target.value)}/>
             }
             {isLoggedIn ? (
               <section className='profile_a'>
@@ -164,7 +177,7 @@ const Navbarr = () => {
                     className="navlinks_s dark:text-white"
                     // style={activeLinks}
                   >
-                    <span>Inicia sesión</span>
+                    <span>Iniciar sesión</span>
                   </NavLink>
                 </li>
                 <li>
@@ -216,7 +229,7 @@ const Navbarr = () => {
               <nav className="mt-6">
                 <ul className="my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
                 {routes.map((route, idx) => {
-                    if (route.text === "Inicia sesión" || route.text === "Registrarse") {
+                    if (route.text === "Iniciar sesión" || route.text === "Registrarse") {
                       if (isLoggedIn) {
                         return null;
                       } else {

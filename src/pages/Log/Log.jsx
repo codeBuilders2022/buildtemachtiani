@@ -207,8 +207,10 @@ const axiosCountries = async () => {
                 <Button title={"Siguiente"} className={"btn_primary"} onClick={() => handleStepTwo()} />
               </div>
             </div>
+
             {!steps.step_two && <div className="dark:bg-half-transparent-black bg-half-transparent-white layer_blur"></div>}
-          </div>
+         
+         </div>
           <div className="tamanio_cards three_card">
             <div className="inside_three">
               <h1>Tipo de cuenta</h1>

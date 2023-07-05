@@ -1,0 +1,53 @@
+.AboutCookies{
+    margin: 40px;
+    margin-top: 195px;
+    padding: 40px;
+    border-radius: 24px;
+    min-height: 100vh;
+    position: relative;
+
+    @media (max-width: 768px) {
+        margin: 8px;
+        margin-top: 145px;
+        padding: 15px;
+    }
+
+
+    ._backlk_{
+        position: absolute;
+        left: 0px;
+        top: -68px;
+    }
+
+    .inside_AboutCookies{
+        padding: 40px;
+        border-radius: 12px;
+
+        @media (max-width: 768px) {
+            padding: 10px;
+        }
+
+        .blocks_cook{
+            margin-bottom: 30px;
+            h1{
+                font-size: 20px;
+            }
+            p{
+                font-size: 17px;
+                text-align: justify;
+            }
+
+            span{
+                font-size: 13px;
+                color: rgb(150, 150, 150);
+            }
+
+            &.mor_h1{
+                p{
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+}
+

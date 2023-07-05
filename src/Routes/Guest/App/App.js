@@ -13,6 +13,7 @@ import MagazinePoliciesSkeleton from "../../../pages/MagazinePolicies/MagazinePo
 import PreviousIssuesSkeleton from "../../../pages/Home/PreviousIssues/PreviousIssuesSkeleton";
 
 //Lazy
+const PreviousArticle =lazy(() => import("../../../pages/Home/PreviousIssues/PreviousArticle/PreviousArticle"));
 const PreviousIssues = lazy(() => import("../../../pages/Home/PreviousIssues/PreviousIssues"));
 const Metrics = lazy(() => import("../../../pages/Metrics/Metrics"));
 const Articles = lazy(() => import("../../../pages/Home/Articles/Articles"));
@@ -101,12 +102,18 @@ const App = () => {
         element={
           <Suspense fallback={<PreviousIssuesSkeleton />}>
             <PreviousIssues />
-            
           </Suspense>
         }
       />
-
-      {/* <Route path="*" element={<Page404 />} /> */}
+      <Route
+        exact
+        path="/previous-issues/:id/article/:ida"
+        element={
+          <Suspense fallback={<PreviousIssuesSkeleton />}>
+            <PreviousArticle />
+          </Suspense>
+        }
+      />
     </Routes>
   );
 };

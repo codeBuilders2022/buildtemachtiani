@@ -160,15 +160,12 @@ const CreateArticle = () => {
         inputListCopy.word.value = word;
         setInputList(inputListCopy)
     }, [word])
-    console.log(" inputListCopy.Notes.value", inputList.Notes.value)
-    console.log("inputListCopy.reference.value", inputList.reference.value)
     const submit = async () => {
         if (SubmitValidation(inputList, setInputList)) {
             if (SubmitValidationStaking(inputListstaking, setinputListstaking)) {
                 setLoading(true)
                 const res = await uploadArticle(inputList, inputListstaking, navigate, idUser)
                 if(res.status === 200){
-                    console.log("SubmitValidation(inputList, setInputList)",SubmitValidation(inputList, setInputList))
                     CorrectModal("Artículo enviado correctamente")
                     setTimeout(() => {
                         navigate(`/user/dashboard/${res.userId}`)

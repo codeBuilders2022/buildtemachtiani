@@ -1,0 +1,114 @@
+.Footer_r{
+    margin: 40px 0 0 0;
+    // margin-top: 96px;
+    padding: 40px 0 0 0;
+   
+
+    @media (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .inside_On_{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 1fr;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px; 
+
+        @media (max-width: 768px) {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .cnt_secct1_f{
+            // padding: 0 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            grid-area: 1 / 1 / 3 / 2;
+    
+            .ricet_logo{
+                width: 214px !important;
+                height: 76px !important;
+            }
+    
+        }
+    
+        .legals_ls{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            grid-area: 1 / 2 / 2 / 3;
+
+            @media (max-width: 768px) {
+                align-items: flex-start;
+                padding-left: 25px;
+            }
+    
+            .inside_ls{
+        
+                .list_options{
+                    padding-left: 20px;
+                    display: flex;
+                    flex-direction: column;
+        
+                    .secct-h3{
+                        font-size: 15px;
+                        margin-top: 10px;
+    
+                        &:hover{
+                            color: #2b4a6e;
+                        }
+                    }
+                }
+            }
+    
+        }
+    
+        .scct3{
+            grid-area: 1 / 3 / 2 / 4;
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+
+           .inside_s3{
+
+            .spna_lo{
+                padding-left: 15px;
+            }
+           }
+        }
+    }
+
+    .inside_tw_{
+        margin-top: 40px;
+        padding-right: 80px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        height: 70px;
+
+        @media (max-width: 768px) {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-right: unset;
+        }
+
+        .class_span{
+            margin-left: 5px;
+            
+        }
+    }
+
+    
+
+  
+}

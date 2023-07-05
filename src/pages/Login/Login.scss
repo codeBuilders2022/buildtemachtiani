@@ -9,6 +9,7 @@
     // background: #202A38;
     padding: 100px 15px 15px 15px;
     position: relative;
+
     .back
     {
         margin: 30px;   
@@ -20,6 +21,10 @@
             margin: 0 !important;
             left: 20px;
         }
+    }
+
+    .form_class{
+        width: 400px;
     }
     .inputs-container
     {
