@@ -1,142 +1,183 @@
 import { useState } from "react";
 import "./Statistics.scss"
 import { useEffect } from "react";
-import { getAxiosContriesView } from "../../Api/Metrics/Metrics";
+import { getAxiosCites, getAxiosContriesView, getAxiosDownloads } from "../../Api/Metrics/Metrics";
 import Sidebar from "../../components/organisms/Sidebar/Sidebar"
 import { Helmet } from 'react-helmet';
 import { IncorrectModal } from "../../components/molecules/modals/Modals";
 import { getAxiosHomeArticles } from "../../Api/Home/home";
-
 const Statistics = () => {
 
-    //chart
-    const [view, setView] = useState([])
     const [download, setDownload] = useState([])
     const [citesMain, setCitesMain] = useState([])
-    const [data, setData] = useState(0)
-
-
-
-    const month = [
-        "Ene",
-        "Feb",
-        "Mar",
-        "Abr",
-        "May",
-        "Jun",
-        "Jul",
-        "Ago",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dic"
-    ]
-
-    const getContries = async () => {
-        const res = await getAxiosContriesView('/api/countries')
-        setView(res.data.data)
-    }
-
-    useEffect(() => {
-        getContries()
-    }, [])
-
-    const downloadMain = [
-        { title: 'In in ligula sit amet quam pharetra imperdiet. Cras iaculis rutrum nibh, quis facilisis lectus dignissim at. Donec pellentesque viverra purus, a malesuada felis pulvinar ac.', number: 400 },
-        { title: ' Pharetra nec lacus. Ut efficitur et est vitae cursus. Ut dignissim placerat erat non mollis. Curabitur tempor est at nulla viverra dapibus. Cras rutrum purus nunc, a efficitur mi tempor ac. Donec iaculis tempor lobortis. Proin dui sapien, finibus in tincidunt ut, ornare vel neque.', number: 113 },
-        { title: 'In in ligula sit amet quam pharetra imperdiet. Cras iaculis rutrum nibh, quis facilisis lectus dignissim at. Donec pellentesque viverra purus, a malesuada felis pulvinar ac.', number: 43 },
-        { title: ' Pharetra nec lacus. Ut efficitur et est vitae cursus. Ut dignissim placerat erat non mollis. Curabitur tempor est at nulla viverra dapibus. Cras rutrum purus nunc, a efficitur mi tempor ac. Donec iaculis tempor lobortis. Proin dui sapien, finibus in tincidunt ut, ornare vel neque.', number: 17 },
-        { title: 'In in ligula sit amet quam pharetra imperdiet. Cras iaculis rutrum nibh, quis facilisis lectus dignissim at. Donec pellentesque viverra purus, a malesuada felis pulvinar ac.', number: 400 },
-        { title: ' Pharetra nec lacus. Ut efficitur et est vitae cursus. Ut dignissim placerat erat non mollis. Curabitur tempor est at nulla viverra dapibus. Cras rutrum purus nunc, a efficitur mi tempor ac. Donec iaculis tempor lobortis. Proin dui sapien, finibus in tincidunt ut, ornare vel neque.', number: 137 },
-        { title: 'In in ligula sit amet quam pharetra imperdiet. Cras iaculis rutrum nibh, quis facilisis lectus dignissim at. Donec pellentesque viverra purus, a malesuada felis pulvinar ac.', number: 43 },
-        { title: ' Pharetra nec lacus. Ut efficitur et est vitae cursus. Ut dignissim placerat erat non mollis. Curabitur tempor est at nulla viverra dapibus. Cras rutrum purus nunc, a efficitur mi tempor ac. Donec iaculis tempor lobortis. Proin dui sapien, finibus in tincidunt ut, ornare vel neque.', number: 711 },
-
-    ]
-
-    useEffect(() => {
-        const compareNumber = (a, b) => {
-            return b.number - a.number;
-        }
-
-        downloadMain.sort(compareNumber);
-        setDownload(downloadMain)
-        setCitesMain(downloadMain)
-    }, [])
-
-    // useEffect(() => {
-    //     getDatas()
-    // }, []);
-
-
-
-    // const getDatas = async () => {
-    //     try {
-    //         const resarticless = await Promise.all([
-    //             getAxiosHomeArticles("/api/current-issues"),
-    //         ]);
-    //         console.log(resarticless[0].data.length)
-           
-
-    //     } catch (error) {
-    //         console.log(error)
-    //         IncorrectModal("¡Algo salió mal, inténtalo más tarde!", true);
-    //     }
-    // };
-
+    const [datas, setDatas] = useState(0)
     const [time, setTime] = useState(50)
     const [articlesOriginals, setArticlesOriginals] = useState(0)
     const [numberArticles, setNumberArticles] = useState(0)
     const [downloads, setDownloads] = useState(0)
     const [cites, setCites] = useState(0)
+    const [originals, setOriginals] = useState(0)
+    const [dataDownloads, setDataDownloads] = useState(0)
+    const [checking, setChecking] = useState(0)
+    const [publichedTime, setPublichedTime] = useState(0)
+    const [percent, setPercent] = useState(0)
 
+
+
+
+
+    const [downloadMain, setDownloadMain] = useState([])
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            setArticlesOriginals((prevContador) => {
-                const newContador = prevContador + 1;
-                if (newContador === 10) {
-                    clearInterval(interval);
-                }
-                return newContador;
-            });
-        }, Number((28 * time) / (10)));
-        const interval2 = setInterval(() => {
-            setNumberArticles((prevContador) => {
-                const newContador = prevContador + 1;
-                console.log(data, 'data')
-                if (newContador === 33) {
-                    clearInterval(interval2);
-                }
-                return newContador;
-            });
-        }, time);
-        const interval3 = setInterval(() => {
-            setDownloads((prevContador) => {
-                const newContador = prevContador + 1;
-                if (newContador === 4) {
-                    clearInterval(interval3);
-                }
-                return newContador;
-            });
-        }, Number((28 * time) / (4)));
-        const interval4 = setInterval(() => {
-            setCites((prevContador) => {
-                const newContador = prevContador + 1;
-                if (newContador === 16) {
-                    clearInterval(interval4);
-                }
-                return newContador;
-            });
-        }, Number((28 * time) / (16)));
 
-        return () => {
-            clearInterval(interval);
-            clearInterval(interval2);
-            clearInterval(interval3);
-            clearInterval(interval4);
-        };
+        if (dataDownloads) {
+            console.log('Hola')
+            dataDownloads.map((element, index) => {
+                if (downloadMain.length == 0) {
+                    const newElement = {
+                        title: element.attributes.name, number: 1
+                    }
+                    setDownload([newElement])
+                    setDownloadMain([newElement])
+                }
+                if (downloadMain.length !== 0) {
+                    downloadMain.map((e, i) => {
+                        if (element.attributes.name == e.attributes.name) {
+                            const newArray = { ...downloadMain }
+                            const newElement = {
+                                title: element.attributes?.name, number: e.attributes.number + 1
+                            }
+                            console.log(newArray)
+                            newArray[i] = newElement
+                            setDownloadMain(newArray)
+                        }
+                    })
+                }
 
+            })
+            if (downloadMain.length >= 2) {
+                const compareNumber = (a, b) => {
+                    return b.number - a.number;
+                }
+
+                downloadMain.sort(compareNumber);
+                setDownload(downloadMain)
+                setCitesMain(downloadMain)
+            }
+        }
+
+    }, [downloadMain])
+
+    // useEffect(()=>{
+    //     console.log(dataDownloads, 'data')
+    // },[dataDownloads])
+
+    function CalculateWeeks(init, end) {
+        const oneWeek = 7 * 24 * 60 * 60 * 1000; // 7 días en milisegundos
+        // Obtener la diferencia en milisegundos entre las dos fechas
+        const difference = Math.abs(init - end);
+        // Calcular la cantidad de semanas redondeando hacia abajo
+        const weeks = Math.floor(difference / oneWeek);
+        return weeks;
+    }
+    function PublichedTime(init, end) {
+        const oneWeek = 7 * 24 * 60 * 60 * 1000; // 7 días en milisegundos
+        // Obtener la diferencia en milisegundos entre las dos fechas
+        const difference = Math.abs(init - end);
+        // Calcular la cantidad de semanas redondeando hacia abajo
+        const weeks = Math.floor(difference / oneWeek);
+        return weeks;
+    }
+
+
+    const getDatas = async () => {
+        let number = 0
+        let timeTotal = 0
+        let timePubliched = 0
+        try {
+            const resarticless = await getAxiosHomeArticles("/api/current-issues")
+            const responseDownloads = await getAxiosDownloads("/api/downloads")
+            const responseArticles = await getAxiosDownloads("/api/articles")
+            const totalArticles = responseArticles.data.data.length
+            setDataDownloads(responseDownloads.data.data)
+            setDatas(resarticless)
+            const totalValues = resarticless.data?.length
+            resarticless.data.map((prop, index) => {
+                if (prop.attributes.type == 'Artículo original') {
+                    number = number + 1
+                    setOriginals(number)
+                }
+                const init = new Date(`${prop.attributes.dateSend}`)
+                const accept = new Date(`${prop.attributes.dateAccept}`)
+                const publiched = new Date(`${prop.attributes.publishedAt}`)
+                const quantity = CalculateWeeks(init, accept)
+                const publichedFuction = PublichedTime(accept, publiched)
+                timeTotal = timeTotal + quantity
+                timePubliched = timePubliched + publichedFuction
+            })
+            setChecking(timeTotal / totalValues)
+            setPublichedTime(timePubliched / totalValues)
+            setPercent(100 * (totalValues / totalArticles))
+
+        } catch (error) {
+            console.log(error)
+            IncorrectModal("¡Algo salió mal, inténtalo más tarde!", true);
+        }
+
+    };
+
+    useEffect(() => {
+        getDatas()
     }, []);
+
+    // useEffect(() => {
+    //     if (datas.data?.length) {
+    //         const interval = setInterval(() => {
+    //             setArticlesOriginals((prevContador) => {
+    //                 const newContador = prevContador + 1;
+    //                 if (newContador === originals) {
+    //                     clearInterval(interval);
+    //                 }
+    //                 return newContador;
+    //             });
+    //         }, Number((datas.data?.length * time) / (originals)));
+    //         const interval2 = setInterval(() => {
+    //             setNumberArticles((prevContador) => {
+    //                 const newContador = prevContador + 1;
+    //                 if (newContador === datas.data?.length) {
+    //                     clearInterval(interval2);
+    //                 }
+    //                 return newContador;
+    //             });
+    //         }, time);
+    //         const interval3 = setInterval(() => {
+    //             setDownloads((prevContador) => {
+    //                 const newContador = prevContador + 1;
+    //                 if (newContador === dataDownloads.length) {
+    //                     clearInterval(interval3);
+    //                 }
+    //                 return newContador;
+    //             });
+    //         }, Number((datas.data?.length * time) / (1)));
+    //         const interval4 = setInterval(() => {
+    //             setCites((prevContador) => {
+    //                 const newContador = prevContador + 1;
+    //                 if (newContador === 16) {
+    //                     clearInterval(interval4);
+    //                 }
+    //                 return newContador;
+    //             });
+    //         }, Number((datas.data?.length * time) / (1)));
+
+    //         return () => {
+    //             clearInterval(interval);
+    //             clearInterval(interval2);
+    //             clearInterval(interval3);
+    //             clearInterval(interval4);
+    //         };
+
+    //     }
+    // }, [datas]);
 
     useEffect(() => {
         window.scrollTo(0, 0); // Hace scroll al principio de la página
@@ -182,15 +223,15 @@ const Statistics = () => {
                                     <strong>Tiempo de publicación:</strong>
                                     <div className="cTimes">
                                         <div className="weeks">
-                                            <span>4 semanas</span>
+                                            {checking > 0 ? <span>{checking}  semanas</span> : <span>Sin estimar aún</span>}
                                             <p>Tiempo de revisión</p>
                                         </div>
                                         <div className="weeks">
-                                            <span>8.9 semanas</span>
+                                            {publichedTime > 0 ? <span>{publichedTime}  semanas</span> : <span>Sin estimar aún</span>}
                                             <p>Tiempo de publicación</p>
                                         </div>
                                         <div className="weeks">
-                                            <span>55%</span>
+                                            <span>{Math.round(percent)}%</span>
                                             <p>Tasa de aceptación</p>
                                         </div>
                                     </div>
@@ -238,7 +279,7 @@ const Statistics = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         </>
     )
 }

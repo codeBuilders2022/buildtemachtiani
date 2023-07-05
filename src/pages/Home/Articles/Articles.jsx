@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Header } from "../../../components";
 import journal from "../../../assets/PDF/RICEDUT-ENERO-2021.pdf"
-
+import ReactGA from 'react-ga';
 import "./Articles.scss";
 
 //Assets
@@ -15,6 +15,7 @@ import { IncorrectModal } from "../../../components/molecules/modals/Modals";
 import { Decrypt } from "../../../utilities/Hooks";
 import { Link, useParams } from "react-router-dom";
 import Back from "../../../components/atoms/Back/Back";
+import { postAxiosDownloads } from "../../../Api/Metrics/Metrics";
 
 const Articles = () => {
   const { idArticle, setIdArticle } = useStateContext()
@@ -33,12 +34,13 @@ const Articles = () => {
   }, []);
 
 
+  const idArticles = Decrypt(id)
   const getDatas = async () => {
-    const idArticle = Decrypt(id)
+
     try {
       // Hacemos una llamada concurrente a la API utilizando Promise.all()
       const [resCommittees] = await Promise.all([
-        getAxiosHomeArticles(`/api/current-issues/${idArticle}?populate=*`)
+        getAxiosHomeArticles(`/api/current-issues/${idArticles}?populate=*`)
       ]);
       const data = resCommittees.data.attributes
       data['year'] = Number(data.publishedAt.substring(0, 4))
@@ -57,7 +59,21 @@ const Articles = () => {
     }
   };
 
+  const handleDescarga = async () => {
+    const formData = new FormData();
+    const dataObject = {
+      "index": idArticles,
+      "name": dataArt?.title,
+    };
+    formData.append("data", JSON.stringify(dataObject));
 
+    try {
+      const response = await postAxiosDownloads("/api/downloads", formData)
+    } catch (error) {
+      console.log(error)
+      IncorrectModal("No es posible guardar los datos", true)
+    }
+  };
 
   return (
     <div className="Articless dark:bg-gray-600 dark:text-white m-2 md:m-10 md:mt-32 mt-24 p-2 md:p-10 bg-white rounded-3xl flex">
@@ -127,7 +143,7 @@ const Articles = () => {
           </div>
           <div className="secct3_s">
             <div className="cnt_pdf" >
-              <a href={`${dataArt?.pdf.data[0].attributes.url}`} download>
+              <a href={`${dataArt?.pdf.data[0].attributes.url}`} download onClick={handleDescarga}>
                 <img src={Pdf_icon} alt="" className="img_pdf" />
               </a>
             </div>

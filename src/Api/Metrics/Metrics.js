@@ -47,4 +47,41 @@ export const getAxiosContriesView = async (url) => {
         return error;
     }
 };
+export const postAxiosDownloads = async (url, form) => {
+    try {
+        const server = process.env.REACT_APP_API_URL;
+        const response = await axios.post(`${server}${url}`, form);
+        return response;
+    } catch (error) {
+        IncorrectModal("Ocurrio algún error, intentelo más tarde", true);
+        throw error;
+    }
+};
+
+
+export const getAxiosDownloads = async (url) => {
+    const server = process.env.REACT_APP_API_URL;
+    try {
+        const response = await axios.get(`${server}${url}`);
+
+        return response;
+    } catch (error) {
+        IncorrectModal("Ocurrio algún error, intentelo más tarde", true);
+        return error;
+    }
+};
+export const getAxiosCites = async () => {
+    try {
+        const response = await axios.get('https://serpapi.com/search', {
+            params: {
+                api_key: 'a0d12b58c187049e7913b8ef696a3ad101238e69f8c2434a49d2792a1d863025', // Reemplaza con tu clave de API de SerpApi
+                q: 'Hola',
+            },
+        });
+        return response.data?.organic_results || [];
+    } catch (error) {
+        IncorrectModal("Ocurrio algún error, intentelo más tarde", true);
+        return error;
+    }
+};
 

@@ -16,11 +16,13 @@ import "./index.css";
 // import Auth from "./Routes/Auth/Auth";
 import axios from "axios";
 
-const urlApi = process.env.REACT_APP_API_URL 
+
+
+const urlApi = process.env.REACT_APP_API_URL
 export default function RootRoute() {
   return (
     <main>
-          <Guest />
+      <Guest />
     </main>
   );
 }
