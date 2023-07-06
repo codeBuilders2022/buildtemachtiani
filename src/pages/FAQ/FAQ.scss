@@ -37,6 +37,18 @@
                 background: transparent;
             }
 
+            .p-accordion .p-accordion-header:not(.p-highlight):not(.p-disabled):hover .p-accordion-header-link {
+                color: rgb(129, 129, 129);
+            }
+
+            .p-accordion .p-accordion-header .p-accordion-header-link {
+                color: unset;
+            }
+
+            .p-accordion .p-accordion-content {
+                color: unset;
+            }
+
             .ext_acc{
                 width: 100%;
 

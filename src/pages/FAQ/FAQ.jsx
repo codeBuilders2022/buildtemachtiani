@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from 'react'
 
-import "./FAQ.scss"
-
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import { useStateContext } from '../../contexts/ContextProvider'
 import Cards from '../../components/atoms/Cards/Cards'
 import { Header } from '../../components'
-
-//Assets
-import ArrowDown from '../../assets/images/left-arrow.png'
 import Back from '../../components/atoms/Back/Back';
+import { getAxiosData } from '../../Api/Committee/Committee';
 
-const FAQ = () => {
+import "./Faq.scss"
 
+const Faq = () => {
     const { currentMode } = useStateContext()
-
+    const [loadingData, setLoadingData] = useState(false)
     const [color1, setColor1] = useState('#f1f5f9');
     const [color2, setColor2] = useState('#ffffff');
+    const [faqq, setFaqq] = useState()
 
     useEffect(() => {
         if (currentMode === 'Dark') {
@@ -30,30 +28,35 @@ const FAQ = () => {
     
     let isColor1 = true;
 
-    const faq = [
-        {
-            id: 1,
-            question: "¿Como publicar en la revista RICET?",
-            answer: "Respuesta 1"
-        },
-        {
-            id: 2,
-            question: "¿Como publicar en la revista RICET?",
-            answer: "Respuesta 2"
-        },
-        {
-            id: 3,
-            question: "¿Como publicar en la revista RICET?",
-            answer: "Respuesta 3"
-        },
-    ]
+    useEffect(() => {
+      getFaq()
+    }, [])
+
+    const getFaq = async () => {
+        try {
+            const response = await getAxiosData("/api/faqs")
+            if(response && response.data){
+                const newArray = response.data.map(({id, attributes: { question, answer}}) => {
+                    return { id, question, answer }
+                })
+                setLoadingData(true)
+                setFaqq(newArray)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
   return (
     <Cards className='FAQ dark:bg-gray-600 bg-white'>
         <Back className={"_backlk_"} url={"/"}/>
         <Header category={"Preguntas"} title={"frecuentes"}/>
         <div className='bg-slate-100 dark:bg-gray-500 text-black dark:text-white inside_faq'>
-            {faq?.map((_, idx) => {
+           {!loadingData ? (
+                <p>Cargando preguntas...</p>
+           ):(
+
+            faqq?.map((_, idx) => {
                 const backgroundColor = isColor1 ? color1 : color2;
                 isColor1 = !isColor1;
                 return(
@@ -66,10 +69,11 @@ const FAQ = () => {
  
                     </div>
                 )
-            })}
+            })
+           )}
         </div>
     </Cards>
   )
 }
 
-export default FAQ
+export default Faq
