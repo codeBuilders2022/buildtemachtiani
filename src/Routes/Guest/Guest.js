@@ -52,6 +52,8 @@ const Guest = () => {
     }
   }, []);
 
+  console.log(currentMode, "modo")
+
   return (
     <div className={currentMode === "Dark" ? "dark" : ""}>
       <BrowserRouter>

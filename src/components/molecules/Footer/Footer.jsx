@@ -53,7 +53,9 @@ const Footer = () => {
           <div className="scct3">
             <div className="inside_s3 text-black dark:text-white">
                 <h3 className="dark:text-gray-200 text-gray-700">
-                    <NavLink className="secct-h3 text-black dark:text-white" to={"/contact"}><strong  style={{cursor:"pointer"}}>Contacto</strong></NavLink>
+                    <NavLink className="secct-h3l text-black dark:text-white" to={"/contact"} style={{background: currentColor}}>
+                      <strong>Contacto</strong>
+                    </NavLink>
                 </h3>
                 {/* <div className="spna_lo">
                     <a

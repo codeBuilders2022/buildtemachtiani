@@ -160,7 +160,7 @@ const Navbarr = () => {
                       <section className="card_inside dark:bg-gray-700 bg-slate-300" key={idx}>
                         <div className='first_secc'>
                           <section className="cnt_letter border-solid border-2 dark:border-white border-black dark:text-white text-black">
-                            {_.letter}
+                            {_?.letter}
                           </section>
                           <section className="cnt_dtas">
                             <p className='_naeme dark:text-black'>{_.name}</p>
