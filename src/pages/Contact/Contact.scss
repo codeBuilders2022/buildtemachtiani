@@ -1,0 +1,46 @@
+.Contact {
+    padding: 20px;
+    width: calc(100vw + -168px);
+
+    @media screen and (max-width:768px) {
+        width: calc(100vw + -32px);
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .sub-title {
+        font-size: 1.4rem;
+        margin: 20px 0;
+
+    }
+
+    .plane-text {
+        font-size: 1rem;
+    }
+
+    .containerContact {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .skeleton-widht {
+        width: 350px;
+
+        @media screen and (max-width:500px) {
+            width: 100%;
+
+        }
+    }
+    .skeleton-widht-300 {
+        width: 300px;
+
+        @media screen and (max-width:500px) {
+            width: 100%;
+
+        }
+    }
+}
