@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Switch  } from "react-router-dom";
 
 //Styles
 import "./App.scss";

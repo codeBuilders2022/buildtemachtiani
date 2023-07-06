@@ -64,7 +64,6 @@ const Guest = () => {
               className="text-3xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray"
             >
               <img src={Paleta_color} className="h-10 w-10"></img>
-              {/* <FiSettings /> */}
             </button>
           </div>
           <div
