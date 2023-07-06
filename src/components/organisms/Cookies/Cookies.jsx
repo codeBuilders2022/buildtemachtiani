@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import "./Cookies.scss"
 
 //Assets
-import Cookies_img from '../../../assets/images/check.png'
+import Cookies_img from '../../../assets/images/cookies.png'
 import { NavLink } from 'react-router-dom'
 
 //hooks
