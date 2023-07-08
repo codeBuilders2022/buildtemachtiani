@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useStateContext } from "../../../contexts/ContextProvider";
 //assets
 import RICET from '../../../assets/images/logo_70_black.png'
@@ -10,7 +10,7 @@ import "./Footer.scss"
 
 const Footer = () => {
   const { currentColor, currentMode } = useStateContext();
-
+  const navigate = useNavigate();
   const option = [
     {
       id: 1,
@@ -53,9 +53,11 @@ const Footer = () => {
           <div className="scct3">
             <div className="inside_s3 text-black dark:text-white">
                 <h3 className="dark:text-gray-200 text-gray-700">
-                    <strong>Contacto</strong>
+                    <NavLink className="secct-h3l" to={"/contact"} style={{background: currentColor}}>
+                      <strong>Contacto</strong>
+                    </NavLink>
                 </h3>
-                <div className="spna_lo">
+                {/* <div className="spna_lo">
                     <a
                         href="mailto:ricedut@gmail.com"
                         className="dark:text-sky-200 text-sky-900"
@@ -63,7 +65,7 @@ const Footer = () => {
                         educiencia@revistatemachtiani.net
                     </a>
                     <h1>San Lorenzo 381 Guadalajara, Jalisco - México</h1>
-                </div>
+                </div> */}
             </div>
                 
           </div>

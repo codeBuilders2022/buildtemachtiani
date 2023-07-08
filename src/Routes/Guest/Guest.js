@@ -15,6 +15,7 @@ import AuthRoutes from "./AuthRoutes/AuthRoutes";
 import Legals from "./Legals/Legals";
 import Cookies from "../../components/organisms/Cookies/Cookies";
 import { useState } from "react";
+import ContactRoutes from "./ContactRoutes/ContactRoutes";
 
 const Guest = () => {
   const {
@@ -51,6 +52,7 @@ const Guest = () => {
     }
   }, []);
 
+
   return (
     <div className={currentMode === "Dark" ? "dark" : ""}>
       <BrowserRouter>
@@ -63,7 +65,6 @@ const Guest = () => {
               className="text-3xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray"
             >
               <img src={Paleta_color} className="h-10 w-10"></img>
-              {/* <FiSettings /> */}
             </button>
           </div>
           <div
@@ -83,6 +84,7 @@ const Guest = () => {
               {!viewCookies &&
                 <Cookies />
               }
+              <ContactRoutes></ContactRoutes>
             </>
             <Footer />
           </div>

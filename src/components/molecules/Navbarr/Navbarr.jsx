@@ -23,6 +23,7 @@ const Navbarr = () => {
   const [showMyProfile, setShowMyProfile] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado de inicio de sesión
   const navigate = useNavigate()
+  
   const hiddenInput = header_location.pathname.startsWith("/user")
   const log_ = header_location.pathname.startsWith("/log")
   const login_ = header_location.pathname.startsWith("/login")
@@ -30,18 +31,21 @@ const Navbarr = () => {
   const verification_code = header_location.pathname.startsWith("/verification-code")
   const new_password = header_location.pathname.startsWith("/new-password")
   const location_cookies = header_location.pathname.startsWith("/about-cookies")
-  
+  const [statusLocation, setStatusLocation] = useState(null)
+  const inputHidden = header_location.pathname === "/"
   
   useEffect(() => {
+    // setStatusLocation(inputHidden)
     if(log_ || login_ || recover_account || verification_code || new_password){
       return setHasnNot(true)
     }
     return setHasnNot(false)
   }, [header_location.pathname])
-  
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem("userWeb")
+
     if(user){
       let firstLetter = user.charAt(0).toUpperCase();
       setUsername(firstLetter)
@@ -50,25 +54,26 @@ const Navbarr = () => {
       setIsLoggedIn(true);
     }
   }, []);
+  
 
   useEffect(() => {
-    if(location_cookies){
-      document.getElementById("inpput-hl4").style.display = "none"
-      document.body.style.overflow = 'visible';
+    const element = document.getElementById("inpput-hl4");
+    if (element) {
+      if (location_cookies) {
+        element.style.display = "none";
+        document.body.style.overflow = 'visible';
+      } else {
+        element.style.display = "flex";
+        document.body.style.overflow = 'hidden';
+      }
     }
-    else{
-      document.getElementById("inpput-hl4").style.display = "flex"
-      document.body.style.overflow = 'hidden';
-    }
-  }, [location_cookies])
+  }, [location_cookies]);
   
   
-  const {idUser} = useParams()
   const [idUserLocal,setIdUserLocal] = useState()
   const handleActiveNavbar = () => setOpenNavbar(!openNavbar);
   useEffect(()=>
   {
-
     setIdUserLocal(localStorage.getItem("ref"))
   },[])
 
@@ -116,9 +121,6 @@ const Navbarr = () => {
     setShowMyProfile((prevShowMyProfile) => !prevShowMyProfile);
   };
 
-   
-
-   
  
   return (
     <nav className='bg-bg-gray-primary dark:bg-bg-dark-secondary Navbarr_' id='nav_header1'>
@@ -137,8 +139,12 @@ const Navbarr = () => {
                 <span>Inicio</span>
               </NavLink>
             </li>
-            {!hiddenInput &&
-                <InputSearch  idDiv={"inpput-hl4"} placeholder={"Buscar... ejemplo: Autor, titulo, doi"} className={"searchNavbar"} id={"search199"} onChange={(e) => setSearch_(e.target.value)}/>
+            {inputHidden ? (
+              <InputSearch  idDiv={"inpput-hl4"} placeholder={"Buscar... ejemplo: Autor, titulo, doi"} className={"searchNavbar"} id={"search199"} onChange={(e) => setSearch_(e.target.value)}/>
+
+            ):(
+              <></>
+            )
             }
             {isLoggedIn ? (
               <section className='profile_a'>
@@ -154,7 +160,7 @@ const Navbarr = () => {
                       <section className="card_inside dark:bg-gray-700 bg-slate-300" key={idx}>
                         <div className='first_secc'>
                           <section className="cnt_letter border-solid border-2 dark:border-white border-black dark:text-white text-black">
-                            {_.letter}
+                            {_?.letter}
                           </section>
                           <section className="cnt_dtas">
                             <p className='_naeme dark:text-black'>{_.name}</p>
@@ -164,7 +170,6 @@ const Navbarr = () => {
                           <button onClick={() => handleLogOut()} className='class_buttm' style={{background: currentColor}}>Cerra sesión</button>
                         </section>
                     ))}
-                    {/* <button className="log_out" >Cerrar sesión</button> */}
                   </div>
                 }
               </section>
@@ -175,7 +180,6 @@ const Navbarr = () => {
                   <NavLink
                     to="/login"
                     className="navlinks_s dark:text-white"
-                    // style={activeLinks}
                   >
                     <span>Iniciar sesión</span>
                   </NavLink>
@@ -184,7 +188,6 @@ const Navbarr = () => {
                   <NavLink
                     to="/log"
                     className="navlinks_s dark:text-white"
-                    // style={activeLinks}
                   >
                     <span>Registrarse</span>
                   </NavLink>

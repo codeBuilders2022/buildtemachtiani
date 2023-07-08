@@ -59,6 +59,7 @@
                     flex-direction: column;
         
                     .secct-h3{
+                        border-radius: 10px;
                         font-size: 15px;
                         margin-top: 10px;
     
@@ -74,10 +75,26 @@
         .scct3{
             grid-area: 1 / 3 / 2 / 4;
            display: flex;
-           flex-direction: column;
            align-items: center;
+           justify-content: center;
 
            .inside_s3{
+               
+               .secct-h3l{
+                    width: 150px;
+                    height: 35px;
+                    letter-spacing: 3px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 10px;
+                    color: #fff;
+
+                    &:hover{
+                        background: #2b4a6e !important;
+                    }
+
+                }
 
             .spna_lo{
                 padding-left: 15px;
