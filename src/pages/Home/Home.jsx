@@ -115,9 +115,6 @@ const Home = () => {
         }
     };
 
-
-    console.log(currentJornal, "currenJornal")
-
     const data = {
         index: [
             "Journal Citation Reports and Science Citation Index Expanded",

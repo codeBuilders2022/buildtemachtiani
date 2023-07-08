@@ -31,7 +31,6 @@ const Statistics = () => {
     useEffect(() => {
 
         if (dataDownloads) {
-            console.log('Hola')
             dataDownloads.map((element, index) => {
                 if (downloadMain.length == 0) {
                     const newElement = {
@@ -47,7 +46,6 @@ const Statistics = () => {
                             const newElement = {
                                 title: element.attributes?.name, number: e.attributes.number + 1
                             }
-                            console.log(newArray)
                             newArray[i] = newElement
                             setDownloadMain(newArray)
                         }
