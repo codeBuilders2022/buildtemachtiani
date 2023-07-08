@@ -23,54 +23,56 @@ const Statistics = () => {
     const [percent, setPercent] = useState(0)
 
 
-
-
-
-    const [downloadMain, setDownloadMain] = useState([])
-
     useEffect(() => {
-
         if (dataDownloads) {
-            console.log('Hola')
+            const newArray = []
             dataDownloads.map((element, index) => {
-                if (downloadMain.length == 0) {
+                newArray.map((e, i) => {
+                    if (e.title == element.attributes.name) {
+                        newArray[i].number = newArray[i].number + 1
+                    }
+                    else {
+                        const newElement = {
+                            title: element.attributes.name, number: 1
+                        }
+                        newArray.push(newElement)
+                    }
+                })
+                if (newArray.length == 0) {
                     const newElement = {
                         title: element.attributes.name, number: 1
                     }
-                    setDownload([newElement])
-                    setDownloadMain([newElement])
+                    newArray.push(newElement)
                 }
-                if (downloadMain.length !== 0) {
-                    downloadMain.map((e, i) => {
-                        if (element.attributes.name == e.attributes.name) {
-                            const newArray = { ...downloadMain }
-                            const newElement = {
-                                title: element.attributes?.name, number: e.attributes.number + 1
-                            }
-                            console.log(newArray)
-                            newArray[i] = newElement
-                            setDownloadMain(newArray)
-                        }
-                    })
-                }
-
             })
-            if (downloadMain.length >= 2) {
+
+            if (newArray.length >= 2) {
                 const compareNumber = (a, b) => {
                     return b.number - a.number;
                 }
 
-                downloadMain.sort(compareNumber);
-                setDownload(downloadMain)
-                setCitesMain(downloadMain)
+                newArray.sort(compareNumber);
             }
+            setDownload(newArray)
+            setCitesMain(newArray)
         }
 
-    }, [downloadMain])
 
-    // useEffect(()=>{
-    //     console.log(dataDownloads, 'data')
-    // },[dataDownloads])
+    }, [dataDownloads])
+    const [arrayEnd, setArrayEnd] = useState([])
+    useEffect(() => {
+        let newArray = [download[0]]
+        download.map((e, index) => {
+            if (download[index + 1]) {
+                let newElement = newArray.filter((element, idx) => element?.title !== download[index + 1].title)
+                if (!newElement.length) {
+                    newArray.push(e)
+                }
+            }
+        })
+        setArrayEnd(newArray)
+
+    }, [download])
 
     function CalculateWeeks(init, end) {
         const oneWeek = 7 * 24 * 60 * 60 * 1000; // 7 días en milisegundos
@@ -130,54 +132,54 @@ const Statistics = () => {
         getDatas()
     }, []);
 
-    useEffect(() => {
-        if (datas.data?.length) {
-            const interval = setInterval(() => {
-                setArticlesOriginals((prevContador) => {
-                    const newContador = prevContador + 1;
-                    if (newContador === originals) {
-                        clearInterval(interval);
-                    }
-                    return newContador;
-                });
-            }, Number((datas.data?.length * time) / (originals)));
-            const interval2 = setInterval(() => {
-                setNumberArticles((prevContador) => {
-                    const newContador = prevContador + 1;
-                    if (newContador === datas.data?.length) {
-                        clearInterval(interval2);
-                    }
-                    return newContador;
-                });
-            }, time);
-            const interval3 = setInterval(() => {
-                setDownloads((prevContador) => {
-                    const newContador = prevContador + 1;
-                    if (newContador === dataDownloads.length) {
-                        clearInterval(interval3);
-                    }
-                    return newContador;
-                });
-            }, Number((datas.data?.length * time) / (1)));
-            const interval4 = setInterval(() => {
-                setCites((prevContador) => {
-                    const newContador = prevContador + 1;
-                    if (newContador === 16) {
-                        clearInterval(interval4);
-                    }
-                    return newContador;
-                });
-            }, Number((datas.data?.length * time) / (1)));
+    // useEffect(() => {
+    //     if (datas.data?.length) {
+    //         const interval = setInterval(() => {
+    //             setArticlesOriginals((prevContador) => {
+    //                 const newContador = prevContador + 1;
+    //                 if (newContador === originals) {
+    //                     clearInterval(interval);
+    //                 }
+    //                 return newContador;
+    //             });
+    //         }, Number((datas.data?.length * time) / (originals)));
+    //         const interval2 = setInterval(() => {
+    //             setNumberArticles((prevContador) => {
+    //                 const newContador = prevContador + 1;
+    //                 if (newContador === datas.data?.length) {
+    //                     clearInterval(interval2);
+    //                 }
+    //                 return newContador;
+    //             });
+    //         }, time);
+    //         const interval3 = setInterval(() => {
+    //             setDownloads((prevContador) => {
+    //                 const newContador = prevContador + 1;
+    //                 if (newContador === dataDownloads.length) {
+    //                     clearInterval(interval3);
+    //                 }
+    //                 return newContador;
+    //             });
+    //         }, Number((datas.data?.length * time) / (1)));
+    //         const interval4 = setInterval(() => {
+    //             setCites((prevContador) => {
+    //                 const newContador = prevContador + 1;
+    //                 if (newContador === 16) {
+    //                     clearInterval(interval4);
+    //                 }
+    //                 return newContador;
+    //             });
+    //         }, Number((datas.data?.length * time) / (1)));
 
-            return () => {
-                clearInterval(interval);
-                clearInterval(interval2);
-                clearInterval(interval3);
-                clearInterval(interval4);
-            };
+    //         return () => {
+    //             clearInterval(interval);
+    //             clearInterval(interval2);
+    //             clearInterval(interval3);
+    //             clearInterval(interval4);
+    //         };
 
-        }
-    }, [datas]);
+    //     }
+    // }, [datas]);
 
     useEffect(() => {
         window.scrollTo(0, 0); // Hace scroll al principio de la página
@@ -231,7 +233,7 @@ const Statistics = () => {
                                             <p>Tiempo de publicación</p>
                                         </div>
                                         <div className="weeks">
-                                            <span>{Math.round(percent)}%</span>
+                                            {percent ? <span>{Math.round(percent)}%</span> : <span>0%</span>}
                                             <p>Tasa de aceptación</p>
                                         </div>
                                     </div>
@@ -240,13 +242,14 @@ const Statistics = () => {
                                     <strong>Lista de artículos más descargados:</strong>
                                     <div className="list">
                                         {
-                                            download.map((element, index) => {
+                                            arrayEnd.length &&
+                                            arrayEnd?.map((element, index) => {
                                                 return (
                                                     <>
                                                         <div key={index} className={index % 2 == 0 ? "elementList bg-par" : "elementList"} >
                                                             <p>{index + 1}</p>
-                                                            <span className="titleDownload">{element.title}</span>
-                                                            <p>{element.number}</p>
+                                                            <span className="titleDownload">{element?.title}</span>
+                                                            <p>{element?.number}</p>
                                                         </div>
                                                         <hr />
                                                     </>
@@ -259,13 +262,14 @@ const Statistics = () => {
                                     <strong>Lista de artículos más citados:</strong>
                                     <div className="list">
                                         {
-                                            download.map((element, index) => {
+                                            arrayEnd.length &&
+                                            arrayEnd.map((element, index) => {
                                                 return (
                                                     <>
                                                         <div key={index} className={index % 2 == 0 ? "elementList bg-par" : "elementList"} >
                                                             <p>{index + 1}</p>
-                                                            <span className="titleDownload">{element.title}</span>
-                                                            <p>{element.number}</p>
+                                                            <span className="titleDownload">{element?.title}</span>
+                                                            <p>{element?.number}</p>
                                                         </div>
                                                         <hr />
                                                     </>
