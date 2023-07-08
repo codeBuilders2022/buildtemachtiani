@@ -90,21 +90,25 @@ const Home = () => {
             }))
 
             if (allArticles_.length > 0) {
-                let firstID = allArticles_[0].id;
-                let indexx = 0;
-
-                allArticles_.forEach((article, idx) => {
-                    if (article.id > firstID) {
-                        firstID = article.id;
-                        indexx = idx;
-                    }
+                let maxID = -Infinity;
+                let maxIndex = 0;
+              
+                allArticles_.forEach((article, index) => {
+                  const desencriptedID = Decrypt(article.id);
+                  if (desencriptedID > maxID) {
+                    maxID = desencriptedID;
+                    maxIndex = index;
+                  }
                 });
-
-                const newArticles = allArticles_.filter((_, number) => number !== indexx);
-                setCurrentJornal([allArticles_[indexx]]);
+              
+                const newArticles = allArticles_.filter((_, index) => index !== maxIndex);
+                setCurrentJornal([allArticles_[maxIndex]]);
                 setAllArticles(newArticles);
-                
             }
+              
+              
+              
+              
         } catch (error) {
             console.log(error)
             IncorrectModal("¡Algo salió mal, inténtalo más tarde!", true);
@@ -112,6 +116,7 @@ const Home = () => {
     };
 
 
+    console.log(currentJornal, "currenJornal")
 
     const data = {
         index: [

@@ -14,7 +14,7 @@ const Contact = () => {
 
                         <div className="plane-text">Estamos encantados de ayudarte en lo que necesites. Por favor, manda tu mensaje por los siguientes medios para que podamos responder de manera efectiva:</div>
                         <div className="containerContact">
-                            <div className="plane-text"><b>Correo electrónico: </b><a className="dark:text-sky-200 text-sky-900" href="mailto:ricedut@gmail.com">ricedut@gmail.com</a></div>
+                            <div className="plane-text"><b>Correo electrónico: </b><a className="dark:text-sky-200 text-sky-900" href="mailto:educiencia@revistatemachtiani.net">educiencia@revistatemachtiani.net</a></div>
                             <div className="plane-text"><b>Teléfono: </b>+52-33-13208625</div>
                             <div className="plane-text"><b>WhastApp: </b>+52-33-3268-8545</div>
                             <div className="plane-text"><b>Dirección: </b>San Lorenzo 381 Guadalajara, Jalisco - México</div>
