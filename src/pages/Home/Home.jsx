@@ -132,27 +132,6 @@ const Home = () => {
 
 
 
-    // //metrics
-    // useEffect(() => {
-    //     const formData = new FormData();
-    //     const fetchCountry = async () => {
-    //         try {
-    //             const response = await fetch('https://ipapi.co/json/');
-    //             const data = await response.json();
-    //             const countrySave = {
-    //                 "value": data.country_name
-    //             }
-    //             console.log(countrySave)
-    //             formData.append("data", JSON.stringify(countrySave));
-    //             const res = await postAxiosCountriesView("/api/countries", formData)
-    //         } catch (error) {
-    //             console.error('Error fetching country:', error);
-    //         }
-
-    //     };
-    //     fetchCountry();
-    // }, []);
-
 
     const dataMethric = [
         // { title: "Factor de impacto 2022", data: 1.22 },
@@ -212,8 +191,6 @@ const Home = () => {
         localStorage.setItem("mens-ge", "true");
         setViewMessage(false);
     };
-
-
 
 
     return (

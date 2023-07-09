@@ -6,8 +6,11 @@ import Sidebar from "../../components/organisms/Sidebar/Sidebar"
 import { Helmet } from 'react-helmet';
 import { IncorrectModal } from "../../components/molecules/modals/Modals";
 import { getAxiosHomeArticles } from "../../Api/Home/home";
-const Statistics = () => {
+import { Encrypt } from "../../utilities/Hooks";
+import { useNavigate } from "react-router";
 
+const Statistics = () => {
+    const navigate = useNavigate()
     const [download, setDownload] = useState([])
     const [citesMain, setCitesMain] = useState([])
     const [datas, setDatas] = useState(0)
@@ -27,20 +30,21 @@ const Statistics = () => {
         if (dataDownloads) {
             const newArray = []
             dataDownloads.map((element, index) => {
+                console.log(element)
                 newArray.map((e, i) => {
                     if (e.title == element.attributes.name) {
                         newArray[i].number = newArray[i].number + 1
                     }
                     else {
                         const newElement = {
-                            title: element.attributes.name, number: 1
+                            title: element.attributes.name, number: 1, id: element.attributes.index
                         }
                         newArray.push(newElement)
                     }
                 })
                 if (newArray.length == 0) {
                     const newElement = {
-                        title: element.attributes.name, number: 1
+                        title: element.attributes.name, number: 1, id: element.attributes.index
                     }
                     newArray.push(newElement)
                 }
@@ -59,6 +63,45 @@ const Statistics = () => {
 
 
     }, [dataDownloads])
+
+    useEffect(() => {
+        if (cites) {
+            const newArray = []
+            cites.map((element, index) => {
+                newArray.map((e, i) => {
+                    if (e.title == element.attributes.name) {
+                        newArray[i].number = newArray[i].number + 1
+                    }
+                    else {
+                        const newElement = {
+                            title: element.attributes.name, number: 1, id: element.attributes.index
+                        }
+                        newArray.push(newElement)
+                    }
+                })
+                if (newArray.length == 0) {
+                    const newElement = {
+                        title: element.attributes.name, number: 1, id: element.attributes.index
+                    }
+                    newArray.push(newElement)
+                }
+            })
+
+            if (newArray.length >= 2) {
+                const compareNumber = (a, b) => {
+                    return b.number - a.number;
+                }
+
+                newArray.sort(compareNumber);
+            }
+            setCitesMain(newArray)
+        }
+
+
+    }, [cites])
+
+
+
     const [arrayEnd, setArrayEnd] = useState([])
     useEffect(() => {
         let newArray = [download[0]]
@@ -73,6 +116,22 @@ const Statistics = () => {
         setArrayEnd(newArray)
 
     }, [download])
+
+    const [arrayCites, setArrayCites] = useState([])
+    useEffect(() => {
+        let newArray = [citesMain[0]]
+        citesMain.map((e, index) => {
+            if (citesMain[index + 1]) {
+                let newElement = newArray.filter((element, idx) => element?.title !== citesMain[index + 1].title)
+                if (!newElement.length) {
+                    newArray.push(e)
+                }
+            }
+        })
+        setArrayCites(newArray)
+
+    }, [citesMain])
+
 
     function CalculateWeeks(init, end) {
         const oneWeek = 7 * 24 * 60 * 60 * 1000; // 7 días en milisegundos
@@ -99,8 +158,10 @@ const Statistics = () => {
         try {
             const resarticless = await getAxiosHomeArticles("/api/current-issues")
             const responseDownloads = await getAxiosDownloads("/api/downloads")
+            const responseVisits = await getAxiosDownloads("/api/metrics")
             const responseArticles = await getAxiosDownloads("/api/articles")
             const totalArticles = responseArticles.data.data.length
+            setCites(responseVisits.data.data)
             setDataDownloads(responseDownloads.data.data)
             setDatas(resarticless)
             const totalValues = resarticless.data?.length
@@ -132,54 +193,54 @@ const Statistics = () => {
         getDatas()
     }, []);
 
-    // useEffect(() => {
-    //     if (datas.data?.length) {
-    //         const interval = setInterval(() => {
-    //             setArticlesOriginals((prevContador) => {
-    //                 const newContador = prevContador + 1;
-    //                 if (newContador === originals) {
-    //                     clearInterval(interval);
-    //                 }
-    //                 return newContador;
-    //             });
-    //         }, Number((datas.data?.length * time) / (originals)));
-    //         const interval2 = setInterval(() => {
-    //             setNumberArticles((prevContador) => {
-    //                 const newContador = prevContador + 1;
-    //                 if (newContador === datas.data?.length) {
-    //                     clearInterval(interval2);
-    //                 }
-    //                 return newContador;
-    //             });
-    //         }, time);
-    //         const interval3 = setInterval(() => {
-    //             setDownloads((prevContador) => {
-    //                 const newContador = prevContador + 1;
-    //                 if (newContador === dataDownloads.length) {
-    //                     clearInterval(interval3);
-    //                 }
-    //                 return newContador;
-    //             });
-    //         }, Number((datas.data?.length * time) / (1)));
-    //         const interval4 = setInterval(() => {
-    //             setCites((prevContador) => {
-    //                 const newContador = prevContador + 1;
-    //                 if (newContador === 16) {
-    //                     clearInterval(interval4);
-    //                 }
-    //                 return newContador;
-    //             });
-    //         }, Number((datas.data?.length * time) / (1)));
+    useEffect(() => {
+        if (datas.data?.length) {
+            const interval = setInterval(() => {
+                setArticlesOriginals((prevContador) => {
+                    const newContador = prevContador + 1;
+                    if (newContador === originals) {
+                        clearInterval(interval);
+                    }
+                    return newContador;
+                });
+            }, Number((datas.data?.length * time) / (originals)));
+            const interval2 = setInterval(() => {
+                setNumberArticles((prevContador) => {
+                    const newContador = prevContador + 1;
+                    if (newContador === datas.data?.length) {
+                        clearInterval(interval2);
+                    }
+                    return newContador;
+                });
+            }, time);
+            const interval3 = setInterval(() => {
+                setDownloads((prevContador) => {
+                    const newContador = prevContador + 1;
+                    if (newContador === dataDownloads.length) {
+                        clearInterval(interval3);
+                    }
+                    return newContador;
+                });
+            }, Number((datas.data?.length * time) / (1)));
+            const interval4 = setInterval(() => {
+                setCites((prevContador) => {
+                    const newContador = prevContador + 1;
+                    if (newContador === 16) {
+                        clearInterval(interval4);
+                    }
+                    return newContador;
+                });
+            }, Number((datas.data?.length * time) / (1)));
 
-    //         return () => {
-    //             clearInterval(interval);
-    //             clearInterval(interval2);
-    //             clearInterval(interval3);
-    //             clearInterval(interval4);
-    //         };
+            return () => {
+                clearInterval(interval);
+                clearInterval(interval2);
+                clearInterval(interval3);
+                clearInterval(interval4);
+            };
 
-    //     }
-    // }, [datas]);
+        }
+    }, [datas]);
 
     useEffect(() => {
         window.scrollTo(0, 0); // Hace scroll al principio de la página
@@ -216,8 +277,8 @@ const Statistics = () => {
                                             <span>Descargas</span>
                                         </div>
                                         <div className="metric">
-                                            <p>{cites}</p>
-                                            <span>Citas</span>
+                                            {cites.length ? <p>{cites.length}</p> : <p>0</p>}
+                                            <span>Visitas a artículos</span>
                                         </div>
                                     </div>
                                 </div>
@@ -233,7 +294,7 @@ const Statistics = () => {
                                             <p>Tiempo de publicación</p>
                                         </div>
                                         <div className="weeks">
-                                            {percent ? <span>{Math.round(percent)}%</span> : <span>0%</span>}
+                                            {percent ? <span>{Math.round(percent)}%</span> : <span>Sin estimar aún</span>}
                                             <p>Tasa de aceptación</p>
                                         </div>
                                     </div>
@@ -241,12 +302,13 @@ const Statistics = () => {
                                 <div className="downloadMain">
                                     <strong>Lista de artículos más descargados:</strong>
                                     <div className="list">
+                                        {console.log(arrayEnd.length)}
                                         {
-                                            arrayEnd.length &&
+                                            arrayEnd[0]?.title &&
                                             arrayEnd?.map((element, index) => {
                                                 return (
                                                     <>
-                                                        <div key={index} className={index % 2 == 0 ? "elementList bg-par" : "elementList"} >
+                                                        <div key={index} className={index % 2 == 0 ? "elementList bg-par" : "elementList"} onClick={() => navigate(`/article/${Encrypt(element?.id)}`)}>
                                                             <p>{index + 1}</p>
                                                             <span className="titleDownload">{element?.title}</span>
                                                             <p>{element?.number}</p>
@@ -259,14 +321,14 @@ const Statistics = () => {
                                     </div>
                                 </div>
                                 <div className="downloadMain">
-                                    <strong>Lista de artículos más citados:</strong>
+                                    <strong>Lista de artículos más visitados:</strong>
                                     <div className="list">
                                         {
-                                            arrayEnd.length &&
-                                            arrayEnd.map((element, index) => {
+                                            arrayCites[0]?.title &&
+                                            arrayCites.map((element, index) => {
                                                 return (
                                                     <>
-                                                        <div key={index} className={index % 2 == 0 ? "elementList bg-par" : "elementList"} >
+                                                        <div key={index} className={index % 2 == 0 ? "elementList bg-par" : "elementList"} onClick={() => navigate(`/article/${Encrypt(element?.id)}`)}>
                                                             <p>{index + 1}</p>
                                                             <span className="titleDownload">{element?.title}</span>
                                                             <p>{element?.number}</p>

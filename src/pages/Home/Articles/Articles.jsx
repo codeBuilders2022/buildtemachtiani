@@ -75,6 +75,27 @@ const Articles = () => {
     }
   };
 
+  const handleVisits = async () => {
+    const formData = new FormData();
+    const dataObject = {
+      "index": idArticles,
+      "name": dataArt?.title,
+    };
+    formData.append("data", JSON.stringify(dataObject));
+
+    try {
+      const response = await postAxiosDownloads("/api/metrics", formData)
+    } catch (error) {
+      console.log(error)
+      IncorrectModal("No es posible guardar los datos", true)
+    }
+  };
+
+  //metrics
+  useEffect(() => {
+    handleVisits()
+  }, []);
+
   return (
     <div className="Articless dark:bg-gray-600 dark:text-white m-2 md:m-10 md:mt-32 mt-24 p-2 md:p-10 bg-white rounded-3xl flex">
       <Back className={"_back_l"} url={"/"} />

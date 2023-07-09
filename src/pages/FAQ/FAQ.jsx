@@ -7,7 +7,7 @@ import { Header } from '../../components'
 import Back from '../../components/atoms/Back/Back';
 import { getAxiosData } from '../../Api/Committee/Committee';
 
-import "./Faq.scss"
+import "./FAQ.scss"
 
 const Faq = () => {
     const { currentMode } = useStateContext()
