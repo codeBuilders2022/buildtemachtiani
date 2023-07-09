@@ -4,7 +4,7 @@ import SkeletonsLegals from "../../../pages/PrivacyPolicies/SkeletonsLegals";
 const LegalNotices = lazy(() => import("../../../pages/LegalNotices/LegalNotices"));
 const AboutCookies = lazy(() => import("../../../pages/AboutCookies/AboutCookies"));
 const PrivacyPolicies = lazy(() => import("../../../pages/PrivacyPolicies/PrivacyPolicies"));
-const Faq = lazy(() => import("../../../pages/Faq/Faq"));
+const Faq = lazy(() => import("../../../pages/FAQ/FAQ"));
 
 
 

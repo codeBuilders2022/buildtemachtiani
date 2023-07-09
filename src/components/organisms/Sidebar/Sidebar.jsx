@@ -183,7 +183,7 @@ const Sidebar = () => {
                             </svg>
                             <strong>Datos de lectores</strong>
                         </div>
-                        {/* <Link to='/statistics'>Ver estadísticas</Link> */}
+                        <Link to='/statistics'>Ver estadísticas</Link>
                     </div>
                     <a href="https://www.revolvermaps.com/livestats/5ba5baxjzkm/" target="_blank"><img src="//rf.revolvermaps.com/h/m/a/0/ff0000/128/0/5ba5baxjzkm.png" alt="Map" /></a>
                 </div>
