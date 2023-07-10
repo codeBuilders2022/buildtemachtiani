@@ -1,11 +1,18 @@
 import React from "react"
 import './Contact.scss'
+import { Helmet } from "react-helmet"
 
 
 
 const Contact = () => {
     return (
         <>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Revista Temachtiani | Contacto</title>
+                {/* <meta name="description" content="Descripción de mi artículo" />
+                <meta name="keywords" content="palabra clave 1, palabra clave 2" /> */}
+            </Helmet>
             <div className="dark:bg-gray-600 dark:text-white m-2 md:m-10 md:mt-32 mt-24 p-2 md:p-10 bg-white rounded-3xl flex Metrics">
                 <div className="bg-slate-100 dark:bg-gray-500 cards-body ">
                     <div className="Contact">

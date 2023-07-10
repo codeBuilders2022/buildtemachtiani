@@ -286,6 +286,10 @@ const CreateArticle = () => {
 
     return (
         <>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Revista Temachtiani</title>
+            </Helmet>
             <div className="CreateArticle">
                 <ExteriorCard>
                     <Back className={"_back_"} url={`/user/dashboard/${idUser}`} />

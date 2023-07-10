@@ -11,6 +11,7 @@ import { Encrypt } from "../../utilities/Hooks";
 import AnimationLoading from "../../components/atoms/AnimationLoading/AnimationLoading";
 import { CorrectModal, IncorrectModal, InfoModal } from "../../components/molecules/modals/Modals";
 import { getAxiosData } from "../../Api/Committee/Committee";
+import { Helmet } from "react-helmet";
 
 
 const Login = () => {
@@ -74,13 +75,16 @@ const navigate = useNavigate()
           }
         } catch (error) {
             console.log(error)
-          // Manejar cualquier error de la llamada a loginConfir
         }
       };
       
 
     return (
         <>
+          <Helmet>
+              <meta charSet="utf-8" />
+              <title>Revista Temachtiani</title>
+          </Helmet>
             <div className="Login">
                 <Back className={"back"} url={"/"}></Back>
                 <form onSubmit={validationFunction} className="form_class">

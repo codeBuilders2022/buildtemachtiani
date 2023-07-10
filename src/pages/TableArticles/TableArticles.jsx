@@ -13,6 +13,7 @@ import { getDataArticles } from "./api";
 
 import View from '../../assets/images/eye.png'
 import { Decrypt } from "../../utilities/Hooks";
+import { Helmet } from "react-helmet";
 
 const TableArticles = () => {
 
@@ -41,19 +42,25 @@ const TableArticles = () => {
             getDataArticles(idUserDecrypt,setData)
         },[])
     return (
-        <div className='TableArticles'>
-            <ExteriorCard>
-                <div className="containerr">
-                    <Header title={"Mis artículos"} button="Enviar nuevo artículo" url={`/user/article-create/${idUser}`}/>
-                    <DataTable value={data} stripedRows tableStyle={{ minWidth: '30rem' }}>
-                        <Column field="title" header="Título"></Column>
-                        <Column field="createdat" header="Fecha"></Column>
-                        <Column field="estatus" header="Estado"></Column>
-                        <Column field="actions" header="Acciones" body={actionTemplate}></Column>
-                    </DataTable>
-                </div>
-            </ExteriorCard>
-        </div>
+        <>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Revista Temachtiani</title>
+            </Helmet>
+            <div className='TableArticles'>
+                <ExteriorCard>
+                    <div className="containerr">
+                        <Header title={"Mis artículos"} button="Enviar nuevo artículo" url={`/user/article-create/${idUser}`}/>
+                        <DataTable value={data} stripedRows tableStyle={{ minWidth: '30rem' }}>
+                            <Column field="title" header="Título"></Column>
+                            <Column field="createdat" header="Fecha"></Column>
+                            <Column field="estatus" header="Estado"></Column>
+                            <Column field="actions" header="Acciones" body={actionTemplate}></Column>
+                        </DataTable>
+                    </div>
+                </ExteriorCard>
+            </div>
+        </>
     )
 }
 

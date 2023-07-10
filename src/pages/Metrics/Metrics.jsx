@@ -6,6 +6,7 @@ import LineChartMetric from "../../components/molecules/LineChart/LineChart"
 import Chartt from "../../components/molecules/Chart/Chart"
 import { useStateContext } from "../../contexts/ContextProvider";
 import { getAxiosContriesView } from "../../Api/Metrics/Metrics"
+import { Helmet } from "react-helmet"
 
 const Metrics = () => {
     const { currentColor } = useStateContext();
@@ -83,6 +84,10 @@ const Metrics = () => {
 
     return (
         <>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Revista Temachtiani | Métricas</title>
+            </Helmet>
             <div className="dark:bg-gray-600 dark:text-white m-2 md:m-10 md:mt-32 mt-24 p-2 md:p-10 bg-white rounded-3xl flex Metrics">
                 <div className="bg-slate-100 dark:bg-gray-500 cards-body ">
                     <div className="title">Métricas</div>

@@ -8,6 +8,7 @@ import Back from '../../components/atoms/Back/Back';
 import { getAxiosData } from '../../Api/Committee/Committee';
 
 import "./Faq.scss"
+import { Helmet } from 'react-helmet';
 
 const Faq = () => {
     const { currentMode } = useStateContext()
@@ -48,31 +49,37 @@ const Faq = () => {
     }
 
   return (
-    <Cards className='FAQ dark:bg-gray-600 bg-white'>
-        <Back className={"_backlk_"} url={"/"}/>
-        <Header category={"Preguntas"} title={"frecuentes"}/>
-        <div className='bg-slate-100 dark:bg-gray-500 text-black dark:text-white inside_faq'>
-           {!loadingData ? (
-                <p>Cargando preguntas...</p>
-           ):(
+    <>
+      <Helmet>
+          <meta charSet="utf-8" />
+          <title>Revista Temachtiani | FAQ</title>
+      </Helmet>
+      <Cards className='FAQ dark:bg-gray-600 bg-white'>
+          <Back className={"_backlk_"} url={"/"}/>
+          <Header category={"Preguntas"} title={"frecuentes"}/>
+          <div className='bg-slate-100 dark:bg-gray-500 text-black dark:text-white inside_faq'>
+            {!loadingData ? (
+                  <p>Cargando preguntas...</p>
+            ):(
 
-            faqq?.map((_, idx) => {
-                const backgroundColor = isColor1 ? color1 : color2;
-                isColor1 = !isColor1;
-                return(
-                    <div className='faq_q' style={{background: backgroundColor}} key={idx}>
-                        <Accordion activeIndex={idx} className='ext_acc'>
-                            <AccordionTab header={_.question} className='inside_acc'>
-                                <p>{_.answer}</p>
-                            </AccordionTab>
-                        </Accordion>
- 
-                    </div>
-                )
-            })
-           )}
-        </div>
-    </Cards>
+              faqq?.map((_, idx) => {
+                  const backgroundColor = isColor1 ? color1 : color2;
+                  isColor1 = !isColor1;
+                  return(
+                      <div className='faq_q' style={{background: backgroundColor}} key={idx}>
+                          <Accordion activeIndex={idx} className='ext_acc'>
+                              <AccordionTab header={_.question} className='inside_acc'>
+                                  <p>{_.answer}</p>
+                              </AccordionTab>
+                          </Accordion>
+  
+                      </div>
+                  )
+              })
+            )}
+          </div>
+      </Cards>
+    </>
   )
 }
 

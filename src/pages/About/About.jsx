@@ -6,20 +6,27 @@ import { About_description } from "../../data/dummy";
 import Header from "../../components/molecules/Header/Header";
 import Grid from "../../components/atoms/Grid/Grid";
 import Sidebar from "../../components/organisms/Sidebar/Sidebar";
+import { Helmet } from "react-helmet";
 
 const About = () => {
   const { currentColor } = useStateContext();
 
   return (
-    <div className="dark:bg-gray-600 dark:text-white md:mt-32 m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-      <Grid>
-      <div className="w-full">
-        <Header title="La Revista Internacional de Ciencias de la Educación Temachtiani" category={"Acerca de"}/>
-        <About_description />
+    <>
+      <Helmet>
+          <meta charSet="utf-8" />
+          <title>Revista Temachtiani | Acerca</title>
+      </Helmet>
+      <div className="dark:bg-gray-600 dark:text-white md:mt-32 m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
+        <Grid>
+        <div className="w-full">
+          <Header title="La Revista Internacional de Ciencias de la Educación Temachtiani" category={"Acerca de"}/>
+          <About_description />
+        </div>
+        <Sidebar/>
+        </Grid>
       </div>
-      <Sidebar/>
-      </Grid>
-    </div>
+    </>
   );
 };
 
