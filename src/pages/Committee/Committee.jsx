@@ -7,6 +7,7 @@ import { Header } from "../../components"
 import { useEffect } from "react"
 import { IncorrectModal } from "../../components/molecules/modals/Modals"
 import { getAxiosData } from "../../Api/Committee/Committee"
+import { Helmet } from "react-helmet"
 
 const Committee = () => {
     const [active, setActive] = useState(false)
@@ -50,41 +51,49 @@ const Committee = () => {
         }
     };
     return (
-        <div className="Committee">
-            <ExteriorCard className={"md:mt-40"}>
-                <Back className={"_back_"} url={"/"} />
-                <div className="container">
-                    <Header title={"COMITÉ"} />
-                    <div className="type md:mb-4">
-                        <button className={!active && "active"} onClick={() => { setActive(false) }}>Editorial</button>
-                        <button className={active && "active"} onClick={() => { setActive(true) }}>Científico</button>
-                    </div>
-                    <div className="containerData">
+        <>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Revista Temachtiani | Comité</title>
+                {/* <meta name="description" content="Descripción de mi artículo" />
+                <meta name="keywords" content="palabra clave 1, palabra clave 2" /> */}
+            </Helmet>
+            <div className="Committee">
+                <ExteriorCard className={"md:mt-40"}>
+                    <Back className={"_back_"} url={"/"} />
+                    <div className="container">
+                        <Header title={"COMITÉ"} />
+                        <div className="type md:mb-4">
+                            <button className={!active && "active"} onClick={() => { setActive(false) }}>Editorial</button>
+                            <button className={active && "active"} onClick={() => { setActive(true) }}>Científico</button>
+                        </div>
+                        <div className="containerData">
 
-                        {!active ? data.map((e, index) => {
-                            return (
-                                <div className="data" key={index}>
-                                    <img className="avatar" src={e.image} />
-                                    <p> {e.fullname}</p>
-                                    <p>{e.email}</p>
-                                    <p>{e.country}</p>
-                                </div>
-                            )
-                        }) : data1.map((e, index) => {
-                            return (
-                                <div className="data" key={index}>
-                                    <img className="avatar" src={e.image} />
-                                    <p>{e.fullname}. </p>
-                                    <p>{e.email}</p>
-                                    <p>{e.country}</p>
-                                </div>
-                            )
-                        })}
+                            {!active ? data.map((e, index) => {
+                                return (
+                                    <div className="data" key={index}>
+                                        <img className="avatar" src={e.image} />
+                                        <p> {e.fullname}</p>
+                                        <p>{e.email}</p>
+                                        <p>{e.country}</p>
+                                    </div>
+                                )
+                            }) : data1.map((e, index) => {
+                                return (
+                                    <div className="data" key={index}>
+                                        <img className="avatar" src={e.image} />
+                                        <p>{e.fullname}. </p>
+                                        <p>{e.email}</p>
+                                        <p>{e.country}</p>
+                                    </div>
+                                )
+                            })}
 
+                        </div>
                     </div>
-                </div>
-            </ExteriorCard>
-        </div >
+                </ExteriorCard>
+            </div >
+        </>
     )
 }
 

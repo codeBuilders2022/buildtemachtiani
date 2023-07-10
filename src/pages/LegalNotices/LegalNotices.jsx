@@ -5,6 +5,7 @@ import Cards from '../../components/atoms/Cards/Cards'
 import Back from '../../components/atoms/Back/Back'
 import { Header } from '../../components'
 import { getAxiosData } from '../../Api/Committee/Committee'
+import { Helmet } from 'react-helmet'
 
 const LegalNotices = () => {  
     
@@ -34,23 +35,29 @@ const LegalNotices = () => {
 
 
     return (
-        <Cards className={"LegalNotices dark:bg-gray-600 bg-white"}>
-            <Back className={"_backlk_"} url={"/"} />
-            <Header  title={"Avisos legales"} />
-            <div className="bg-slate-100 dark:bg-gray-500 inside_LegalNotices">
-                {!loadingData ? (
-                    <p>Cargando datos...</p>
-                ):(
-                    privacyText?.map((_, idx) => {
-                        return(
-                            <div key={idx} className='cnt_inside_'>
-                                <p dangerouslySetInnerHTML={{__html: _.LegalNotices}}></p>
-                            </div>
-                        )
-                    })
-                )}
-            </div>
-        </Cards>
+        <>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Revista Temachtiani | Avisos Legales</title>
+            </Helmet>
+            <Cards className={"LegalNotices dark:bg-gray-600 bg-white"}>
+                <Back className={"_backlk_"} url={"/"} />
+                <Header  title={"Avisos legales"} />
+                <div className="bg-slate-100 dark:bg-gray-500 inside_LegalNotices">
+                    {!loadingData ? (
+                        <p>Cargando datos...</p>
+                    ):(
+                        privacyText?.map((_, idx) => {
+                            return(
+                                <div key={idx} className='cnt_inside_'>
+                                    <p dangerouslySetInnerHTML={{__html: _.LegalNotices}}></p>
+                                </div>
+                            )
+                        })
+                    )}
+                </div>
+            </Cards>
+        </>
     )
 }
 

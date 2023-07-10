@@ -7,6 +7,7 @@ import Back from '../../components/atoms/Back/Back'
 import { getAxiosData } from '../../Api/Committee/Committee'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import { Helmet } from 'react-helmet'
 
 const PrivacyPolicies = () => {
 
@@ -33,23 +34,29 @@ const PrivacyPolicies = () => {
     }
 
   return (
-    <Cards className="PrivacyPolicies dark:bg-gray-600 bg-white">
-        <Back className={"_backlk_"} url={"/"} />
-        <Header category={"Políticas"} title={"Protección de datos personales"} />
-        <div className="bg-slate-100 dark:bg-gray-500 inside_PrivacyPolicies">
-            {!loadingData ? (
-                <p>Cargando datos...</p>
-            ):(
-                privacyText?.map((_, idx) => {
-                    return(
-                        <div key={idx} className='cnt_inside_'>
-                            <p dangerouslySetInnerHTML={{__html: _.privacypolicy}}></p>
-                        </div>
-                    )
-                })
-            )}
-        </div>
-    </Cards>
+    <>
+        <Helmet>
+            <meta charSet="utf-8" />
+            <title>Revista Temachtiani | Políticas</title>
+        </Helmet>
+        <Cards className="PrivacyPolicies dark:bg-gray-600 bg-white">
+            <Back className={"_backlk_"} url={"/"} />
+            <Header category={"Políticas"} title={"Protección de datos personales"} />
+            <div className="bg-slate-100 dark:bg-gray-500 inside_PrivacyPolicies">
+                {!loadingData ? (
+                    <p>Cargando datos...</p>
+                ):(
+                    privacyText?.map((_, idx) => {
+                        return(
+                            <div key={idx} className='cnt_inside_'>
+                                <p dangerouslySetInnerHTML={{__html: _.privacypolicy}}></p>
+                            </div>
+                        )
+                    })
+                )}
+            </div>
+        </Cards>
+    </>
   );
 }
 
