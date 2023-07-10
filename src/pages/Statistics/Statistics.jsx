@@ -30,7 +30,6 @@ const Statistics = () => {
         if (dataDownloads) {
             const newArray = []
             dataDownloads.map((element, index) => {
-                console.log(element)
                 newArray.map((e, i) => {
                     if (e.title == element.attributes.name) {
                         newArray[i].number = newArray[i].number + 1
@@ -302,7 +301,6 @@ const Statistics = () => {
                                 <div className="downloadMain">
                                     <strong>Lista de artículos más descargados:</strong>
                                     <div className="list">
-                                        {console.log(arrayEnd.length)}
                                         {
                                             arrayEnd[0]?.title &&
                                             arrayEnd?.map((element, index) => {
