@@ -8,6 +8,7 @@ const Faq = lazy(() => import("../../../pages/Faq/Faq"));
 
 
 
+
 const Legals = () => {
     return (
         <Routes>
