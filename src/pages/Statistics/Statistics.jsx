@@ -255,7 +255,7 @@ const Statistics = () => {
                 <meta name="keywords" content="palabra clave 1, palabra clave 2" /> */}
             </Helmet>
             <div className="dark:bg-gray-600 dark:text-white m-2 md:m-10 md:mt-32 mt-24 p-2 md:p-10 bg-white rounded-3xl flex Metrics">
-                <div className="bg-slate-100 dark:bg-gray-500 cards-body w-full">
+                <div className="bg-slate-100 dark:bg-gray-500 cards-body w-full rounded-3xl">
                     <div className="Statistics">
                         <div className="titleS">Estadísticas</div>
                         <div className='StatisticsC'>
