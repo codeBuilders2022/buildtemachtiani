@@ -1,2 +1,0 @@
-.cnt_loading{display:flex;justify-content:center;width:230px}.cnt_loading .AnimationLoading{-webkit-animation:loading .5s linear infinite;animation:loading .5s linear infinite;border-radius:100px;height:50px;width:50px}@-webkit-keyframes loading{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}@keyframes loading{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}
-/*# sourceMappingURL=321.a3f66b88.chunk.css.map*/
