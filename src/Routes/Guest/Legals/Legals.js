@@ -6,8 +6,6 @@ const AboutCookies = lazy(() => import("../../../pages/AboutCookies/AboutCookies
 const PrivacyPolicies = lazy(() => import("../../../pages/PrivacyPolicies/PrivacyPolicies"));
 const Faq = lazy(() => import("../../../pages/Faq/Faq"));
 
-
-
 const Legals = () => {
     return (
         <Routes>
