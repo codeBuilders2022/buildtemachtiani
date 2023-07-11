@@ -2,7 +2,6 @@ export { default as ThemeSettings } from "./organisms/ThemeSettings/ThemeSetting
 export { default as Sidebar } from "./molecules/Sidebar/Sidebar";
 export { default as Footer } from "./molecules/Footer/Footer";
 export { default as Header } from "./molecules/Header/Header";
-export { default as ContainerPDF } from "./molecules/ContainerPDF/ContainerPDF"
 export {default as Select} from "./atoms/Select/Select"
 export {default as Input} from "./atoms/Input/Input"
 export {default as Shedule} from "./atoms/Shedule/Shedule"
